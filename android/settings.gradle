@@ -1,0 +1,3 @@
+rootProject.name = 'HotDrop'
+
+include ':app'
