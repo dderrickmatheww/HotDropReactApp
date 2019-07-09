@@ -8,10 +8,12 @@ export default class Header extends Component {
       uri: 'https://raw.githubusercontent.com/dderrickmatheww/Project1/master/assets/images/banner.png'
     };
     return (
-        <View style={styles.headerText}>
+        <View>
             <ImageBackground source={pic} style={styles.header}>
-                <Text>HOT DROP</Text>
-                <Text>"Where we droppin'?"</Text>
+              <View style={styles.headerText}>
+                <Text style={{fontWeight: 'bold', color: 'yellow', textShadowOffset:{width: 5, height: 5}, textShadowRadius:10}}>HOT DROP</Text>
+                <Text style={{color: 'yellow'}}>"Where we droppin'?"</Text>
+              </View> 
             </ImageBackground>
       </View>
     );
@@ -20,13 +22,18 @@ export default class Header extends Component {
 
 const styles = StyleSheet.create({
   header: {
-    width: '100%', 
-    height: '60%'
+   position: 'absolute',
+   top: 0,
+   left: 0,
+   right: 0,
+   width: '100%',
+   justifyContent: 'center',
+   alignItems: 'center',
   },
   headerText: {
-    flexDirection: 'column',
+    padding: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100%'
   }
+  
 });
