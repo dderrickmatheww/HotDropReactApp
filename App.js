@@ -7,7 +7,7 @@ export default function App() {
     <KeyboardAvoidingView>
           <Header/>
       <View>
-        
+
         <View>
 
         </View>

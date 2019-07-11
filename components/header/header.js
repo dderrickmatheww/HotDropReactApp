@@ -11,7 +11,7 @@ export default class Header extends Component {
         <View>
             <ImageBackground source={pic} style={styles.header}>
               <View style={styles.headerText}>
-                <Text style={{fontWeight: 'bold', color: 'yellow', textShadowOffset:{width: 5, height: 5}, textShadowRadius:10}}>HOT DROP</Text>
+                <Text style={{fontWeight: 'bold', color: 'yellow', textShadowOffset:{width: 5, height: 5}, textShadowRadius:10}}>TEST TEST TEST</Text>
                 <Text style={{color: 'yellow'}}>"Where we droppin'?"</Text>
               </View> 
             </ImageBackground>
