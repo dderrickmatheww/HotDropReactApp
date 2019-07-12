@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sat Jul 06 13:34:30 EDT 2019
+#Wed Jul 10 19:47:01 EDT 2019
 5.base=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 42.base=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 22.path=lib/x86/libreactnativejni.so

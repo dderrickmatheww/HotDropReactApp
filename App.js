@@ -1,20 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
 import Header from './components/header/header';
+import SearchBar from './components/SearchBar/SearchBar'
 
 export default function App() {
   return (
-    <KeyboardAvoidingView>
-          <Header/>
-      <View>
-        
-        <View>
+    <View style={{flex: 1, backgroundColor: "grey"}}>
 
-        </View>
-        <View>
+       <Header />
 
-        </View>
-      </View>
-    </KeyboardAvoidingView>
+      <KeyboardAvoidingView>
+
+          <SearchBar />
+
+      </KeyboardAvoidingView>
+
+    </View>
   );
 }
