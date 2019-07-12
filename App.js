@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, ScrollView, View, KeyboardAvoidingView } from 'react-native';
 import Header from './components/header/header';
 import Card from './components/card/card';
+import Footer from './components/footer/footer';
 
 
 export default function App() {
@@ -59,6 +60,7 @@ export default function App() {
         />
         ))}
       </ScrollView>
+      <Footer/>
     </View>
   );
 }
