@@ -1,0 +1,4 @@
+#Sat Jul 13 10:19:05 EDT 2019
+base.0=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\dexMerger\\release\\0
+path.0=classes.dex
+renamed.0=classes.dex

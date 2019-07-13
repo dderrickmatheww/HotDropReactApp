@@ -1,21 +1,23 @@
 import React from "react";
-import { Image, StyleSheet, Text, View, Linking } from 'react-native';
+import { Image, TouchableHighlight, StyleSheet, Text, View, Linking } from 'react-native';
 
 export default function ArticleCard(props){
     return(
-        <View style={styles.card}>
-            <View style={styles.thumbcontainer}>
-                <Image
-                    style={styles.articlethumb}
-                    source={{uri: 'https://raw.githubusercontent.com/dderrickmatheww/Project1/master/assets/images/thumbnailph.jpg'}}
-                />
+        <TouchableHighlight onPress={ ()=>{ Linking.openURL(props.link)}} style={styles.card}>
+            <View style={styles.cardwrapper}>
+                <View style={styles.thumbcontainer}>
+                    <Image
+                        style={styles.articlethumb}
+                        source={{uri: 'https://raw.githubusercontent.com/dderrickmatheww/Project1/master/assets/images/thumbnailph.jpg'}}
+                    />
+                </View>
+                <View style={styles.articletext}>
+                    <Text style={styles.cardHead}>{props.cardhead}</Text>
+                    <Text style={styles.cardSubhead}>{props.cardsubhead}</Text>
+                    <Text style={styles.cardBody}>{props.cardbody}</Text>
+                </View>
             </View>
-            <View style={styles.articletext}>
-                <Text style={styles.cardHead} onPress={ ()=>{ Linking.openURL(props.link)}}>{props.cardhead}</Text>
-                <Text style={styles.cardSubhead}>{props.cardsubhead}</Text>
-                <Text style={styles.cardBody}>{props.cardbody}</Text>
-            </View>
-        </View>
+        </TouchableHighlight>
     )
 }
 
@@ -30,7 +32,6 @@ const styles = StyleSheet.create({
         border: `solid`,
         borderColor: `darkslategray`,
         borderWidth: 1,
-        flexDirection: `row`,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -39,6 +40,9 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
         elevation: 4,
+    },
+    cardwrapper: {
+        flexDirection: `row`,
     },
     cardHead: {
         fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
