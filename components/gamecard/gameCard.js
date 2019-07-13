@@ -26,7 +26,7 @@ export default function GameCard(props){
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: `rgb(1, 0, 48)`,
+        backgroundColor: `rgb(1, 0, 24)`,
         height: `auto`,
         margin: 4,
         padding: 5,
@@ -43,23 +43,26 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
-        elevation: 4,
+        elevation: 5,
     },
     title: {
         fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
         color:`rgb(135, 206, 250)`,
         fontWeight: `bold`,
         fontSize: 20,
-        textShadow: `.6pt 1.2pt 4pt white`,
     },
     info: {
         fontWeight: `100`,
         color:`rgb(135, 206, 250)`,
         fontSize: 10,
+        textShadowColor: 'rgba(255, 255, 255, 1)',
+        textShadowRadius: 3,
     },
     description: {
-        color:`rgb(135, 206, 250)`,
+        color:`rgb(255, 255, 255)`,
         fontSize: 12,
+        textShadowColor: 'rgba(255, 255, 255, 1)',
+        textShadowRadius: 5,
     },
     bottom: {
         lineHeight: 5,
@@ -84,14 +87,7 @@ const styles = StyleSheet.create({
         marginRight: 5,
     },
     thumbcontainer: {
-        shadowColor: `#fff`,
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.66,
-        shadowRadius: 2.62,
-        elevation: 4
+        elevation: 3
     },
     cardtext: {
         width: '66%',
