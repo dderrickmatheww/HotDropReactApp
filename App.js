@@ -15,32 +15,38 @@ export default function App() {
         {
           title: "Title 1",
           subheader: "Subhead 1",
-          body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah" 
+          body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah",
+          link: "https://ign.com"
         },
         {
           title: "Title 2",
           subheader: "Subhead 2",
-          body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah" 
+          body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah",
+          link: "https://ign.com"
         },
         {
           title: "Title 3",
           subheader: "Subhead 3",
-          body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah" 
+          body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah",
+          link: "https://ign.com" 
         },
         {
           title: "Title 4",
           subheader: "Subhead 4",
-          body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah" 
+          body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah",
+          link: "https://ign.com" 
         },
         {
           title: "Title 5",
           subheader: "Subhead 5",
-          body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah" 
+          body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah",
+          link: "https://ign.com" 
         },
         {
           title: "Title 6",
           subheader: "Subhead 6",
-          body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah" 
+          body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah",
+          link: "https://ign.com" 
         }
       ]
   }
@@ -59,6 +65,7 @@ export default function App() {
           cardhead={article.title}
           cardsubhead={article.subheader}
           cardbody={article.body}
+          link={article.link}
         />
         ))}
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View, Linking } from 'react-native';
 
 export default function ArticleCard(props){
     return(
@@ -11,7 +11,7 @@ export default function ArticleCard(props){
                 />
             </View>
             <View style={styles.articletext}>
-                <Text style={styles.cardHead}>{props.cardhead}</Text>
+                <Text style={styles.cardHead} onPress={ ()=>{ Linking.openURL(props.link)}}>{props.cardhead}</Text>
                 <Text style={styles.cardSubhead}>{props.cardsubhead}</Text>
                 <Text style={styles.cardBody}>{props.cardbody}</Text>
             </View>
