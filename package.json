@@ -11,7 +11,8 @@
     "react-dom": "^16.8.6",
     "react-native": "0.59.8",
     "react-native-cache": "^1.1.7",
-    "react-native-web": "^0.11.4"
+    "react-native-web": "^0.11.4",
+    "react-navigation": "^3.11.1"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.1.1"
