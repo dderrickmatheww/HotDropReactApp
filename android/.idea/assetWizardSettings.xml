@@ -73,6 +73,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="scalingPercent" value="60" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -106,9 +107,9 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="d3e000" />
+                                      <entry key="backgroundColor" value="403f3e" />
                                       <entry key="backgroundImage" value="C:\Users\RB\Desktop\Bootcamp\Project1\assets\images\border1.jpg" />
-                                      <entry key="foregroundAssetType" value="TEXT" />
+                                      <entry key="foregroundImage" value="C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\hdlogo.png" />
                                     </map>
                                   </option>
                                 </PersistentState>
