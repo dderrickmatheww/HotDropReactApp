@@ -4,20 +4,26 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 export default function GameCard(props){
     return(
         <View style={styles.card}>
-            <View style={styles.thumbcontainer}>
-                <Image
-                    style={styles.gamelogo}
-                    source={{uri: 'https://raw.githubusercontent.com/dderrickmatheww/Project1/master/assets/images/thumbnailph.jpg'}}
-                />
+            <View style={styles.cardhalf}>
+                <View style={styles.thumbcontainer}>
+                    <Image
+                        style={styles.gamelogo}
+                        source={{uri: 'https://raw.githubusercontent.com/dderrickmatheww/Project1/master/assets/images/thumbnailph.jpg'}}
+                    />
+                </View>
+                <View style={styles.cardtext}>
+                    <Text style={styles.title}>{props.title}</Text>
+                    <Text style={styles.info}>Platforms: {props.platforms}</Text>
+                    <Text style={styles.info}>Release Date: {props.releasedate}</Text>
+                    <Text style={styles.description}>{props.description}</Text>
+                </View>
             </View>
-            <View style={styles.cardtext}>
-                <Text style={styles.title}>{props.title}</Text>
-                <Text style={styles.info}>Platforms: {props.platforms}</Text>
-                <Text style={styles.info}>Release Date: {props.releasedate}</Text>
-                <Text style={styles.description}>{props.description}</Text>
+            <View style={styles.hr}/>
+            <View style={styles.cardhalf}>
                 <View style={styles.bottom}>
                     <Text style={styles.bottombutton}>More News</Text>
                     <Text style={styles.bottombutton}>YouTube</Text>
+                    <Text style={styles.bottombutton}>Twitch</Text>
                 </View>
             </View>
         </View>
@@ -35,7 +41,6 @@ const styles = StyleSheet.create({
         border: `solid`,
         borderColor: `darkslategray`,
         borderWidth: 1,
-        flexDirection: `row`,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -44,6 +49,10 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
         elevation: 5,
+    },
+    cardhalf:{
+        flexDirection: `row`,
+        paddingBottom: 5
     },
     title: {
         fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
@@ -64,9 +73,15 @@ const styles = StyleSheet.create({
         textShadowColor: 'rgba(255, 255, 255, 1)',
         textShadowRadius: 5,
     },
+    hr: {
+        borderTopColor: `rgb(64, 64, 255)`,
+        borderTopWidth: 0.5,
+        width: `95%`
+    },
     bottom: {
         lineHeight: 5,
-        flexDirection: `row`
+        flexDirection: `row`,
+        paddingTop: 3
     },
     bottombutton: {
         backgroundColor: `darkslategray`,
