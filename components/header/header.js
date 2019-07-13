@@ -12,7 +12,7 @@ export default class Header extends Component {
             <ImageBackground source={pic} style={styles.header}>
               <View style={styles.headerText}>
                 <Text style={{fontWeight: 'bold', color: 'yellow', textShadowOffset:{width: 5, height: 5}, textShadowRadius:10}}>HOT DROP</Text>
-                <Text style={{color: 'yellow'}}>"Where we droppin'?"</Text>
+                <Text style={{color: 'yellow'}}>Where we droppin'?</Text>
               </View> 
             </ImageBackground>
       </View>
@@ -22,7 +22,7 @@ export default class Header extends Component {
 
 const styles = StyleSheet.create({
   header: {
-   position: 'absolute',
+   zIndex: 2000,
    top: 0,
    left: 0,
    right: 0,
