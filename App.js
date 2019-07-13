@@ -1,21 +1,56 @@
 import React from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, ScrollView, View, KeyboardAvoidingView } from 'react-native';
 import Header from './components/header/header';
 import SearchBar from './components/SearchBar/SearchBar'
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
 export default function App() {
-  
+
+  state = {
+    articles: [
+      {
+        title: "Title 1",
+        subheader: "Subhead 1",
+        body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah",
+        link: "https://ign.com"
+      },
+      {
+        title: "Title 2",
+        subheader: "Subhead 2",
+        body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah",
+        link: "https://ign.com"
+      },
+      {
+        title: "Title 3",
+        subheader: "Subhead 3",
+        body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah",
+        link: "https://ign.com" 
+      },
+      {
+        title: "Title 4",
+        subheader: "Subhead 4",
+        body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah",
+        link: "https://ign.com" 
+      },
+      {
+        title: "Title 5",
+        subheader: "Subhead 5",
+        body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah",
+        link: "https://ign.com" 
+      },
+      {
+        title: "Title 6",
+        subheader: "Subhead 6",
+        body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah",
+        link: "https://ign.com" 
+      }
+    ]
+}
   class Home extends React.Component {
             
     getSearchResults = (text) => {
       // this.setState({onCall: true});
-      
-      let searchQuery = text;
-      let cacheName = text.toLowerCase();
-      searchQuery = searchQuery.toLowerCase().replace(' ', '%');
-
-      this.props.navigation.navigate('Details', {
+      this.props.navigation.navigate('Card', {
         text: text
       });
       
@@ -27,8 +62,20 @@ export default function App() {
           <Header />
 
           <KeyboardAvoidingView>
+            <ScrollView>
 
               <SearchBar getSearchResults={this.getSearchResults}  />
+
+              {this.state.articles.map(article => (
+              
+              <ArticleCard
+                cardhead={article.title}
+                cardsubhead={article.subheader}
+                cardbody={article.body}
+                link={article.link}
+              />
+              ))}
+            </ScrollView>
 
           </KeyboardAvoidingView>
 
@@ -59,10 +106,14 @@ export default function App() {
 
                     if ( value ) {
                         value = JSON.parse(value);
+                        console.log('Grabbed from cache')
+                        console.log(value);
                     } 
                     else {
                         await AsyncStorage.setItem(cacheName, JSON.stringify(data.results));
                         value = data.results;
+                        console.log('Add to cache')
+                        console.log(value);
                     }
                     this.setState({searchResults: value});
                 })
@@ -74,6 +125,31 @@ export default function App() {
             });
 
       }
+  
+ 
+  
+    render() {
+      return (
+        <View style={{flex: 1, backgroundColor: "grey"}}>
+
+          <Header />
+
+          <KeyboardAvoidingView>
+              <ScrollView>
+              {/* The GameCard below shouldn't be on the homepage, obviously, it's just here to see styling and components until we get routing and pages set up */}
+
+              <GameCard
+                title="Apex Legends"
+                platforms="PC, PS4, XBO"
+                releasedate="2019"
+                description="This battle royale from Respawn Entertainment is focused on teams and special abilities"
+              />
+            </ScrollView>
+          </KeyboardAvoidingView>
+        <Footer/>
+      </View>
+      )
+    }
   }
   const AppNavigator = createStackNavigator(
     {
@@ -84,26 +160,7 @@ export default function App() {
       initialRouteName: "Home"
     }
   );
-
-  module.exports = createAppContainer(AppNavigator);
   
-  render() {
-    return (
-      <View style={{flex: 1, backgroundColor: "grey"}}>
-
-        <Header />
-
-        <KeyboardAvoidingView>
-
-            
-
-        </KeyboardAvoidingView>
-
-      </View>
-    
-    )
-  }
- 
+  module.exports = createAppContainer(AppNavigator);
 }
-
 

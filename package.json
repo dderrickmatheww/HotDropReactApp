@@ -10,7 +10,11 @@
     "react": "16.8.3",
     "react-dom": "^16.8.6",
     "react-native": "0.59.8",
+<<<<<<< HEAD
     "react-native-cache": "^1.1.7",
+=======
+    "react-native-gesture-handler": "^1.3.0",
+>>>>>>> fe0f253723780234b50ac93e1d954412ab7cc9d4
     "react-native-web": "^0.11.4",
     "react-navigation": "^3.11.1"
   },
