@@ -10,10 +10,10 @@ export default class Footer extends Component {
                 <Text style={styles.tab}>Home</Text>
             </View>
             <View>
-                <Text style={styles.tab}>Login</Text>
+                <Text style={styles.tab}>Search</Text>
             </View>
             <View>
-                <Text style={styles.tab}>Search</Text>
+                <Text style={styles.tab}>Login</Text>
             </View>
         </View> 
     );

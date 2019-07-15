@@ -53,7 +53,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <KeyboardAvoidingView>
+      <KeyboardAvoidingView style={styles.headerdrop}>
         <Header/>
       </KeyboardAvoidingView>
       
@@ -91,5 +91,9 @@ const styles  = StyleSheet.create({
   },
   containerText: {
     color: `skyblue`
+  },
+  headerdrop: {
+    elevation: 10,
+    backgroundColor: `yellow`
   }
 })
