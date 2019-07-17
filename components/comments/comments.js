@@ -4,7 +4,6 @@ import { View, StyleSheet, Text } from 'react-native';
 export default function Comments(props){
     return (
         <View style={styles.container}>
-        <Text style={styles.head}>Comments</Text>
         <View style={styles.commentcard}>
             <Text style={styles.author}>{props.author}</Text>
             <Text style={styles.body}>{props.comment}</Text>
@@ -35,11 +34,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
         elevation: 5,
-    },
-    head: {
-        fontSize: 18,
-        fontWeight: `bold`,
-        color: `skyblue`
     },
     author: {
         fontSize: 14,

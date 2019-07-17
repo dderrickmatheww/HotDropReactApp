@@ -79,7 +79,7 @@ export default function App() {
           releasedate="2019"
           description="This battle royale from Respawn Entertainment is focused on teams and special abilities"
         />
-
+        <Text>Comments</Text>
         <Comments
           author='Some Jerk'
           comment='Boy I have opinions on this game'
