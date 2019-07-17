@@ -4,6 +4,7 @@ import Header from './components/header/header';
 import ArticleCard from './components/articlecard/articleCard';
 import Footer from './components/footer/footer';
 import GameCard from './components/gamecard/gameCard';
+import Comments from './components/comments/comments';
 
 
 export default function App() {
@@ -76,6 +77,12 @@ export default function App() {
           platforms="PC, PS4, XBO"
           releasedate="2019"
           description="This battle royale from Respawn Entertainment is focused on teams and special abilities"
+        />
+
+        <Comments
+          author='Some Jerk'
+          comment='Boy I have opinions on this game'
+          datetime='07-16-2019 at 8:00PM'
         />
       </ScrollView>
       <Footer/>
