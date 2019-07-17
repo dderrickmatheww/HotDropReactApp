@@ -1,4 +1,12 @@
 #Internal package file, do not edit.
+<<<<<<< HEAD
+#Wed Jul 10 19:47:01 EDT 2019
+5.base=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
+42.base=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
+22.path=lib/x86/libreactnativejni.so
+32.set=NATIVE_RESOURCE
+32.path=lib/x86_64/libfolly_json.so
+=======
 #Wed Jul 10 20:40:17 EDT 2019
 5.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 42.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
@@ -6,6 +14,7 @@
 32.set=DEX
 52.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\19
 32.path=classes.dex
+>>>>>>> fe0f253723780234b50ac93e1d954412ab7cc9d4
 36.baseType=DIRECTORY
 18.baseType=DIRECTORY
 27.baseType=DIRECTORY
