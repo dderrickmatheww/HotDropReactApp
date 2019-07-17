@@ -1,22 +1,24 @@
 import React from "react";
 import { Image, StyleSheet, Text, View, Linking } from 'react-native';
 
-export default function ArticleCard(props){
-    return(
-        <View style={styles.card}>
-            <View style={styles.thumbcontainer}>
-                <Image
-                    style={styles.articlethumb}
-                    source={{uri: 'https://raw.githubusercontent.com/dderrickmatheww/Project1/master/assets/images/thumbnailph.jpg'}}
-                />
+export default class ArticleCard extends React.Component {
+    render() {
+        return (
+            <View style={styles.card}>
+                <View style={styles.thumbcontainer}>
+                    <Image
+                        style={styles.articlethumb}
+                        source={{uri: 'https://raw.githubusercontent.com/dderrickmatheww/Project1/master/assets/images/thumbnailph.jpg'}}
+                    />
+                </View>
+                <View style={styles.articletext}>
+                    <Text style={styles.cardHead} onPress={ ()=>{ Linking.openURL(props.link)}}>{this.props.cardhead}</Text>
+                    <Text style={styles.cardSubhead}>{this.props.cardsubhead}</Text>
+                    <Text style={styles.cardBody}>{this.props.cardbody}</Text>
+                </View>
             </View>
-            <View style={styles.articletext}>
-                <Text style={styles.cardHead} onPress={ ()=>{ Linking.openURL(props.link)}}>{props.cardhead}</Text>
-                <Text style={styles.cardSubhead}>{props.cardsubhead}</Text>
-                <Text style={styles.cardBody}>{props.cardbody}</Text>
-            </View>
-        </View>
-    )
+        )
+    }
 }
 
 const styles = StyleSheet.create({
@@ -27,7 +29,6 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 3,
         borderBottomRightRadius: 75,
-        border: `solid`,
         borderColor: `darkslategray`,
         borderWidth: 1,
         flexDirection: `row`,
@@ -45,12 +46,10 @@ const styles = StyleSheet.create({
         color:`rgb(135, 206, 250)`,
         fontWeight: `bold`,
         fontSize: 20,
-        textShadow: `.6pt 1.2pt 4pt white`,
     },
     cardSubhead: {
         fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
         color:`rgb(135, 206, 250)`,
-        textShadow: `.6pt 1.2pt 4pt white`,
         fontSize: 16
     },
     cardBody: {
@@ -60,7 +59,6 @@ const styles = StyleSheet.create({
     articlethumb: {
         width: 100,
         height: 100,
-        border: `solid`,
         borderColor: `rgb(2, 0, 144)`,
         borderWidth: 1,
         marginRight: 5,
