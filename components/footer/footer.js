@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         height: `auto`,
-        borderTop: `solid`,
         borderTopWidth: 1,
         borderTopColor: `rgb(64, 64, 64)`
     },

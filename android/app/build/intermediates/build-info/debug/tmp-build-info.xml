@@ -5,9 +5,9 @@
     build-mode="FULL"
     density="xxhdpi"
     format="10"
-    plugin-version="3.3.1"
-    timestamp="1562883739188"
-    token="1800711951645097243"
+    plugin-version="3.4.2"
+    timestamp="1563233980933"
+    token="0"
     verifier="FULL_BUILD_REQUESTED" >
 
     <task

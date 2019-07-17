@@ -1,27 +1,30 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from 'react-native';
 
-export default function GameCard(props){
-    return(
-        <View style={styles.card}>
-            <View style={styles.thumbcontainer}>
-                <Image
-                    style={styles.gamelogo}
-                    source={{uri: 'https://raw.githubusercontent.com/dderrickmatheww/Project1/master/assets/images/thumbnailph.jpg'}}
-                />
-            </View>
-            <View style={styles.cardtext}>
-                <Text style={styles.title}>{props.title}</Text>
-                <Text style={styles.info}>Platforms: {props.platforms}</Text>
-                <Text style={styles.info}>Release Date: {props.releasedate}</Text>
-                <Text style={styles.description}>{props.description}</Text>
-                <View style={styles.bottom}>
-                    <Text style={styles.bottombutton}>More News</Text>
-                    <Text style={styles.bottombutton}>YouTube</Text>
+export default class GameCard extends React.Component {
+   
+        render() {
+            return(
+                <View style={styles.card}>
+                    <View style={styles.thumbcontainer}>
+                        <Image
+                            style={styles.gamelogo}
+                            source={{uri: 'https://raw.githubusercontent.com/dderrickmatheww/Project1/master/assets/images/thumbnailph.jpg'}}
+                        />
+                    </View>
+                    <View style={styles.cardtext}>
+                        <Text style={styles.title}>{this.props.title}</Text>
+                        <Text style={styles.info}>Platforms: {this.props.platforms}</Text>
+                        <Text style={styles.info}>Release Date: {this.props.releasedate}</Text>
+                        <Text style={styles.description}>{this.props.description}</Text>
+                        <View style={styles.bottom}>
+                            <Text style={styles.bottombutton}>More News</Text>
+                            <Text style={styles.bottombutton}>YouTube</Text>
+                        </View>
+                    </View>
                 </View>
-            </View>
-        </View>
-    )
+            )
+        }
 }
 
 const styles = StyleSheet.create({
@@ -32,7 +35,6 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 3,
         borderBottomRightRadius: 100,
-        border: `solid`,
         borderColor: `darkslategray`,
         borderWidth: 1,
         flexDirection: `row`,
@@ -50,7 +52,6 @@ const styles = StyleSheet.create({
         color:`rgb(135, 206, 250)`,
         fontWeight: `bold`,
         fontSize: 20,
-        textShadow: `.6pt 1.2pt 4pt white`,
     },
     info: {
         fontWeight: `100`,
@@ -78,7 +79,6 @@ const styles = StyleSheet.create({
     gamelogo: {
         width: 100,
         height: 150,
-        border: `solid`,
         borderColor: `rgb(2, 0, 144)`,
         borderWidth: 1,
         marginRight: 5,
