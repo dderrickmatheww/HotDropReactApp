@@ -5,6 +5,7 @@ import ArticleCard from './components/articlecard/articleCard';
 import Footer from './components/footer/footer';
 import GameCard from './components/gamecard/gameCard';
 import Comments from './components/comments/comments';
+import CommentsField from './components/comments/commentsfield';
 
 
 export default function App() {
@@ -84,6 +85,7 @@ export default function App() {
           comment='Boy I have opinions on this game'
           datetime='07-16-2019 at 8:00PM'
         />
+        <CommentsField/>
       </ScrollView>
       <Footer/>
     </View>
