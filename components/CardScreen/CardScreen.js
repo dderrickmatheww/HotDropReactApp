@@ -73,7 +73,6 @@ import GameCard from '../gamecard/gameCard';
 
                 <KeyboardAvoidingView>
                     <ScrollView>
-                    {/* The GameCard below shouldn't be on the homepage, obviously, it's just here to see styling and components until we get routing and pages set up */}
 
                     <GameCard
                     title={this.state.searchResults.name}

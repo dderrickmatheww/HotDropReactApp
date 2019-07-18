@@ -1,10 +1,10 @@
 import React from "react";
-import { Image, StyleSheet, Text, View, Linking } from 'react-native';
+import { Image, StyleSheet, Text, View, Linking, TouchableHighlight } from 'react-native';
 
 export default class ArticleCard extends React.Component {
     render() {
         return (
-            <View style={styles.card}>
+            <TouchableHighlight style={styles.card} onPress={ ()=>{ Linking.openURL(props.link)}}>
                 <View style={styles.thumbcontainer}>
                     <Image
                         style={styles.articlethumb}
@@ -12,11 +12,11 @@ export default class ArticleCard extends React.Component {
                     />
                 </View>
                 <View style={styles.articletext}>
-                    <Text style={styles.cardHead} onPress={ ()=>{ Linking.openURL(props.link)}}>{this.props.cardhead}</Text>
+                    <Text style={styles.cardHead}>{this.props.cardhead}</Text>
                     <Text style={styles.cardSubhead}>{this.props.cardsubhead}</Text>
                     <Text style={styles.cardBody}>{this.props.cardbody}</Text>
                 </View>
-            </View>
+            </TouchableHighlight>
         )
     }
 }
