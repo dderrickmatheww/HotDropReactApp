@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         fontSize: 10,
     },
     description: {
-        color:`rgb(135, 206, 250)`,
+        color:`white`,
         fontSize: 12,
     },
     bottom: {

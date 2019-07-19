@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Hot Drop</string>
+    <color name="bgcolor">#363534</color>
 </resources>

@@ -18,6 +18,7 @@
     <color name="background_floating_material_light">@android:color/white</color>
     <color name="background_material_dark">@color/material_grey_850</color>
     <color name="background_material_light">@color/material_grey_50</color>
+    <color name="bgcolor">#363534</color>
     <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
     <color name="bright_foreground_disabled_material_light">#80000000</color>
     <color name="bright_foreground_inverse_material_dark">@color/bright_foreground_material_light</color>
@@ -296,7 +297,8 @@
     <item name="android:windowExitAnimation">@anim/catalyst_push_up_out</item>
   </style>
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        
+        <item name="android:windowBackground">@color/bgcolor</item>
+        <item name="android:colorBackground">@color/bgcolor</item>
     </style>
     <style name="Base.AlertDialog.AppCompat" parent="android:Widget">
         <item name="android:layout">@layout/abc_alert_dialog_material</item>
