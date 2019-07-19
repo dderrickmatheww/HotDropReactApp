@@ -1,6 +1,8 @@
 import React from 'react';
-import { ScrollView, AsyncStorage, View, KeyboardAvoidingView } from 'react-native';
+import { ScrollView, AsyncStorage, View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native';
 import GameCard from '../gamecard/gameCard';
+import TwitchCom from '../twitchcard/twitchcard';
+import YoutubeCom from '../youtubecard/youtubecard';
     export default class CardScreen extends React.Component {
 
         static navigationOptions = ({ navigation }) => {
@@ -11,12 +13,41 @@ import GameCard from '../gamecard/gameCard';
 
         state = {
             searchResults: [],
+            YTVidID: [],
             date: [],
-            platforms: []
+            platforms: [],
+            pic: {},
+            YTtoggle: false,
+            NWtoggle: false,
+            TWtoggle: false
         }
 
+        YTtoggle = () => {
+            const newState = !this.state.YTtoggle
+            this.setState({YTtoggle: newState});
+            let url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + this.state.searchResults.name + "+game+trailer" + "&type=video&key=AIzaSyAhsb0OUjYC9-im6U3pNoks26zkjBWUtHo"
+            fetch(url)
+            .then((response) => {
+                response.json().then(data => {
+                let videoId = data.items[0].id.videoId
+                console.log(videoId);
+                this.setState({YTVidID: videoId});
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+            })
+            .catch((err) => {console.log(err)});
+        }
+        NWtoggle = () => {
+            const newState = !this.state.NWtoggle
+            this.setState({NWtoggle: newState})
+        }
+        TWtoggle = () => {
+            const newState = !this.state.TWtoggle
+            this.setState({TWtoggle: newState})
+        }
         componentDidMount() {
-            
             const { navigation } = this.props;
             const text = navigation.getParam('text', '');
             let searchQuery = text;
@@ -29,24 +60,24 @@ import GameCard from '../gamecard/gameCard';
                 let value = await AsyncStorage.getItem(cacheName);
             
                 if ( value ) {
-                    
                     value = JSON.parse(value);
                     console.log('Grabbed from cache')
                     this.setState({searchResults: value[0]});  
-                    this.setState({date: [value[0].expected_release_day, ' / ', value[0].expected_release_month, ' / ', value[0].expected_release_year]});
+                    this.setState({date: [value[0].expected_release_month, '/', value[0].expected_release_day, '/', value[0].expected_release_year]});
                     this.setState({platforms: value[0].platforms.map(platforms => platforms.abbreviation).join(', ')});
+                    this.setState({pic: value[0].image});
                 } 
                 else {
                     fetch(url)
                     .then( response => {
                         response.json().then( async data => {
-
                             await AsyncStorage.setItem(cacheName, JSON.stringify(data.results));
                             value = data.results;
                             console.log('Add to cache')
                             this.setState({searchResults: value[0]});
-                            this.setState({date: [value[0].expected_release_day, value[0].expected_release_month, value[0].expected_release_year]})
-                            
+                            this.setState({date: [value[0].expected_release_month, '/', value[0].expected_release_day, '/', value[0].expected_release_year]});
+                            this.setState({platforms: value[0].platforms.map(platforms => platforms.abbreviation).join(', ')});
+                            this.setState({pic: value[0].image});
                         })
                         .catch(function(err) {
                             if(err) {
@@ -54,7 +85,6 @@ import GameCard from '../gamecard/gameCard';
                             }
                         })
                         console.log(this);
-                       
                     })
                     .catch(function(err) {
                         if (err) {
@@ -70,21 +100,49 @@ import GameCard from '../gamecard/gameCard';
         render() {
             return (
             <View style={{flex: 1, backgroundColor: "grey"}}>
-
-                <KeyboardAvoidingView>
                     <ScrollView>
                     {/* The GameCard below shouldn't be on the homepage, obviously, it's just here to see styling and components until we get routing and pages set up */}
-
                     <GameCard
                     title={this.state.searchResults.name}
                     platforms={this.state.platforms}
                     releasedate={this.state.date}
                     description={this.state.searchResults.deck}
+                    picture={this.state.pic.medium_url}
                     />
+                    <View style={styles.bottom}>
+                             <TouchableOpacity onPress={this.NWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> More News </Text></TouchableOpacity>
+                                {
+                                    this.state.NWtoggle ? <Text style={styles.bottombuttontext}>Here</Text> : null
+                                }
+                             <TouchableOpacity onPress={this.YTtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> YouTube </Text></TouchableOpacity>
+                                {
+                                    this.state.YTtoggle ? <YoutubeCom videoId={this.state.YTVidID}/> : null
+                                }
+                             <TouchableOpacity onPress={this.TWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Twitch </Text></TouchableOpacity>
+                                {
+                                    this.state.TWtoggle ? <TwitchCom /> : null
+                                }
+                    </View>
                 </ScrollView>
-                </KeyboardAvoidingView>
-    
             </View>
             )
         }
+    }
+
+    const styles = StyleSheet.create({
+        bottombutton: {
+            backgroundColor: `darkslategray`,
+            padding: 5,
+            fontSize: 14,
+            borderRadius: 2,
+            marginRight: 5,
+            bottom: 0,
+            justifyContent: 'center',
+            alignContent: 'center'
+        },
+        bottombuttontext: {
+            color:`rgb(135, 206, 250)`,
+            fontWeight: `bold`,
         }
+    
+    })

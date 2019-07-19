@@ -18,44 +18,28 @@ export default class HomeScreen extends React.Component {
       };
 
     state = {
-      articles: [
-        {
-          title: "Title 1",
-          subheader: "Subhead 1",
-          body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah",
-          link: "https://ign.com"
-        },
-        {
-          title: "Title 2",
-          subheader: "Subhead 2",
-          body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah",
-          link: "https://ign.com"
-        },
-        {
-          title: "Title 3",
-          subheader: "Subhead 3",
-          body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah",
-          link: "https://ign.com" 
-        },
-        {
-          title: "Title 4",
-          subheader: "Subhead 4",
-          body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah",
-          link: "https://ign.com" 
-        },
-        {
-          title: "Title 5",
-          subheader: "Subhead 5",
-          body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah",
-          link: "https://ign.com" 
-        },
-        {
-          title: "Title 6",
-          subheader: "Subhead 6",
-          body: "This is an article card. Blah blah blah Blah blah blah Blah blah blah Blah blah blah Blah blah blah",
-          link: "https://ign.com" 
-        }
-      ]
+      article: []
+  }
+
+  componentWillMount() {
+    let month = new Date().getMonth() + 1; 
+    let year = new Date().getFullYear();
+    console.log(year, month)
+    let url ="https://newsapi.org/v2/top-headlines?sources=ign,polygon&from=" + year + "-" + month +"&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15"
+    fetch(url)
+    .then( response => {
+        response.json().then( data => {
+            console.log(data);
+            this.setState({article: data.articles})
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+
   }
     getSearchResults = (text) => {
       // this.setState({onCall: true});
@@ -72,13 +56,14 @@ export default class HomeScreen extends React.Component {
 
                     <SearchBar getSearchResults={this.getSearchResults}  />
 
-                    {this.state.articles.map(article => (
+                    {this.state.article.map(article => (
                     
                     <ArticleCard
                         cardhead={article.title}
-                        cardsubhead={article.subheader}
-                        cardbody={article.body}
-                        link={article.link}
+                        cardauthor={article.author}
+                        cardbody={article.content}
+                        link={article.url}
+                        pic={article.urlToImage}
                     />
                     ))} 
   

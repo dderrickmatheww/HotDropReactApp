@@ -800,6 +800,10 @@
         "source": "C:\\Users\\dderr\\.gradle\\caches\\transforms-2\\files-2.1\\bbd650789fa4d575ee2aba0a5f3ebb37\\res\\drawable-xxxhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
+        "merged": "C:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\xml_file_provider_paths.xml.flat",
+        "source": "C:\\Users\\dderr\\Documents\\HotDropReactApp\\node_modules\\react-native-webview\\android\\build\\intermediates\\packaged_res\\debug\\xml\\file_provider_paths.xml"
+    },
+    {
         "merged": "C:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_notification_bg_low_pressed.9.png.flat",
         "source": "C:\\Users\\dderr\\.gradle\\caches\\transforms-2\\files-2.1\\40a53477423c6438b74418072a8aa6f6\\res\\drawable-xhdpi-v4\\notification_bg_low_pressed.9.png"
     },

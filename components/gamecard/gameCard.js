@@ -2,14 +2,13 @@ import React from "react";
 import { Image, StyleSheet, Text, View } from 'react-native';
 
 export default class GameCard extends React.Component {
-   
         render() {
             return(
                 <View style={styles.card}>
                     <View style={styles.thumbcontainer}>
                         <Image
                             style={styles.gamelogo}
-                            source={{uri: 'https://raw.githubusercontent.com/dderrickmatheww/Project1/master/assets/images/thumbnailph.jpg'}}
+                            source={{ uri: this.props.picture }}
                         />
                     </View>
                     <View style={styles.cardtext}>
@@ -17,12 +16,8 @@ export default class GameCard extends React.Component {
                         <Text style={styles.info}>Platforms: {this.props.platforms}</Text>
                         <Text style={styles.info}>Release Date: {this.props.releasedate}</Text>
                         <Text style={styles.description}>{this.props.description}</Text>
-                        <View style={styles.bottom}>
-                            <Text style={styles.bottombutton}>More News</Text>
-                            <Text style={styles.bottombutton}>YouTube</Text>
-                        </View>
                     </View>
-                </View>
+                </View>  
             )
         }
 }
@@ -68,13 +63,15 @@ const styles = StyleSheet.create({
     },
     bottombutton: {
         backgroundColor: `darkslategray`,
-        color:`rgb(135, 206, 250)`,
-        fontWeight: `bold`,
         padding: 5,
         fontSize: 14,
         borderRadius: 2,
         marginRight: 5,
         bottom: 0
+    },
+    bottombuttontext: {
+        color:`rgb(135, 206, 250)`,
+        fontWeight: `bold`,
     },
     gamelogo: {
         width: 100,
