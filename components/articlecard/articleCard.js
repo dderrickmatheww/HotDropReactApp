@@ -1,30 +1,34 @@
 import React from "react";
-import { Image, StyleSheet, Text, View, Linking } from 'react-native';
+import { Image, StyleSheet, TouchableHighlight, Text, View, Linking } from 'react-native';
 
 export default class ArticleCard extends React.Component {
     render() {
         return (
-            <View style={styles.card}>
-                <View style={styles.thumbcontainer}>
-                    <Image
-                        style={styles.articlethumb}
-                        source={{uri: this.props.pic }}
-                    />
+            <TouchableHighlight style={styles.card} onPress={ ()=>{ Linking.openURL(this.props.link)}} underlayColor="rgb(1, 0, 64)">
+                <View style={styles.cardcontainer}>
+                    <View style={styles.thumbcontainer}>
+                        <Image
+                            style={styles.articlethumb}
+                            source={{uri: this.props.pic }}
+                        />
+                    </View>
+                    <View style={styles.articletext}>
+                        <Text style={styles.cardHead}>{this.props.cardhead}</Text>
+                        <Text style={styles.cardSubhead}> Author: {this.props.cardauthor}</Text>
+                        <Text style={styles.cardBody}>{this.props.cardbody}</Text>
+                    </View>
                 </View>
-                <View style={styles.articletext}>
-                    <Text style={styles.cardHead}>{this.props.cardhead}</Text>
-                    <Text style={styles.cardSubhead}> Author: {this.props.cardauthor}</Text>
-                    <Text style={styles.cardBody}>{this.props.cardbody}</Text>
-                    <Text style={styles.cardHead} onPress={ ()=>{ Linking.openURL(props.link)}}>Read more here</Text>
-                </View>
-            </View>
+            </TouchableHighlight>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    cardcontainer: {
+        flexDirection: `row`,
+    },
     card: {
-        backgroundColor: `rgb(1, 0, 48)`,
+        backgroundColor: `rgb(1, 0, 24)`,
         height: `auto`,
         margin: 4,
         padding: 5,
@@ -32,7 +36,6 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 75,
         borderColor: `darkslategray`,
         borderWidth: 1,
-        flexDirection: `row`,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
