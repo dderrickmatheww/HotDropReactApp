@@ -5,6 +5,7 @@ INJECTED from C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\Andr
 INJECTED from C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:1:1-26:12
 INJECTED from C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:1:1-26:12
 MERGED from C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:1:1-26:12
+MERGED from [:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-23:12
 MERGED from [:react-native-gesture-handler] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\dderr\.gradle\caches\transforms-2\files-2.1\ca43b7c38bd6ac2d6e3ad0031d47261f\AndroidManifest.xml:2:1-13:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\dderr\.gradle\caches\transforms-2\files-2.1\bbd650789fa4d575ee2aba0a5f3ebb37\AndroidManifest.xml:17:1-22:12
@@ -68,6 +69,8 @@ application
 ADDED from C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:6:5-24:19
 MERGED from C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:6:5-24:19
 MERGED from C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:6:5-24:19
+MERGED from [:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-21:19
+MERGED from [:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-21:19
 MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\dderr\.gradle\caches\transforms-2\files-2.1\ca43b7c38bd6ac2d6e3ad0031d47261f\AndroidManifest.xml:11:5-20
 MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\dderr\.gradle\caches\transforms-2\files-2.1\ca43b7c38bd6ac2d6e3ad0031d47261f\AndroidManifest.xml:11:5-20
 MERGED from [com.android.support:support-compat:28.0.0] C:\Users\dderr\.gradle\caches\transforms-2\files-2.1\40a53477423c6438b74418072a8aa6f6\AndroidManifest.xml:22:5-94
@@ -130,6 +133,8 @@ uses-sdk
 INJECTED from C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml
 INJECTED from C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml
+MERGED from [:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\dderr\.gradle\caches\transforms-2\files-2.1\ca43b7c38bd6ac2d6e3ad0031d47261f\AndroidManifest.xml:7:5-9:41
@@ -212,3 +217,19 @@ uses-permission#android.permission.SYSTEM_ALERT_WINDOW
 ADDED from C:\Users\dderr\Documents\HotDropReactApp\android\app\src\debug\AndroidManifest.xml:5:5-77
 	android:name
 		ADDED from C:\Users\dderr\Documents\HotDropReactApp\android\app\src\debug\AndroidManifest.xml:5:22-75
+provider#com.reactnativecommunity.webview.RNCWebViewFileProvider
+ADDED from [:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-20:20
+	android:grantUriPermissions
+		ADDED from [:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:13-47
+	android:authorities
+		ADDED from [:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-64
+	android:exported
+		ADDED from [:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-37
+	android:name
+		ADDED from [:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-83
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-19:63
+	android:resource
+		ADDED from [:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:17-60
+	android:name
+		ADDED from [:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:17-67

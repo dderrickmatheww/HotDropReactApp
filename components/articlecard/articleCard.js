@@ -8,13 +8,14 @@ export default class ArticleCard extends React.Component {
                 <View style={styles.thumbcontainer}>
                     <Image
                         style={styles.articlethumb}
-                        source={{uri: 'https://raw.githubusercontent.com/dderrickmatheww/Project1/master/assets/images/thumbnailph.jpg'}}
+                        source={{uri: this.props.pic }}
                     />
                 </View>
                 <View style={styles.articletext}>
-                    <Text style={styles.cardHead} onPress={ ()=>{ Linking.openURL(props.link)}}>{this.props.cardhead}</Text>
-                    <Text style={styles.cardSubhead}>{this.props.cardsubhead}</Text>
+                    <Text style={styles.cardHead}>{this.props.cardhead}</Text>
+                    <Text style={styles.cardSubhead}> Author: {this.props.cardauthor}</Text>
                     <Text style={styles.cardBody}>{this.props.cardbody}</Text>
+                    <Text style={styles.cardHead} onPress={ ()=>{ Linking.openURL(props.link)}}>Read more here</Text>
                 </View>
             </View>
         )
