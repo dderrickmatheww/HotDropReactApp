@@ -24,7 +24,7 @@ export default class GameCard extends React.Component {
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: `rgb(1, 0, 48)`,
+        backgroundColor: `rgb(1, 0, 24)`,
         height: `auto`,
         margin: 4,
         padding: 5,

@@ -6,7 +6,7 @@
     density="440dpi"
     format="10"
     plugin-version="3.4.2"
-    timestamp="1563565325850"
+    timestamp="1563567502581"
     token="7809877264079993799"
     verifier="COLD_SWAP_REQUESTED" >
 
@@ -73,7 +73,7 @@
     </build>
     <build
         build-mode="COLD"
-        timestamp="1563565325850"
+        timestamp="1563567502581"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\build\intermediates\instant-run-apk\debug\app-debug.apk"

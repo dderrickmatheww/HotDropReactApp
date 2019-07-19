@@ -49,15 +49,15 @@ const styles = StyleSheet.create({
         fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
         color:`rgb(135, 206, 250)`,
         fontWeight: `bold`,
-        fontSize: 20,
+        fontSize: 18,
     },
     cardSubhead: {
         fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
         color:`rgb(135, 206, 250)`,
-        fontSize: 16
+        fontSize: 14
     },
     cardBody: {
-        color:`rgb(135, 206, 250)`,
+        color:`white`,
         fontSize: 12
     },
     articlethumb: {
