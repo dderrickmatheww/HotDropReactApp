@@ -5,15 +5,26 @@ import WebView from 'react-native-webview';
 export default class YoutubeCom extends React.Component {
         render() {
             return(
-                <View style={styles.card}>
-                    <WebView
-                        style={ styles.WebViewStyle }
-                        source={{ uri: 'https://www.youtube.com/embed/' + this.props.videoId}}
-                        javaScriptEnabled={true}
-                        domStorageEnabled={true}
-                        style={{ alignSelf: 'stretch', height: 300 }}   
-                    />
-                </View>  
+                <View>
+                    <View style={styles.card}>
+                        <WebView
+                            style={ styles.WebViewStyle }
+                            source={{ uri: 'https://www.youtube.com/embed/' + this.props.videoId}}
+                            javaScriptEnabled={true}
+                            domStorageEnabled={true}
+                            style={{ alignSelf: 'stretch', height: 300 }}   
+                        />
+                    </View>  
+                    <View style={styles.card}>
+                    {this.props.comments.map(comments => (
+                        <View>
+                            <Image source={{url: comments.snippet.topLevelComment.snippet.authorProfileImageUrl}}/>
+                            <Text>{comments.snippet.topLevelComment.snippet.authorDisplayName}</Text>
+                            <Text>{comments.snippet.topLevelComment.snippet.textDisplay}</Text>
+                        </View>
+                    ))} 
+                </View>
+             </View>
             )
         }
 }
