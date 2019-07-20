@@ -7,7 +7,11 @@ import YoutubeCom from '../youtubecard/youtubecard';
 
         static navigationOptions = ({ navigation }) => {
             return {
-              title: navigation.getParam('text')
+              title: navigation.getParam('text'),
+              headerStyle: {
+                backgroundColor: 'rgb(1, 0, 24)',
+              },
+              headerTintColor: 'skyblue'
             };
           };
 
@@ -134,9 +138,8 @@ import YoutubeCom from '../youtubecard/youtubecard';
 
         render() {
             return (
-            <View style={{flex: 1, backgroundColor: "grey"}}>
+            <View style={{flex: 1, backgroundColor: "#363534"}}>
                     <ScrollView>
-                    {/* The GameCard below shouldn't be on the homepage, obviously, it's just here to see styling and components until we get routing and pages set up */}
                     <GameCard
                     title={this.state.searchResults.name}
                     platforms={this.state.platforms}
