@@ -14,7 +14,7 @@ export default class ArticleCard extends React.Component {
                     </View>
                     <View style={styles.articletext}>
                         <Text style={styles.cardHead}>{this.props.cardhead}</Text>
-                        <Text style={styles.cardSubhead}> Author: {this.props.cardauthor}</Text>
+                        <Text style={styles.cardSubhead}>By {this.props.cardauthor} for {this.props.source}</Text>
                         <Text style={styles.cardBody}>{this.props.cardbody}</Text>
                     </View>
                 </View>

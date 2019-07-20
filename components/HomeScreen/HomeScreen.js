@@ -61,6 +61,7 @@ export default class HomeScreen extends React.Component {
                     <ArticleCard
                         cardhead={article.title}
                         cardauthor={article.author}
+                        source={article.source.name}
                         cardbody={article.content}
                         link={article.url}
                         pic={article.urlToImage}
