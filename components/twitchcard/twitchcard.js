@@ -25,12 +25,11 @@ export default class TwitchCom extends React.Component {
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: `rgb(1, 0, 48)`,
+        backgroundColor: `rgb(1, 0, 24)`,
         height: `auto`,
         margin: 4,
         padding: 5,
         borderRadius: 3,
-        borderBottomRightRadius: 100,
         borderColor: `darkslategray`,
         borderWidth: 1,
         flexDirection: `row`,

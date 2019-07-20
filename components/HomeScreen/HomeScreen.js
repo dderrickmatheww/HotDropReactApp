@@ -50,7 +50,7 @@ export default class HomeScreen extends React.Component {
   
     render() {
       return (
-        <View style={{ backgroundColor: "grey"}}>
+        <View style={{ backgroundColor: "#363534"}}>
 
                 <ScrollView>
 
