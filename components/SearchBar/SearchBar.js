@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, TextInput, Button, StyleSheet, AsyncStorage } from 'react-native';
+import {Autocomplete} from 'react-native-autocomplete-input';
 
 
 export default class SearchBar extends Component {
@@ -10,26 +11,44 @@ export default class SearchBar extends Component {
             page: ''
         }
 
-      
+    
         render() {
-          return (
-              <View style={styles.searchbar}>
-                <TextInput
-                  style={{height: 40, width: '100%', backgroundColor: 'rgb(52, 58, 64)', borderColor: 'rgb(206, 212, 218);', fontWeight:'bold', borderWidth: 1, color: 'white'}}
+          return(
+            <View>
+              <View style={styles.autocompleteContainer}>
+                <Autocomplete 
+                  data={data}
+                  defaultValue={query}
+                  onChangeText={text => this.setState({ query: text })}
+                  renderItem={({ item, i }) => (
+                    <TouchableOpacity onPress={() => this.setState({ query: item })}>
+                      <Text>{item}</Text>
+                    </TouchableOpacity>
+                  )}
                   onChangeText={(text) => this.setState({text})}
                   value={this.state.text}
                   placeholder='Where we droppin&#39;?'
-                  placeholderTextColor='gray'
-                />
-                <Button title='DEPLOY!' style={styles.searchbutton} color='rgb(1, 0, 48)' onPress={() => this.props.getSearchResults(this.state.text)}/>
-            </View>
-          );
-        }
+                  placeholderTextColor='gray'/>
+              </View>
+              <View>
+                <Text>Some content</Text>
+              </View>            
+              <Button title='DEPLOY!' style={styles.searchbutton} color='rgb(1, 0, 48)' onPress={() => this.props.getSearchResults(this.state.text)}/>
+            </View>            
+            
+
+          )};
+          
       
 }
 
 const styles = StyleSheet.create({
-  searchbar: {
-    margin: 4
+  autocompleteContainer: {
+    flex: 1,
+    left: 0,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    zIndex: 1
   }
-})
+});
