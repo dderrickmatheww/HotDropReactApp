@@ -3,6 +3,8 @@ import { ScrollView, AsyncStorage, View, StyleSheet, TouchableOpacity, Text, Ima
 import GameCard from '../gamecard/gameCard';
 import TwitchCom from '../twitchcard/twitchcard';
 import YoutubeCom from '../youtubecard/youtubecard';
+import NewsCom from '../newscard/newscard';
+
     export default class CardScreen extends React.Component {
 
         static navigationOptions = ({ navigation }) => {
@@ -19,6 +21,7 @@ import YoutubeCom from '../youtubecard/youtubecard';
             searchResults: [],
             YTVidID: [],
             YTcomments: [],
+            gameArticles: [],
             date: [],
             platforms: [],
             pic: {},
@@ -36,10 +39,10 @@ import YoutubeCom from '../youtubecard/youtubecard';
             let url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + this.state.searchResults.name + "+game+trailer" + "&type=video&key=AIzaSyAhsb0OUjYC9-im6U3pNoks26zkjBWUtHo"
             let value =  await AsyncStorage.getItem(cacheName);
             value = JSON.parse(value);
-            if ( value.items && value.snippet ) {
-                console.log("Grabbed comments from cache");
+            if ( value.items && value.videoId ) {
+                console.log("Grabbed comments & video id from cache");
                 console.log(value);
-                this.setState({YTVidID: value.snippet.videoId});
+                this.setState({YTVidID: value.videoId});
                 this.setState({YTcomments: value.items});
             }
             else {
@@ -47,7 +50,7 @@ import YoutubeCom from '../youtubecard/youtubecard';
                 .then((response) => {
                     response.json().then( async data => {
                         let videoId = data.items[0].id.videoId
-                        await  AsyncStorage.mergeItem(cacheName, JSON.stringify(data)).catch((err) => {if(err) console.log(err)});
+                        await  AsyncStorage.mergeItem(cacheName, JSON.stringify(data.items[0].id)).catch((err) => {if(err) console.log(err)});
                         console.log('added video id to cache');
                         this.setState({YTVidID: videoId});
                         let commentURL = "https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&moderationStatus=published&order=relevance&textFormat=html&videoId=" + this.state.YTVidID + "&key=AIzaSyAhsb0OUjYC9-im6U3pNoks26zkjBWUtHo"
@@ -57,6 +60,7 @@ import YoutubeCom from '../youtubecard/youtubecard';
                                     console.log(data2);
                                     this.setState({YTcomments: data2.items});
                                     await AsyncStorage.mergeItem(cacheName, JSON.stringify(data2)).catch((err) => {if(err) console.log(err)}); 
+                                    console.log('added comments to cache');
                                 })
                                 .catch((err)=> {
                                     if (err) {
@@ -81,13 +85,64 @@ import YoutubeCom from '../youtubecard/youtubecard';
                 });
             }
         }
-        NWtoggle = () => {
+        NWtoggle =  async () => {
             const newState = !this.state.NWtoggle
             this.setState({NWtoggle: newState})
+            let month = new Date().getMonth() + 1; 
+            let year = new Date().getFullYear();
+            let { navigation } = this.props;
+            let text = navigation.getParam('text', '');
+            let cacheName = text.toLowerCase();
+            let url = "https://newsapi.org/v2/everything?q="+ this.state.searchResults.name +"&from="+ year +"-"+ month +"&sources=ign,polygon&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15"
+            let value =  await AsyncStorage.getItem(cacheName);
+            value = JSON.parse(value);
+
+            if ( value.articles ) {
+                console.log("Grabbed articles from cache");
+                console.log(value);
+                this.setState({gameArticles: value.articles.slice(1, 4)});
+            }
+            else {
+                fetch(url)
+                .then((response) => {
+                    response.json()
+                    .then( async data => {
+                        await  AsyncStorage.mergeItem(cacheName, JSON.stringify(data)).catch((err) => {if(err) console.log(err)});
+                        console.log('added articles to cache');
+                        this.setState({gameArticles: data.articles.slice(1, 4)}); 
+                    })
+                    .catch((err)=>{
+                        if (err) {
+                            console.log(err)
+                        }
+                    });
+                })
+                .catch((err) => {
+                        console.log(err)
+                });  
+            }
         }
         TWtoggle = () => {
             const newState = !this.state.TWtoggle
-            this.setState({TWtoggle: newState})
+            this.setState({TWtoggle: newState});
+            let top100Streams ='https://api.twitch.tv/kraken/streams?limit=50&client_id=7mx4fyx7xv1pcxfe25fmguto1xao2b';
+            fetch(top100Streams)
+            .then((response) => {
+                response.json()
+                .then((data) => {
+                    console.log(data.streams);
+                })
+                .catch((err) => {
+                    if (err) {
+                        console.log(err);
+                    }    
+                })
+            })
+            .catch((err) => {
+                if (err) {
+                    console.log(err);
+                }
+            });
         }
         componentDidMount() {
             let { navigation } = this.props;
@@ -150,7 +205,7 @@ import YoutubeCom from '../youtubecard/youtubecard';
                     <View style={styles.bottom}>
                              <TouchableOpacity onPress={this.NWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> More News </Text></TouchableOpacity>
                                 {
-                                    this.state.NWtoggle ? <Text style={styles.bottombuttontext}>Here</Text> : null
+                                    this.state.NWtoggle ?  this.state.gameArticles.map(article => (<NewsCom  cardhead={article.title} cardauthor={article.author} cardbody={article.content} link={article.url} pic={article.urlToImage}/> )) : null
                                 }
                              <TouchableOpacity onPress={this.YTtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> YouTube </Text></TouchableOpacity>
                                 {

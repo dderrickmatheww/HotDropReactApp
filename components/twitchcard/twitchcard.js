@@ -1,31 +1,38 @@
 import React from "react";
-import { Image, Text, View, StyleSheet } from 'react-native';
+import { Image, Text, View, StyleSheet, ImageBackground } from 'react-native';
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 export default class TwitchCom extends React.Component {
         render() {
+            let pic = {
+                uri: this.props.streamerBanner
+              };
             return(
-                <View style={styles.card}>
-                    <View style={styles.thumbcontainer}>
-                        <Image
-                            style={styles.gamelogo}
-                            source={{ uri: this.props.picture }}
-                        />
+                <TouchableHighlight onPress={ ()=>{ Linking.openURL(this.props.streamURL)}} underlayColor="rgb(1, 0, 64)">
+                    <View style={styles.card}>
+                        <ImageBackground source={pic} style={{width: '100%', height: '20%'}}>
+                            <Text> Watch {this.props.streamerName} streaming {this.props.streamedGame}</Text>
+                        </ImageBackground>
+                        <View style={styles.thumbcontainer}>
+                            <Image
+                                style={styles.gamelogo}
+                                source={{ uri: this.props.streamPreview }}
+                            />
+                        </View>
+                        <View style={styles.cardtext}>
+                            <Text style={styles.title}>{this.props.streamerStatus}</Text>
+                            <Text style={styles.info}>Viewers: {this.props.viewers}</Text>
+                            <Text style={styles.info}>{this.props.streamerName}'s {this.props.streamerFollowers}</Text>
+                        </View>
                     </View>
-                    <Text>Top streams for {this.props.game}</Text>
-                    <View style={styles.cardtext}>
-                        <Text style={styles.title}>{this.props.title}</Text>
-                        <Text style={styles.info}>Platforms: {this.props.platforms}</Text>
-                        <Text style={styles.info}>Release Date: {this.props.releasedate}</Text>
-                        <Text style={styles.description}>{this.props.description}</Text>
-                    </View>
-                </View>  
+                </TouchableHighlight>
             )
         }
 }
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: `rgb(1, 0, 24)`,
+        backgroundColor: '#ffffff' || this.props.streamerBackgroundColor,
         height: `auto`,
         margin: 4,
         padding: 5,
