@@ -14,7 +14,7 @@ export default class ArticleCard extends React.Component {
                     </View>
                     <View style={styles.articletext}>
                         <Text style={styles.cardHead}>{this.props.cardhead}</Text>
-                        <Text style={styles.cardSubhead}> Author: {this.props.cardauthor}</Text>
+                        <Text style={styles.cardSubhead}>By {this.props.cardauthor} for {this.props.source}</Text>
                         <Text style={styles.cardBody}>{this.props.cardbody}</Text>
                     </View>
                 </View>
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         margin: 4,
         padding: 5,
         borderRadius: 3,
-        borderBottomRightRadius: 75,
+        borderBottomRightRadius: 25,
         borderColor: `darkslategray`,
         borderWidth: 1,
         shadowColor: "#000",
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         elevation: 4
     },
     articletext: {
-        width: `66%`
+        flex: 1
     }
 
 })

@@ -16,14 +16,16 @@ export default class YoutubeCom extends React.Component {
                         />
                     </View>  
                     <View style={styles.card}>
-                    {this.props.comments.map(comments => (
-                        <View>
-                            <Image source={{url: comments.snippet.topLevelComment.snippet.authorProfileImageUrl}}/>
-                            <Text>{comments.snippet.topLevelComment.snippet.authorDisplayName}</Text>
-                            <Text>{comments.snippet.topLevelComment.snippet.textDisplay}</Text>
-                        </View>
-                    ))} 
-                </View>
+                        {this.props.comments.map(comments => (
+                            <View style={styles.ytcontainer}>
+                                <Image style={styles.yticon} source={{url: comments.snippet.topLevelComment.snippet.authorProfileImageUrl}}/>
+                                <View style={styles.yttext}>
+                                    <Text style={styles.ytauthor}>{comments.snippet.topLevelComment.snippet.authorDisplayName}</Text>
+                                    <Text style={styles.ytbody}>{comments.snippet.topLevelComment.snippet.textDisplay}</Text>
+                                </View>
+                            </View>
+                        ))} 
+                    </View>
              </View>
             )
         }
@@ -38,7 +40,6 @@ const styles = StyleSheet.create({
         borderRadius: 3,
         borderColor: `darkslategray`,
         borderWidth: 1,
-        flexDirection: `row`,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -98,6 +99,30 @@ const styles = StyleSheet.create({
     },
     cardtext: {
         width: '66%',
+    },
+    ytcontainer:{
+        flexDirection: 'row',
+        paddingVertical: 3
+    },
+    yticon:{
+        width: 50,
+        height: 50,
+        borderColor: `rgb(2, 0, 144)`,
+        borderWidth: 1,
+        marginRight: 5,
+    },
+    yttext:{
+        flex: 1
+    },
+    ytauthor: {
+        fontWeight: `bold`,
+        color:`rgb(135, 206, 250)`,
+        fontSize: 12,
+    },
+    ytbody:{
+        fontWeight: `100`,
+        color:`rgb(135, 206, 250)`,
+        fontSize: 10,
     }
 
 })

@@ -1,6 +1,5 @@
 import React from "react";
-import { Image, Text, View, StyleSheet, ImageBackground } from 'react-native';
-import { TouchableHighlight } from "react-native-gesture-handler";
+import { Image, Text, View, StyleSheet, TouchableHighlight, ImageBackground, Linking } from 'react-native';
 
 export default class TwitchCom extends React.Component {
         render() {
@@ -8,21 +7,22 @@ export default class TwitchCom extends React.Component {
                 uri: this.props.streamerBanner
               };
             return(
-                <TouchableHighlight onPress={ ()=>{ Linking.openURL(this.props.streamURL)}} underlayColor="rgb(1, 0, 64)">
-                    <View style={styles.card}>
-                        <ImageBackground source={pic} style={{width: '100%', height: '20%'}}>
-                            <Text> Watch {this.props.streamerName} streaming {this.props.streamedGame}</Text>
+                <TouchableHighlight style={styles.card} onPress={ ()=>{ Linking.openURL(this.props.streamURL)}} underlayColor="rgb(1, 0, 96)">
+                    <View style={styles.cardcontainer}>
+                        <ImageBackground source={{uri: this.props.streamPreview}} style={{width: '100%', height: '100%', opacity: 4, position: 'absolute'}}>
                         </ImageBackground>
-                        <View style={styles.thumbcontainer}>
-                            <Image
-                                style={styles.gamelogo}
-                                source={{ uri: this.props.streamPreview }}
-                            />
-                        </View>
-                        <View style={styles.cardtext}>
-                            <Text style={styles.title}>{this.props.streamerStatus}</Text>
-                            <Text style={styles.info}>Viewers: {this.props.viewers}</Text>
-                            <Text style={styles.info}>{this.props.streamerName}'s {this.props.streamerFollowers}</Text>
+                        <View style={styles.subcontainer}>
+                            <View style={styles.thumbcontainer}>
+                                <Image
+                                    style={styles.gamelogo}
+                                    source={pic}
+                                />
+                            </View>
+                            <View style={styles.cardtext}>
+                                <Text style={styles.title}>Watch {this.props.streamerName} streaming {this.props.streamedGame}</Text>
+                                <Text style={styles.description}>{this.props.streamerStatus}</Text>
+                                <Text style={styles.info}>Followers: {this.props.streamerFollowers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
+                            </View>
                         </View>
                     </View>
                 </TouchableHighlight>
@@ -31,15 +31,21 @@ export default class TwitchCom extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    cardcontainer: {
+        flexDirection: `column`,
+    },
+    subcontainer: {
+        flexDirection: 'row'
+    }, 
     card: {
-        backgroundColor: '#ffffff' || this.props.streamerBackgroundColor,
+        backgroundColor: 'rgb(1, 0, 64)' || this.props.streamerBackgroundColor,
         height: `auto`,
         margin: 4,
         padding: 5,
         borderRadius: 3,
         borderColor: `darkslategray`,
         borderWidth: 1,
-        flexDirection: `row`,
+        width: 350,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -53,7 +59,8 @@ const styles = StyleSheet.create({
         fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
         color:`rgb(135, 206, 250)`,
         fontWeight: `bold`,
-        fontSize: 20,
+        fontSize: 16,
+        flexWrap: 'wrap',
     },
     info: {
         fontWeight: `100`,
@@ -84,8 +91,7 @@ const styles = StyleSheet.create({
         width: 100,
         height: 150,
         borderColor: `rgb(2, 0, 144)`,
-        borderWidth: 1,
-        marginRight: 5,
+        borderWidth: 2
     },
     thumbcontainer: {
         shadowColor: `#fff`,
@@ -98,7 +104,11 @@ const styles = StyleSheet.create({
         elevation: 4
     },
     cardtext: {
-        width: '66%',
+        flex: 1,
+        padding: 4,
+        margin: 2,
+        borderRadius: 3,
+        backgroundColor: `rgba(1, 0, 24, 0.4)`
     }
 
 })
