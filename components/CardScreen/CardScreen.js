@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, AsyncStorage, View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native';
+import { ScrollView, AsyncStorage, View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import GameCard from '../gamecard/gameCard';
 import TwitchCom from '../twitchcard/twitchcard';
 import YoutubeCom from '../youtubecard/youtubecard';
@@ -19,6 +19,7 @@ import NewsCom from '../newscard/newscard';
 
         state = {
             searchResults: [],
+            twitchResults: [],
             YTVidID: [],
             YTcomments: [],
             gameArticles: [],
@@ -90,25 +91,13 @@ import NewsCom from '../newscard/newscard';
             this.setState({NWtoggle: newState})
             let month = new Date().getMonth() + 1; 
             let year = new Date().getFullYear();
-            let { navigation } = this.props;
-            let text = navigation.getParam('text', '');
-            let cacheName = text.toLowerCase();
             let url = "https://newsapi.org/v2/everything?q="+ this.state.searchResults.name +"&from="+ year +"-"+ month +"&sources=ign,polygon&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15"
-            let value =  await AsyncStorage.getItem(cacheName);
             value = JSON.parse(value);
-
-            if ( value.articles ) {
-                console.log("Grabbed articles from cache");
-                console.log(value);
-                this.setState({gameArticles: value.articles.slice(1, 4)});
-            }
-            else {
                 fetch(url)
                 .then((response) => {
                     response.json()
                     .then( async data => {
-                        await  AsyncStorage.mergeItem(cacheName, JSON.stringify(data)).catch((err) => {if(err) console.log(err)});
-                        console.log('added articles to cache');
+                        console.log('added article data');
                         this.setState({gameArticles: data.articles.slice(1, 4)}); 
                     })
                     .catch((err)=>{
@@ -120,31 +109,33 @@ import NewsCom from '../newscard/newscard';
                 .catch((err) => {
                         console.log(err)
                 });  
-            }
         }
-        TWtoggle = () => {
+        TWtoggle = async () => {
             const newState = !this.state.TWtoggle
             this.setState({TWtoggle: newState});
-            let top100Streams ='https://api.twitch.tv/kraken/streams?limit=50&client_id=7mx4fyx7xv1pcxfe25fmguto1xao2b';
-            fetch(top100Streams)
-            .then((response) => {
-                response.json()
-                .then((data) => {
-                    console.log(data.streams);
+            let gameStreams ='https://api.twitch.tv/kraken/search/streams?query='+ this.state.searchResults.name +'&limit=5&client_id=7mx4fyx7xv1pcxfe25fmguto1xao2b';
+                fetch(gameStreams)
+                .then((response) => {
+                    response.json()
+                    .then(async (data) => {
+                        console.log('Stream data added')
+                        console.log(data.streams);
+                        this.setState({twitchResults: data.streams});
+                    })
+                    .catch((err) => {
+                        if (err) {
+                            console.log(err);
+                        }    
+                    })
                 })
                 .catch((err) => {
                     if (err) {
                         console.log(err);
-                    }    
-                })
-            })
-            .catch((err) => {
-                if (err) {
-                    console.log(err);
-                }
-            });
+                    }
+                });
         }
         componentDidMount() {
+
             let { navigation } = this.props;
             let text = navigation.getParam('text', '');
             let searchQuery = text;
@@ -213,9 +204,18 @@ import NewsCom from '../newscard/newscard';
                                 }
                              <TouchableOpacity onPress={this.TWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Twitch </Text></TouchableOpacity>
                                 {
-                                    this.state.TWtoggle ? <TwitchCom /> : null
+                                    this.state.TWtoggle ? this.state.twitchResults.map( stream => (<TwitchCom streamedGame={stream.channel.game}
+                                    streamerName={stream.channel.display_name}
+                                    streamerFollowers={stream.channel.followers}
+                                    streamerBanner={stream.channel.profile_banner}
+                                    streamerBackgroundColor={stream.channel.profile_banner_background_color}
+                                    streamerStatus={stream.channel.status}
+                                    streamURL={stream.channel.url}
+                                    streamBanner={stream.channel.video_banner}
+                                    streamPreview={stream.preview.medium} /> )) : null
                                 }
                     </View>
+                    <Footer />
                 </ScrollView>
             </View>
             )

@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Text, View, StyleSheet, TouchableHighlight } from 'react-native';
+import { Image, Text, View, StyleSheet, TouchableHighlight, Linking } from 'react-native';
 
 export default class NewsCom extends React.Component {
         render() {

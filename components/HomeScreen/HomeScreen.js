@@ -12,8 +12,7 @@ export default class HomeScreen extends React.Component {
 
     static navigationOptions = {
 
-        headerTitle: <Header />,
-        footerTitle: <Footer />
+        headerTitle: <Header />
 
       };
 
@@ -29,7 +28,6 @@ export default class HomeScreen extends React.Component {
     fetch(url)
     .then( response => {
         response.json().then( data => {
-            console.log(data);
             this.setState({article: data.articles})
         })
         .catch(err => {
@@ -97,9 +95,10 @@ export default class HomeScreen extends React.Component {
                         pic={article.urlToImage}
                     />
                     ))} 
-        
+                  <Footer />
                 </ScrollView>
 
+                
         </View>
       
       )

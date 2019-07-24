@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Jul 22 21:05:04 EDT 2019
+#Tue Jul 23 18:46:15 EDT 2019
 5.base=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 42.base=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 22.path=lib/x86/libjsc.so
