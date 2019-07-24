@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         margin: 4,
         padding: 5,
         borderRadius: 3,
-        borderBottomRightRadius: 100,
+        borderBottomRightRadius: 25,
         borderColor: `darkslategray`,
         borderWidth: 1,
         flexDirection: `row`,
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
         elevation: 4
     },
     cardtext: {
-        width: '66%',
+        flex: 1
     }
 
 })
