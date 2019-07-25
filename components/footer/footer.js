@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import FooterTab from "./footertab";
 
 
 export default class Footer extends Component {
   render() {
     return (
         <View style={styles.footer}>
-            <View>
-                <Text style={styles.tab}>Home</Text>
-            </View>
-            <View>
-                <Text style={styles.tab}>Login</Text>
-            </View>
-            <View>
-                <Text style={styles.tab}>Search</Text>
-            </View>
+            <FooterTab tablabel='Home' />
+            <FooterTab tablabel='Account' />
+            <FooterTab tablabel='Log Out' />
         </View> 
     );
   }
@@ -22,25 +17,17 @@ export default class Footer extends Component {
 
 const styles = StyleSheet.create({
     footer: {
+        position: 'absolute',
         bottom: 0,
+        flex: 1,
         width: `100%`,
         backgroundColor: `#000`,
         flexDirection: 'row',
         justifyContent: 'center',
         height: `auto`,
         borderTopWidth: 1,
-        borderTopColor: `rgb(64, 64, 64)`
-    },
-    tab: {
-        fontFamily: 'sans-serif-thin',
-        paddingVertical: 4,
-        paddingHorizontal: 35,
-        borderRightWidth: 0.5,
-        borderLeftWidth: 0.5,
-        textAlign: `center`,
-        borderLeftColor: `rgb(128, 128, 128)`,
-        borderRightColor: `rgb(128, 128, 128)`,
-        color: `rgb(128, 128, 128)`,
-        fontSize: 22,
+        borderBottomWidth: 1,
+        borderTopColor: `darkslategray`,
+        borderBottomWidth: `darkslategray`
     }
 })

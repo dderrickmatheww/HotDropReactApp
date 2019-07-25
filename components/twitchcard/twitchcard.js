@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         margin: 4,
         padding: 5,
         borderRadius: 3,
-        borderColor: `darkslategray`,
+        borderColor: `rgb(1, 0, 128)`,
         borderWidth: 1,
         width: 350,
         shadowColor: "#000",
@@ -61,15 +61,33 @@ const styles = StyleSheet.create({
         fontWeight: `bold`,
         fontSize: 16,
         flexWrap: 'wrap',
+        textShadowColor: `#000`,
+        textShadowRadius: 2,
+        textShadowOffset: {
+            height: 2,
+            width: 1,
+        }
     },
     info: {
         fontWeight: `100`,
         color:`rgb(135, 206, 250)`,
         fontSize: 10,
+        textShadowColor: `#000`,
+        textShadowRadius: 2,
+        textShadowOffset: {
+            height: 2,
+            width: 1,
+        }
     },
     description: {
         color:`rgb(135, 206, 250)`,
         fontSize: 12,
+        textShadowColor: `#000`,
+        textShadowRadius: 2,
+        textShadowOffset: {
+            height: 2,
+            width: 1,
+        }
     },
     bottom: {
         lineHeight: 5,
@@ -90,7 +108,7 @@ const styles = StyleSheet.create({
     gamelogo: {
         width: 100,
         height: 150,
-        borderColor: `rgb(2, 0, 144)`,
+        borderColor: `rgb(1, 0, 218)`,
         borderWidth: 2
     },
     thumbcontainer: {
