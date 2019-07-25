@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderBottomWidth: 1,
         borderTopColor: `darkslategray`,
-        borderBottomWidth: `darkslategray`
+        borderBottomColor: `darkslategray`
     }
 })

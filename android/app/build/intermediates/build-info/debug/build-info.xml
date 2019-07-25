@@ -6,7 +6,7 @@
     density="440dpi"
     format="10"
     plugin-version="3.4.2"
-    timestamp="1564097870755"
+    timestamp="1564098164975"
     token="7809877264079993799"
     verifier="COLD_SWAP_REQUESTED" >
 
@@ -23,13 +23,9 @@
         name="verifier"
         duration="0" />
 
-    <artifact
-        location="C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
-        type="SPLIT_MAIN" />
-
     <build
         build-mode="FULL"
-        timestamp="1564094844824"
+        timestamp="1564098123604"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
@@ -73,11 +69,7 @@
     </build>
     <build
         build-mode="COLD"
-        timestamp="1564097870755"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
-            type="SPLIT_MAIN" />
-    </build>
+        timestamp="1564098164975"
+        verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>
