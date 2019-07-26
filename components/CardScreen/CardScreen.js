@@ -1,8 +1,10 @@
 import React from 'react';
-import { ScrollView, AsyncStorage, View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native';
+import { ScrollView, AsyncStorage, View, StyleSheet, TouchableOpacity, Text, Image, Linking } from 'react-native';
 import GameCard from '../gamecard/gameCard';
 import TwitchCom from '../twitchcard/twitchcard';
 import YoutubeCom from '../youtubecard/youtubecard';
+import ArticleCard from '../articlecard/articleCard';
+
     export default class CardScreen extends React.Component {
 
         static navigationOptions = ({ navigation }) => {
@@ -18,6 +20,8 @@ import YoutubeCom from '../youtubecard/youtubecard';
         state = {
             searchResults: [],
             YTVidID: [],
+            YTcomments: [],
+            gameArticles: [],
             date: [],
             platforms: [],
             pic: {},
@@ -26,69 +30,155 @@ import YoutubeCom from '../youtubecard/youtubecard';
             TWtoggle: false
         }
 
-        YTtoggle = () => {
+        YTtoggle = async () => {
             const newState = !this.state.YTtoggle
             this.setState({YTtoggle: newState});
+            let { navigation } = this.props;
+            let text = navigation.getParam('text', '');
+            let cacheName = text.toLowerCase();
             let url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + this.state.searchResults.name + "+game+trailer" + "&type=video&key=AIzaSyAhsb0OUjYC9-im6U3pNoks26zkjBWUtHo"
-            fetch(url)
-            .then((response) => {
-                response.json().then(data => {
-                let videoId = data.items[0].id.videoId
-                console.log(videoId);
-                this.setState({YTVidID: videoId});
+            let value =  await AsyncStorage.getItem(cacheName);
+            value = JSON.parse(value);
+            if ( value.items && value.videoId ) {
+                console.log("Grabbed comments & video id from cache");
+                console.log(value);
+                this.setState({YTVidID: value.videoId});
+                this.setState({YTcomments: value.items});
+            }
+            else {
+                fetch(url)
+                .then((response) => {
+                    response.json().then( async data => {
+                        let videoId = data.items[0].id.videoId
+                        await  AsyncStorage.mergeItem(cacheName, JSON.stringify(data.items[0].id)).catch((err) => {if(err) console.log(err)});
+                        console.log('added video id to cache');
+                        this.setState({YTVidID: videoId});
+                        let commentURL = "https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&moderationStatus=published&order=relevance&textFormat=html&videoId=" + this.state.YTVidID + "&key=AIzaSyAhsb0OUjYC9-im6U3pNoks26zkjBWUtHo"
+                            fetch(commentURL)
+                            .then((response) => {
+                                response.json().then(async data2 => {
+                                    console.log(data2);
+                                    this.setState({YTcomments: data2.items});
+                                    await AsyncStorage.mergeItem(cacheName, JSON.stringify(data2)).catch((err) => {if(err) console.log(err)}); 
+                                    console.log('added comments to cache');
+                                })
+                                .catch((err)=> {
+                                    if (err) {
+                                        console.log(err);
+                                    }
+                                });
+                            })
+                            .catch((err)=>{
+                                if (err) {
+                                    console.log(err)
+                                }
+                            });
+                    })
+                    .catch((err) => {
+                            console.log(err)
+                    });
                 })
                 .catch((err) => {
-                    console.log(err)
-                })
-            })
-            .catch((err) => {console.log(err)});
+                        if(err) {
+                        console.log(err);
+                        }
+                });
+            }
         }
-        NWtoggle = () => {
+        NWtoggle =  async () => {
             const newState = !this.state.NWtoggle
             this.setState({NWtoggle: newState})
+            let month = new Date().getMonth() + 1; 
+            let year = new Date().getFullYear();
+            let { navigation } = this.props;
+            let text = navigation.getParam('text', '');
+            let cacheName = text.toLowerCase();
+            let url = "https://newsapi.org/v2/everything?q="+ this.state.searchResults.name +"&from="+ year +"-"+ month +"&sources=ign,polygon&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15"
+            let value =  await AsyncStorage.getItem(cacheName);
+            value = JSON.parse(value);
+
+            if ( value.articles ) {
+                console.log("Grabbed articles from cache");
+                console.log(value);
+                this.setState({gameArticles: value.articles.slice(1, 4)});
+            }
+            else {
+                fetch(url)
+                .then((response) => {
+                    response.json()
+                    .then( async data => {
+                        await  AsyncStorage.mergeItem(cacheName, JSON.stringify(data)).catch((err) => {if(err) console.log(err)});
+                        console.log('added articles to cache');
+                        this.setState({gameArticles: data.articles.slice(1, 4)}); 
+                    })
+                    .catch((err)=>{
+                        if (err) {
+                            console.log(err)
+                        }
+                    });
+                })
+                .catch((err) => {
+                        console.log(err)
+                });  
+            }
         }
         TWtoggle = () => {
             const newState = !this.state.TWtoggle
-            this.setState({TWtoggle: newState})
+            this.setState({TWtoggle: newState});
+            let top100Streams ='https://api.twitch.tv/kraken/streams?limit=50&client_id=7mx4fyx7xv1pcxfe25fmguto1xao2b';
+            fetch(top100Streams)
+            .then((response) => {
+                response.json()
+                .then((data) => {
+                    console.log(data.streams);
+                })
+                .catch((err) => {
+                    if (err) {
+                        console.log(err);
+                    }    
+                })
+            })
+            .catch((err) => {
+                if (err) {
+                    console.log(err);
+                }
+            });
         }
         componentDidMount() {
-            const { navigation } = this.props;
-            const text = navigation.getParam('text', '');
+            let { navigation } = this.props;
+            let text = navigation.getParam('text', '');
             let searchQuery = text;
             let cacheName = text.toLowerCase();
             searchQuery = searchQuery.toLowerCase().replace(' ', '%');
             let url = 'https://www.giantbomb.com/api/search/?format=json&api_key=99ec1d8980f419c59250e12a72f3b31d084e9bf9&query=' + searchQuery + '&resources=game&limit=1';
 
             cacheResults = async (cacheName, url) => {
-
                 let value = await AsyncStorage.getItem(cacheName);
-            
                 if ( value ) {
                     value = JSON.parse(value);
-                    console.log('Grabbed from cache')
-                    this.setState({searchResults: value[0]});  
-                    this.setState({date: [value[0].expected_release_month, '/', value[0].expected_release_day, '/', value[0].expected_release_year]});
-                    this.setState({platforms: value[0].platforms.map(platforms => platforms.abbreviation).join(', ')});
-                    this.setState({pic: value[0].image});
+                    console.log('Grabbed game data from cache')
+                    this.setState({searchResults: value});  
+                    this.setState({date: [value.expected_release_month, '/', value.expected_release_day, '/', value.expected_release_year]});
+                    this.setState({platforms: value.platforms.map(platforms => platforms.abbreviation).join(', ')});
+                    this.setState({pic: value.image});
                 } 
                 else {
                     fetch(url)
                     .then( response => {
                         response.json().then( async data => {
-                            await AsyncStorage.setItem(cacheName, JSON.stringify(data.results));
-                            value = data.results;
-                            console.log('Add to cache')
-                            this.setState({searchResults: value[0]});
-                            this.setState({date: [value[0].expected_release_month, '/', value[0].expected_release_day, '/', value[0].expected_release_year]});
-                            this.setState({platforms: value[0].platforms.map(platforms => platforms.abbreviation).join(', ')});
-                            this.setState({pic: value[0].image});
+                            value = data.results[0];
+                            await AsyncStorage.setItem(cacheName, JSON.stringify(value));
+                            console.log('Added game data to cache')
+                            this.setState({searchResults: value});
+                            this.setState({date: [value.expected_release_month, '/', value.expected_release_day, '/', value.expected_release_year]});
+                            this.setState({platforms: value.platforms.map(platforms => platforms.abbreviation).join(', ')});
+                            this.setState({pic: value.image});
                         })
                         .catch(function(err) {
                             if(err) {
                                 console.log(err);
                             }
                         })
-                        console.log(this);
                     })
                     .catch(function(err) {
                         if (err) {
@@ -106,20 +196,20 @@ import YoutubeCom from '../youtubecard/youtubecard';
             <View style={{flex: 1, backgroundColor: "#363534"}}>
                     <ScrollView>
                     <GameCard
-                    title={this.state.searchResults.name}
-                    platforms={this.state.platforms}
-                    releasedate={this.state.date}
-                    description={this.state.searchResults.deck}
-                    picture={this.state.pic.medium_url}
+                        title={this.state.searchResults.name}
+                        platforms={this.state.platforms}
+                        releasedate={this.state.date}
+                        description={this.state.searchResults.deck}
+                        picture={this.state.pic.medium_url}
                     />
                     <View style={styles.bottom}>
                              <TouchableOpacity onPress={this.NWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> More News </Text></TouchableOpacity>
                                 {
-                                    this.state.NWtoggle ? <Text style={styles.bottombuttontext}>Here</Text> : null
+                                    this.state.NWtoggle ?  this.state.gameArticles.map(article => (<ArticleCard  cardhead={article.title} cardauthor={article.author} cardbody={article.content} link={article.url} source={article.source.name} pic={article.urlToImage}/> )) : null
                                 }
                              <TouchableOpacity onPress={this.YTtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> YouTube </Text></TouchableOpacity>
                                 {
-                                    this.state.YTtoggle ? <YoutubeCom videoId={this.state.YTVidID}/> : null
+                                    this.state.YTtoggle ? <YoutubeCom videoId={this.state.YTVidID} comments={this.state.YTcomments}/> : null
                                 }
                              <TouchableOpacity onPress={this.TWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Twitch </Text></TouchableOpacity>
                                 {
