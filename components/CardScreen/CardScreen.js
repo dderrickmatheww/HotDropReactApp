@@ -1,10 +1,9 @@
 import React from 'react';
-import axios from 'axios'
-import { ScrollView, AsyncStorage, View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { ScrollView, AsyncStorage, View, StyleSheet, TouchableOpacity, Text, Image, Linking } from 'react-native';
 import GameCard from '../gamecard/gameCard';
 import TwitchCom from '../twitchcard/twitchcard';
 import YoutubeCom from '../youtubecard/youtubecard';
-import NewsCom from '../newscard/newscard';
+import ArticleCard from '../articlecard/articleCard';
 
     export default class CardScreen extends React.Component {
 
@@ -187,16 +186,16 @@ import NewsCom from '../newscard/newscard';
             <View style={{flex: 1, backgroundColor: "#363534"}}>
                     <ScrollView>
                     <GameCard
-                    title={this.state.searchResults.name}
-                    platforms={this.state.platforms}
-                    releasedate={this.state.date}
-                    description={this.state.searchResults.deck}
-                    picture={this.state.pic.medium_url}
+                        title={this.state.searchResults.name}
+                        platforms={this.state.platforms}
+                        releasedate={this.state.date}
+                        description={this.state.searchResults.deck}
+                        picture={this.state.pic.medium_url}
                     />
                     <View style={styles.bottom}>
                              <TouchableOpacity onPress={this.NWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> More News </Text></TouchableOpacity>
                                 {
-                                    this.state.NWtoggle ?  this.state.gameArticles.map(article => (<NewsCom  cardhead={article.title} cardauthor={article.author} cardbody={article.content} link={article.url} pic={article.urlToImage}/> )) : null
+                                    this.state.NWtoggle ?  this.state.gameArticles.map(article => (<ArticleCard  cardhead={article.title} cardauthor={article.author} cardbody={article.content} link={article.url} source={article.source.name} pic={article.urlToImage}/> )) : null
                                 }
                              <TouchableOpacity onPress={this.YTtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> YouTube </Text></TouchableOpacity>
                                 {

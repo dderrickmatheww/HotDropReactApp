@@ -68,11 +68,24 @@ export default class HomeScreen extends React.Component {
       return (
         <View style={{ backgroundColor: "#363534"}}>
 
-                <ScrollView>
-
+                <ScrollView keyboardShouldPersistTaps='always' >
                     <SearchBar getSearchResults={this.getSearchResults}  />
                     <Text style={styles.text}>Top Twitch Streams</Text>
-                    <ScrollView horizontal="true">
+                    <View                       
+                      style={{
+                        backgroundColor: '#545251', 
+                        paddingTop: 2, 
+                        paddingBottom: 4,
+                        borderBottomColor: 'rgb(1, 0, 96)',
+                        borderBottomWidth: 2
+                      }}
+                    >
+                      <ScrollView 
+                      horizontal="true" 
+                      snapToInterval={358} 
+                      snapToAlignment="center" 
+                      indicatorStyle="white" 
+                    >
                       {this.state.streams.map(stream => ( 
                         <TwitchCom 
                           streamedGame={stream.channel.game}
@@ -86,7 +99,10 @@ export default class HomeScreen extends React.Component {
                           streamPreview={stream.preview.medium}
                         />
                       ))}
-                    </ScrollView>
+                      </ScrollView>
+                      <Text style={styles.scrollinst}>« Swipe left and right to browse streams »</Text>
+                    </View>
+                    
 
                     <Text style={styles.text}>Aggregated News</Text>
                     {this.state.article.map(article => (
@@ -99,7 +115,8 @@ export default class HomeScreen extends React.Component {
                         pic={article.urlToImage}
                     />
                     ))} 
-                </ScrollView>  
+                </ScrollView>
+                <Footer />
         </View>
       
       )
@@ -121,7 +138,15 @@ export default class HomeScreen extends React.Component {
       fontWeight: `bold`,
       color: `skyblue`,
       marginLeft: 4,
-      fontSize: 16
+      fontSize: 16,
+      marginTop: 2
+    },
+    scrollinst: {
+      fontStyle: `italic`,
+      fontSize: 10,
+      color: `lightgray`,
+      paddingVertical: 1,
+      marginLeft: 4
     }
   })
 
