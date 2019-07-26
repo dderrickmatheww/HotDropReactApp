@@ -4,7 +4,7 @@ import { StyleSheet, Text, TouchableHighlight } from 'react-native';
 export default class FooterTab extends Component {
     render() {
       return (
-        <TouchableHighlight style={styles.tab} onPress={ () => {1 + 1}} activeOpacity={0.5} underlayColor="rgb(1, 0, 96)">
+        <TouchableHighlight style={styles.tab} onPress={() => {}} onHideUnderlay={this.props.tabaction} activeOpacity={0.5} underlayColor="rgb(1, 0, 96)">
             <Text style={styles.tabtext}>{this.props.tablabel}</Text>
         </TouchableHighlight>
       );

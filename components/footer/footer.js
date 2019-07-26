@@ -4,15 +4,36 @@ import FooterTab from "./footertab";
 
 
 export default class Footer extends Component {
-  render() {
-    return (
-        <View style={styles.footer}>
-            <FooterTab tablabel='Home' />
-            <FooterTab tablabel='Account' />
-            <FooterTab tablabel='Log Out' />
-        </View> 
-    );
-  }
+    state = {
+        loggedIn: false
+    }
+
+    logIn = () => {
+        this.setState({loggedIn: true})
+    }
+
+    logOut = () => {
+        this.setState({loggedIn: false})
+    }
+
+    render() {
+        return (
+            <View>
+                {this.state.loggedIn ? 
+                    <View style={styles.footer}>
+                        <FooterTab tablabel='Home'/>
+                        <FooterTab tablabel='Account' /> 
+                        <FooterTab tablabel='Log Out' tabaction={this.logOut}/>
+                    </View>
+                :
+                    <View style={styles.footer}>
+                        <FooterTab tablabel='Home'/>
+                        <FooterTab tablabel='Login' tabaction={this.logIn}/>
+                    </View>
+                }
+            </View> 
+        );
+    }
 }
 
 const styles = StyleSheet.create({
