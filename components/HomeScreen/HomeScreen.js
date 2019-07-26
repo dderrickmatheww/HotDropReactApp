@@ -99,10 +99,7 @@ export default class HomeScreen extends React.Component {
                         pic={article.urlToImage}
                     />
                     ))} 
-                  <Footer />
-                </ScrollView>
-
-                
+                </ScrollView>  
         </View>
       
       )
@@ -123,7 +120,6 @@ export default class HomeScreen extends React.Component {
     text: {
       fontWeight: `bold`,
       color: `skyblue`,
-      fontVariant: `small-caps`,
       marginLeft: 4,
       fontSize: 16
     }

@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios'
 import { ScrollView, AsyncStorage, View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import GameCard from '../gamecard/gameCard';
 import TwitchCom from '../twitchcard/twitchcard';
@@ -42,7 +43,7 @@ import NewsCom from '../newscard/newscard';
             value = JSON.parse(value);
             if ( value.items && value.videoId ) {
                 console.log("Grabbed comments & video id from cache");
-                console.log(value);
+                console.log(value.items.snippet.topLevelComment.snippet.authorProfileImageUrl);
                 this.setState({YTVidID: value.videoId});
                 this.setState({YTcomments: value.items});
             }
@@ -86,17 +87,16 @@ import NewsCom from '../newscard/newscard';
                 });
             }
         }
-        NWtoggle =  async () => {
+        NWtoggle = () => {
             const newState = !this.state.NWtoggle
             this.setState({NWtoggle: newState})
             let month = new Date().getMonth() + 1; 
             let year = new Date().getFullYear();
-            let url = "https://newsapi.org/v2/everything?q="+ this.state.searchResults.name +"&from="+ year +"-"+ month +"&sources=ign,polygon&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15"
-            value = JSON.parse(value);
+            let url = "https://newsapi.org/v2/everything?q="+ this.state.searchResults.name +"&from="+ year +"-"+ month +"&sources=ign,polygon&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15";
                 fetch(url)
                 .then((response) => {
                     response.json()
-                    .then( async data => {
+                    .then( data => {
                         console.log('added article data');
                         this.setState({gameArticles: data.articles.slice(1, 4)}); 
                     })
@@ -110,14 +110,14 @@ import NewsCom from '../newscard/newscard';
                         console.log(err)
                 });  
         }
-        TWtoggle = async () => {
+        TWtoggle = () => {
             const newState = !this.state.TWtoggle
             this.setState({TWtoggle: newState});
             let gameStreams ='https://api.twitch.tv/kraken/search/streams?query='+ this.state.searchResults.name +'&limit=5&client_id=7mx4fyx7xv1pcxfe25fmguto1xao2b';
                 fetch(gameStreams)
                 .then((response) => {
                     response.json()
-                    .then(async (data) => {
+                    .then((data) => {
                         console.log('Stream data added')
                         console.log(data.streams);
                         this.setState({twitchResults: data.streams});
@@ -215,7 +215,6 @@ import NewsCom from '../newscard/newscard';
                                     streamPreview={stream.preview.medium} /> )) : null
                                 }
                     </View>
-                    <Footer />
                 </ScrollView>
             </View>
             )
