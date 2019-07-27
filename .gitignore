@@ -1,5 +1,5 @@
-node_modules/**/*
-!node_modules/react-native-autocomplete-input
+/node_modules/*
+!/node_modules/react-native-autocomplete-input
 .expo/*
 npm-debug.*
 *.jks
