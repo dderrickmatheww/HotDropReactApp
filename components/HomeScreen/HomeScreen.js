@@ -9,6 +9,8 @@ import Header from '../header/header';
 import TwitchCom from '../twitchcard/twitchcard';
 import AutoCompleteBar from '../AutoCompleteBar/autoCompleteBar';
 import AboutScreen from '../AboutScreen/AboutScreen';
+import LoginScreen from "../LoginScreen/LoginScreen";
+import ProfileScreen from "../ProfileScreen/ProfileScreen";
 
 export default class HomeScreen extends React.Component {
 
@@ -138,6 +140,8 @@ export default class HomeScreen extends React.Component {
                 <Footer 
                   scrollfunc={this.scrollToTop}
                   about={() => this.props.navigation.navigate('AboutScreen')}
+                  login={() => this.props.navigation.navigate('LoginScreen')}
+                  profile={() => this.props.navigation.navigate('ProfileScreen')}
                 />
         </View>
       
@@ -149,7 +153,9 @@ export default class HomeScreen extends React.Component {
     {
       HomeScreen: HomeScreen,
       CardScreen: CardScreen,
-      AboutScreen: AboutScreen
+      AboutScreen: AboutScreen,
+      LoginScreen, LoginScreen,
+      ProfileScreen: ProfileScreen
     },
     {
       initialRouteName: "HomeScreen"

@@ -22,14 +22,14 @@ export default class Footer extends Component {
                 {this.state.loggedIn ? 
                     <View style={styles.footer}>
                         <FooterTab tablabel='Home' tabaction={this.props.scrollfunc}/>
-                        <FooterTab tablabel='Account' /> 
+                        <FooterTab tablabel='Account' tabaction={this.props.profile}/> 
                         <FooterTab tablabel='Log Out' tabaction={this.logOut}/>
                         <FooterTab tablabel='About' />
                     </View>
                 :
                     <View style={styles.footer}>
                         <FooterTab tablabel='Home' tabaction={this.props.scrollfunc}/>
-                        <FooterTab tablabel='Login' tabaction={this.logIn}/>
+                        <FooterTab tablabel='Login' tabaction={this.props.login}/>
                         <FooterTab tablabel='About' tabaction={this.props.about}/>
                     </View>
                 }
