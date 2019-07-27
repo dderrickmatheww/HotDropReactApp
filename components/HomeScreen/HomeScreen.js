@@ -80,9 +80,11 @@ export default class HomeScreen extends React.Component {
                   ref = 'mainScroll'
                   style={{marginBottom: 50}}
                 >
-                    <AutoCompleteBar/>
+                    <AutoCompleteBar
+                      getSearchResults={this.getSearchResults}
+                    />
 
-
+                  <View style={{marginTop: 95}}>
                     {/* <SearchBar getSearchResults={this.getSearchResults}  /> */}
                     <Text style={styles.text}>Top Twitch Streams</Text>
                     <View                       
@@ -130,7 +132,7 @@ export default class HomeScreen extends React.Component {
                         pic={article.urlToImage}
                     />
                     ))} 
-        
+                </View>  
                 </ScrollView>
                 <Footer 
                   scrollfunc={this.scrollToTop}
@@ -157,7 +159,7 @@ export default class HomeScreen extends React.Component {
       color: `skyblue`,
       fontVariant: `small-caps`,
       marginLeft: 4,
-      fontSize: 16,
+      fontSize: 18,
       marginTop: 2
     },
     scrollinst: {
