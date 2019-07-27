@@ -7,6 +7,7 @@ import CardScreen from '../CardScreen/CardScreen'
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Header from '../header/header';
 import TwitchCom from '../twitchcard/twitchcard';
+import AutoCompleteBar from '../AutoCompleteBar/autoCompleteBar';
 
 export default class HomeScreen extends React.Component {
 
@@ -64,13 +65,25 @@ export default class HomeScreen extends React.Component {
         text: text
       });
   }
+
+    scrollToTop = () => {
+      this.refs.mainScroll.scrollTo({x: 0, y: 0, animated: true})
+      this.componentWillMount()
+    }
   
     render() {
       return (
         <View style={{ backgroundColor: "#363534"}}>
 
-                <ScrollView keyboardShouldPersistTaps='always' >
-                    <SearchBar getSearchResults={this.getSearchResults}  />
+                <ScrollView 
+                  keyboardShouldPersistTaps='always'     
+                  ref = 'mainScroll'
+                  style={{marginBottom: 50}}
+                >
+                    <AutoCompleteBar/>
+
+
+                    {/* <SearchBar getSearchResults={this.getSearchResults}  /> */}
                     <Text style={styles.text}>Top Twitch Streams</Text>
                     <View                       
                       style={{
@@ -81,8 +94,9 @@ export default class HomeScreen extends React.Component {
                         borderBottomWidth: 2
                       }}
                     >
-                      <ScrollView 
+                    <ScrollView 
                       horizontal="true" 
+                      persistentScrollbar={true}
                       snapToInterval={358} 
                       snapToAlignment="center" 
                       indicatorStyle="white" 
@@ -118,7 +132,9 @@ export default class HomeScreen extends React.Component {
                     ))} 
         
                 </ScrollView>
-                <Footer />
+                <Footer 
+                  scrollfunc={this.scrollToTop}
+                />
         </View>
       
       )

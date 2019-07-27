@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Tue Jul 23 21:18:31 EDT 2019
+#Fri Jul 26 13:55:53 EDT 2019
 5.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 42.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 22.path=lib/arm64-v8a/libglog_init.so

@@ -7,13 +7,13 @@ export default class Footer extends Component {
     state = {
         loggedIn: false
     }
-
+    
     logIn = () => {
-        this.setState({loggedIn: true})
+        this.setState({loggedIn: true});
     }
 
     logOut = () => {
-        this.setState({loggedIn: false})
+        this.setState({loggedIn: false});
     }
 
     render() {
@@ -21,14 +21,16 @@ export default class Footer extends Component {
             <View>
                 {this.state.loggedIn ? 
                     <View style={styles.footer}>
-                        <FooterTab tablabel='Home'/>
+                        <FooterTab tablabel='Home' tabaction={this.props.scrollfunc}/>
                         <FooterTab tablabel='Account' /> 
                         <FooterTab tablabel='Log Out' tabaction={this.logOut}/>
+                        <FooterTab tablabel='About' />
                     </View>
                 :
                     <View style={styles.footer}>
-                        <FooterTab tablabel='Home'/>
+                        <FooterTab tablabel='Home' tabaction={this.props.scrollfunc}/>
                         <FooterTab tablabel='Login' tabaction={this.logIn}/>
+                        <FooterTab tablabel='About' />
                     </View>
                 }
             </View> 
