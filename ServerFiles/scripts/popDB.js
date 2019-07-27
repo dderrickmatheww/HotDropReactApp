@@ -49,7 +49,7 @@ async function giantBombAPICall (offset, dataAccum) {
     const offsetStore = response.data.number_of_page_results;
     const limit = response.data.limit;
     // for testing code below changed from < maxOffset - limit to 300 to test popDB with 100 results
-    if (currentOffset + offsetStore < 300) {
+    if (currentOffset + offsetStore < maxOffset - limit) {
       bombDB(currentOffset + offsetStore, response, dataAccum);
     } else {
       console.log("Giant Bomb download complete!");

@@ -6,6 +6,10 @@ router.route("/info/")
   .get(infoController.findAll)
   .post(infoController.create);
 
+// Matches with "/api/info/name/:name"
+router.route("/info/name/:name")
+  .get(infoController.findByName);
+
 // Matches with "/api/info/:id"
 router
   .route("/info/:id")

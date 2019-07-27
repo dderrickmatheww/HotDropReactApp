@@ -19,18 +19,13 @@ const infoSchema = new Schema({
     type: String,
     required: false
   },
-  // date is just a string
-  releasedate: {
-    type: Date,
-    default: Date.now
+  // 
+  platforms: {
+    type: Array,
+    required: false
   },
   // imageurl, a string
   imageURL: {
-    type: String,
-    required: false
-  },
-  // aliases, a string
-  aliases: {
     type: String,
     required: false
   },
