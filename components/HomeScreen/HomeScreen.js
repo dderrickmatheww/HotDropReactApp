@@ -88,7 +88,6 @@ export default class HomeScreen extends React.Component {
                     />
 
                   <View style={{marginTop: 95}}>
-                    {/* <SearchBar getSearchResults={this.getSearchResults}  /> */}
                     <Text style={styles.text}>Top Twitch Streams</Text>
                     <View                       
                       style={{

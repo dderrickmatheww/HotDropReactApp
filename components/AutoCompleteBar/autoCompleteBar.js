@@ -2,7 +2,7 @@ import Autocomplete from 'react-native-autocomplete-input';
 import React, { Component } from 'react';
 import { StyleSheet, Text, Image, TouchableOpacity, View, Button } from 'react-native';
 
-const API = 1//API HERE//;
+const API = 1//AUTOCOMPLETE API LINK HERE//;
 
 export default class AutoCompleteBar extends Component {
 
@@ -79,6 +79,7 @@ export default class AutoCompleteBar extends Component {
         selected: false
     };
 
+    // THIS IS WHERE THE API ROUTE FOR THE AUTOCOMPLETE GOES, FRED
 /*     componentDidMount() {
         fetch(`${API}/games/`).then(res => res.json()).then((json) => {
             const { results: games } = json;
