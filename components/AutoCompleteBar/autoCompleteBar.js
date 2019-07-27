@@ -99,6 +99,7 @@ export default class AutoCompleteBar extends Component {
     selectItem = (result) => {
         this.setState({query: result});
         this.setState({selected: true})
+        this.props.getSearchResults(result)
     }
 
     changeText = (text) => {

@@ -8,6 +8,7 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import Header from '../header/header';
 import TwitchCom from '../twitchcard/twitchcard';
 import AutoCompleteBar from '../AutoCompleteBar/autoCompleteBar';
+import AboutScreen from '../AboutScreen/AboutScreen';
 
 export default class HomeScreen extends React.Component {
 
@@ -136,6 +137,7 @@ export default class HomeScreen extends React.Component {
                 </ScrollView>
                 <Footer 
                   scrollfunc={this.scrollToTop}
+                  about={() => this.props.navigation.navigate('AboutScreen')}
                 />
         </View>
       
@@ -146,7 +148,8 @@ export default class HomeScreen extends React.Component {
   const AppNavigator = createStackNavigator(
     {
       HomeScreen: HomeScreen,
-      CardScreen: CardScreen
+      CardScreen: CardScreen,
+      AboutScreen: AboutScreen
     },
     {
       initialRouteName: "HomeScreen"
