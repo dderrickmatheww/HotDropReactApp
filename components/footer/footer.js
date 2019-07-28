@@ -8,10 +8,12 @@ export default class Footer extends Component {
         loggedIn: false
     }
     
+    //this is a placeholder function to test the ternary statement
     logIn = () => {
         this.setState({loggedIn: true});
     }
 
+    //same as above
     logOut = () => {
         this.setState({loggedIn: false});
     }
