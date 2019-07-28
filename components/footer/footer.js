@@ -24,7 +24,7 @@ export default class Footer extends Component {
                         <FooterTab tablabel='Home' tabaction={this.props.scrollfunc}/>
                         <FooterTab tablabel='Account' tabaction={this.props.profile}/> 
                         <FooterTab tablabel='Log Out' tabaction={this.logOut}/>
-                        <FooterTab tablabel='About' />
+                        <FooterTab tablabel='About' tabaction={this.props.about} />
                     </View>
                 :
                     <View style={styles.footer}>
