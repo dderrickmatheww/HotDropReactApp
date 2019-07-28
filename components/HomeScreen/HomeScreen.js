@@ -7,6 +7,8 @@ import CardScreen from '../CardScreen/CardScreen'
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Header from '../header/header';
 import TwitchCom from '../twitchcard/twitchcard';
+import Firebase from '../loginmodule/firebase';
+import Login from '../loginmodule/loginmodule';
 
 export default class HomeScreen extends React.Component {
 
@@ -18,10 +20,19 @@ export default class HomeScreen extends React.Component {
 
     state = {
       article: [],
-      streams: []
+      streams: [],
+      authStatusReported: false,
+      isUserAuthenticated: false
   }
 
   componentWillMount() {
+    Firebase.init();
+    Firebase.auth.onAuthStateChanged(user => {
+      this.setState({
+        authStatusReported: true,
+        isUserAuthenticated: !!user
+      })
+    })
     let month = new Date().getMonth() + 1; 
     let year = new Date().getFullYear();
     let url ="https://newsapi.org/v2/top-headlines?sources=ign,polygon&from=" + year + "-" + month +"&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15"
@@ -116,7 +127,7 @@ export default class HomeScreen extends React.Component {
                     />
                     ))} 
                 </ScrollView>
-                <Footer />
+                <Footer navigation={(route) => {this.props.navigation.navigate(route)}} userAuth={this.state.isUserAuthenticated}/>
         </View>
       
       )
@@ -126,12 +137,14 @@ export default class HomeScreen extends React.Component {
   const AppNavigator = createStackNavigator(
     {
       HomeScreen: HomeScreen,
-      CardScreen: CardScreen
+      CardScreen: CardScreen,
+      LoginScreen: Login
     },
     {
       initialRouteName: "HomeScreen"
     }
   );
+
 
   const styles = StyleSheet.create({
     text: {
@@ -150,4 +163,4 @@ export default class HomeScreen extends React.Component {
     }
   })
 
-  module.exports = createAppContainer(AppNavigator);
+  module.exports = createAppContainer(AppNavigator)

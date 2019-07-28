@@ -1,168 +1,135 @@
 import React from "react";
-import { Text, View, StyleSheet, TouchableHighlight, KeyboardAvoidingView, AsyncStorage, TextInput} from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import { AccessToken, LoginManager } from 'react-native-fbsdk';
-import firebase from 'react-native-firebase'
+import { Text, View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, AsyncStorage, TextInput} from 'react-native';
+import Firebase from './firebase';
 
-var config = {
-    apiKey: "AIzaSyAij5cJMyfiiwCGa8DptFJVgx2mNkR0rrE",
-    authDomain: "hotdropauth.firebaseapp.com",
-    databaseURL: "https://hotdropauth.firebaseio.com",
-    projectId: "hotdropauth",
-    storageBucket: "hotdropauth.appspot.com",
-    messagingSenderId: "1053617876000"
-  };
-
-  firebase.initializeApp(config);
-// Calling the following function will open the FB login dialogue:
-export async function facebookLogin() {
-  try {
-    const result = await LoginManager.logInWithReadPermissions(['public_profile', 'email']);
-
-    if (result.isCancelled) {
-      // handle this however suites the flow of your app
-      throw new Error('User cancelled request'); 
-    }
-
-    console.log(`Login success with permissions: ${result.grantedPermissions.toString()}`);
-
-    // get the access token
-    const data = await AccessToken.getCurrentAccessToken();
-
-    if (!data) {
-      // handle this however suites the flow of your app
-      throw new Error('Something went wrong obtaining the users access token');
-    }
-
-    // create a new firebase credential with the token
-    const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
-
-    // login with credential
-    const firebaseUserCredential = await firebase.auth().signInWithCredential(credential);
-
-    console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()))
-  } catch (e) {
-    console.error(e);
-  }
-}
-  // update firestore settings
-  // Initialize the FirebaseUI Widget using Firebase.
-// var ui = new firebaseui.auth.AuthUI(firebase.auth());
-//   var uiConfig = {
-//     callbacks: {
-//       signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-//         // User successfully signed in.
-//         // Return type determines whether we continue the redirect automatically
-//         // or whether we leave that to developer to handle.
-//         return false;
-//       },
-//       uiShown: function() {
-//         // The widget is rendered.
-//         // Hide the loader.
-//         document.getElementById('loader').style.display = 'none';
-//       }
-//     },
-//     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-//     signInFlow: 'popup',
-//     signInSuccessUrl: 'index.html',
-//     signInOptions: [
-//         firebase.auth.EmailAuthProvider.PROVIDER_ID,
-//       // Leave the lines as is for the providers you want to offer your users.
-//     //   firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-//      firebase.auth.FacebookAuthProvider.PROVIDER_ID
-//     //   firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-//     //   firebase.auth.GithubAuthProvider.PROVIDER_ID,
-//     //   firebase.auth.PhoneAuthProvider.PROVIDER_ID
-//     ],
-//     // Terms of service url.
-//     tosUrl: '<your-tos-url>',
-//     // Privacy policy url.
-//     privacyPolicyUrl: 'index.html'
-//   };
-
-// // The start method will wait until the DOM is loaded.
-// ui.start('#firebaseui-auth-container', uiConfig);
-
-//   var onAuth = auth.onAuthStateChanged(user => {
-//     if (user) {
-//       console.log('user logged in: ', user);
-//       $("#login").hide()
-     
-    
-      
-//     } else {
-//       console.log('user logged out');
-//       $("#login").show()
-      
-   
-//     }
-//     console.log(user)
-//   })
   
-//   //logout
-//   const logout = document.querySelector('#logout');
-//   logout.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     auth.signOut();
-//   });
-
-
 export default class Login extends React.Component {
-    loginFacebook = () => {
-        return (dispatch) => {
-            LoginManager.logInWithReadPermissions(['public_profile', 'user_friends', 'email'])
-              .then(
-                (result) => {
-                  if (result.isCancelled) {
-                    Alert.alert('Whoops!', 'You cancelled the sign in.');
-                  } else {
-                    AccessToken.getCurrentAccessToken()
-                      .then((data) => {
-                        const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
-                        firebase.auth().signInWithCredential(credential)
-                          .then(loginUserSuccess(dispatch))
-                          .catch((error) => {
-                            loginSingUpFail(dispatch, error.message);
-                          });
-                      });
-                  }
-                },
-                (error) => {
-                  Alert.alert('Sign in error', error);
-                },
-              );
-          };
+    
+    static navigationOptions = ({ navigation }) => {
+        return {
+          title: 'Login or Sign up',
+          headerStyle: {
+            backgroundColor: 'rgb(1, 0, 24)',
+          },
+          headerTintColor: 'skyblue'
+        };
+      };
+    state = {
+        loginTog: false,
+        signupTog: false,
+        userName: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        passwordComfirm: ''
     }
-    onFBButtonPress = () => {
-        this.props.loginFacebook();
+    LoginTog = () => {
+        const newState = !this.state.loginTog
+        this.setState({loginTog: newState});
+        this.setState({signupTog: !newState});
+    }
+    SignupTog = () => {
+        const newState = !this.state.signupTog
+        this.setState({signupTog: newState});
+        this.setState({loginTog: !newState});
+    }
+
+    login = async () => {
+        Firebase.loginInfo.username = this.state.userName
+        Firebase.loginInfo.password = this.state.password
+        try {
+            await Firebase.auth.signInWithEmailAndPassword(Firebase.loginInfo.username, Firebase.loginInfo.password);
+            this.props.navigation.navigate('HomeScreen');
+        }
+        catch (err) {
+            alert(err);
+        }
+    }
+
+    signup = async () => {
+        
+            Firebase.signupInfo.email = this.state.email
+            Firebase.signupInfo.firstName = this.state.firstName
+            Firebase.signupInfo.lastName = this.state.lastName
+            Firebase.signupInfo.username = this.state.userName
+            Firebase.signupInfo.password = this.state.password
+
+        try {
+            await Firebase.auth.createUserWithEmailAndPassword(Firebase.signupInfo.email,  Firebase.signupInfo.password);
+            this.props.navigation.navigate('HomeScreen');
+        } 
+        catch (err) {
+            alert(err);
+        }
+    }
+
+    render() {
+        return(
+                <View style={{justifyContent: 'center', alignContent: 'center', backgroundColor: "#363534"}}>
+                    <TouchableOpacity style={{ 
+                            backgroundColor: `darkslategray`,
+                            padding: 5,
+                            fontSize: 14,
+                            borderRadius: 2,
+                            marginRight: 5,
+                            bottom: 0,
+                            justifyContent: 'center',
+                            alignContent: 'center'
+                            }} onPress={this.LoginTog}><Text>Login</Text></TouchableOpacity>
+                    
+                    { this.state.loginTog ? 
+                    <View style={{justifyContent: 'center', alignContent: 'center'}}> 
+                        <TextInput placeholder='Username' placeholderTextColor='gray' style={{height: 40, width: '100%', backgroundColor: 'rgb(52, 58, 64)', borderColor: 'rgb(206, 212, 218);', fontWeight:'bold', borderWidth: 1, color: 'white'}} onChangeText={(text) => this.setState({userName: text})}/>
+                        <TextInput placeholder='Password' secureTextEntry={true} placeholderTextColor='gray' style={{height: 40, width: '100%', backgroundColor: 'rgb(52, 58, 64)', borderColor: 'rgb(206, 212, 218);', fontWeight:'bold', borderWidth: 1, color: 'white'}} onChangeText={(text) => this.setState({password: text})}/>
+                        <TouchableOpacity
+                            onPress={this.login}
+                            title="Login"
+                            style={{justifyContent: 'center', alignContent: 'center'}}
+                        >
+                            <Text style={{alignContent: 'center'}}>
+                                Login
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                        : null 
+                    }
+
+                    <TouchableOpacity style={{ 
+                            backgroundColor: `darkslategray`,
+                            padding: 5,
+                            fontSize: 14,
+                            borderRadius: 2,
+                            marginRight: 5,
+                            bottom: 0,
+                            justifyContent: 'center',
+                            alignContent: 'center'
+                            }} onPress={this.SignupTog}><Text>Not a member? Sign up</Text></TouchableOpacity>
+
+                    { this.state.signupTog ? 
+                    <View style={{justifyContent: 'center', alignContent: 'center'}}>   
+                        <TextInput placeholder='First Name' placeholderTextColor='gray'  style={{height: 40, width: '100%', backgroundColor: 'rgb(52, 58, 64)', borderColor: 'rgb(206, 212, 218);', fontWeight:'bold', borderWidth: 1, color: 'white'}} onChangeText={(text) => this.setState({firstName: text})}/>
+                        <TextInput placeholder='Last Name' placeholderTextColor='gray' style={{height: 40, width: '100%', backgroundColor: 'rgb(52, 58, 64)', borderColor: 'rgb(206, 212, 218);', fontWeight:'bold', borderWidth: 1, color: 'white'}} onChangeText={(text) => this.setState({lastName: text})}/>
+                        <TextInput placeholder='Email' placeholderTextColor='gray' style={{height: 40, width: '100%', backgroundColor: 'rgb(52, 58, 64)', borderColor: 'rgb(206, 212, 218);', fontWeight:'bold', borderWidth: 1, color: 'white'}} onChangeText={(text) => this.setState({email: text})}/>
+                        <TextInput placeholder='Username' placeholderTextColor='gray' style={{height: 40, width: '100%', backgroundColor: 'rgb(52, 58, 64)', borderColor: 'rgb(206, 212, 218);', fontWeight:'bold', borderWidth: 1, color: 'white'}} onChangeText={(text) => this.setState({userName: text})}/>
+                        <TextInput placeholder='Password' secureTextEntry={true} placeholderTextColor='gray' style={{height: 40, width: '100%', backgroundColor: 'rgb(52, 58, 64)', borderColor: 'rgb(206, 212, 218);', fontWeight:'bold', borderWidth: 1, color: 'white'}} onChangeText={(text) => this.setState({password: text})}/>
+                        <TextInput placeholder='Password Comfirm' secureTextEntry={true} placeholderTextColor='gray' style={{height: 40, width: '100%', backgroundColor: 'rgb(52, 58, 64)', borderColor: 'rgb(206, 212, 218);', fontWeight:'bold', borderWidth: 1, color: 'white'}} onChangeText={(text) => this.setState({passwordComfirm: text})}/>
+                        <TouchableOpacity
+                            onPress={this.signup}
+                            title="Sign up"
+                            style={{height: 40, width: '100%', justifyContent: 'center', alignContent: 'center'}}
+                        >
+                            <Text style={{justifyContent: 'center', alignContent: 'center'}}>
+                                Sign up
+                            </Text>
+                        </TouchableOpacity>
+                    </View>  
+                        : null
+                    }
+                </View>
+        )
     }
     
-            render() {
-                return(
-                    <KeyboardAvoidingView behavior='padding'>
-
-                        <View>
-
-                            <Text>LOGIN</Text>
-
-                            <TextInput placeholder='Username' onChangeText={(username) => this.setState({username: username})}/>
-                            <TextInput placeholder='Password' onChangeText={(password) => this.setState({password: password})}/>
-
-                            <TouchableHighlight onPress={this.login}> 
-                                <Text>Login</Text>
-                            </TouchableHighlight>
-                            <TouchableOpacity
-                                style={styles.FBbutton}
-                                onPress={this.onFBButtonPress}
-                                title="Continue with Facebook"
-                            >
-                            <Text style={styles.FBbuttonText}>
-                                Continue with Facebook
-                            </Text>
-                            </TouchableOpacity>
-                        </View>
-                    </KeyboardAvoidingView>
-                )
-        }
+           
 }
 

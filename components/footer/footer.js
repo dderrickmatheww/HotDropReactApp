@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import FooterTab from "./footertab";
-
+import Firebase from "../loginmodule/firebase";
 
 export default class Footer extends Component {
     state = {
@@ -9,12 +9,24 @@ export default class Footer extends Component {
     }
 
     logIn = () => {
-        this.setState({loggedIn: true})
+        this.props.navigation('LoginScreen');
+        if(this.props.userAuth) {
+            this.setState({loggedIn: true});
+        }
+        
     }
 
     logOut = () => {
-        this.setState({loggedIn: false})
-    }
+        if(this.props.userAuth === false) {
+            this.setState({loggedIn: false})
+        }
+        Firebase.auth.signOut().then(function() {
+            this.props.navigation('HomeScreen');
+            this.setState({loggedIn: false})
+          }).catch(function(error) {
+            // An error happened.
+          });
+    } 
 
     render() {
         return (
