@@ -2,10 +2,11 @@ import Autocomplete from 'react-native-autocomplete-input';
 import React, { Component } from 'react';
 import { StyleSheet, Text, Image, TouchableOpacity, View, Button } from 'react-native';
 
-const API = 1//AUTOCOMPLETE API LINK HERE//;
+const API = 1//AUTOCOMPLETE API LINK HERE IF NECESSARY//;
 
 export default class AutoCompleteBar extends Component {
 
+    //Remove the dummy JSON and just set games to a blank array
     state = {
         "games": [
             {   
@@ -76,10 +77,11 @@ export default class AutoCompleteBar extends Component {
             }
         ],
         query: '',
+        //See below in the functions for what selected is for; it can possibly be removed
         selected: false
     };
 
-    // THIS IS WHERE THE API ROUTE FOR THE AUTOCOMPLETE GOES, FRED
+    // This is where the API goes for the autocomplete, it's currently uncommented out since I was using the dummy JSON
 /*     componentDidMount() {
         fetch(`${API}/games/`).then(res => res.json()).then((json) => {
             const { results: games } = json;
@@ -97,14 +99,25 @@ export default class AutoCompleteBar extends Component {
         return games.filter(game => game.title.search(regex) >= 0);
     }
 
+    //(result) is currently just the name being passed from the suggestions, but once the routes are going this will have to be the GUID to search for a specific game
     selectItem = (result) => {
+        //Set the field to the currently selected option (ex, selecting "Halo" would change the text field from "hal" to "Halo"
+        //(this is technically a holdover from the example and can be removed)
         this.setState({query: result});
+
+        //The {selected: true} is again something that can probably be removed; with the function above, if you selected something that still
+        //matched with other things, you'd still see suggestions (ie, if you selected "Halo" from a suggestion, you'd still see "Halo," "Halo 2," etc.)
+        //There's a ternary statement on a "hideResults" prop in the autocomplete that checks if you've selected something and hides the other suggestions
         this.setState({selected: true})
+
+        //This is the actual search function from the HomeScreen being run, though we'll have to change it to the Giant Bomb individual game search route
         this.props.getSearchResults(result)
     }
 
     changeText = (text) => {
         this.setState({query: text});
+
+        //This is to undo the hidden suggestions from above once the user starts modifying the text field again, this can also be removed
         this.setState({selected: false})
     }
 
@@ -123,6 +136,7 @@ export default class AutoCompleteBar extends Component {
                     autoCorrect={false}
                     data={results.length === 1 && comp(query, results[0].title) ? [] : results}
                     defaultValue={query}
+                    //Remove hideResults if everything regarding it and state.selected is also removed
                     hideResults={(this.state.selected)}
                     onChangeText={text => this.changeText(text)}
                     style={styles.bar}
@@ -130,6 +144,7 @@ export default class AutoCompleteBar extends Component {
                     placeholderTextColor='gray'
                     keyExtractor={(item, index) => item.key}
                     renderItem={ result => (         
+                        //All of these fields will have to be modified to have their correct API names (ie, result.item.thumb will be whatever the image.thumbnail is named)
                         <TouchableOpacity id={result.item.id} style={styles.itemTouch} onPress={() => this.selectItem(result.item.title)}>
                             <View style={styles.viewcontainer}>
                                 <Image style={styles.thumbnail} source={{ uri: result.item.thumb ? result.item.thumb : 'https://raw.githubusercontent.com/dderrickmatheww/Project1/master/assets/images/thumbnailph.jpg' }}/>
