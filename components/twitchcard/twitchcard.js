@@ -1,38 +1,51 @@
 import React from "react";
-import { Image, Text, View, StyleSheet } from 'react-native';
+import { Image, Text, View, StyleSheet, TouchableHighlight, ImageBackground, Linking } from 'react-native';
 
 export default class TwitchCom extends React.Component {
         render() {
+            let pic = {
+                uri: this.props.streamerBanner
+              };
             return(
-                <View style={styles.card}>
-                    <View style={styles.thumbcontainer}>
-                        <Image
-                            style={styles.gamelogo}
-                            source={{ uri: this.props.picture }}
-                        />
+                <TouchableHighlight style={styles.card} onPress={ ()=>{ Linking.openURL(this.props.streamURL)}} underlayColor="rgb(1, 0, 96)">
+                    <View style={styles.cardcontainer}>
+                        <ImageBackground source={{uri: this.props.streamPreview}} style={{width: '100%', height: '100%', opacity: 4, position: 'absolute'}}>
+                        </ImageBackground>
+                        <View style={styles.subcontainer}>
+                            <View style={styles.thumbcontainer}>
+                                <Image
+                                    style={styles.gamelogo}
+                                    source={pic}
+                                />
+                            </View>
+                            <View style={styles.cardtext}>
+                                <Text style={styles.title}>Watch {this.props.streamerName} streaming {this.props.streamedGame}</Text>
+                                <Text style={styles.description}>{this.props.streamerStatus}</Text>
+                                <Text style={styles.info}>Followers: {this.props.streamerFollowers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
+                            </View>
+                        </View>
                     </View>
-                    <Text>Top streams for {this.props.game}</Text>
-                    <View style={styles.cardtext}>
-                        <Text style={styles.title}>{this.props.title}</Text>
-                        <Text style={styles.info}>Platforms: {this.props.platforms}</Text>
-                        <Text style={styles.info}>Release Date: {this.props.releasedate}</Text>
-                        <Text style={styles.description}>{this.props.description}</Text>
-                    </View>
-                </View>  
+                </TouchableHighlight>
             )
         }
 }
 
 const styles = StyleSheet.create({
+    cardcontainer: {
+        flexDirection: `column`,
+    },
+    subcontainer: {
+        flexDirection: 'row'
+    }, 
     card: {
-        backgroundColor: `rgb(1, 0, 24)`,
+        backgroundColor: 'rgb(1, 0, 64)' || this.props.streamerBackgroundColor,
         height: `auto`,
         margin: 4,
         padding: 5,
         borderRadius: 3,
-        borderColor: `darkslategray`,
+        borderColor: `rgb(1, 0, 128)`,
         borderWidth: 1,
-        flexDirection: `row`,
+        width: 350,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -46,16 +59,35 @@ const styles = StyleSheet.create({
         fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
         color:`rgb(135, 206, 250)`,
         fontWeight: `bold`,
-        fontSize: 20,
+        fontSize: 16,
+        flexWrap: 'wrap',
+        textShadowColor: `#000`,
+        textShadowRadius: 2,
+        textShadowOffset: {
+            height: 2,
+            width: 1,
+        }
     },
     info: {
         fontWeight: `100`,
         color:`rgb(135, 206, 250)`,
         fontSize: 10,
+        textShadowColor: `#000`,
+        textShadowRadius: 2,
+        textShadowOffset: {
+            height: 2,
+            width: 1,
+        }
     },
     description: {
         color:`rgb(135, 206, 250)`,
         fontSize: 12,
+        textShadowColor: `#000`,
+        textShadowRadius: 2,
+        textShadowOffset: {
+            height: 2,
+            width: 1,
+        }
     },
     bottom: {
         lineHeight: 5,
@@ -76,9 +108,8 @@ const styles = StyleSheet.create({
     gamelogo: {
         width: 100,
         height: 150,
-        borderColor: `rgb(2, 0, 144)`,
-        borderWidth: 1,
-        marginRight: 5,
+        borderColor: `rgb(1, 0, 218)`,
+        borderWidth: 2
     },
     thumbcontainer: {
         shadowColor: `#fff`,
@@ -91,7 +122,11 @@ const styles = StyleSheet.create({
         elevation: 4
     },
     cardtext: {
-        width: '66%',
+        flex: 1,
+        padding: 4,
+        margin: 2,
+        borderRadius: 3,
+        backgroundColor: `rgba(1, 0, 24, 0.4)`
     }
 
 })

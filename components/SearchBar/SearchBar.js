@@ -21,7 +21,7 @@ export default class SearchBar extends Component {
                   placeholder='Where we droppin&#39;?'
                   placeholderTextColor='gray'
                 />
-                <Button title='DEPLOY!' style={styles.searchbutton} color='rgb(1, 0, 48)' onPress={() => this.props.getSearchResults(this.state.text)}/>
+                <Button title='DEPLOY!' style={styles.searchbutton} color='rgb(1, 0, 64)' onPress={() => this.props.getSearchResults(this.state.text)}/>
             </View>
           );
         }

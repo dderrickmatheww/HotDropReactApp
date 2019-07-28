@@ -1,0 +1,20 @@
+{
+  "name": "project3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node -r dotenv/config server.js",
+    "seed": "node -r dotenv/config scripts/popDB.js",
+    "wipe": "node -r dotenv/config seed.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.5"
+  }
+}

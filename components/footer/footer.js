@@ -1,46 +1,54 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import FooterTab from "./footertab";
 
 
 export default class Footer extends Component {
-  render() {
-    return (
-        <View style={styles.footer}>
+    state = {
+        loggedIn: false
+    }
+
+    logIn = () => {
+        this.setState({loggedIn: true})
+    }
+
+    logOut = () => {
+        this.setState({loggedIn: false})
+    }
+
+    render() {
+        return (
             <View>
-                <Text style={styles.tab}>Home</Text>
-            </View>
-            <View>
-                <Text style={styles.tab}>Login</Text>
-            </View>
-            <View>
-                <Text style={styles.tab}>Search</Text>
-            </View>
-        </View> 
-    );
-  }
+                {this.state.loggedIn ? 
+                    <View style={styles.footer}>
+                        <FooterTab tablabel='Home'/>
+                        <FooterTab tablabel='Account' /> 
+                        <FooterTab tablabel='Log Out' tabaction={this.logOut}/>
+                    </View>
+                :
+                    <View style={styles.footer}>
+                        <FooterTab tablabel='Home'/>
+                        <FooterTab tablabel='Login' tabaction={this.logIn}/>
+                    </View>
+                }
+            </View> 
+        );
+    }
 }
 
 const styles = StyleSheet.create({
     footer: {
+        position: 'absolute',
         bottom: 0,
+        flex: 1,
         width: `100%`,
         backgroundColor: `#000`,
         flexDirection: 'row',
         justifyContent: 'center',
         height: `auto`,
         borderTopWidth: 1,
-        borderTopColor: `rgb(64, 64, 64)`
-    },
-    tab: {
-        fontFamily: 'sans-serif-thin',
-        paddingVertical: 4,
-        paddingHorizontal: 35,
-        borderRightWidth: 0.5,
-        borderLeftWidth: 0.5,
-        textAlign: `center`,
-        borderLeftColor: `rgb(128, 128, 128)`,
-        borderRightColor: `rgb(128, 128, 128)`,
-        color: `rgb(128, 128, 128)`,
-        fontSize: 22,
+        borderBottomWidth: 1,
+        borderTopColor: `darkslategray`,
+        borderBottomColor: `darkslategray`
     }
 })
