@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
 import FooterTab from "./footertab";
 import Firebase from "../loginmodule/firebase";
+
 
 export default class Footer extends Component {
     state = {
