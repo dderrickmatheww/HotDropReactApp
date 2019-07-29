@@ -77,7 +77,6 @@ export default class AutoCompleteBar extends Component {
             }
         ],
         query: '',
-        //See below in the functions for what selected is for; it can possibly be removed
         selected: false
     };
 
@@ -102,11 +101,10 @@ export default class AutoCompleteBar extends Component {
     //(result) is currently just the name being passed from the suggestions, but once the routes are going this will have to be the GUID to search for a specific game
     selectItem = (result) => {
         //Set the field to the currently selected option (ex, selecting "Halo" would change the text field from "hal" to "Halo"
-        //(this is technically a holdover from the example and can be removed)
         this.setState({query: result});
 
-        //The {selected: true} is again something that can probably be removed; with the function above, if you selected something that still
-        //matched with other things, you'd still see suggestions (ie, if you selected "Halo" from a suggestion, you'd still see "Halo," "Halo 2," etc.)
+        //If you selected something that still matched with other things, you'd still see suggestions (ie, if you selected "Halo" from a suggestion, 
+        //you'd still see "Halo," "Halo 2," etc.)
         //There's a ternary statement on a "hideResults" prop in the autocomplete that checks if you've selected something and hides the other suggestions
         this.setState({selected: true})
 
@@ -117,7 +115,7 @@ export default class AutoCompleteBar extends Component {
     changeText = (text) => {
         this.setState({query: text});
 
-        //This is to undo the hidden suggestions from above once the user starts modifying the text field again, this can also be removed
+        //This is to undo the hidden suggestions from above once the user starts modifying the text field again
         this.setState({selected: false})
     }
 
@@ -136,7 +134,6 @@ export default class AutoCompleteBar extends Component {
                     autoCorrect={false}
                     data={results.length === 1 && comp(query, results[0].title) ? [] : results}
                     defaultValue={query}
-                    //Remove hideResults if everything regarding it and state.selected is also removed
                     hideResults={(this.state.selected)}
                     onChangeText={text => this.changeText(text)}
                     style={styles.bar}
