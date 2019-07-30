@@ -104,4 +104,4 @@ function bombDB ( offset, result, dataAccum) {
   giantBombAPICall(offset, dataAccum);
 }; 
 
-giantBombAPICall(0,[]);
+giantBombAPICall(14100,[]);
