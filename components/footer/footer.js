@@ -12,7 +12,6 @@ export default class Footer extends Component {
     
     //this is a placeholder function to test the ternary statement
     logIn = () => {
-<<<<<<< HEAD
         this.props.navigation('LoginScreen');
         this.setState({loggedIn: Firebase.auth.currentUser});
     }
@@ -25,15 +24,6 @@ export default class Footer extends Component {
             console.log(error);
           });
     } 
-=======
-        this.setState({loggedIn: true});
-    }
-
-    //same as above
-    logOut = () => {
-        this.setState({loggedIn: false});
-    }
->>>>>>> master
 
     render() {
         return (
@@ -41,7 +31,6 @@ export default class Footer extends Component {
                 {this.state.loggedIn ? 
                     <View style={styles.footer}>
                         <FooterTab tablabel='Home' tabaction={this.props.scrollfunc}/>
-                        <FooterTab tablabel='Account' tabaction={this.props.profile}/> 
                         <FooterTab tablabel='Log Out' tabaction={this.logOut}/>
                         <FooterTab tablabel='About' tabaction={this.props.about} />
                     </View>
@@ -49,6 +38,7 @@ export default class Footer extends Component {
                     <View style={styles.footer}>
                         <FooterTab tablabel='Home' tabaction={this.props.scrollfunc}/>
                         <FooterTab tablabel='Login' tabaction={this.props.login}/>
+                        <FooterTab tablabel='Sign-Up' tabaction={this.props.login}/>
                         <FooterTab tablabel='About' tabaction={this.props.about}/>
                     </View>
                 }

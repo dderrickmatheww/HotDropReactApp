@@ -13,7 +13,7 @@ const config = {
       static auth;
 
       static loginInfo = {
-        username: "",
+        email: "",
         password: "",
       }
 

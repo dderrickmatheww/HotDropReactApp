@@ -1,21 +1,17 @@
 import React from 'react';
 import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import ArticleCard from '../articlecard/articleCard';
-import SearchBar from '../SearchBar/SearchBar';
 import Footer from '../footer/footer';
 import CardScreen from '../CardScreen/CardScreen'
 import { createStackNavigator, createAppContainer, SwitchActions } from "react-navigation";
 import Header from '../header/header';
 import TwitchCom from '../twitchcard/twitchcard';
-<<<<<<< HEAD
-import Firebase from '../loginmodule/firebase';
-import Login from '../loginmodule/loginmodule';
-=======
 import AutoCompleteBar from '../AutoCompleteBar/autoCompleteBar';
 import AboutScreen from '../AboutScreen/AboutScreen';
 import LoginScreen from "../LoginScreen/LoginScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
->>>>>>> master
+import Firebase from '../loginmodule/firebase';
+
 
 export default class HomeScreen extends React.Component {
 
@@ -192,10 +188,6 @@ export default class HomeScreen extends React.Component {
                         pic={article.urlToImage}
                     />
                     ))} 
-<<<<<<< HEAD
-                </ScrollView>
-                <Footer navigation={(route) => {this.props.navigation.navigate(route)}} />
-=======
                 </View>  
                 </ScrollView>
                 <Footer 
@@ -203,8 +195,8 @@ export default class HomeScreen extends React.Component {
                   about={() => this.props.navigation.navigate('AboutScreen')}
                   login={() => this.props.navigation.navigate('LoginScreen')}
                   profile={() => this.props.navigation.navigate('ProfileScreen')}
+                  signup={() => this.props.navigation.navigate('SignupScreen')}
                 />
->>>>>>> master
         </View>
       
       )
@@ -215,13 +207,10 @@ export default class HomeScreen extends React.Component {
     {
       HomeScreen: HomeScreen,
       CardScreen: CardScreen,
-<<<<<<< HEAD
-      LoginScreen: Login
-=======
       AboutScreen: AboutScreen,
-      LoginScreen, LoginScreen,
-      ProfileScreen: ProfileScreen
->>>>>>> master
+      LoginScreen: LoginScreen,
+      ProfileScreen: ProfileScreen,
+      SignupScreen: SignupScreen
     },
     {
       initialRouteName: "HomeScreen"
