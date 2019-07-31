@@ -1,11 +1,12 @@
 import React from "react";
-import { Text, View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, AsyncStorage, TextInput} from 'react-native';
+import { Text, View, TouchableOpacity, TextInput} from 'react-native';
 import Firebase from './firebase';
+
 
   
 export default class Login extends React.Component {
     
-    static navigationOptions = ({ navigation }) => {
+    static navigationOptions = ({}) => {
         return {
           title: 'Login or Sign up',
           headerStyle: {
@@ -34,13 +35,19 @@ export default class Login extends React.Component {
         this.setState({signupTog: newState});
         this.setState({loginTog: !newState});
     }
-
+    
     login = async () => {
         Firebase.loginInfo.username = this.state.userName
         Firebase.loginInfo.password = this.state.password
         try {
             await Firebase.auth.signInWithEmailAndPassword(Firebase.loginInfo.username, Firebase.loginInfo.password);
-            this.props.navigation.navigate('HomeScreen');
+            Firebase.auth.onAuthStateChanged((user) => {
+                if (user) {
+                    this.props.navigation.popToTop('HomeScreen');
+                } else {
+                   
+                }
+              });
         }
         catch (err) {
             alert(err);
@@ -48,16 +55,20 @@ export default class Login extends React.Component {
     }
 
     signup = async () => {
-        
             Firebase.signupInfo.email = this.state.email
             Firebase.signupInfo.firstName = this.state.firstName
             Firebase.signupInfo.lastName = this.state.lastName
             Firebase.signupInfo.username = this.state.userName
             Firebase.signupInfo.password = this.state.password
-
         try {
             await Firebase.auth.createUserWithEmailAndPassword(Firebase.signupInfo.email,  Firebase.signupInfo.password);
-            this.props.navigation.navigate('HomeScreen');
+            Firebase.auth.onAuthStateChanged((user) => {
+                if (user) {
+                    this.props.navigation.popToTop('HomeScreen');
+                } else {
+                  alert('Unsuccessful sign-up try again later');
+                }
+            });
         } 
         catch (err) {
             alert(err);
@@ -76,7 +87,7 @@ export default class Login extends React.Component {
                             bottom: 0,
                             justifyContent: 'center',
                             alignContent: 'center'
-                            }} onPress={this.LoginTog}><Text>Login</Text></TouchableOpacity>
+                    }} onPress={this.LoginTog}><Text>Login</Text></TouchableOpacity>
                     
                     { this.state.loginTog ? 
                     <View style={{justifyContent: 'center', alignContent: 'center'}}> 
@@ -126,6 +137,16 @@ export default class Login extends React.Component {
                     </View>  
                         : null
                     }
+                    <TouchableOpacity style={{ 
+                            backgroundColor: `darkslategray`,
+                            padding: 5,
+                            fontSize: 14,
+                            borderRadius: 2,
+                            marginRight: 5,
+                            bottom: 0,
+                            justifyContent: 'center',
+                            alignContent: 'center'
+                    }} onPress={this.FBlogin}><Text>Login with Facebook</Text></TouchableOpacity>
                 </View>
         )
     }

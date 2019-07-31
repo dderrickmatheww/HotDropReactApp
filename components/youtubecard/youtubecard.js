@@ -15,17 +15,6 @@ export default class YoutubeCom extends React.Component {
                             style={{ alignSelf: 'stretch', height: 300 }}   
                         />
                     </View>  
-                    <View style={styles.card}>
-                        {this.props.comments.map(comments => (
-                            <View style={styles.ytcontainer}>
-                                <Image style={styles.yticon} source={{url: comments.snippet.topLevelComment.snippet.authorProfileImageUrl}}/>
-                                <View style={styles.yttext}>
-                                    <Text style={styles.ytauthor}>{comments.snippet.topLevelComment.snippet.authorDisplayName}</Text>
-                                    <Text style={styles.ytbody}>{comments.snippet.topLevelComment.snippet.textDisplay}</Text>
-                                </View>
-                            </View>
-                        ))} 
-                    </View>
              </View>
             )
         }

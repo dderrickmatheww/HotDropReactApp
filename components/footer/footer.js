@@ -1,31 +1,26 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, Text, TouchableHighlight, AsyncStorage } from 'react-native';
 import FooterTab from "./footertab";
 import Firebase from "../loginmodule/firebase";
 
 
+
 export default class Footer extends Component {
     state = {
-        loggedIn: false
+        loggedIn: Firebase.auth.currentUser
     }
 
     logIn = () => {
         this.props.navigation('LoginScreen');
-        if(this.props.userAuth) {
-            this.setState({loggedIn: true});
-        }
-        
+        this.setState({loggedIn: Firebase.auth.currentUser});
     }
 
-    logOut = () => {
-        if(this.props.userAuth === false) {
-            this.setState({loggedIn: false})
-        }
-        Firebase.auth.signOut().then(function() {
+    logOut = async () => {
+        Firebase.auth.signOut().then(() => {
             this.props.navigation('HomeScreen');
-            this.setState({loggedIn: false})
+            this.setState({loggedIn: Firebase.auth.currentUser});
           }).catch(function(error) {
-            // An error happened.
+            console.log(error);
           });
     } 
 

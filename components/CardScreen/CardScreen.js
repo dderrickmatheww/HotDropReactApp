@@ -54,26 +54,6 @@ import ArticleCard from '../articlecard/articleCard';
                         await  AsyncStorage.mergeItem(cacheName, JSON.stringify(data.items[0].id)).catch((err) => {if(err) console.log(err)});
                         console.log('added video id to cache');
                         this.setState({YTVidID: videoId});
-                        let commentURL = "https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&moderationStatus=published&order=relevance&textFormat=html&videoId=" + this.state.YTVidID + "&key=AIzaSyAhsb0OUjYC9-im6U3pNoks26zkjBWUtHo"
-                            fetch(commentURL)
-                            .then((response) => {
-                                response.json().then(async data2 => {
-                                    console.log(data2);
-                                    this.setState({YTcomments: data2.items});
-                                    await AsyncStorage.mergeItem(cacheName, JSON.stringify(data2)).catch((err) => {if(err) console.log(err)}); 
-                                    console.log('added comments to cache');
-                                })
-                                .catch((err)=> {
-                                    if (err) {
-                                        console.log(err);
-                                    }
-                                });
-                            })
-                            .catch((err)=>{
-                                if (err) {
-                                    console.log(err)
-                                }
-                            });
                     })
                     .catch((err) => {
                             console.log(err)

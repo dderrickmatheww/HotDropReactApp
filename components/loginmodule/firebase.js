@@ -26,6 +26,7 @@ const config = {
       }
 
       static init() {
+        
         firebase.initializeApp(config);
         Firebase.auth = firebase.auth();
       }

@@ -4,7 +4,7 @@ import ArticleCard from '../articlecard/articleCard';
 import SearchBar from '../SearchBar/SearchBar';
 import Footer from '../footer/footer';
 import CardScreen from '../CardScreen/CardScreen'
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { createStackNavigator, createAppContainer, SwitchActions } from "react-navigation";
 import Header from '../header/header';
 import TwitchCom from '../twitchcard/twitchcard';
 import Firebase from '../loginmodule/firebase';
@@ -20,19 +20,55 @@ export default class HomeScreen extends React.Component {
 
     state = {
       article: [],
-      streams: [],
-      authStatusReported: false,
-      isUserAuthenticated: false
+      streams: []
   }
 
   componentWillMount() {
     Firebase.init();
-    Firebase.auth.onAuthStateChanged(user => {
-      this.setState({
-        authStatusReported: true,
-        isUserAuthenticated: !!user
-      })
+    let month = new Date().getMonth() + 1; 
+    let year = new Date().getFullYear();
+    let url ="https://newsapi.org/v2/top-headlines?sources=ign,polygon&from=" + year + "-" + month +"&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15"
+    fetch(url)
+    .then( response => {
+        response.json().then( data => {
+            this.setState({article: data.articles})
+        })
+        .catch(err => {
+            console.log(err);
+        })
     })
+    .catch((err) => {
+        console.log(err);
+    });
+
+    let top100Streams ='https://api.twitch.tv/kraken/streams?limit=10&client_id=7mx4fyx7xv1pcxfe25fmguto1xao2b';
+    fetch(top100Streams)
+    .then((response) => {
+        response.json()
+        .then((data) => {
+            this.setState({streams: data.streams});
+        })
+        .catch((err) => {
+            if (err) {
+                console.log(err);
+            }    
+        })
+    })
+    .catch((err) => {
+        if (err) {
+            console.log(err);
+        }
+    });
+  }
+    getSearchResults = (text) => {
+      // this.setState({onCall: true});
+      this.props.navigation.navigate('CardScreen', {
+        text: text
+      });
+  }
+  componentWillUnmount() {
+    Firebase.init();
+    this.componentWillMount;
     let month = new Date().getMonth() + 1; 
     let year = new Date().getFullYear();
     let url ="https://newsapi.org/v2/top-headlines?sources=ign,polygon&from=" + year + "-" + month +"&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15"
@@ -127,7 +163,7 @@ export default class HomeScreen extends React.Component {
                     />
                     ))} 
                 </ScrollView>
-                <Footer navigation={(route) => {this.props.navigation.navigate(route)}} userAuth={this.state.isUserAuthenticated}/>
+                <Footer navigation={(route) => {this.props.navigation.navigate(route)}} />
         </View>
       
       )
