@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import WebView from 'react-native-webview';
 
 export default class YoutubeCom extends React.Component {

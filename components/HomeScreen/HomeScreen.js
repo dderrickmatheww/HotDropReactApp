@@ -3,14 +3,15 @@ import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import ArticleCard from '../articlecard/articleCard';
 import Footer from '../footer/footer';
 import CardScreen from '../CardScreen/CardScreen'
-import { createStackNavigator, createAppContainer, SwitchActions } from "react-navigation";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 import Header from '../header/header';
 import TwitchCom from '../twitchcard/twitchcard';
 import AutoCompleteBar from '../AutoCompleteBar/autoCompleteBar';
 import AboutScreen from '../AboutScreen/AboutScreen';
 import LoginScreen from "../LoginScreen/LoginScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
-import Firebase from '../loginmodule/firebase';
+import SignupScreen from "../SignupScreen/SignupScreen";
+import Firebase from '../LoginScreen/firebase';
 
 
 export default class HomeScreen extends React.Component {
@@ -43,7 +44,6 @@ export default class HomeScreen extends React.Component {
     .catch((err) => {
         console.log(err);
     });
-
     let top100Streams ='https://api.twitch.tv/kraken/streams?limit=10&client_id=7mx4fyx7xv1pcxfe25fmguto1xao2b';
     fetch(top100Streams)
     .then((response) => {
@@ -63,51 +63,6 @@ export default class HomeScreen extends React.Component {
         }
     });
   }
-    getSearchResults = (text) => {
-      // this.setState({onCall: true});
-      this.props.navigation.navigate('CardScreen', {
-        text: text
-      });
-  }
-  componentWillUnmount() {
-    Firebase.init();
-    this.componentWillMount;
-    let month = new Date().getMonth() + 1; 
-    let year = new Date().getFullYear();
-    let url ="https://newsapi.org/v2/top-headlines?sources=ign,polygon&from=" + year + "-" + month +"&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15"
-    fetch(url)
-    .then( response => {
-        response.json().then( data => {
-            this.setState({article: data.articles})
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-
-    let top100Streams ='https://api.twitch.tv/kraken/streams?limit=10&client_id=7mx4fyx7xv1pcxfe25fmguto1xao2b';
-    fetch(top100Streams)
-    .then((response) => {
-        response.json()
-        .then((data) => {
-            this.setState({streams: data.streams});
-        })
-        .catch((err) => {
-            if (err) {
-                console.log(err);
-            }    
-        })
-    })
-    .catch((err) => {
-        if (err) {
-            console.log(err);
-        }
-    });
-    }
-
     getSearchResults = (text) => {
       // this.setState({onCall: true});
       this.props.navigation.navigate('CardScreen', {

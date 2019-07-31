@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import { View, StyleSheet, Button, TextInput, Linking } from 'react-native';
-import Firebase from './firebase';
+import { View, StyleSheet, Button, TextInput } from 'react-native';
+import Firebase from '../LoginScreen/firebase';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default class AboutScreen extends Component {
 
@@ -13,7 +14,6 @@ export default class AboutScreen extends Component {
           headerTintColor: 'skyblue'
         };
     };
-
     state = {
         userName: '',
         firstName: '',
@@ -55,50 +55,52 @@ export default class AboutScreen extends Component {
     
     render() {
         return(
-            <View style={styles.aboutscreen}>
-                <TextInput
-                    style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
-                    placeholder="First Name"
-                    placeholderTextColor="darkslategray"
-                    onChangeText={(text) => this.setState({firstName: text})}
-                />
-                <TextInput
-                    style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
-                    placeholder="Last Name"
-                    placeholderTextColor="darkslategray"
-                    onChangeText={(text) => this.setState({lastName: text})}
-                />
-                <TextInput
-                    style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
-                    placeholder="Email"
-                    placeholderTextColor="darkslategray"
-                    keyboardType={'email-address'}
-                    onChangeText={(text) => this.setState({email: text})}
-                />
-                <TextInput
-                    style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
-                    placeholder="Username"
-                    placeholderTextColor="darkslategray"
-                    onChangeText={(text) => this.setState({userName: text})}
-                />
-                <TextInput
-                    style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
-                    placeholder="Password"
-                    placeholderTextColor="darkslategray"
-                    secureTextEntry={true}
-                    onChangeText={(text) => this.setState({password: text})}
-                />
-                <TextInput
-                    style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
-                    placeholder="Password again"
-                    placeholderTextColor="darkslategray"
-                    secureTextEntry={true}
-                    onChangeText={(text) => this.setState({passwordComfirm: text})}
-                />
-                <Button
-                    title="Sign-Up"
-                    onPress={this.signup}/>
-            </View>
+             <ScrollView>
+                <View style={styles.aboutscreen}>
+                    <TextInput
+                        style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
+                        placeholder="First Name"
+                        placeholderTextColor="darkslategray"
+                        onChangeText={(text) => this.setState({firstName: text})}
+                    />
+                    <TextInput
+                        style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
+                        placeholder="Last Name"
+                        placeholderTextColor="darkslategray"
+                        onChangeText={(text) => this.setState({lastName: text})}
+                    />
+                    <TextInput
+                        style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
+                        placeholder="Email"
+                        placeholderTextColor="darkslategray"
+                        keyboardType={'email-address'}
+                        onChangeText={(text) => this.setState({email: text})}
+                    />
+                    <TextInput
+                        style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
+                        placeholder="Username"
+                        placeholderTextColor="darkslategray"
+                        onChangeText={(text) => this.setState({userName: text})}
+                    />
+                    <TextInput
+                        style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
+                        placeholder="Password"
+                        placeholderTextColor="darkslategray"
+                        secureTextEntry={true}
+                        onChangeText={(text) => this.setState({password: text})}
+                    />
+                    <TextInput
+                        style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
+                        placeholder="Password again"
+                        placeholderTextColor="darkslategray"
+                        secureTextEntry={true}
+                        onChangeText={(text) => this.setState({passwordComfirm: text})}
+                    />
+                    <Button
+                        title="Sign-Up"
+                        onPress={this.signup}/> 
+                </View> 
+            </ScrollView>
         )
     }
 }

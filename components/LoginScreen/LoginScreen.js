@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, StyleSheet, Button, TextInput, Linking } from 'react-native';
+import { View, StyleSheet, Button, TextInput } from 'react-native';
 import Firebase from './firebase';
 
 export default class AboutScreen extends Component {
@@ -26,7 +26,7 @@ export default class AboutScreen extends Component {
             Firebase.loginInfo.email = this.state.email
             Firebase.loginInfo.password = this.state.password
             try {
-                await Firebase.auth.signInWithEmailAndPassword(Firebase.loginInfo.username, Firebase.loginInfo.password);
+                await Firebase.auth.signInWithEmailAndPassword(Firebase.loginInfo.email, Firebase.loginInfo.password);
                 Firebase.auth.onAuthStateChanged((user) => {
                     if (user) {
                         this.props.navigation.navigate('HomeScreen');
