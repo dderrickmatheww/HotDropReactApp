@@ -1,5 +1,6 @@
 #Internal package file, do not edit.
 <<<<<<< HEAD
+<<<<<<< HEAD
 #Sat Jul 20 10:43:15 EDT 2019
 5.base=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 42.base=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
@@ -8,11 +9,14 @@
 32.path=lib/armeabi-v7a/libfb.so
 =======
 #Tue Jul 23 21:18:31 EDT 2019
+=======
+#Sat Jul 27 13:59:22 EDT 2019
+>>>>>>> 9800e8396fc187f2efd16285751401ff1d3b17c4
 5.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 42.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 22.path=lib/arm64-v8a/libglog_init.so
 32.set=DEX
-52.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
+52.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\19
 32.path=classes.dex
 >>>>>>> 64dae829c182f9826c8453b0fb2482e53965f02b
 36.baseType=DIRECTORY
@@ -28,8 +32,12 @@
 10.set=NATIVE_RESOURCE
 =======
 36.path=lib/x86/libjsinspector.so
+<<<<<<< HEAD
 10.set=DEX
 >>>>>>> 64dae829c182f9826c8453b0fb2482e53965f02b
+=======
+10.set=NATIVE_RESOURCE
+>>>>>>> 9800e8396fc187f2efd16285751401ff1d3b17c4
 28.set=NATIVE_RESOURCE
 22.base=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 32.base=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
@@ -109,6 +117,7 @@ count=46
 19.set=NATIVE_RESOURCE
 24.path=classes.dex
 <<<<<<< HEAD
+<<<<<<< HEAD
 34.path=lib/x86/libc++_shared.so
 3.set=NATIVE_RESOURCE
 18.path=lib/x86/libyoga.so
@@ -119,6 +128,9 @@ count=46
 10.path=lib/x86_64/libjscexecutor.so
 =======
 52.set=NATIVE_RESOURCE
+=======
+52.set=DEX
+>>>>>>> 9800e8396fc187f2efd16285751401ff1d3b17c4
 54.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 34.path=lib/arm64-v8a/libjsinspector.so
 3.set=DEX
@@ -128,8 +140,12 @@ count=46
 48.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\13
 28.path=lib/x86_64/libjsinspector.so
 30.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
+<<<<<<< HEAD
 10.path=classes.dex
 >>>>>>> 64dae829c182f9826c8453b0fb2482e53965f02b
+=======
+10.path=lib/x86/libfb.so
+>>>>>>> 9800e8396fc187f2efd16285751401ff1d3b17c4
 13.baseType=DIRECTORY
 41.baseType=DIRECTORY
 38.path=lib/x86/libjsinspector.so
@@ -149,8 +165,12 @@ count=46
 37.set=DEX
 18.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 28.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
+<<<<<<< HEAD
 10.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\18
 >>>>>>> 64dae829c182f9826c8453b0fb2482e53965f02b
+=======
+10.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
+>>>>>>> 9800e8396fc187f2efd16285751401ff1d3b17c4
 26.set=NATIVE_RESOURCE
 38.base=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 0.path=index.android.bundle
@@ -165,9 +185,13 @@ count=46
 41.path=lib/x86_64/libglog.so
 6.set=NATIVE_RESOURCE
 <<<<<<< HEAD
+<<<<<<< HEAD
 0.base=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\merged_assets\\debug\\out
 =======
 51.path=classes.dex
+=======
+51.path=lib/armeabi-v7a/libjsinspector.so
+>>>>>>> 9800e8396fc187f2efd16285751401ff1d3b17c4
 0.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 >>>>>>> 64dae829c182f9826c8453b0fb2482e53965f02b
 44.set=NATIVE_RESOURCE
@@ -183,16 +207,20 @@ count=46
 43.baseType=DIRECTORY
 34.baseType=DIRECTORY
 <<<<<<< HEAD
+<<<<<<< HEAD
 31.path=lib/arm64-v8a/libjsinspector.so
 8.base=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 11.set=NATIVE_RESOURCE
 45.base=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 =======
 51.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\19
+=======
+51.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
+>>>>>>> 9800e8396fc187f2efd16285751401ff1d3b17c4
 49.path=lib/arm64-v8a/libimagepipeline.so
 31.path=lib/x86_64/libglog_init.so
 8.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
-11.set=NATIVE_RESOURCE
+11.set=DEX
 45.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 >>>>>>> 64dae829c182f9826c8453b0fb2482e53965f02b
 29.set=NATIVE_RESOURCE
@@ -209,12 +237,16 @@ count=46
 =======
 19.path=index.android.bundle
 21.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
-51.set=DEX
+51.set=NATIVE_RESOURCE
 49.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 29.path=lib/armeabi-v7a/libimagepipeline.so
 31.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
+<<<<<<< HEAD
 11.path=lib/x86/libfb.so
 >>>>>>> 64dae829c182f9826c8453b0fb2482e53965f02b
+=======
+11.path=classes.dex
+>>>>>>> 9800e8396fc187f2efd16285751401ff1d3b17c4
 2.set=NATIVE_RESOURCE
 39.path=lib/arm64-v8a/libglog.so
 40.set=NATIVE_RESOURCE
@@ -232,8 +264,12 @@ count=46
 11.base=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 =======
 29.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
+<<<<<<< HEAD
 11.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 >>>>>>> 64dae829c182f9826c8453b0fb2482e53965f02b
+=======
+11.base=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\18
+>>>>>>> 9800e8396fc187f2efd16285751401ff1d3b17c4
 36.set=NATIVE_RESOURCE
 39.base=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 1.path=lib/x86/libimagepipeline.so
@@ -250,8 +286,12 @@ count=46
 =======
 5.path=lib/x86/libglog_init.so
 42.path=lib/arm64-v8a/libfolly_json.so
+<<<<<<< HEAD
 52.path=lib/armeabi-v7a/libjsinspector.so
 >>>>>>> 64dae829c182f9826c8453b0fb2482e53965f02b
+=======
+52.path=classes.dex
+>>>>>>> 9800e8396fc187f2efd16285751401ff1d3b17c4
 5.baseType=DIRECTORY
 1.base=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 9.path=lib/x86/libglog_init.so

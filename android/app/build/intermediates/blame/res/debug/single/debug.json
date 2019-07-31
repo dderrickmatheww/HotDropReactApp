@@ -204,8 +204,17 @@
         "source": "C:\\Users\\dderr\\.gradle\\caches\\transforms-2\\files-2.1\\bbd650789fa4d575ee2aba0a5f3ebb37\\res\\drawable-xhdpi-v4\\abc_popup_background_mtrl_mult.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "C:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_btn_colored_material.xml.flat",
         "source": "C:\\Users\\dderr\\.gradle\\caches\\transforms-2\\files-2.1\\bbd650789fa4d575ee2aba0a5f3ebb37\\res\\drawable\\abc_btn_colored_material.xml"
+=======
+        "merged": "C:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_assets_banner.png.flat",
+        "source": "C:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\src\\main\\res\\drawable-mdpi\\assets_banner.png"
+    },
+    {
+        "merged": "C:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_ic_search_api_material.xml.flat",
+        "source": "C:\\Users\\RB\\.gradle\\caches\\transforms-2\\files-2.1\\fcc243040b495194ad62c5f02da13e24\\res\\drawable\\abc_ic_search_api_material.xml"
+>>>>>>> 9800e8396fc187f2efd16285751401ff1d3b17c4
     },
     {
         "merged": "C:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_star_black_48dp.png.flat",

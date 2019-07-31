@@ -7,13 +7,15 @@ export default class Footer extends Component {
     state = {
         loggedIn: false
     }
-
+    
+    //this is a placeholder function to test the ternary statement
     logIn = () => {
-        this.setState({loggedIn: true})
+        this.setState({loggedIn: true});
     }
 
+    //same as above
     logOut = () => {
-        this.setState({loggedIn: false})
+        this.setState({loggedIn: false});
     }
 
     render() {
@@ -21,14 +23,16 @@ export default class Footer extends Component {
             <View>
                 {this.state.loggedIn ? 
                     <View style={styles.footer}>
-                        <FooterTab tablabel='Home'/>
-                        <FooterTab tablabel='Account' /> 
+                        <FooterTab tablabel='Home' tabaction={this.props.scrollfunc}/>
+                        <FooterTab tablabel='Account' tabaction={this.props.profile}/> 
                         <FooterTab tablabel='Log Out' tabaction={this.logOut}/>
+                        <FooterTab tablabel='About' tabaction={this.props.about} />
                     </View>
                 :
                     <View style={styles.footer}>
-                        <FooterTab tablabel='Home'/>
-                        <FooterTab tablabel='Login' tabaction={this.logIn}/>
+                        <FooterTab tablabel='Home' tabaction={this.props.scrollfunc}/>
+                        <FooterTab tablabel='Login' tabaction={this.props.login}/>
+                        <FooterTab tablabel='About' tabaction={this.props.about}/>
                     </View>
                 }
             </View> 

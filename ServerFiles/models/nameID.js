@@ -14,6 +14,11 @@ const nameIdSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "GiantBomb"
   },
+  // The release year will be used for the search autocomplete
+  releaseyear: {
+    type: String,
+    required: false
+  },
   // The bombid is used for direct game api calls from gb
   gbid: {
     type: String,
@@ -43,15 +48,18 @@ const nameIdSchema = new Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
     trim: true
+  },
+  // aliases, a string
+  aliases: {
+    type: String,
+    required: false
   },
   // tinyimageurl, a string
   tinyimageURL: {
     type: String,
     required: false
-  },
-
+  }
 });
 
 // Create the GameNameID model using the GameNameIDSchema
