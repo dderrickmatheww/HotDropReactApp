@@ -61,13 +61,21 @@ export default class HomeScreen extends React.Component {
             console.log(err);
         }
     });
-  }
+    }
+
     getSearchResults = (text) => {
       // this.setState({onCall: true});
       this.props.navigation.navigate('CardScreen', {
         text: text
       });
-  }
+    }
+
+    getSuggestion = (name, id) => {
+      this.props.navigation.navigate('CardScreen', {
+        name: name,
+        id: id
+      });
+    }
 
     scrollToTop = () => {
       this.refs.mainScroll.scrollTo({x: 0, y: 0, animated: true})
@@ -85,6 +93,7 @@ export default class HomeScreen extends React.Component {
                 >
                     <AutoCompleteBar
                       getSearchResults={this.getSearchResults}
+                      getSuggestion={this.getSuggestion}
                     />
 
                   <View style={{marginTop: 95}}>

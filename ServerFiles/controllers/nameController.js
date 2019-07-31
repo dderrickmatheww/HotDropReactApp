@@ -8,7 +8,7 @@ module.exports = {
     {'alias' : new RegExp(req.params.name, 'i')}]
     })
       .sort({ name: -1 })
-      .limit(5)
+      .limit(10)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
     },
