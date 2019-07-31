@@ -2,92 +2,17 @@ import Autocomplete from 'react-native-autocomplete-input';
 import React, { Component } from 'react';
 import { StyleSheet, Text, Image, TouchableOpacity, View, Button } from 'react-native';
 
-const API = 1//AUTOCOMPLETE API LINK HERE IF NECESSARY//;
 
 export default class AutoCompleteBar extends Component {
-
-    //Remove the dummy JSON and just set games to a blank array
     state = {
-        "games": [
-            {   
-                "id": 1,
-                "thumb": null,
-                "title": "Doom",
-                "year": "1993",
-            },
-            {
-                "id": 2,
-                "thumb": null,
-                "title": "Doom II",
-                "year": "1994"
-            },
-            {
-                "id": 3,
-                "thumb": "https://via.placeholder.com/30x30",
-                "title": "Doom",
-                "year": "2016"
-            },
-            {
-                "id": 4,
-                "thumb": "https://via.placeholder.com/30x30",
-                "title": "Super Mario Bros.",
-                "year": "1985"
-            },
-            {
-                "id": 5,
-                "thumb": "https://via.placeholder.com/30x30",
-                "title": "Super Mario Bros 3.",
-                "year": "1989"
-            },
-            {
-                "id": 6,
-                "thumb": "https://via.placeholder.com/30x30",
-                "title": "Super Mario Kart",
-                "year": "1994"
-            },
-            {
-                "id": 7,
-                "thumb": "https://via.placeholder.com/30x30",
-                "title": "Doom Eternal",
-                "year": "2019"
-            },
-            {
-                "id": 8,
-                "thumb": "https://via.placeholder.com/30x30",
-                "title": "Dark Souls",
-                "year": "2011"
-            },
-            {
-                "id": 9,
-                "thumb": "https://via.placeholder.com/30x30",
-                "title": "Dark Souls II",
-                "year": "2014"
-            },
-            {
-                "id": 10,
-                "thumb": "https://via.placeholder.com/30x30",
-                "title": "Dark Souls III",
-                "year": "2016"
-            },
-            {
-                "id": 11,
-                "thumb": "https://via.placeholder.com/30x30",
-                "title": "Bleach: Dark Souls",
-                "year": "2007"
-            }
-        ],
+        games: [],
         query: '',
         selected: false
     };
 
-    // This is where the API goes for the autocomplete, it's currently uncommented out since I was using the dummy JSON
-/*     componentDidMount() {
-        fetch(`${API}/games/`).then(res => res.json()).then((json) => {
-            const { results: games } = json;
-            this.setState({ games });
-        });
+    componentDidMount(){
     }
- */
+
     findGame(query) {
         if (query === '') {
             return [];
@@ -95,7 +20,11 @@ export default class AutoCompleteBar extends Component {
 
         const { games } = this.state;
         const regex = new RegExp(`${query.trim()}`, 'i');
-        return games.filter(game => game.title.search(regex) >= 0);
+        if (games) {
+            return games.filter(game => game.name.search(regex) >= 0);
+        } else {
+            return []
+        }
     }
 
     //(result) is currently just the name being passed from the suggestions, but once the routes are going this will have to be the GUID to search for a specific game
@@ -115,6 +44,12 @@ export default class AutoCompleteBar extends Component {
     changeText = (text) => {
         this.setState({query: text});
 
+        fetch('https://hotdropserver.herokuapp.com/api/nameID/autocomplete/' + text)
+        .then(res => res.json())
+        .then(json => {
+            this.setState({ games: json });
+        });
+
         //This is to undo the hidden suggestions from above once the user starts modifying the text field again
         this.setState({selected: false})
     }
@@ -123,16 +58,13 @@ export default class AutoCompleteBar extends Component {
 
         const { query } = this.state;
         const results = this.findGame(query);
-        const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
         
-        console.log(results)
-
         return (
             <View style={styles.container}>
                 <Autocomplete
                     autoCapitalize="none"
                     autoCorrect={false}
-                    data={results.length === 1 && comp(query, results[0].title) ? [] : results}
+                    data={results.length === 1 ? [] : results}
                     defaultValue={query}
                     hideResults={(this.state.selected)}
                     onChangeText={text => this.changeText(text)}
@@ -141,15 +73,18 @@ export default class AutoCompleteBar extends Component {
                     placeholderTextColor='gray'
                     keyExtractor={(item, index) => item.key}
                     renderItem={ result => (         
-                        //All of these fields will have to be modified to have their correct API names (ie, result.item.thumb will be whatever the image.thumbnail is named)
-                        <TouchableOpacity id={result.item.id} style={styles.itemTouch} onPress={() => this.selectItem(result.item.title)}>
+                        <TouchableOpacity id={result.item.guid} style={styles.itemTouch} onPress={() => this.selectItem(result.item.name)}>
                             <View style={styles.viewcontainer}>
-                                <Image style={styles.thumbnail} source={{ uri: result.item.thumb ? result.item.thumb : 'https://raw.githubusercontent.com/dderrickmatheww/Project1/master/assets/images/thumbnailph.jpg' }}/>
+                                <Image style={styles.thumbnail} source={{ 
+                                    uri: result.item.tinyimageURL != `https://www.giantbomb.com/api/image/square_mini/3026329-gb_default-16_9.png` 
+                                        ? result.item.tinyimageURL : 
+                                    'https://raw.githubusercontent.com/dderrickmatheww/Project1/master/assets/images/thumbnailph.jpg' 
+                                    }}/>
                                 <Text style={styles.itemTitle}>
-                                    {result.item.title}&nbsp;  
+                                    {result.item.name}&nbsp;  
                                 </Text>
                                 <Text style={styles.itemYear}>
-                                    ({result.item.year})
+                                    {result.item.releaseyear != "NaN" ? "(" + result.item.releaseyear + ")" : ""}
                                 </Text>
                             </View>
                         </TouchableOpacity>
