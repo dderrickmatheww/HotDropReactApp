@@ -55,8 +55,8 @@ export default class AboutScreen extends Component {
     
     render() {
         return(
-             <ScrollView>
-                <View style={styles.aboutscreen}>
+             <ScrollView style={styles.aboutscreen}>
+                <View>
                     <TextInput
                         style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
                         placeholder="First Name"
