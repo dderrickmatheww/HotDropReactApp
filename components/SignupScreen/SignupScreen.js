@@ -7,7 +7,7 @@ export default class AboutScreen extends Component {
 
     static navigationOptions = ({navigation}) => {
         return {
-            title: 'Log In',
+            title: 'Sign Up',
             headerStyle: {
             backgroundColor: 'rgb(1, 0, 24)',
           },
