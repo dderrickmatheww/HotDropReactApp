@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 import { Text, View, TouchableOpacity, TextInput} from 'react-native';
 import Firebase from './firebase';
 
@@ -7,6 +8,15 @@ import Firebase from './firebase';
 export default class Login extends React.Component {
     
     static navigationOptions = ({}) => {
+=======
+import { Text, View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, AsyncStorage, TextInput} from 'react-native';
+import Firebase from './firebase';
+
+  
+export default class Login extends React.Component {
+    
+    static navigationOptions = ({ navigation }) => {
+>>>>>>> master
         return {
           title: 'Login or Sign up',
           headerStyle: {
@@ -35,12 +45,17 @@ export default class Login extends React.Component {
         this.setState({signupTog: newState});
         this.setState({loginTog: !newState});
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> master
     login = async () => {
         Firebase.loginInfo.username = this.state.userName
         Firebase.loginInfo.password = this.state.password
         try {
             await Firebase.auth.signInWithEmailAndPassword(Firebase.loginInfo.username, Firebase.loginInfo.password);
+<<<<<<< HEAD
             Firebase.auth.onAuthStateChanged((user) => {
                 if (user) {
                     this.props.navigation.popToTop('HomeScreen');
@@ -48,18 +63,52 @@ export default class Login extends React.Component {
                    
                 }
               });
+=======
+            this.props.navigation.navigate('HomeScreen');
+>>>>>>> master
         }
         catch (err) {
             alert(err);
         }
     }
+<<<<<<< HEAD
 
     signup = async () => {
+=======
+    FBlogin = async () => {
+        var provider = new Firebase.auth.FacebookAuthProvider();
+        provider.addScope('user_birthday', 'email', 'user_age_range', 'user_gender', 'user_hometown');
+        Firebase.auth.signInWithPopup(provider).then(function(result) {
+            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+            var token = result.credential.accessToken;
+            // The signed-in user info.
+            var user = result.user;
+            console.log(user);
+            // ...
+          }).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            console.log(errorCode);
+            var errorMessage = error.message;
+            console.log(errorMessage);
+            // The email of the user's account used.
+            var email = error.email;
+            console.log(email);
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            console.log(credential);
+            // ...
+          });
+    }
+    signup = async () => {
+        
+>>>>>>> master
             Firebase.signupInfo.email = this.state.email
             Firebase.signupInfo.firstName = this.state.firstName
             Firebase.signupInfo.lastName = this.state.lastName
             Firebase.signupInfo.username = this.state.userName
             Firebase.signupInfo.password = this.state.password
+<<<<<<< HEAD
         try {
             await Firebase.auth.createUserWithEmailAndPassword(Firebase.signupInfo.email,  Firebase.signupInfo.password);
             Firebase.auth.onAuthStateChanged((user) => {
@@ -69,6 +118,12 @@ export default class Login extends React.Component {
                   alert('Unsuccessful sign-up try again later');
                 }
             });
+=======
+
+        try {
+            await Firebase.auth.createUserWithEmailAndPassword(Firebase.signupInfo.email,  Firebase.signupInfo.password);
+            this.props.navigation.navigate('HomeScreen');
+>>>>>>> master
         } 
         catch (err) {
             alert(err);
@@ -87,7 +142,11 @@ export default class Login extends React.Component {
                             bottom: 0,
                             justifyContent: 'center',
                             alignContent: 'center'
+<<<<<<< HEAD
                     }} onPress={this.LoginTog}><Text>Login</Text></TouchableOpacity>
+=======
+                            }} onPress={this.LoginTog}><Text>Login</Text></TouchableOpacity>
+>>>>>>> master
                     
                     { this.state.loginTog ? 
                     <View style={{justifyContent: 'center', alignContent: 'center'}}> 
@@ -115,7 +174,11 @@ export default class Login extends React.Component {
                             bottom: 0,
                             justifyContent: 'center',
                             alignContent: 'center'
+<<<<<<< HEAD
                             }} onPress={this.SignupTog}><Text>Not a member? Sign up</Text></TouchableOpacity>
+=======
+                    }} onPress={this.SignupTog}><Text>Not a member? Sign up</Text></TouchableOpacity>
+>>>>>>> master
 
                     { this.state.signupTog ? 
                     <View style={{justifyContent: 'center', alignContent: 'center'}}>   
@@ -146,7 +209,11 @@ export default class Login extends React.Component {
                             bottom: 0,
                             justifyContent: 'center',
                             alignContent: 'center'
+<<<<<<< HEAD
                     }} onPress={this.FBlogin}><Text>Login with Facebook</Text></TouchableOpacity>
+=======
+                            }} onPress={this.FBlogin}><Text>Login with Facebook</Text></TouchableOpacity>
+>>>>>>> master
                 </View>
         )
     }

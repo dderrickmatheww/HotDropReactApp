@@ -1,4 +1,18 @@
+<<<<<<< HEAD
 #Tue Jul 30 19:15:01 EDT 2019
 base.0=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\4
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+#Sat Jul 20 10:38:06 EDT 2019
+base.0=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\4
+=======
+#Mon Jul 22 23:35:29 EDT 2019
+=======
+#Sat Jul 27 12:52:45 EDT 2019
+>>>>>>> 9800e8396fc187f2efd16285751401ff1d3b17c4
+base.0=C\:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\4
+>>>>>>> 64dae829c182f9826c8453b0fb2482e53965f02b
+>>>>>>> master
 path.0=classes.dex
 renamed.0=classes.dex

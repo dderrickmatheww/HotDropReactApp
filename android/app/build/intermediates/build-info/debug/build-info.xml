@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
     abi="x86"
     api-level="25"
     build-mode="FULL"
     density="xxhdpi"
+<<<<<<< HEAD
     format="10"
     plugin-version="3.4.2"
     timestamp="1564528447862"
     token="1800711951645097243"
+=======
+    format="10"
+    plugin-version="3.4.2"
+    timestamp="1563633509828"
+    token="1800711951645097243"
+=======
+    abi="arm64-v8a,armeabi-v7a,armeabi"
+    api-level="28"
+    build-mode="COLD"
+    density="440dpi"
+    format="10"
+    plugin-version="3.4.2"
+    timestamp="1564545098125"
+    token="7809877264079993799"
+<<<<<<< HEAD
+>>>>>>> 64dae829c182f9826c8453b0fb2482e53965f02b
+>>>>>>> master
     verifier="FULL_BUILD_REQUESTED" >
+=======
+    verifier="COLD_SWAP_REQUESTED" >
+>>>>>>> 9800e8396fc187f2efd16285751401ff1d3b17c4
 
     <task
         name="javac"
@@ -24,7 +49,51 @@
         duration="8401" />
 
     <artifact
+<<<<<<< HEAD
         location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\dep\dependencies.apk"
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+        location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_1.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_8.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\dep\dependencies.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
+=======
+        location="C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_8.apk"
+>>>>>>> master
         type="SPLIT" />
     <artifact
         location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
@@ -57,11 +126,19 @@
         location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
         type="SPLIT" />
     <artifact
+<<<<<<< HEAD
         location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
+=======
+=======
+>>>>>>> 9800e8396fc187f2efd16285751401ff1d3b17c4
+        location="C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
+>>>>>>> 64dae829c182f9826c8453b0fb2482e53965f02b
+>>>>>>> master
         type="SPLIT_MAIN" />
 
     <build
         build-mode="FULL"
+<<<<<<< HEAD
         timestamp="1564528447862"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
@@ -99,6 +176,85 @@
             type="SPLIT" />
         <artifact
             location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+        timestamp="1563633509828"
+        verifier="FULL_BUILD_REQUESTED" >
+        <artifact
+            location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
+=======
+        timestamp="1564101070447"
+=======
+        timestamp="1564542314822"
+>>>>>>> 9800e8396fc187f2efd16285751401ff1d3b17c4
+        verifier="FULL_BUILD_REQUESTED" >
+        <artifact
+            location="C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
+            type="SPLIT_MAIN" />
+        <artifact
+            location="C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_8.apk"
+>>>>>>> 64dae829c182f9826c8453b0fb2482e53965f02b
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_1.apk"
+            type="SPLIT" />
+        <artifact
+<<<<<<< HEAD
+            location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
+=======
+            location="C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\build\intermediates\resources\instant-run\debug\resources-debug.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
+>>>>>>> 64dae829c182f9826c8453b0fb2482e53965f02b
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
+            type="SPLIT" />
+        <artifact
+<<<<<<< HEAD
+            location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_8.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
+=======
+            location="C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\build\intermediates\split-apk\debug\dep\dependencies.apk"
+>>>>>>> 9800e8396fc187f2efd16285751401ff1d3b17c4
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\dep\dependencies.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
+            type="SPLIT" />
+        <artifact
+<<<<<<< HEAD
+            location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
+            type="SPLIT" />
+    </build>
+    <build
+        build-mode="COLD"
+        timestamp="1564545098125"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="C:\Users\dderr\Documents\HotDropReactApp\android\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
+=======
+            location="C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
+>>>>>>> 64dae829c182f9826c8453b0fb2482e53965f02b
+>>>>>>> master
             type="SPLIT_MAIN" />
     </build>
 

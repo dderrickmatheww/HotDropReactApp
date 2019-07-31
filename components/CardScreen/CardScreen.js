@@ -9,7 +9,7 @@ import ArticleCard from '../articlecard/articleCard';
 
         static navigationOptions = ({ navigation }) => {
             return {
-              title: navigation.getParam('text'),
+              title: navigation.getParam('text') ? navigation.getParam('text') : navigation.getParam('name'),
               headerStyle: {
                 backgroundColor: 'rgb(1, 0, 24)',
               },
@@ -117,10 +117,22 @@ import ArticleCard from '../articlecard/articleCard';
 
             let { navigation } = this.props;
             let text = navigation.getParam('text', '');
-            let searchQuery = text;
-            let cacheName = text.toLowerCase();
-            searchQuery = searchQuery.toLowerCase().replace(' ', '%');
-            let url = 'https://www.giantbomb.com/api/search/?format=json&api_key=99ec1d8980f419c59250e12a72f3b31d084e9bf9&query=' + searchQuery + '&resources=game&limit=1';
+            let id = navigation.getParam('id', '');
+            let searchQuery = ''
+            let cacheName = ''
+            let url = ''
+
+            if (text) {
+                searchQuery = text;
+                cacheName = text.toLowerCase();
+                searchQuery = searchQuery.toLowerCase().replace(' ', '%');
+                url = 'https://www.giantbomb.com/api/search/?format=json&api_key=99ec1d8980f419c59250e12a72f3b31d084e9bf9&query=' + searchQuery + '&resources=game&limit=1';
+
+            } else if (id) {
+                searchQuery = id;
+                cacheName = id;
+                url = `https://www.giantbomb.com/api/game/` + searchQuery + `/?format=json&api_key=99ec1d8980f419c59250e12a72f3b31d084e9bf9`
+            }
 
             cacheResults = async (cacheName, url) => {
                 let value = await AsyncStorage.getItem(cacheName);
@@ -136,7 +148,12 @@ import ArticleCard from '../articlecard/articleCard';
                     fetch(url)
                     .then( response => {
                         response.json().then( async data => {
-                            value = data.results[0];
+                            if (text) {
+                                value = data.results[0];
+                            }
+                            if (id) {
+                                value = data.results;
+                            }
                             await AsyncStorage.setItem(cacheName, JSON.stringify(value));
                             console.log('Added game data to cache')
                             this.setState({searchResults: value});

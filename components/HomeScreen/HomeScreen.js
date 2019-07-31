@@ -7,8 +7,15 @@ import CardScreen from '../CardScreen/CardScreen'
 import { createStackNavigator, createAppContainer, SwitchActions } from "react-navigation";
 import Header from '../header/header';
 import TwitchCom from '../twitchcard/twitchcard';
+<<<<<<< HEAD
 import Firebase from '../loginmodule/firebase';
 import Login from '../loginmodule/loginmodule';
+=======
+import AutoCompleteBar from '../AutoCompleteBar/autoCompleteBar';
+import AboutScreen from '../AboutScreen/AboutScreen';
+import LoginScreen from "../LoginScreen/LoginScreen";
+import ProfileScreen from "../ProfileScreen/ProfileScreen";
+>>>>>>> master
 
 export default class HomeScreen extends React.Component {
 
@@ -103,20 +110,42 @@ export default class HomeScreen extends React.Component {
             console.log(err);
         }
     });
-  }
+    }
+
     getSearchResults = (text) => {
       // this.setState({onCall: true});
       this.props.navigation.navigate('CardScreen', {
         text: text
       });
-  }
+    }
+
+    getSuggestion = (name, id) => {
+      this.props.navigation.navigate('CardScreen', {
+        name: name,
+        id: id
+      });
+    }
+
+    scrollToTop = () => {
+      this.refs.mainScroll.scrollTo({x: 0, y: 0, animated: true})
+      this.componentWillMount()
+    }
   
     render() {
       return (
         <View style={{ backgroundColor: "#363534"}}>
 
-                <ScrollView keyboardShouldPersistTaps='always' >
-                    <SearchBar getSearchResults={this.getSearchResults}  />
+                <ScrollView 
+                  keyboardShouldPersistTaps='always'     
+                  ref = 'mainScroll'
+                  style={{marginBottom: 50}}
+                >
+                    <AutoCompleteBar
+                      getSearchResults={this.getSearchResults}
+                      getSuggestion={this.getSuggestion}
+                    />
+
+                  <View style={{marginTop: 95}}>
                     <Text style={styles.text}>Top Twitch Streams</Text>
                     <View                       
                       style={{
@@ -127,8 +156,9 @@ export default class HomeScreen extends React.Component {
                         borderBottomWidth: 2
                       }}
                     >
-                      <ScrollView 
+                    <ScrollView 
                       horizontal="true" 
+                      persistentScrollbar={true}
                       snapToInterval={358} 
                       snapToAlignment="center" 
                       indicatorStyle="white" 
@@ -162,8 +192,19 @@ export default class HomeScreen extends React.Component {
                         pic={article.urlToImage}
                     />
                     ))} 
+<<<<<<< HEAD
                 </ScrollView>
                 <Footer navigation={(route) => {this.props.navigation.navigate(route)}} />
+=======
+                </View>  
+                </ScrollView>
+                <Footer 
+                  scrollfunc={this.scrollToTop}
+                  about={() => this.props.navigation.navigate('AboutScreen')}
+                  login={() => this.props.navigation.navigate('LoginScreen')}
+                  profile={() => this.props.navigation.navigate('ProfileScreen')}
+                />
+>>>>>>> master
         </View>
       
       )
@@ -174,7 +215,13 @@ export default class HomeScreen extends React.Component {
     {
       HomeScreen: HomeScreen,
       CardScreen: CardScreen,
+<<<<<<< HEAD
       LoginScreen: Login
+=======
+      AboutScreen: AboutScreen,
+      LoginScreen, LoginScreen,
+      ProfileScreen: ProfileScreen
+>>>>>>> master
     },
     {
       initialRouteName: "HomeScreen"
@@ -187,7 +234,7 @@ export default class HomeScreen extends React.Component {
       fontWeight: `bold`,
       color: `skyblue`,
       marginLeft: 4,
-      fontSize: 16,
+      fontSize: 18,
       marginTop: 2
     },
     scrollinst: {

@@ -14,7 +14,7 @@ const giantbombSchema = new Schema({
   } 
 });
 
-// Create the GameNameID model using the GameNameIDSchema
+// Create the GameNameID model using the GiantBombSchema
 const GiantBomb = mongoose.model("GiantBomb", giantbombSchema);
 
 // Export the GameNameID model

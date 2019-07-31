@@ -5590,32 +5590,32 @@
     "aliases": null,
     "api_detail_url": "https://www.giantbomb.com/api/game/3030-78/",
     "date_added": "2008-04-01 01:33:04",
-    "date_last_updated": "2014-05-30 08:02:04",
-    "deck": null,
+    "date_last_updated": "2019-07-25 09:01:17",
+    "deck": "A puzzle game in which each of the 60 screens has a laser and a target and the aim is to connect the two using optical devices like mirrors.",
     "description": null,
     "expected_release_day": null,
     "expected_release_month": null,
     "expected_release_quarter": null,
-    "expected_release_year": 1988,
+    "expected_release_year": 1987,
     "guid": "3030-78",
     "id": 78,
     "image": {
-      "icon_url": "https://www.giantbomb.com/api/image/square_avatar/1250806-deflektor_ami.jpg",
-      "medium_url": "https://www.giantbomb.com/api/image/scale_medium/1250806-deflektor_ami.jpg",
-      "screen_url": "https://www.giantbomb.com/api/image/screen_medium/1250806-deflektor_ami.jpg",
-      "screen_large_url": "https://www.giantbomb.com/api/image/screen_kubrick/1250806-deflektor_ami.jpg",
-      "small_url": "https://www.giantbomb.com/api/image/scale_small/1250806-deflektor_ami.jpg",
-      "super_url": "https://www.giantbomb.com/api/image/scale_large/1250806-deflektor_ami.jpg",
-      "thumb_url": "https://www.giantbomb.com/api/image/scale_avatar/1250806-deflektor_ami.jpg",
-      "tiny_url": "https://www.giantbomb.com/api/image/square_mini/1250806-deflektor_ami.jpg",
-      "original_url": "https://www.giantbomb.com/api/image/original/1250806-deflektor_ami.jpg",
+      "icon_url": "https://www.giantbomb.com/api/image/square_avatar/3116917-deflektor_amiga_1_1.jpg",
+      "medium_url": "https://www.giantbomb.com/api/image/scale_medium/3116917-deflektor_amiga_1_1.jpg",
+      "screen_url": "https://www.giantbomb.com/api/image/screen_medium/3116917-deflektor_amiga_1_1.jpg",
+      "screen_large_url": "https://www.giantbomb.com/api/image/screen_kubrick/3116917-deflektor_amiga_1_1.jpg",
+      "small_url": "https://www.giantbomb.com/api/image/scale_small/3116917-deflektor_amiga_1_1.jpg",
+      "super_url": "https://www.giantbomb.com/api/image/scale_large/3116917-deflektor_amiga_1_1.jpg",
+      "thumb_url": "https://www.giantbomb.com/api/image/scale_avatar/3116917-deflektor_amiga_1_1.jpg",
+      "tiny_url": "https://www.giantbomb.com/api/image/square_mini/3116917-deflektor_amiga_1_1.jpg",
+      "original_url": "https://www.giantbomb.com/api/image/original/3116917-deflektor_amiga_1_1.jpg",
       "image_tags": "All Images,Box Art"
     },
     "image_tags": [
       {
         "api_detail_url": "https://www.giantbomb.com/api/images/3030-78/?filter=image_tag%3AAll+Images",
         "name": "All Images",
-        "total": 21
+        "total": 32
       },
       {
         "api_detail_url": "https://www.giantbomb.com/api/images/3030-78/?filter=image_tag%3AAMI+Screenshots",
@@ -5630,12 +5630,17 @@
       {
         "api_detail_url": "https://www.giantbomb.com/api/images/3030-78/?filter=image_tag%3ABox+Art",
         "name": "Box Art",
-        "total": 5
+        "total": 13
       },
       {
         "api_detail_url": "https://www.giantbomb.com/api/images/3030-78/?filter=image_tag%3AC64+Screenshots",
         "name": "C64 Screenshots",
         "total": 4
+      },
+      {
+        "api_detail_url": "https://www.giantbomb.com/api/images/3030-78/?filter=image_tag%3AMedia",
+        "name": "Media",
+        "total": 3
       },
       {
         "api_detail_url": "https://www.giantbomb.com/api/images/3030-78/?filter=image_tag%3AScreenshots",

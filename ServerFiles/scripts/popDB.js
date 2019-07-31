@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
 const db = require("../models");
 const axios = require("axios");
-var fs = require('fs');
+const fs = require('fs');
 const gamesURL = "https://www.giantbomb.com/api/games/";
 const apiKey = "?api_key=" + process.env.BOMBAPI_KEY;
 const formatOffset = "&format=json&offset=";
+const moment = require('moment');
+moment().format();
+
 // URL will be used to store the changing API to get the next page of games
 var URL = ""; 
 
@@ -17,6 +20,15 @@ function genApiURL ( offset ) {
   URL = gamesURL + apiKey + formatOffset + offset;
   return URL;
 };
+
+//a quick for loop to place all available platforms in an array
+function getPlats(doc) {
+  const plats = [];
+  for (let i = 0; i < doc.data.platforms.length; i++) {
+    plats.push(doc.data.platforms[i].abbreviation);
+  }
+  return plats;
+}
 
 async function twitchLookup ( gamename ) {
   twitchURL = "https://api.twitch.tv/helix/streams?giantbomb_id="
@@ -37,7 +49,7 @@ async function giantBombAPICall (offset, dataAccum) {
     const offsetStore = response.data.number_of_page_results;
     const limit = response.data.limit;
     // for testing code below changed from < maxOffset - limit to 300 to test popDB with 100 results
-    if (currentOffset + offsetStore < 300) {
+    if (currentOffset + offsetStore < maxOffset - limit) {
       bombDB(currentOffset + offsetStore, response, dataAccum);
     } else {
       console.log("Giant Bomb download complete!");
@@ -47,39 +59,41 @@ async function giantBombAPICall (offset, dataAccum) {
       });
     }  
   })  
-;}
+}
 
 // populates database with Giant Bomb DB info
 function bombDB ( offset, result, dataAccum) {
   console.log("Getting offset #" + offset);
   dataAccum = [...dataAccum, ...result.data.results]; 
-  for (i=0; i < result.data.results.length; i++) {
+  for (let i=0; i < result.data.results.length; i++) {
     const gbgame = result.data.results[i];
     db.GiantBomb.create({data: gbgame})
     .then(async doc => {
-      //console.log(doc.data.name);
+
       const nameDoc = {
         hotdropid: doc._id,
+        releaseyear: parseInt(moment(doc.data.original_release_date).format('YYYY')),
         gbid: doc.data.id,
         guid: doc.data.guid,
         steamid: "",
         twitchid: "",
         name: doc.data.name,
+        aliases: doc.data.aliases,
         tinyimageURL: doc.data.image.tiny_url
       }
-      //console.log(nameDoc);
-      await db.NameID.create(nameDoc);
 
+      await db.NameID.create(nameDoc);
       const infoDoc = {
         hotdropid: doc._id,
+        platforms: getPlats(doc),
         description: doc.data.description,
         releasedate: doc.data.original_release_date,
         imageURL: doc.data.image.medium_url,
-        aliases: doc.data.aliases,
         dateupdated: Date.now(),
         releasedate: doc.data.original_release_date,
         comments: []
       }
+      console.log(infoDoc.platforms);
       //console.log(infoDoc);
       await db.Info.create(infoDoc);
     })
@@ -90,5 +104,6 @@ function bombDB ( offset, result, dataAccum) {
   giantBombAPICall(offset, dataAccum);
 }; 
 
+
 giantBombAPICall(0,[]);
-// if the above screw up use async.each
+
