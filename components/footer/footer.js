@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TouchableHighlight, AsyncStorage } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import FooterTab from "./footertab";
 import Firebase from "../loginmodule/firebase";
 
