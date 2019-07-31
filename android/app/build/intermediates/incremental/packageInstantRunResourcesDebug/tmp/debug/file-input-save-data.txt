@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Wed Jul 31 18:17:29 EDT 2019
+0.baseType=DIRECTORY
+0.base=C\:\\Users\\dderr\\Documents\\HotDropReactApp\\android\\app\\build\\intermediates\\merged_assets\\debug\\out
+0.path=index.android.bundle
+0.set=ASSET
+count=1

@@ -1,22 +1,30 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import FooterTab from "./footertab";
+import Firebase from "../LoginScreen/firebase";
+
 
 
 export default class Footer extends Component {
     state = {
-        loggedIn: false
+        loggedIn: Firebase.auth.currentUser
     }
     
-    //this is a placeholder function to test the ternary statement
+    componentWillMount() {
+        this.setState({loggedIn: Firebase.auth.currentUser});
+    }
+    
     logIn = () => {
-        this.setState({loggedIn: true});
+        this.props.navigation('LoginScreen');
     }
 
-    //same as above
-    logOut = () => {
-        this.setState({loggedIn: false});
-    }
+    logOut = async () => {
+        Firebase.auth.signOut().then(() => {
+            this.props.navigation('HomeScreen');
+          }).catch(function(error) {
+            console.log(error);
+          });
+    } 
 
     render() {
         return (
@@ -24,7 +32,6 @@ export default class Footer extends Component {
                 {this.state.loggedIn ? 
                     <View style={styles.footer}>
                         <FooterTab tablabel='Home' tabaction={this.props.scrollfunc}/>
-                        <FooterTab tablabel='Account' tabaction={this.props.profile}/> 
                         <FooterTab tablabel='Log Out' tabaction={this.logOut}/>
                         <FooterTab tablabel='About' tabaction={this.props.about} />
                     </View>
@@ -32,6 +39,7 @@ export default class Footer extends Component {
                     <View style={styles.footer}>
                         <FooterTab tablabel='Home' tabaction={this.props.scrollfunc}/>
                         <FooterTab tablabel='Login' tabaction={this.props.login}/>
+                        <FooterTab tablabel='Sign-Up' tabaction={this.props.signup}/>
                         <FooterTab tablabel='About' tabaction={this.props.about}/>
                     </View>
                 }

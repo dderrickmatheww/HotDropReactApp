@@ -1,7 +1,6 @@
 import React from 'react';
 import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import ArticleCard from '../articlecard/articleCard';
-import SearchBar from '../SearchBar/SearchBar';
 import Footer from '../footer/footer';
 import CardScreen from '../CardScreen/CardScreen'
 import { createStackNavigator, createAppContainer } from "react-navigation";
@@ -11,12 +10,15 @@ import AutoCompleteBar from '../AutoCompleteBar/autoCompleteBar';
 import AboutScreen from '../AboutScreen/AboutScreen';
 import LoginScreen from "../LoginScreen/LoginScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
+import SignupScreen from "../SignupScreen/SignupScreen";
+import Firebase from '../LoginScreen/firebase';
+
 
 export default class HomeScreen extends React.Component {
 
     static navigationOptions = {
 
-        headerTitle: <Header />,
+        headerTitle: <Header />
 
       };
 
@@ -26,13 +28,13 @@ export default class HomeScreen extends React.Component {
   }
 
   componentWillMount() {
+    Firebase.init();
     let month = new Date().getMonth() + 1; 
     let year = new Date().getFullYear();
     let url ="https://newsapi.org/v2/top-headlines?sources=ign,polygon&from=" + year + "-" + month +"&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15"
     fetch(url)
     .then( response => {
         response.json().then( data => {
-            console.log(data);
             this.setState({article: data.articles})
         })
         .catch(err => {
@@ -42,7 +44,6 @@ export default class HomeScreen extends React.Component {
     .catch((err) => {
         console.log(err);
     });
-
     let top100Streams ='https://api.twitch.tv/kraken/streams?limit=10&client_id=7mx4fyx7xv1pcxfe25fmguto1xao2b';
     fetch(top100Streams)
     .then((response) => {
@@ -61,8 +62,7 @@ export default class HomeScreen extends React.Component {
             console.log(err);
         }
     });
-    }
-
+  }
     getSearchResults = (text) => {
       // this.setState({onCall: true});
       this.props.navigation.navigate('CardScreen', {
@@ -150,6 +150,7 @@ export default class HomeScreen extends React.Component {
                   about={() => this.props.navigation.navigate('AboutScreen')}
                   login={() => this.props.navigation.navigate('LoginScreen')}
                   profile={() => this.props.navigation.navigate('ProfileScreen')}
+                  signup={() => this.props.navigation.navigate('SignupScreen')}
                 />
         </View>
       
@@ -162,19 +163,20 @@ export default class HomeScreen extends React.Component {
       HomeScreen: HomeScreen,
       CardScreen: CardScreen,
       AboutScreen: AboutScreen,
-      LoginScreen, LoginScreen,
-      ProfileScreen: ProfileScreen
+      LoginScreen: LoginScreen,
+      ProfileScreen: ProfileScreen,
+      SignupScreen: SignupScreen
     },
     {
       initialRouteName: "HomeScreen"
     }
   );
 
+
   const styles = StyleSheet.create({
     text: {
       fontWeight: `bold`,
       color: `skyblue`,
-      fontVariant: `small-caps`,
       marginLeft: 4,
       fontSize: 18,
       marginTop: 2
@@ -188,4 +190,4 @@ export default class HomeScreen extends React.Component {
     }
   })
 
-  module.exports = createAppContainer(AppNavigator);
+  module.exports = createAppContainer(AppNavigator)

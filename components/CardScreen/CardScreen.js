@@ -19,6 +19,7 @@ import ArticleCard from '../articlecard/articleCard';
 
         state = {
             searchResults: [],
+            twitchResults: [],
             YTVidID: [],
             YTcomments: [],
             gameArticles: [],
@@ -41,7 +42,7 @@ import ArticleCard from '../articlecard/articleCard';
             value = JSON.parse(value);
             if ( value.items && value.videoId ) {
                 console.log("Grabbed comments & video id from cache");
-                console.log(value);
+                console.log(value.items.snippet.topLevelComment.snippet.authorProfileImageUrl);
                 this.setState({YTVidID: value.videoId});
                 this.setState({YTcomments: value.items});
             }
@@ -53,26 +54,6 @@ import ArticleCard from '../articlecard/articleCard';
                         await  AsyncStorage.mergeItem(cacheName, JSON.stringify(data.items[0].id)).catch((err) => {if(err) console.log(err)});
                         console.log('added video id to cache');
                         this.setState({YTVidID: videoId});
-                        let commentURL = "https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&moderationStatus=published&order=relevance&textFormat=html&videoId=" + this.state.YTVidID + "&key=AIzaSyAhsb0OUjYC9-im6U3pNoks26zkjBWUtHo"
-                            fetch(commentURL)
-                            .then((response) => {
-                                response.json().then(async data2 => {
-                                    console.log(data2);
-                                    this.setState({YTcomments: data2.items});
-                                    await AsyncStorage.mergeItem(cacheName, JSON.stringify(data2)).catch((err) => {if(err) console.log(err)}); 
-                                    console.log('added comments to cache');
-                                })
-                                .catch((err)=> {
-                                    if (err) {
-                                        console.log(err);
-                                    }
-                                });
-                            })
-                            .catch((err)=>{
-                                if (err) {
-                                    console.log(err)
-                                }
-                            });
                     })
                     .catch((err) => {
                             console.log(err)
@@ -85,30 +66,17 @@ import ArticleCard from '../articlecard/articleCard';
                 });
             }
         }
-        NWtoggle =  async () => {
+        NWtoggle = () => {
             const newState = !this.state.NWtoggle
             this.setState({NWtoggle: newState})
             let month = new Date().getMonth() + 1; 
             let year = new Date().getFullYear();
-            let { navigation } = this.props;
-            let text = navigation.getParam('text', '');
-            let cacheName = text.toLowerCase();
-            let url = "https://newsapi.org/v2/everything?q="+ this.state.searchResults.name +"&from="+ year +"-"+ month +"&sources=ign,polygon&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15"
-            let value =  await AsyncStorage.getItem(cacheName);
-            value = JSON.parse(value);
-
-            if ( value.articles ) {
-                console.log("Grabbed articles from cache");
-                console.log(value);
-                this.setState({gameArticles: value.articles.slice(1, 4)});
-            }
-            else {
+            let url = "https://newsapi.org/v2/everything?q="+ this.state.searchResults.name +"&from="+ year +"-"+ month +"&sources=ign,polygon&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15";
                 fetch(url)
                 .then((response) => {
                     response.json()
-                    .then( async data => {
-                        await  AsyncStorage.mergeItem(cacheName, JSON.stringify(data)).catch((err) => {if(err) console.log(err)});
-                        console.log('added articles to cache');
+                    .then( data => {
+                        console.log('added article data');
                         this.setState({gameArticles: data.articles.slice(1, 4)}); 
                     })
                     .catch((err)=>{
@@ -120,31 +88,33 @@ import ArticleCard from '../articlecard/articleCard';
                 .catch((err) => {
                         console.log(err)
                 });  
-            }
         }
         TWtoggle = () => {
             const newState = !this.state.TWtoggle
             this.setState({TWtoggle: newState});
-            let top100Streams ='https://api.twitch.tv/kraken/streams?limit=50&client_id=7mx4fyx7xv1pcxfe25fmguto1xao2b';
-            fetch(top100Streams)
-            .then((response) => {
-                response.json()
-                .then((data) => {
-                    console.log(data.streams);
+            let gameStreams ='https://api.twitch.tv/kraken/search/streams?query='+ this.state.searchResults.name +'&limit=5&client_id=7mx4fyx7xv1pcxfe25fmguto1xao2b';
+                fetch(gameStreams)
+                .then((response) => {
+                    response.json()
+                    .then((data) => {
+                        console.log('Stream data added')
+                        console.log(data.streams);
+                        this.setState({twitchResults: data.streams});
+                    })
+                    .catch((err) => {
+                        if (err) {
+                            console.log(err);
+                        }    
+                    })
                 })
                 .catch((err) => {
                     if (err) {
                         console.log(err);
-                    }    
-                })
-            })
-            .catch((err) => {
-                if (err) {
-                    console.log(err);
-                }
-            });
+                    }
+                });
         }
         componentDidMount() {
+
             let { navigation } = this.props;
             let text = navigation.getParam('text', '');
             let id = navigation.getParam('id', '');
@@ -230,7 +200,15 @@ import ArticleCard from '../articlecard/articleCard';
                                 }
                              <TouchableOpacity onPress={this.TWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Twitch </Text></TouchableOpacity>
                                 {
-                                    this.state.TWtoggle ? <TwitchCom /> : null
+                                    this.state.TWtoggle ? this.state.twitchResults.map( stream => (<TwitchCom streamedGame={stream.channel.game}
+                                    streamerName={stream.channel.display_name}
+                                    streamerFollowers={stream.channel.followers}
+                                    streamerBanner={stream.channel.profile_banner}
+                                    streamerBackgroundColor={stream.channel.profile_banner_background_color}
+                                    streamerStatus={stream.channel.status}
+                                    streamURL={stream.channel.url}
+                                    streamBanner={stream.channel.video_banner}
+                                    streamPreview={stream.preview.medium} /> )) : null
                                 }
                     </View>
                 </ScrollView>
