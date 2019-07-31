@@ -28,9 +28,9 @@ export default class AutoCompleteBar extends Component {
     }
 
     //(result) is currently just the name being passed from the suggestions, but once the routes are going this will have to be the GUID to search for a specific game
-    selectItem = (result) => {
+    selectItem = (name, id) => {
         //Set the field to the currently selected option (ex, selecting "Halo" would change the text field from "hal" to "Halo"
-        this.setState({query: result});
+        this.setState({query: name});
 
         //If you selected something that still matched with other things, you'd still see suggestions (ie, if you selected "Halo" from a suggestion, 
         //you'd still see "Halo," "Halo 2," etc.)
@@ -38,7 +38,7 @@ export default class AutoCompleteBar extends Component {
         this.setState({selected: true})
 
         //This is the actual search function from the HomeScreen being run, though we'll have to change it to the Giant Bomb individual game search route
-        this.props.getSearchResults(result)
+        this.props.getSuggestion(name, id)
     }
 
     changeText = (text) => {
@@ -58,6 +58,7 @@ export default class AutoCompleteBar extends Component {
 
         const { query } = this.state;
         const results = this.findGame(query);
+
         
         return (
             <View style={styles.container}>
@@ -73,7 +74,7 @@ export default class AutoCompleteBar extends Component {
                     placeholderTextColor='gray'
                     keyExtractor={(item, index) => item.key}
                     renderItem={ result => (         
-                        <TouchableOpacity id={result.item.guid} style={styles.itemTouch} onPress={() => this.selectItem(result.item.name)}>
+                        <TouchableOpacity id={result.item.guid} style={styles.itemTouch} onPress={() => this.selectItem(result.item.name, result.item.guid)}>
                             <View style={styles.viewcontainer}>
                                 <Image style={styles.thumbnail} source={{ 
                                     uri: result.item.tinyimageURL != `https://www.giantbomb.com/api/image/square_mini/3026329-gb_default-16_9.png` 
