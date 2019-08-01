@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, AsyncStorage, View, StyleSheet, TouchableOpacity, Text, Image, Linking } from 'react-native';
+import { ScrollView, AsyncStorage, View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import GameCard from '../gamecard/gameCard';
 import TwitchCom from '../twitchcard/twitchcard';
 import YoutubeCom from '../youtubecard/youtubecard';
