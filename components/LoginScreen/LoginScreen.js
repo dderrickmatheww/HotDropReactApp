@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import { View, StyleSheet, Button, TextInput } from 'react-native';
+import { View, StyleSheet, Button, TextInput, AsyncStorage } from 'react-native';
 import Firebase from './firebase';
 
-export default class AboutScreen extends Component {
+export default class LoginScreen extends Component {
 
     static navigationOptions = ({navigation}) => {
         return {
@@ -27,11 +27,14 @@ export default class AboutScreen extends Component {
             Firebase.loginInfo.password = this.state.password
             try {
                 await Firebase.auth.signInWithEmailAndPassword(Firebase.loginInfo.email, Firebase.loginInfo.password);
-                Firebase.auth.onAuthStateChanged((user) => {
+                Firebase.auth.onAuthStateChanged( async (user) => {
                     if (user) {
-                        this.props.navigation.navigate('HomeScreen');
+                        console.log(user);
+                        await AsyncStorage.setItem('user', JSON.stringify(user));
+                        alert("Sign in successful");
+                        this.props.navigation.navigate('HomeScreen')
                     } else {
-                    
+
                     }
                 });
             }

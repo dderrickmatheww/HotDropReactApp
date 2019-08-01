@@ -1,38 +1,50 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, AsyncStorage } from 'react-native';
 import FooterTab from "./footertab";
 import Firebase from "../LoginScreen/firebase";
 
 
-
 export default class Footer extends Component {
     state = {
-        loggedIn: Firebase.auth.currentUser
+        loggedIn: false
     }
-    
-    componentWillMount() {
-        this.setState({loggedIn: Firebase.auth.currentUser});
+    componentDidMount() {
+       this.authCheck();
     }
-    
-    logIn = () => {
-        this.props.navigation('LoginScreen');
+    componentWillUnmount() {
+        this.componentDidMount;
     }
-
-    logOut = async () => {
-        Firebase.auth.signOut().then(() => {
-            this.props.navigation('HomeScreen');
-          }).catch(function(error) {
-            console.log(error);
-          });
-    } 
+    authCheck = async () => {
+        try {
+          let user = await AsyncStorage.getItem('user');
+          user = JSON.parse(user);
+            if (user) {
+            this.setState({
+                loggedIn: true
+            });
+            }
+        } 
+        catch (err) {
+          console.log(err);
+        }
+    }
+    signout = () => {
+        Firebase.auth.signOut()
+        .then(() => {
+            AsyncStorage.removeItem('user');
+            this.setState({loggedIn: false})
+        })
+        .catch((error) => {console.log(error)})
+    }
 
     render() {
+        console.log(this.state.loggedIn);
         return (
             <View>
                 {this.state.loggedIn ? 
                     <View style={styles.footer}>
                         <FooterTab tablabel='Home' tabaction={this.props.scrollfunc}/>
-                        <FooterTab tablabel='Log Out' tabaction={this.logOut}/>
+                        <FooterTab tablabel='Log Out' tabaction={this.signout}/>
                         <FooterTab tablabel='About' tabaction={this.props.about} />
                     </View>
                 :
