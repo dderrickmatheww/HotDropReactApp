@@ -125,6 +125,7 @@ import ArticleCard from '../articlecard/articleCard';
             let { navigation } = this.props;
             let text = navigation.getParam('text', '');
             let id = navigation.getParam('id', '');
+            let name = navigation.getParam('name', '')
             let searchQuery = ''
             let cacheName = ''
             let url = ''
@@ -137,7 +138,7 @@ import ArticleCard from '../articlecard/articleCard';
 
             } else if (id) {
                 searchQuery = id;
-                cacheName = id;
+                cacheName = name.toLowerCase();
                 url = `https://www.giantbomb.com/api/game/` + searchQuery + `/?format=json&api_key=99ec1d8980f419c59250e12a72f3b31d084e9bf9`
             }
 

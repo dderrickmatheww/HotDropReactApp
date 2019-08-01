@@ -6,7 +6,7 @@
     density="440dpi"
     format="10"
     plugin-version="3.4.2"
-    timestamp="1564688952315"
+    timestamp="1564690026368"
     token="7809877264079993799"
     verifier="FULL_BUILD_REQUESTED" >
 
@@ -65,7 +65,7 @@
 
     <build
         build-mode="FULL"
-        timestamp="1564688952315"
+        timestamp="1564690026368"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
