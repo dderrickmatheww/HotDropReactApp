@@ -36,7 +36,14 @@ import ArticleCard from '../articlecard/articleCard';
             this.setState({YTtoggle: newState});
             let { navigation } = this.props;
             let text = navigation.getParam('text', '');
-            let cacheName = text.toLowerCase();
+            let name = navigation.getParam('name', '');
+            let cacheName = ''
+            if (text) {
+                cacheName = text.toLowerCase();
+            }
+            if (name) {
+                cacheName = name.toLowerCase();
+            }
             let url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + this.state.searchResults.name + "+game+trailer" + "&type=video&key=AIzaSyAhsb0OUjYC9-im6U3pNoks26zkjBWUtHo"
             let value =  await AsyncStorage.getItem(cacheName);
             value = JSON.parse(value);
