@@ -23,7 +23,8 @@ export default class HomeScreen extends React.Component {
     };
     state = {
       article: [],
-      streams: []
+      streams: [],
+      user: []
   }
   loadTwitchandNews = async () => {
     let month = new Date().getMonth() + 1; 
@@ -61,8 +62,19 @@ export default class HomeScreen extends React.Component {
     });
   }
   componentWillMount() {
-    Firebase.init();
+    try {
+      Firebase.init();
+    } 
+    catch (err) {
+      console.log(err)
+    }
     this.loadTwitchandNews();
+  }
+  handleOnNavigateBack = (user) => {
+    this.setState({user: JSON.parse(user)})
+    this.componentWillMount()
+    alert("Sign in successful");
+    console.log(this.state.user);
   }
   getSearchResults = (text) => {
     this.props.navigation.navigate('CardScreen', {
@@ -146,9 +158,10 @@ export default class HomeScreen extends React.Component {
               <Footer 
                 scrollfunc={this.scrollToTop}
                 about={() => this.props.navigation.navigate('AboutScreen')}
-                login={() => this.props.navigation.navigate('LoginScreen')}
+                login={() => this.props.navigation.navigate('LoginScreen', {onNavigateBack: this.handleOnNavigateBack})}
                 profile={() => this.props.navigation.navigate('ProfileScreen')}
                 signup={() => this.props.navigation.navigate('SignupScreen')}
+                user={this.state.user}
               />
       </View>
     

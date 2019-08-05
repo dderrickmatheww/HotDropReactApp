@@ -6,10 +6,24 @@ import Firebase from "../LoginScreen/firebase";
 
 export default class Footer extends Component {
     state = {
-        loggedIn: false
+        loggedIn: false,
+        userAuth: this.props.user
     }
     componentDidMount() {
        this.authCheck();
+    }
+    componentWillMount() {
+        this.authCheck();
+    }
+    shouldComponentUpdate() {
+        this.authCheck();
+        if(this.state.loggedIn){
+            return false;
+        }
+        else {
+            return true
+        }
+        
     }
     componentWillUnmount() {
         this.componentDidMount;
@@ -18,10 +32,22 @@ export default class Footer extends Component {
         try {
           let user = await AsyncStorage.getItem('user');
           user = JSON.parse(user);
-            if (user) {
-            this.setState({
-                loggedIn: true
-            });
+          let userAuth = this.state.userAuth
+          console.log(userAuth)
+            if (!userAuth === []) {
+                this.setState({
+                    loggedIn: true
+                });
+            } 
+            else if (user) {
+                this.setState({
+                    loggedIn: true
+                });
+            }
+            else {
+                this.setState({
+                    loggedIn: false
+                });
             }
         } 
         catch (err) {
@@ -33,6 +59,7 @@ export default class Footer extends Component {
         .then(() => {
             AsyncStorage.removeItem('user');
             this.setState({loggedIn: false})
+            this.setState({userAuth: []});
         })
         .catch((error) => {console.log(error)})
     }
