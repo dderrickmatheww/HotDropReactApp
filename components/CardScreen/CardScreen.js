@@ -22,7 +22,6 @@ import ArticleCard from '../articlecard/articleCard';
             twitchResults: [],
             mixerResults: [],
             YTVidID: [],
-            YTcomments: [],
             gameArticles: [],
             date: [],
             platforms: [],
@@ -46,14 +45,12 @@ import ArticleCard from '../articlecard/articleCard';
             if (name) {
                 cacheName = name.toLowerCase();
             }
-            let url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + this.state.searchResults.name + "+game+trailer" + "&type=video&key=AIzaSyAhsb0OUjYC9-im6U3pNoks26zkjBWUtHo"
+            let url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q="' + this.state.searchResults.name + '" game trailer&type=video&key=AIzaSyAhsb0OUjYC9-im6U3pNoks26zkjBWUtHo'
             let value =  await AsyncStorage.getItem(cacheName);
             value = JSON.parse(value);
-            if ( value.items && value.videoId ) {
-                console.log("Grabbed comments & video id from cache");
-                console.log(value.items.snippet.topLevelComment.snippet.authorProfileImageUrl);
+            if ( value.videoId ) {
+                console.log("Grabbed video id from cache");
                 this.setState({YTVidID: value.videoId});
-                this.setState({YTcomments: value.items});
             }
             else {
                 fetch(url)
@@ -80,13 +77,18 @@ import ArticleCard from '../articlecard/articleCard';
             this.setState({NWtoggle: newState})
             let month = new Date().getMonth() + 1; 
             let year = new Date().getFullYear();
-            let url = "https://newsapi.org/v2/everything?q="+ this.state.searchResults.name +"&from="+ year +"-"+ month +"&sources=ign,polygon&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15";
+            let url = 'https://newsapi.org/v2/everything?q="'+ this.state.searchResults.name +'"&from='+ year +'-'+ month +'&sources=polygon&language=en&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15';
                 fetch(url)
                 .then((response) => {
                     response.json()
                     .then( data => {
-                        console.log('added article data');
-                        this.setState({gameArticles: data.articles.slice(1, 4)}); 
+                        if(data.articles.length === 0){
+                            alert("There are no new articles for " + this.state.searchResults.name + " at this time");
+                        } 
+                        else {
+                            console.log('added article data');
+                            this.setState({gameArticles: data.articles.slice(1, 4)}); 
+                        }
                     })
                     .catch((err)=>{
                         if (err) {
@@ -101,14 +103,21 @@ import ArticleCard from '../articlecard/articleCard';
         TWtoggle = () => {
             const newState = !this.state.TWtoggle
             this.setState({TWtoggle: newState});
-            let gameStreams ='https://api.twitch.tv/kraken/search/streams?query='+ this.state.searchResults.name +'&limit=5&client_id=7mx4fyx7xv1pcxfe25fmguto1xao2b';
+            let gameStreams ='https://api.twitch.tv/kraken/search/streams?query='+ this.state.searchResults.name +'&game='+ this.state.searchResults.name +'&limit=5&client_id=7mx4fyx7xv1pcxfe25fmguto1xao2b';
                 fetch(gameStreams)
                 .then((response) => {
                     response.json()
-                    .then((data) => {
-                        console.log('Stream data added')
-                        console.log(data.streams);
-                        this.setState({twitchResults: data.streams});
+                    .then(async (data) => {
+                        console.log(data.streams)
+                        let gameName = await data.streams.map(game => {return game.game.toLowerCase()})
+                        if (gameName[0] === this.state.searchResults.name.toLowerCase()){
+                            console.log('Stream data added')
+                            console.log(data.streams);
+                            this.setState({twitchResults: data.streams});
+                        }
+                        else {
+                            alert('Noone is streaming '+ this.state.searchResults.name +' on Twitch at this time!');
+                        }
                     })
                     .catch((err) => {
                         if (err) {
@@ -129,11 +138,12 @@ import ArticleCard from '../articlecard/articleCard';
             .then((res1) => {
                 res1.json()
                 .then((res2) => {
-                    console.log(res2[0].id)
+                    if (res2.length === 0) {
+                        alert('Noone is streaming '+ this.state.searchResults.name +' on Mixer at this time!');
+                    }
                     fetch('https://mixer.com/api/v1/types/'+res2[0].id+'/channels?order=viewersCurrent:DESC&limit=5')
                     .then( async (res3) => {
-                       let res4 = await res3.json()
-                       console.log(res4)
+                        let res4 = await res3.json()
                         this.setState({mixerResults: res4});
                     })
                     .catch((err) => {
@@ -254,19 +264,19 @@ import ArticleCard from '../articlecard/articleCard';
                                     streamPreview={stream.preview.medium} /> )) : null
                                 }
                             <TouchableOpacity onPress={this.MIXtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Mixer </Text></TouchableOpacity>
-                            { 
-                                this.state.MIXtoggle ? this.state.mixerResults.map(stream => ( 
-                                    <TwitchCom 
-                                      streamedGame={this.state.searchResults.name}
-                                      streamerName={stream.user.username}
-                                      streamerFollowers={stream.numFollowers}
-                                      streamerBanner={stream.user.avatarUrl}
-                                      streamerStatus={stream.name}
-                                      streamURL={'https://mixer.com/' + stream.token}
-                                      streamBanner={stream.bannerUrl}
-                                    />
-                                  )) : null
-                            }
+                                { 
+                                    this.state.MIXtoggle ? this.state.mixerResults.map(stream => ( 
+                                        <TwitchCom 
+                                        streamedGame={this.state.searchResults.name}
+                                        streamerName={stream.user.username}
+                                        streamerFollowers={stream.numFollowers}
+                                        streamerBanner={stream.user.avatarUrl}
+                                        streamerStatus={stream.name}
+                                        streamURL={'https://mixer.com/' + stream.token}
+                                        streamBanner={stream.bannerUrl}
+                                        />
+                                    )) : null
+                                }
                     </View>
                 </ScrollView>
             </View>
