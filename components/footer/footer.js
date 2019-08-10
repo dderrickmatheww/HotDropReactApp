@@ -20,10 +20,9 @@ export default class Footer extends Component {
         if(this.state.loggedIn){
             return false;
         }
-        else {
-            return true
+        else{
+            return true;
         }
-        
     }
     componentWillUnmount() {
         this.componentDidMount;
@@ -48,6 +47,7 @@ export default class Footer extends Component {
                 this.setState({
                     loggedIn: false
                 });
+                return false;
             }
         } 
         catch (err) {

@@ -35,7 +35,7 @@ export default class LoginScreen extends Component {
                         this.props.navigation.navigate('HomeScreen')
                     } 
                     else {
-                        
+                        alert('Unsuccessful sign-up try again later');
                     }
                 });
             }

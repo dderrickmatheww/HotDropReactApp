@@ -20,6 +20,7 @@ import ArticleCard from '../articlecard/articleCard';
         state = {
             searchResults: [],
             twitchResults: [],
+            mixerResults: [],
             YTVidID: [],
             YTcomments: [],
             gameArticles: [],
@@ -28,7 +29,8 @@ import ArticleCard from '../articlecard/articleCard';
             pic: {},
             YTtoggle: false,
             NWtoggle: false,
-            TWtoggle: false
+            TWtoggle: false,
+            MIXtoggle: false
         }
 
         YTtoggle = async () => {
@@ -120,6 +122,39 @@ import ArticleCard from '../articlecard/articleCard';
                     }
                 });
         }
+        MIXtoggle = async () => {
+            const newState = !this.state.MIXtoggle
+            this.setState({MIXtoggle: newState});
+            fetch('https://mixer.com/api/v1/types?query=' + this.state.searchResults.name)
+            .then((res1) => {
+                res1.json()
+                .then((res2) => {
+                    console.log(res2[0].id)
+                    fetch('https://mixer.com/api/v1/types/'+res2[0].id+'/channels?order=viewersCurrent:DESC&limit=5')
+                    .then( async (res3) => {
+                       let res4 = await res3.json()
+                       console.log(res4)
+                        this.setState({mixerResults: res4});
+                    })
+                    .catch((err) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                    });
+                })
+                .catch((err) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+            })
+            .catch((err) => {
+                if (err) {
+                    console.log(err);
+                }
+            });
+            
+        }
         componentDidMount() {
 
             let { navigation } = this.props;
@@ -155,7 +190,7 @@ import ArticleCard from '../articlecard/articleCard';
                 else {
                     fetch(url)
                     .then( response => {
-                        response.json().then( async data => {
+                        response.json().then(async data => {
                             if (text) {
                                 value = data.results[0];
                             }
@@ -218,6 +253,20 @@ import ArticleCard from '../articlecard/articleCard';
                                     streamBanner={stream.channel.video_banner}
                                     streamPreview={stream.preview.medium} /> )) : null
                                 }
+                            <TouchableOpacity onPress={this.MIXtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Mixer </Text></TouchableOpacity>
+                            { 
+                                this.state.MIXtoggle ? this.state.mixerResults.map(stream => ( 
+                                    <TwitchCom 
+                                      streamedGame={this.state.searchResults.name}
+                                      streamerName={stream.user.username}
+                                      streamerFollowers={stream.numFollowers}
+                                      streamerBanner={stream.user.avatarUrl}
+                                      streamerStatus={stream.name}
+                                      streamURL={'https://mixer.com/' + stream.token}
+                                      streamBanner={stream.bannerUrl}
+                                    />
+                                  )) : null
+                            }
                     </View>
                 </ScrollView>
             </View>

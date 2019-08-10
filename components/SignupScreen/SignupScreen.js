@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, StyleSheet, Button, TextInput } from 'react-native';
+import { View, StyleSheet, Button, TextInput, AsyncStorage } from 'react-native';
 import Firebase from '../LoginScreen/firebase';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -35,10 +35,14 @@ export default class AboutScreen extends Component {
                 Firebase.signupInfo.password = this.state.password
                 try {
                     await Firebase.auth.createUserWithEmailAndPassword(Firebase.signupInfo.email,  Firebase.signupInfo.password);
-                    Firebase.auth.onAuthStateChanged((user) => {
+                    Firebase.auth.onAuthStateChanged( async (user) => {
                         if (user) {
-                            this.props.navigation.popToTop('HomeScreen');
-                        } else {
+                            await AsyncStorage.setItem('user', JSON.stringify(user));
+                            let userAuth = await AsyncStorage.getItem('user');
+                            this.props.navigation.state.params.onNavigateBack(userAuth);
+                            this.props.navigation.navigate('HomeScreen')
+                        } 
+                        else {
                             alert('Unsuccessful sign-up try again later');
                         }
                     });
