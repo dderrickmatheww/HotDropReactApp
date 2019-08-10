@@ -55,6 +55,7 @@ export default class LoginScreen extends Component {
                     placeholderTextColor="darkslategray"
                     keyboardType={'email-address'}
                     onChangeText={(text) => this.setState({email: text})}
+                    onSubmitEditing={this.login}
                 />
                 <TextInput
                     style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
@@ -62,10 +63,12 @@ export default class LoginScreen extends Component {
                     placeholderTextColor="darkslategray"
                     secureTextEntry={true}
                     onChangeText={(text) => this.setState({password: text})}
+                    onSubmitEditing={this.login}
                 />
                 <Button
                     title="Log In"
-                    onPress={this.login}/>
+                    onPress={this.login}
+                />
             </View>
         )
     }

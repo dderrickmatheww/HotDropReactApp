@@ -20,6 +20,8 @@ export default class SearchBar extends Component {
                   value={this.state.text}
                   placeholder='Where we droppin&#39;?'
                   placeholderTextColor='gray'
+                  onSubmitEditing={() => this.props.getSearchResults(this.state.text)}
+                  keyboardType='default'
                 />
                 <Button title='DEPLOY!' style={styles.searchbutton} color='rgb(1, 0, 64)' onPress={() => this.props.getSearchResults(this.state.text)}/>
             </View>

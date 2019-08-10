@@ -96,9 +96,14 @@ export default class HomeScreen extends React.Component {
     console.log(this.state.user);
   }
   getSearchResults = (text) => {
-    this.props.navigation.navigate('CardScreen', {
-      text: text
-    });
+      if(text){
+        this.props.navigation.navigate('CardScreen', {
+          text: text
+        });
+      }
+      else {
+        alert('Please enter a game to search');
+      }
   }
   getSuggestion = (name, id) => {
     this.props.navigation.navigate('CardScreen', {

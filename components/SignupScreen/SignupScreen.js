@@ -66,12 +66,14 @@ export default class AboutScreen extends Component {
                         placeholder="First Name"
                         placeholderTextColor="darkslategray"
                         onChangeText={(text) => this.setState({firstName: text})}
+                        onSubmitEditing={this.signup}
                     />
                     <TextInput
                         style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
                         placeholder="Last Name"
                         placeholderTextColor="darkslategray"
                         onChangeText={(text) => this.setState({lastName: text})}
+                        onSubmitEditing={this.signup}
                     />
                     <TextInput
                         style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
@@ -79,12 +81,14 @@ export default class AboutScreen extends Component {
                         placeholderTextColor="darkslategray"
                         keyboardType={'email-address'}
                         onChangeText={(text) => this.setState({email: text})}
+                        onSubmitEditing={this.signup}
                     />
                     <TextInput
                         style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
                         placeholder="Username"
                         placeholderTextColor="darkslategray"
                         onChangeText={(text) => this.setState({userName: text})}
+                        onSubmitEditing={this.signup}
                     />
                     <TextInput
                         style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
@@ -92,6 +96,7 @@ export default class AboutScreen extends Component {
                         placeholderTextColor="darkslategray"
                         secureTextEntry={true}
                         onChangeText={(text) => this.setState({password: text})}
+                        onSubmitEditing={this.signup}
                     />
                     <TextInput
                         style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
@@ -99,10 +104,12 @@ export default class AboutScreen extends Component {
                         placeholderTextColor="darkslategray"
                         secureTextEntry={true}
                         onChangeText={(text) => this.setState({passwordComfirm: text})}
+                        onSubmitEditing={this.signup}
                     />
                     <Button
                         title="Sign-Up"
-                        onPress={this.signup}/> 
+                        onPress={this.signup}
+                    /> 
                 </View> 
             </ScrollView>
         )

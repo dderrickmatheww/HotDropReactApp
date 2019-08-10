@@ -207,12 +207,18 @@ import ArticleCard from '../articlecard/articleCard';
                             if (id) {
                                 value = data.results;
                             }
-                            await AsyncStorage.setItem(cacheName, JSON.stringify(value));
-                            console.log('Added game data to cache')
-                            this.setState({searchResults: value});
-                            this.setState({date: [value.expected_release_month, '/', value.expected_release_day, '/', value.expected_release_year]});
-                            this.setState({platforms: value.platforms.map(platforms => platforms.abbreviation).join(', ')});
-                            this.setState({pic: value.image});
+                            if (data.results.length === 0){
+                                alert("We have no clue what you're trying to search for... No results")
+                                this.props.navigation.goBack();
+                            }
+                            else{
+                                await AsyncStorage.setItem(cacheName, JSON.stringify(value));
+                                console.log('Added game data to cache')
+                                this.setState({searchResults: value});
+                                this.setState({date: [value.expected_release_month, '/', value.expected_release_day, '/', value.expected_release_year]});
+                                this.setState({platforms: value.platforms.map(platforms => platforms.abbreviation).join(', ')});
+                                this.setState({pic: value.image});
+                            }
                         })
                         .catch(function(err) {
                             if(err) {
@@ -243,15 +249,15 @@ import ArticleCard from '../articlecard/articleCard';
                         picture={this.state.pic.medium_url}
                     />
                     <View style={styles.bottom}>
-                             <TouchableOpacity onPress={this.NWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> More News </Text></TouchableOpacity>
+                             <TouchableOpacity onPress={this.NWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}>Top News for {this.state.searchResults.name} </Text></TouchableOpacity>
                                 {
                                     this.state.NWtoggle ?  this.state.gameArticles.map(article => (<ArticleCard  cardhead={article.title} cardauthor={article.author} cardbody={article.content} link={article.url} source={article.source.name} pic={article.urlToImage}/> )) : null
                                 }
-                             <TouchableOpacity onPress={this.YTtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> YouTube </Text></TouchableOpacity>
+                             <TouchableOpacity onPress={this.YTtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> YouTube Trailer for {this.state.searchResults.name} </Text></TouchableOpacity>
                                 {
-                                    this.state.YTtoggle ? <YoutubeCom videoId={this.state.YTVidID} comments={this.state.YTcomments}/> : null
+                                    this.state.YTtoggle ? <YoutubeCom videoId={this.state.YTVidID}/> : null
                                 }
-                             <TouchableOpacity onPress={this.TWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Twitch </Text></TouchableOpacity>
+                             <TouchableOpacity onPress={this.TWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top Twitch streams for {this.state.searchResults.name} </Text></TouchableOpacity>
                                 {
                                     this.state.TWtoggle ? this.state.twitchResults.map( stream => (<TwitchCom streamedGame={stream.channel.game}
                                     streamerName={stream.channel.display_name}
@@ -263,7 +269,7 @@ import ArticleCard from '../articlecard/articleCard';
                                     streamBanner={stream.channel.video_banner}
                                     streamPreview={stream.preview.medium} /> )) : null
                                 }
-                            <TouchableOpacity onPress={this.MIXtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Mixer </Text></TouchableOpacity>
+                            <TouchableOpacity onPress={this.MIXtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top Mixer streams for {this.state.searchResults.name} </Text></TouchableOpacity>
                                 { 
                                     this.state.MIXtoggle ? this.state.mixerResults.map(stream => ( 
                                         <TwitchCom 
