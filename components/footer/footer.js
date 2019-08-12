@@ -32,7 +32,6 @@ export default class Footer extends Component {
           let user = await AsyncStorage.getItem('user');
           user = JSON.parse(user);
           let userAuth = this.state.userAuth
-          console.log(userAuth)
             if (!userAuth === []) {
                 this.setState({
                     loggedIn: true

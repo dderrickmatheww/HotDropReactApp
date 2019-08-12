@@ -3,6 +3,7 @@ import { View, StyleSheet, Button, TextInput, AsyncStorage } from 'react-native'
 import Firebase from '../LoginScreen/firebase';
 import { ScrollView } from 'react-native-gesture-handler';
 
+
 export default class AboutScreen extends Component {
 
     static navigationOptions = ({navigation}) => {
@@ -34,7 +35,7 @@ export default class AboutScreen extends Component {
                 Firebase.signupInfo.username = this.state.userName
                 Firebase.signupInfo.password = this.state.password
                 try {
-                    await Firebase.auth.createUserWithEmailAndPassword(Firebase.signupInfo.email,  Firebase.signupInfo.password);
+                    await firebase.auth().createUserWithEmailAndPassword(Firebase.signupInfo.email, Firebase.signupInfo.password)
                     Firebase.auth.onAuthStateChanged( async (user) => {
                         if (user) {
                             await AsyncStorage.setItem('user', JSON.stringify(user));

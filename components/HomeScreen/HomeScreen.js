@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet, AsyncStorage } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import ArticleCard from '../articlecard/articleCard';
 import Footer from '../footer/footer';
 import CardScreen from '../CardScreen/CardScreen'
@@ -12,6 +12,7 @@ import LoginScreen from "../LoginScreen/LoginScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
 import SignupScreen from "../SignupScreen/SignupScreen";
 import Firebase from '../LoginScreen/firebase';
+import FirebaseComments from '../comments/firebaseComments';
 
 
 export default class HomeScreen extends React.Component {
@@ -24,7 +25,8 @@ export default class HomeScreen extends React.Component {
     state = {
       article: [],
       streams: [],
-      mixerResults: []
+      mixerResults: [],
+      bool: true
   }
   loadTwitchNewsAndMixer = async () => {
     let month = new Date().getMonth() + 1; 
@@ -61,39 +63,39 @@ export default class HomeScreen extends React.Component {
         }
     });
     fetch('https://mixer.com/api/v1/channels?order=viewersCurrent:DESC&limit=10')
-            .then((response) => {
-                response.json()
-                .then((data) => {
-                    console.log('Mixer data added')
-                    console.log(data);
-                    this.setState({mixerResults: data});
-                })
-                .catch((err) => {
-                    if (err) {
-                        console.log(err);
-                    }    
-                })
-            })
-            .catch((err) => {
-                if (err) {
-                    console.log(err);
-                }
-            });
+    .then((response) => {
+        response.json()
+        .then((data) => {
+            console.log('Mixer data added')
+            console.log(data);
+            this.setState({mixerResults: data});
+        })
+        .catch((err) => {
+            if (err) {
+                console.log(err);
+            }    
+        })
+    })
+    .catch((err) => {
+        if (err) {
+            console.log(err);
+        }
+    });
+    this.setState({bool: false});
   }
-  componentWillMount() {
+  componentWillMount = () => {
     try {
       Firebase.init();
+      FirebaseComments.init();
     } 
     catch (err) {
       console.log(err)
     }
-    this.loadTwitchNewsAndMixer();
+    this.loadTwitchNewsAndMixer()
   }
-  handleOnNavigateBack = (user) => {
-    this.setState({user: JSON.parse(user)})
+  handleOnNavigateBack = () => {
     this.componentWillMount()
     alert("Sign in successful");
-    console.log(this.state.user);
   }
   getSearchResults = (text) => {
       if(text){
@@ -119,7 +121,6 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={{ backgroundColor: "#363534"}}>
-
               <ScrollView 
                 keyboardShouldPersistTaps='always'     
                 ref = 'mainScroll'

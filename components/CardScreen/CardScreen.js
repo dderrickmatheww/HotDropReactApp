@@ -4,6 +4,7 @@ import GameCard from '../gamecard/gameCard';
 import TwitchCom from '../twitchcard/twitchcard';
 import YoutubeCom from '../youtubecard/youtubecard';
 import ArticleCard from '../articlecard/articleCard';
+import CommentsCom from '../comments/comments';
 
     export default class CardScreen extends React.Component {
 
@@ -283,6 +284,8 @@ import ArticleCard from '../articlecard/articleCard';
                                         />
                                     )) : null
                                 }
+
+                            <CommentsCom game={this.props.navigation.getParam('text', '')}/>
                     </View>
                 </ScrollView>
             </View>
