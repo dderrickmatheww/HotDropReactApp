@@ -6,4 +6,8 @@
         <item name="android:colorBackground">@color/bgcolor</item>
     </style>
 
+    <!-- Splash screen style -->
+    <style name="AppTheme.Launcher" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
 </resources>
