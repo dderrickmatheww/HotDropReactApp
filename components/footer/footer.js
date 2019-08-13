@@ -20,10 +20,9 @@ export default class Footer extends Component {
         if(this.state.loggedIn){
             return false;
         }
-        else {
-            return true
+        else{
+            return true;
         }
-        
     }
     componentWillUnmount() {
         this.componentDidMount;
@@ -33,7 +32,6 @@ export default class Footer extends Component {
           let user = await AsyncStorage.getItem('user');
           user = JSON.parse(user);
           let userAuth = this.state.userAuth
-          console.log(userAuth)
             if (!userAuth === []) {
                 this.setState({
                     loggedIn: true
@@ -48,6 +46,7 @@ export default class Footer extends Component {
                 this.setState({
                     loggedIn: false
                 });
+                return false;
             }
         } 
         catch (err) {

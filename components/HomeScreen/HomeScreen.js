@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet, AsyncStorage } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import ArticleCard from '../articlecard/articleCard';
 import Footer from '../footer/footer';
 import CardScreen from '../CardScreen/CardScreen'
@@ -24,9 +24,10 @@ export default class HomeScreen extends React.Component {
     state = {
       article: [],
       streams: [],
-      user: []
+      mixerResults: [],
+      bool: true
   }
-  loadTwitchandNews = async () => {
+  loadTwitchNewsAndMixer = async () => {
     let month = new Date().getMonth() + 1; 
     let year = new Date().getFullYear();
     let url ="https://newsapi.org/v2/top-headlines?sources=ign,polygon&from=" + year + "-" + month +"&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15"
@@ -60,26 +61,49 @@ export default class HomeScreen extends React.Component {
             console.log(err);
         }
     });
+    fetch('https://mixer.com/api/v1/channels?order=viewersCurrent:DESC&limit=10')
+    .then((response) => {
+        response.json()
+        .then((data) => {
+            console.log('Mixer data added')
+            console.log(data);
+            this.setState({mixerResults: data});
+        })
+        .catch((err) => {
+            if (err) {
+                console.log(err);
+            }    
+        })
+    })
+    .catch((err) => {
+        if (err) {
+            console.log(err);
+        }
+    });
+    this.setState({bool: false});
   }
-  componentWillMount() {
+  componentWillMount = () => {
     try {
       Firebase.init();
     } 
     catch (err) {
       console.log(err)
     }
-    this.loadTwitchandNews();
+    this.loadTwitchNewsAndMixer()
   }
-  handleOnNavigateBack = (user) => {
-    this.setState({user: JSON.parse(user)})
+  handleOnNavigateBack = () => {
     this.componentWillMount()
     alert("Sign in successful");
-    console.log(this.state.user);
   }
   getSearchResults = (text) => {
-    this.props.navigation.navigate('CardScreen', {
-      text: text
-    });
+      if(text){
+        this.props.navigation.navigate('CardScreen', {
+          text: text
+        });
+      }
+      else {
+        alert('Please enter a game to search');
+      }
   }
   getSuggestion = (name, id) => {
     this.props.navigation.navigate('CardScreen', {
@@ -89,13 +113,12 @@ export default class HomeScreen extends React.Component {
   }
   scrollToTop = () => {
     this.refs.mainScroll.scrollTo({x: 0, y: 0, animated: true})
-    this.loadTwitchandNews()
+    this.loadTwitchNewsAndMixer()
   }
   
   render() {
     return (
       <View style={{ backgroundColor: "#363534"}}>
-
               <ScrollView 
                 keyboardShouldPersistTaps='always'     
                 ref = 'mainScroll'
@@ -140,7 +163,39 @@ export default class HomeScreen extends React.Component {
                     </ScrollView>
                     <Text style={styles.scrollinst}>« Swipe left and right to browse streams »</Text>
                   </View>
-                  
+
+                  <Text style={styles.text}>Top Mixer Streams</Text>
+                  <View                       
+                    style={{
+                      backgroundColor: '#545251', 
+                      paddingTop: 2, 
+                      paddingBottom: 4,
+                      borderBottomColor: 'rgb(1, 0, 96)',
+                      borderBottomWidth: 2
+                    }}
+                  >
+                  <ScrollView 
+                    horizontal="true" 
+                    persistentScrollbar={true}
+                    snapToInterval={358} 
+                    snapToAlignment="center" 
+                    indicatorStyle="white" 
+                  >
+                    {this.state.mixerResults.map(stream => ( 
+                      <TwitchCom 
+                        streamedGame={stream.type.name}
+                        streamerName={stream.user.username}
+                        streamerFollowers={stream.numFollowers}
+                        streamerBanner={stream.user.avatarUrl}
+                        streamerStatus={stream.name}
+                        streamURL={'https://mixer.com/' + stream.token}
+                        streamBanner={stream.type.backgroundUrl}
+                      />
+                    ))}
+                    </ScrollView>
+                    <Text style={styles.scrollinst}>« Swipe left and right to browse streams »</Text>
+                  </View>
+
 
                   <Text style={styles.text}>Aggregated News</Text>
                   {this.state.article.map(article => (
@@ -160,7 +215,7 @@ export default class HomeScreen extends React.Component {
                 about={() => this.props.navigation.navigate('AboutScreen')}
                 login={() => this.props.navigation.navigate('LoginScreen', {onNavigateBack: this.handleOnNavigateBack})}
                 profile={() => this.props.navigation.navigate('ProfileScreen')}
-                signup={() => this.props.navigation.navigate('SignupScreen')}
+                signup={() => this.props.navigation.navigate('SignupScreen', {onNavigateBack: this.handleOnNavigateBack})}
                 user={this.state.user}
               />
       </View>

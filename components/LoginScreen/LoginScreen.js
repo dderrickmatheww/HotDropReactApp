@@ -35,7 +35,7 @@ export default class LoginScreen extends Component {
                         this.props.navigation.navigate('HomeScreen')
                     } 
                     else {
-                        
+                        alert('Unsuccessful sign-up try again later');
                     }
                 });
             }
@@ -55,6 +55,8 @@ export default class LoginScreen extends Component {
                     placeholderTextColor="darkslategray"
                     keyboardType={'email-address'}
                     onChangeText={(text) => this.setState({email: text})}
+                    returnKeyType = { "next" }
+                    onSubmitEditing={() => { this.secondTextInput.focus(); }}
                 />
                 <TextInput
                     style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
@@ -62,10 +64,13 @@ export default class LoginScreen extends Component {
                     placeholderTextColor="darkslategray"
                     secureTextEntry={true}
                     onChangeText={(text) => this.setState({password: text})}
+                    ref={(input) => { this.secondTextInput = input; }}
+                    onSubmitEditing={this.login}
                 />
                 <Button
                     title="Log In"
-                    onPress={this.login}/>
+                    onPress={this.login}
+                />
             </View>
         )
     }

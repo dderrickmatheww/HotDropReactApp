@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import { View, StyleSheet, Button, TextInput } from 'react-native';
+import { View, StyleSheet, Button, TextInput, AsyncStorage } from 'react-native';
 import Firebase from '../LoginScreen/firebase';
 import { ScrollView } from 'react-native-gesture-handler';
+
 
 export default class AboutScreen extends Component {
 
@@ -34,11 +35,15 @@ export default class AboutScreen extends Component {
                 Firebase.signupInfo.username = this.state.userName
                 Firebase.signupInfo.password = this.state.password
                 try {
-                    await Firebase.auth.createUserWithEmailAndPassword(Firebase.signupInfo.email,  Firebase.signupInfo.password);
-                    Firebase.auth.onAuthStateChanged((user) => {
+                    await firebase.auth().createUserWithEmailAndPassword(Firebase.signupInfo.email, Firebase.signupInfo.password)
+                    Firebase.auth.onAuthStateChanged( async (user) => {
                         if (user) {
-                            this.props.navigation.popToTop('HomeScreen');
-                        } else {
+                            await AsyncStorage.setItem('user', JSON.stringify(user));
+                            let userAuth = await AsyncStorage.getItem('user');
+                            this.props.navigation.state.params.onNavigateBack(userAuth);
+                            this.props.navigation.navigate('HomeScreen')
+                        } 
+                        else {
                             alert('Unsuccessful sign-up try again later');
                         }
                     });
@@ -62,12 +67,17 @@ export default class AboutScreen extends Component {
                         placeholder="First Name"
                         placeholderTextColor="darkslategray"
                         onChangeText={(text) => this.setState({firstName: text})}
+                        returnKeyType = { "next" }
+                        onSubmitEditing={() => { this.secondTextInput.focus(); }}
                     />
                     <TextInput
                         style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
                         placeholder="Last Name"
                         placeholderTextColor="darkslategray"
                         onChangeText={(text) => this.setState({lastName: text})}
+                        ref={(input) => { this.secondTextInput = input; }}
+                        returnKeyType = { "next" }
+                        onSubmitEditing={() => { this.thirdTextInput.focus(); }}
                     />
                     <TextInput
                         style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
@@ -75,12 +85,18 @@ export default class AboutScreen extends Component {
                         placeholderTextColor="darkslategray"
                         keyboardType={'email-address'}
                         onChangeText={(text) => this.setState({email: text})}
+                        ref={(input) => { this.thirdTextInput = input; }}
+                        returnKeyType = { "next" }
+                        onSubmitEditing={() => { this.fourthTextInput.focus(); }}
                     />
                     <TextInput
                         style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
                         placeholder="Username"
                         placeholderTextColor="darkslategray"
                         onChangeText={(text) => this.setState({userName: text})}
+                        ref={(input) => { this.fourthTextInput = input; }}
+                        returnKeyType = { "next" }
+                        onSubmitEditing={() => { this.fifthTextInput.focus(); }}
                     />
                     <TextInput
                         style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
@@ -88,6 +104,9 @@ export default class AboutScreen extends Component {
                         placeholderTextColor="darkslategray"
                         secureTextEntry={true}
                         onChangeText={(text) => this.setState({password: text})}
+                        ref={(input) => { this.fifthTextInput = input; }}
+                        returnKeyType = { "next" }
+                        onSubmitEditing={() => { this.sixthTextInput.focus(); }}
                     />
                     <TextInput
                         style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
@@ -95,10 +114,13 @@ export default class AboutScreen extends Component {
                         placeholderTextColor="darkslategray"
                         secureTextEntry={true}
                         onChangeText={(text) => this.setState({passwordComfirm: text})}
+                        ref={(input) => { this.sixthTextInput = input; }}
+                        onSubmitEditing={this.signup}
                     />
                     <Button
                         title="Sign-Up"
-                        onPress={this.signup}/> 
+                        onPress={this.signup}
+                    /> 
                 </View> 
             </ScrollView>
         )

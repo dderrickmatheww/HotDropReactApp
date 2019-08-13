@@ -4,6 +4,8 @@ import GameCard from '../gamecard/gameCard';
 import TwitchCom from '../twitchcard/twitchcard';
 import YoutubeCom from '../youtubecard/youtubecard';
 import ArticleCard from '../articlecard/articleCard';
+import CommentsCom from '../comments/comments';
+import Firebase from '../LoginScreen/firebase';
 
     export default class CardScreen extends React.Component {
 
@@ -20,15 +22,16 @@ import ArticleCard from '../articlecard/articleCard';
         state = {
             searchResults: [],
             twitchResults: [],
+            mixerResults: [],
             YTVidID: [],
-            YTcomments: [],
             gameArticles: [],
             date: [],
             platforms: [],
             pic: {},
             YTtoggle: false,
             NWtoggle: false,
-            TWtoggle: false
+            TWtoggle: false,
+            MIXtoggle: false
         }
 
         YTtoggle = async () => {
@@ -44,14 +47,12 @@ import ArticleCard from '../articlecard/articleCard';
             if (name) {
                 cacheName = name.toLowerCase();
             }
-            let url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + this.state.searchResults.name + "+game+trailer" + "&type=video&key=AIzaSyAhsb0OUjYC9-im6U3pNoks26zkjBWUtHo"
+            let url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q="' + this.state.searchResults.name + '" game trailer&type=video&key=AIzaSyAhsb0OUjYC9-im6U3pNoks26zkjBWUtHo'
             let value =  await AsyncStorage.getItem(cacheName);
             value = JSON.parse(value);
-            if ( value.items && value.videoId ) {
-                console.log("Grabbed comments & video id from cache");
-                console.log(value.items.snippet.topLevelComment.snippet.authorProfileImageUrl);
+            if ( value.videoId ) {
+                console.log("Grabbed video id from cache");
                 this.setState({YTVidID: value.videoId});
-                this.setState({YTcomments: value.items});
             }
             else {
                 fetch(url)
@@ -78,13 +79,18 @@ import ArticleCard from '../articlecard/articleCard';
             this.setState({NWtoggle: newState})
             let month = new Date().getMonth() + 1; 
             let year = new Date().getFullYear();
-            let url = "https://newsapi.org/v2/everything?q="+ this.state.searchResults.name +"&from="+ year +"-"+ month +"&sources=ign,polygon&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15";
+            let url = 'https://newsapi.org/v2/everything?q="'+ this.state.searchResults.name +'"&from='+ year +'-'+ month +'&sources=polygon&language=en&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15';
                 fetch(url)
                 .then((response) => {
                     response.json()
                     .then( data => {
-                        console.log('added article data');
-                        this.setState({gameArticles: data.articles.slice(1, 4)}); 
+                        if(data.articles.length === 0){
+                            alert("There are no new articles for " + this.state.searchResults.name + " at this time");
+                        } 
+                        else {
+                            console.log('added article data');
+                            this.setState({gameArticles: data.articles.slice(1, 4)}); 
+                        }
                     })
                     .catch((err)=>{
                         if (err) {
@@ -99,14 +105,21 @@ import ArticleCard from '../articlecard/articleCard';
         TWtoggle = () => {
             const newState = !this.state.TWtoggle
             this.setState({TWtoggle: newState});
-            let gameStreams ='https://api.twitch.tv/kraken/search/streams?query='+ this.state.searchResults.name +'&limit=5&client_id=7mx4fyx7xv1pcxfe25fmguto1xao2b';
+            let gameStreams ='https://api.twitch.tv/kraken/search/streams?query='+ this.state.searchResults.name +'&game='+ this.state.searchResults.name +'&limit=5&client_id=7mx4fyx7xv1pcxfe25fmguto1xao2b';
                 fetch(gameStreams)
                 .then((response) => {
                     response.json()
-                    .then((data) => {
-                        console.log('Stream data added')
-                        console.log(data.streams);
-                        this.setState({twitchResults: data.streams});
+                    .then(async (data) => {
+                        console.log(data.streams)
+                        let gameName = await data.streams.map(game => {return game.game.toLowerCase()})
+                        if (gameName[0] === this.state.searchResults.name.toLowerCase()){
+                            console.log('Stream data added')
+                            console.log(data.streams);
+                            this.setState({twitchResults: data.streams});
+                        }
+                        else {
+                            alert('Noone is streaming '+ this.state.searchResults.name +' on Twitch at this time!');
+                        }
                     })
                     .catch((err) => {
                         if (err) {
@@ -119,6 +132,40 @@ import ArticleCard from '../articlecard/articleCard';
                         console.log(err);
                     }
                 });
+        }
+        MIXtoggle = async () => {
+            const newState = !this.state.MIXtoggle
+            this.setState({MIXtoggle: newState});
+            fetch('https://mixer.com/api/v1/types?query=' + this.state.searchResults.name)
+            .then((res1) => {
+                res1.json()
+                .then((res2) => {
+                    if (res2.length === 0) {
+                        alert('Noone is streaming '+ this.state.searchResults.name +' on Mixer at this time!');
+                    }
+                    fetch('https://mixer.com/api/v1/types/'+res2[0].id+'/channels?order=viewersCurrent:DESC&limit=5')
+                    .then( async (res3) => {
+                        let res4 = await res3.json()
+                        this.setState({mixerResults: res4});
+                    })
+                    .catch((err) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                    });
+                })
+                .catch((err) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+            })
+            .catch((err) => {
+                if (err) {
+                    console.log(err);
+                }
+            });
+            
         }
         componentDidMount() {
 
@@ -155,19 +202,25 @@ import ArticleCard from '../articlecard/articleCard';
                 else {
                     fetch(url)
                     .then( response => {
-                        response.json().then( async data => {
+                        response.json().then(async data => {
                             if (text) {
                                 value = data.results[0];
                             }
                             if (id) {
                                 value = data.results;
                             }
-                            await AsyncStorage.setItem(cacheName, JSON.stringify(value));
-                            console.log('Added game data to cache')
-                            this.setState({searchResults: value});
-                            this.setState({date: [value.expected_release_month, '/', value.expected_release_day, '/', value.expected_release_year]});
-                            this.setState({platforms: value.platforms.map(platforms => platforms.abbreviation).join(', ')});
-                            this.setState({pic: value.image});
+                            if (data.results.length === 0){
+                                alert("We have no clue what you're trying to search for... No results")
+                                this.props.navigation.goBack();
+                            }
+                            else{
+                                await AsyncStorage.setItem(cacheName, JSON.stringify(value));
+                                console.log('Added game data to cache')
+                                this.setState({searchResults: value});
+                                this.setState({date: [value.expected_release_month, '/', value.expected_release_day, '/', value.expected_release_year]});
+                                this.setState({platforms: value.platforms.map(platforms => platforms.abbreviation).join(', ')});
+                                this.setState({pic: value.image});
+                            }
                         })
                         .catch(function(err) {
                             if(err) {
@@ -198,15 +251,15 @@ import ArticleCard from '../articlecard/articleCard';
                         picture={this.state.pic.medium_url}
                     />
                     <View style={styles.bottom}>
-                             <TouchableOpacity onPress={this.NWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> More News </Text></TouchableOpacity>
+                             <TouchableOpacity onPress={this.NWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}>Top News for {this.state.searchResults.name} </Text></TouchableOpacity>
                                 {
                                     this.state.NWtoggle ?  this.state.gameArticles.map(article => (<ArticleCard  cardhead={article.title} cardauthor={article.author} cardbody={article.content} link={article.url} source={article.source.name} pic={article.urlToImage}/> )) : null
                                 }
-                             <TouchableOpacity onPress={this.YTtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> YouTube </Text></TouchableOpacity>
+                             <TouchableOpacity onPress={this.YTtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> YouTube Trailer for {this.state.searchResults.name} </Text></TouchableOpacity>
                                 {
-                                    this.state.YTtoggle ? <YoutubeCom videoId={this.state.YTVidID} comments={this.state.YTcomments}/> : null
+                                    this.state.YTtoggle ? <YoutubeCom videoId={this.state.YTVidID}/> : null
                                 }
-                             <TouchableOpacity onPress={this.TWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Twitch </Text></TouchableOpacity>
+                             <TouchableOpacity onPress={this.TWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top Twitch streams for {this.state.searchResults.name} </Text></TouchableOpacity>
                                 {
                                     this.state.TWtoggle ? this.state.twitchResults.map( stream => (<TwitchCom streamedGame={stream.channel.game}
                                     streamerName={stream.channel.display_name}
@@ -218,6 +271,22 @@ import ArticleCard from '../articlecard/articleCard';
                                     streamBanner={stream.channel.video_banner}
                                     streamPreview={stream.preview.medium} /> )) : null
                                 }
+                            <TouchableOpacity onPress={this.MIXtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top Mixer streams for {this.state.searchResults.name} </Text></TouchableOpacity>
+                                { 
+                                    this.state.MIXtoggle ? this.state.mixerResults.map(stream => ( 
+                                        <TwitchCom 
+                                        streamedGame={this.state.searchResults.name}
+                                        streamerName={stream.user.username}
+                                        streamerFollowers={stream.numFollowers}
+                                        streamerBanner={stream.user.avatarUrl}
+                                        streamerStatus={stream.name}
+                                        streamURL={'https://mixer.com/' + stream.token}
+                                        streamBanner={stream.bannerUrl}
+                                        />
+                                    )) : null
+                                }
+
+                            <CommentsCom game={this.props.navigation.getParam('text', '')} />
                     </View>
                 </ScrollView>
             </View>
