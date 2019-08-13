@@ -67,14 +67,17 @@ export default class AboutScreen extends Component {
                         placeholder="First Name"
                         placeholderTextColor="darkslategray"
                         onChangeText={(text) => this.setState({firstName: text})}
-                        onSubmitEditing={this.signup}
+                        returnKeyType = { "next" }
+                        onSubmitEditing={() => { this.secondTextInput.focus(); }}
                     />
                     <TextInput
                         style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
                         placeholder="Last Name"
                         placeholderTextColor="darkslategray"
                         onChangeText={(text) => this.setState({lastName: text})}
-                        onSubmitEditing={this.signup}
+                        ref={(input) => { this.secondTextInput = input; }}
+                        returnKeyType = { "next" }
+                        onSubmitEditing={() => { this.thirdTextInput.focus(); }}
                     />
                     <TextInput
                         style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
@@ -82,14 +85,18 @@ export default class AboutScreen extends Component {
                         placeholderTextColor="darkslategray"
                         keyboardType={'email-address'}
                         onChangeText={(text) => this.setState({email: text})}
-                        onSubmitEditing={this.signup}
+                        ref={(input) => { this.thirdTextInput = input; }}
+                        returnKeyType = { "next" }
+                        onSubmitEditing={() => { this.fourthTextInput.focus(); }}
                     />
                     <TextInput
                         style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
                         placeholder="Username"
                         placeholderTextColor="darkslategray"
                         onChangeText={(text) => this.setState({userName: text})}
-                        onSubmitEditing={this.signup}
+                        ref={(input) => { this.fourthTextInput = input; }}
+                        returnKeyType = { "next" }
+                        onSubmitEditing={() => { this.fifthTextInput.focus(); }}
                     />
                     <TextInput
                         style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
@@ -97,7 +104,9 @@ export default class AboutScreen extends Component {
                         placeholderTextColor="darkslategray"
                         secureTextEntry={true}
                         onChangeText={(text) => this.setState({password: text})}
-                        onSubmitEditing={this.signup}
+                        ref={(input) => { this.fifthTextInput = input; }}
+                        returnKeyType = { "next" }
+                        onSubmitEditing={() => { this.sixthTextInput.focus(); }}
                     />
                     <TextInput
                         style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
@@ -105,6 +114,7 @@ export default class AboutScreen extends Component {
                         placeholderTextColor="darkslategray"
                         secureTextEntry={true}
                         onChangeText={(text) => this.setState({passwordComfirm: text})}
+                        ref={(input) => { this.sixthTextInput = input; }}
                         onSubmitEditing={this.signup}
                     />
                     <Button

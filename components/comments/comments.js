@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, StyleSheet, Button, TextInput, AsyncStorage, Text, FlatList } from 'react-native';
+import { View, StyleSheet, Button, TextInput, AsyncStorage, Text, KeyboardAvoidingView } from 'react-native';
 import Firebase from '../LoginScreen/firebase';
 import CommentsRender from './commentsRender';
 export default class commentsCom extends Component {
@@ -54,7 +54,6 @@ export default class commentsCom extends Component {
             }
     }
     grabbingComments = (searchedGame) => {
-        
         Firebase.gameRef.child(searchedGame).on('value', (snap) => {
                 let child = snap.val();
                 if(child) {
@@ -68,36 +67,38 @@ export default class commentsCom extends Component {
     }
 
     render () {
-        console.log('render ' + this.state.commentData)
-        console.log(this.state.commentData.length)
         return(
             <View style={styles.aboutscreen}>
                 <Text style={{marginTop: 10, marginBottom: 1, textDecorationLine: 'underline'}}>All comments</Text>
                
                 <CommentsRender commentData={this.state.commentData} />
 
-                <Text style={{marginBottom: 10}}>Have something to say? Post a comment below ↴ </Text>
-                <TextInput
-                    style={{marginBottom: 5, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
-                    placeholder="Your name"
-                    placeholderTextColor="darkslategray"
-                    onChangeText={(text) => this.setState({author: text})}
-                    onSubmitEditing={this.postComment}
-                />
-                <TextInput
-                    style={{marginBottom: 5, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
-                    placeholder="What do you have to say?"
-                    placeholderTextColor="darkslategray"
-                    multiline = {true}
-                    numberOfLines = {4}
-                    onChangeText={(text) => this.setState({comment: text})}
-                    onSubmitEditing={this.postComment}
-                />
-                <Button
-                    title="Post"
-                    onPress={this.postComment}
-                    style={{marginBottom: 10}}
-                />
+                <Text style={{marginTop: 20, marginBottom: 20}}>Have something to say? Post a comment below ↴ </Text>
+                <KeyboardAvoidingView enabled> 
+                    <TextInput
+                        style={{marginBottom: 15, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
+                        placeholder="Your name"
+                        placeholderTextColor="darkslategray"
+                        onChangeText={(text) => this.setState({author: text})}
+                        returnKeyType = { "next" }
+                        onSubmitEditing={() => { this.secondTextInput.focus(); }}
+                    />
+                    <TextInput
+                        style={{marginBottom: 15, textAlignVertical: "top", backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
+                        placeholder="What do you have to say?"
+                        placeholderTextColor="darkslategray"
+                        ref={(input) => { this.secondTextInput = input; }}
+                        multiline = {true}
+                        numberOfLines = {4}
+                        onChangeText={(text) => this.setState({comment: text})}
+                        onSubmitEditing={this.postComment}
+                    />
+                    <Button
+                        title="Post"
+                        onPress={this.postComment}
+                        style={{marginBottom: 15}}
+                    />
+                </KeyboardAvoidingView>
             </View>
         )
     }
