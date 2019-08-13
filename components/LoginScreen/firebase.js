@@ -28,6 +28,7 @@ export default class Firebase {
         comment: ''
     }
     static init() {
+     
       firebase.initializeApp(config1);
       Firebase.auth = firebase.auth();
       Firebase.database = firebase.database();

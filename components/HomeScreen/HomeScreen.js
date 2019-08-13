@@ -12,7 +12,6 @@ import LoginScreen from "../LoginScreen/LoginScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
 import SignupScreen from "../SignupScreen/SignupScreen";
 import Firebase from '../LoginScreen/firebase';
-import FirebaseComments from '../comments/firebaseComments';
 
 
 export default class HomeScreen extends React.Component {
@@ -86,7 +85,6 @@ export default class HomeScreen extends React.Component {
   componentWillMount = () => {
     try {
       Firebase.init();
-      FirebaseComments.init();
     } 
     catch (err) {
       console.log(err)
