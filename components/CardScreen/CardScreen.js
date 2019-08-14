@@ -251,7 +251,7 @@ import Firebase from '../LoginScreen/firebase';
                         picture={this.state.pic.medium_url}
                     />
                     <View style={styles.bottom}>
-                             <TouchableOpacity onPress={this.NWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}>Top News for {this.state.searchResults.name} </Text></TouchableOpacity>
+                             <TouchableOpacity onPress={this.NWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top News for {this.state.searchResults.name} </Text></TouchableOpacity>
                                 {
                                     this.state.NWtoggle ?  this.state.gameArticles.map(article => (<ArticleCard  cardhead={article.title} cardauthor={article.author} cardbody={article.content} link={article.url} source={article.source.name} pic={article.urlToImage}/> )) : null
                                 }
@@ -300,7 +300,10 @@ import Firebase from '../LoginScreen/firebase';
             padding: 5,
             fontSize: 14,
             borderRadius: 2,
-            marginRight: 5,
+            marginVertical: 1,
+            borderWidth: 1,
+            borderColor: 'rgb(1, 0, 64)',
+            marginHorizontal: 5,
             bottom: 0,
             justifyContent: 'center',
             alignContent: 'center'

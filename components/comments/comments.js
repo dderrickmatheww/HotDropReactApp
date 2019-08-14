@@ -68,12 +68,12 @@ export default class commentsCom extends Component {
 
     render () {
         return(
-            <View style={styles.aboutscreen}>
-                <Text style={{marginTop: 10, marginBottom: 1, textDecorationLine: 'underline'}}>All comments</Text>
-               
+            <View style={styles.commentsection}>
+                <Text style={styles.commentheader}>Comments</Text>
+                <View style={styles.commentcontainer}>
                 <CommentsRender commentData={this.state.commentData} />
-
-                <Text style={{marginTop: 20, marginBottom: 20}}>Have something to say? Post a comment below ↴ </Text>
+                </View>
+                <Text style={styles.commentinst}>Have something to say? Post a comment below ↴ </Text>
                 <KeyboardAvoidingView enabled> 
                     <TextInput
                         style={{marginBottom: 15, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
@@ -105,20 +105,29 @@ export default class commentsCom extends Component {
 }
 
 const styles = StyleSheet.create({
-    aboutscreen: {
-        padding: 20,
+    commentsection: {
+        marginHorizontal: 5,
         flex: 1,
-        backgroundColor: '#545251',
+        backgroundColor: '#363534',
         height: `100%`,
     },
-    text:{
-        fontSize: 16,
-        color: `skyblue`,
-        textAlign: `center`
-    },
-    link: {
-        fontSize: 16,
-        color: `yellow`,
+    commentheader: {
+        marginTop: 10, 
+        marginBottom: 1, 
+        textDecorationLine: 'underline', 
+        color: 'skyblue', 
+        fontSize: 14,
         fontWeight: `bold`
+    },
+    commentcontainer: {
+        borderWidth: 0.5,
+        borderColor: 'darkslategray',
+        padding: 1
+    },
+    commentinst: {
+        marginTop: 20,
+        marginBottom: 20, 
+        fontSize: 12,
+        color: 'skyblue'
     }
 })
