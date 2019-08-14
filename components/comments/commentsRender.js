@@ -12,12 +12,12 @@ export default class CommentsRender extends Component {
                     this.props.commentData.length > 0 ?
                     this.props.commentData.map((comment) => {
                         return (
-                            <View>
-                                <Text>Name: {comment.authorName}</Text>
-                                <Text>comment: {comment.comment}</Text>
+                            <View style={styles.card}>
+                                    <Text style={styles.author}>{comment.authorName}</Text>
+                                    <Text style={styles.comment}>{comment.comment}</Text>
                             </View>
                         )
-                    }) : <Text>No comments yet</Text>
+                    }) : <Text style={styles.nocomments}>No comments here yet -- try leaving one!</Text>
                }
             </View>   
         )
@@ -25,20 +25,38 @@ export default class CommentsRender extends Component {
 }
 
 const styles = StyleSheet.create({
-    aboutscreen: {
+    card: {
+        backgroundColor: `rgb(1, 0, 24)`,
+        height: `auto`,
+        marginVertical: 1,
+        padding: 5,
+        borderRadius: 3,
+        borderColor: `darkslategray`,
+        borderWidth: 1,
+        shadowColor: "#000",
+        flexDirection: `column`,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
+        elevation: 4,
+    },
+    author: {
+        color:`rgb(135, 206, 250)`,
+        fontWeight: `bold`,
+        fontSize: 11,
+    },
+    comment: {
+        fontWeight: `100`,
+        color:`white`,
+        fontSize: 11,
+    },
+    nocomments: {
         padding: 20,
-        flex: 1,
-        backgroundColor: '#545251',
-        height: `100%`,
-    },
-    text:{
-        fontSize: 16,
-        color: `skyblue`,
-        textAlign: `center`
-    },
-    link: {
-        fontSize: 16,
-        color: `yellow`,
-        fontWeight: `bold`
+        fontStyle: 'italic',
+        color:`rgb(135, 206, 250)`,
+        fontSize: 12,
     }
 })
