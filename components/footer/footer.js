@@ -9,15 +9,12 @@ export default class Footer extends Component {
         loggedIn: false,
         userAuth: this.props.user
     }
-    componentDidMount() {
-       this.authCheck();
-    }
     componentWillMount() {
         this.authCheck();
     }
     shouldComponentUpdate() {
         this.authCheck();
-        if(this.state.loggedIn){
+        if (this.state.loggedIn){
             return false;
         }
         else{
@@ -64,7 +61,6 @@ export default class Footer extends Component {
     }
 
     render() {
-        console.log(this.state.loggedIn);
         return (
             <View>
                 {this.state.loggedIn ? 

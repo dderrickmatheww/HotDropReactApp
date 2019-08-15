@@ -286,7 +286,7 @@ import Firebase from '../LoginScreen/firebase';
                                     )) : null
                                 }
 
-                            <CommentsCom game={this.props.navigation.getParam('text', '')} />
+                            <CommentsCom game={this.props.navigation.getParam('text', '')} navigate={this.props.navigation} />
                     </View>
                 </ScrollView>
             </View>
