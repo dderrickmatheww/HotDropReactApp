@@ -91,10 +91,6 @@ export default class HomeScreen extends React.Component {
     }
     this.loadTwitchNewsAndMixer()
   }
-  handleOnNavigateBack = () => {
-    this.componentWillMount()
-    alert("Sign in successful");
-  }
   getSearchResults = (text) => {
       if(text){
         this.props.navigation.navigate('CardScreen', {

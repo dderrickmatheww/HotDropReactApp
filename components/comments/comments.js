@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, StyleSheet, Button, TextInput, AsyncStorage, Text, KeyboardAvoidingView } from 'react-native';
+import { View, StyleSheet, Button, TextInput, AsyncStorage, Text, KeyboardAvoidingView, Modal, TouchableOpacity } from 'react-native';
 import Firebase from '../LoginScreen/firebase';
 import CommentsRender from './commentsRender';
 export default class commentsCom extends Component {
@@ -8,7 +8,8 @@ export default class commentsCom extends Component {
         comment: '',
         gameExists: false,
         searchedGame: this.props.game,
-        commentData: []
+        commentData: [],
+        isVisible: false
     };
     async componentDidMount() {
         let searchedGame = this.state.searchedGame.toLowerCase();
@@ -16,7 +17,7 @@ export default class commentsCom extends Component {
         console.log(this.state.commentData);
     }
    
-      postComment = async () => {
+    postComment = async () => {
         let searchedGame = this.state.searchedGame.toLowerCase();
         await Firebase.database.ref('game').once("value").then((snapshot) => {this.setState({gameExists: snapshot.child(searchedGame).exists()}); console.log(snapshot.child(this.state.searchedGame).exists())});
         let user = await AsyncStorage.getItem('user');
@@ -50,7 +51,11 @@ export default class commentsCom extends Component {
                 }
             }
             else {
-                alert('You must be signed in to post comments');
+                this.firstTextInput.clear();
+                this.secondTextInput.clear();
+                this.setState({author: ''});
+                this.setState({comment: ''});
+                this.setState({isVisible: true});
             }
     }
     grabbingComments = (searchedGame) => {
@@ -65,13 +70,15 @@ export default class commentsCom extends Component {
             console.log("Errors handled: " + errorObject.code);
         })
     }
-
+    closeModalFunc = () => {
+        this.setState({isVisible: false});
+    }
     render () {
         return(
             <View style={styles.commentsection}>
                 <Text style={styles.commentheader}>Comments</Text>
                 <View style={styles.commentcontainer}>
-                <CommentsRender commentData={this.state.commentData} />
+                    <CommentsRender commentData={this.state.commentData} />
                 </View>
                 <Text style={styles.commentinst}>Have something to say? Post a comment below ↴ </Text>
                 <KeyboardAvoidingView enabled> 
@@ -82,6 +89,7 @@ export default class commentsCom extends Component {
                         onChangeText={(text) => this.setState({author: text})}
                         returnKeyType = { "next" }
                         onSubmitEditing={() => { this.secondTextInput.focus(); }}
+                        ref={(input) => { this.firstTextInput = input; }}
                     />
                     <TextInput
                         style={{marginBottom: 15, textAlignVertical: "top", backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
@@ -95,11 +103,58 @@ export default class commentsCom extends Component {
                     />
                     <Button
                         title="Post"
+                        color='rgb(1, 0, 64)'
                         onPress={this.postComment}
                         style={{marginBottom: 15}}
                     />
                 </KeyboardAvoidingView>
-            </View>
+                <View style={styles.container}>
+                    <Modal
+                        animationType='slide'
+                        onRequestClose={() => console.log('no warning')}
+                        transparent={true}
+                        visible={this.state.isVisible}
+                    >
+                        <View style={{backgroundColor: 'rgba(96, 96, 128, 0.66)', height: '100%'}}>
+                            <View style={styles.modalView} >
+                                <TouchableOpacity
+                                    onPress={this.closeModalFunc}
+                                >
+                                    <Text style={styles.closeText}>X</Text>
+                                </TouchableOpacity>
+                            <View style={styles.modalContent}>
+                                <Text 
+                                    style={styles.modalTitle}
+                                >
+                                    Please log in (or sign up) in order to post comments.
+                                </Text>
+                        
+                                <View style={styles.modalDivider}></View>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        this.setState({isVisible: false});
+                                        this.props.navigate.navigate('LoginScreen')
+                                    }}
+                                    style={styles.modalButton}
+                                >
+                                    <Text style={styles.modalText}>Login here</Text>
+                                </TouchableOpacity>
+                                <Text style={styles.modalText}>OR</Text>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        this.setState({isVisible: false});
+                                        this.props.navigate.navigate('SignupScreen')
+                                    }}
+                                    style={styles.modalButton}
+                                >
+                                    <Text style={styles.modalText}>Sign-up here</Text>
+                                </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    </Modal>
+                </View>
+          </View>
         )
     }
 }
@@ -129,5 +184,69 @@ const styles = StyleSheet.create({
         marginBottom: 20, 
         fontSize: 12,
         color: 'skyblue'
+    },
+    container: {
+         backgroundColor: 'gray',
+    },
+    modalView: {
+        backgroundColor: `rgb(1, 0, 32)`,
+        margin: 40,
+        padding: 10,
+        borderRadius: 1,
+        borderWidth: 1,
+        borderColor: 'rgb(206, 212, 218)',
+        elevation: 20
+    },
+    closeText: {
+        color: 'rgb(135, 206, 250)',
+        backgroundColor: 'rgb(1, 0, 128)',
+        borderRadius: 1,
+        width: 32,
+        padding: 6,
+        alignSelf: 'flex-end',
+        textAlign: 'center',
+        borderWidth: 1,
+        borderColor: 'darkslategray',
+    },
+    modalContent: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    modalButton: {
+        marginTop: 10,
+        backgroundColor: `darkslategray`,
+        padding: 5,
+        fontSize: 14,
+        borderRadius: 2,
+        marginVertical: 1,
+        borderWidth: 1,
+        borderColor: 'rgb(1, 0, 64)',
+        marginHorizontal: 5,
+        bottom: 0,
+        justifyContent: 'center',
+        alignContent: 'center'
+    },
+    modalText: {
+        color:`rgb(135, 206, 250)`,
+        fontWeight: `bold`,
+    },
+    modalTitle: {
+        marginTop: 10, 
+        marginBottom: 1, 
+        textAlign: `center`,
+        color: 'skyblue', 
+        fontSize: 15,
+        fontWeight: `bold`,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    modalDivider: {
+        marginVertical: 3,
+        height: 1,
+        width: `95%`,
+        borderWidth: 0.5,
+        borderColor: `darkslategray`,
+        backgroundColor: 'darkslategray'
     }
+        
 })

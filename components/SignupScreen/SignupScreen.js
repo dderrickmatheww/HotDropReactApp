@@ -39,13 +39,12 @@ export default class AboutScreen extends Component {
                     Firebase.auth.onAuthStateChanged( async (user) => {
                         if (user) {
                             await AsyncStorage.setItem('user', JSON.stringify(user));
-                            let userAuth = await AsyncStorage.getItem('user');
-                            this.props.navigation.state.params.onNavigateBack(userAuth);
-                            this.props.navigation.navigate('HomeScreen')
+                            this.props.navigation.goBack();
                         } 
                         else {
-                            alert('Unsuccessful sign-up try again later');
+
                         }
+                        
                     });
                 } 
                 catch (err) {

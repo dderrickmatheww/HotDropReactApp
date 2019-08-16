@@ -141,7 +141,7 @@ import Firebase from '../LoginScreen/firebase';
                 res1.json()
                 .then((res2) => {
                     if (res2.length === 0) {
-                        alert('Noone is streaming '+ this.state.searchResults.name +' on Mixer at this time!');
+                        alert('No one is streaming '+ this.state.searchResults.name +' on Mixer at this time!');
                     }
                     fetch('https://mixer.com/api/v1/types/'+res2[0].id+'/channels?order=viewersCurrent:DESC&limit=5')
                     .then( async (res3) => {
@@ -249,6 +249,7 @@ import Firebase from '../LoginScreen/firebase';
                         releasedate={this.state.date}
                         description={this.state.searchResults.deck}
                         picture={this.state.pic.medium_url}
+                        modal={this.state.pic.original_url}
                     />
                     <View style={styles.bottom}>
                              <TouchableOpacity onPress={this.NWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top News for {this.state.searchResults.name} </Text></TouchableOpacity>
@@ -286,7 +287,7 @@ import Firebase from '../LoginScreen/firebase';
                                     )) : null
                                 }
 
-                            <CommentsCom game={this.props.navigation.getParam('text', '')} />
+                            <CommentsCom game={this.props.navigation.getParam('text', '')} navigate={this.props.navigation} />
                     </View>
                 </ScrollView>
             </View>
