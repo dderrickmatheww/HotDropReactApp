@@ -103,30 +103,33 @@ export default class commentsCom extends Component {
                     />
                     <Button
                         title="Post"
+                        color='rgb(1, 0, 64)'
                         onPress={this.postComment}
                         style={{marginBottom: 15}}
                     />
                 </KeyboardAvoidingView>
                 <View style={styles.container}>
                     <Modal
-                    animationType='slide'
-                    onRequestClose={() => console.log('no warning')}
-                    transparent
-                    visible={this.state.isVisible}
+                        animationType='slide'
+                        onRequestClose={() => console.log('no warning')}
+                        transparent={true}
+                        visible={this.state.isVisible}
                     >
-                        <View>
+                        <View style={{backgroundColor: 'rgba(96, 96, 128, 0.66)', height: '100%'}}>
                             <View style={styles.modalView} >
                                 <TouchableOpacity
                                     onPress={this.closeModalFunc}
                                 >
                                     <Text style={styles.closeText}>X</Text>
                                 </TouchableOpacity>
-                                <View style={styles.modalContent}>
-                                    <Text 
-                                        style={styles.modalTitle}
-                                    >
-                                        You have to login or sign up to post comments!</Text>
-                                
+                            <View style={styles.modalContent}>
+                                <Text 
+                                    style={styles.modalTitle}
+                                >
+                                    Please log in (or sign up) in order to post comments.
+                                </Text>
+                        
+                                <View style={styles.modalDivider}></View>
                                 <TouchableOpacity
                                     onPress={() => {
                                         this.setState({isVisible: false});
@@ -186,22 +189,24 @@ const styles = StyleSheet.create({
          backgroundColor: 'gray',
     },
     modalView: {
-        backgroundColor: `rgb(1, 0, 24)`,
+        backgroundColor: `rgb(1, 0, 32)`,
         margin: 40,
         padding: 10,
         borderRadius: 1,
-        borderColor: `darkslategray`,
+        borderWidth: 1,
+        borderColor: 'rgb(206, 212, 218)',
+        elevation: 20
     },
     closeText: {
         color: 'rgb(135, 206, 250)',
+        backgroundColor: 'rgb(1, 0, 128)',
         borderRadius: 1,
-        borderColor: 'rgb(135, 206, 250)',
         width: 32,
         padding: 6,
         alignSelf: 'flex-end',
         textAlign: 'center',
         borderWidth: 1,
-        borderColor: 'white',
+        borderColor: 'darkslategray',
     },
     modalContent: {
         justifyContent: 'center',
@@ -228,12 +233,20 @@ const styles = StyleSheet.create({
     modalTitle: {
         marginTop: 10, 
         marginBottom: 1, 
-        textDecorationLine: 'underline', 
+        textAlign: `center`,
         color: 'skyblue', 
-        fontSize: 14,
+        fontSize: 15,
         fontWeight: `bold`,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    modalDivider: {
+        marginVertical: 3,
+        height: 1,
+        width: `95%`,
+        borderWidth: 0.5,
+        borderColor: `darkslategray`,
+        backgroundColor: 'darkslategray'
     }
         
 })
