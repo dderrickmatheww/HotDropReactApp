@@ -43,12 +43,16 @@ export default class HomeScreen extends React.Component {
     .catch((err) => {
         console.log(err);
     });
-    let top100Streams ='https://api.twitch.tv/kraken/streams?limit=10&client_id=7mx4fyx7xv1pcxfe25fmguto1xao2b';
-    fetch(top100Streams)
+    let top100Streams ='https://api.twitch.tv/helix/streams?first=10';
+    fetch(top100Streams, {
+      headers: {
+        "Client-ID": '7mx4fyx7xv1pcxfe25fmguto1xao2b'
+      }
+    })
     .then((response) => {
         response.json()
         .then((data) => {
-            this.setState({streams: data.streams});
+            this.setState({streams: data.data});
         })
         .catch((err) => {
             if (err) {
@@ -145,15 +149,11 @@ export default class HomeScreen extends React.Component {
                   >
                     {this.state.streams.map(stream => ( 
                       <TwitchCom 
-                        streamedGame={stream.channel.game}
-                        streamerName={stream.channel.display_name}
-                        streamerFollowers={stream.channel.followers}
-                        streamerBanner={stream.channel.profile_banner}
-                        streamerBackgroundColor={stream.channel.profile_banner_background_color}
-                        streamerStatus={stream.channel.status}
-                        streamURL={stream.channel.url}
-                        streamBanner={stream.channel.video_banner}
-                        streamPreview={stream.preview.medium}
+                      streamerName={stream.user_name}
+                      streamerFollowers={stream.viewer_count}
+                      streamerStatus={stream.title}
+                      streamURL={"https://www.twitch.tv/" + stream.user_name}
+                      streamerPreview={stream.thumbnail_url.slice(0, -21) + ".jpg"}
                       />
                     ))}
                     </ScrollView>
@@ -182,7 +182,7 @@ export default class HomeScreen extends React.Component {
                         streamedGame={stream.type.name}
                         streamerName={stream.user.username}
                         streamerFollowers={stream.numFollowers}
-                        streamerBanner={stream.user.avatarUrl}
+                        streamerPreview={stream.user.avatarUrl}
                         streamerStatus={stream.name}
                         streamURL={'https://mixer.com/' + stream.token}
                         streamBanner={stream.type.backgroundUrl}

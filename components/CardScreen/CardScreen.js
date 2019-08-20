@@ -105,17 +105,40 @@ import Firebase from '../LoginScreen/firebase';
         TWtoggle = () => {
             const newState = !this.state.TWtoggle
             this.setState({TWtoggle: newState});
-            let gameStreams ='https://api.twitch.tv/kraken/search/streams?query='+ this.state.searchResults.name +'&game='+ this.state.searchResults.name +'&limit=5&client_id=7mx4fyx7xv1pcxfe25fmguto1xao2b';
-                fetch(gameStreams)
+            let gameStreams ='https://api.twitch.tv/helix/games?name=' + this.state.searchResults.name;
+                fetch(gameStreams, {
+                    headers: {
+                        "Client-ID": '7mx4fyx7xv1pcxfe25fmguto1xao2b'
+                    }
+                })
                 .then((response) => {
                     response.json()
                     .then(async (data) => {
-                        console.log(data.streams)
-                        let gameName = await data.streams.map(game => {return game.game.toLowerCase()})
-                        if (gameName[0] === this.state.searchResults.name.toLowerCase()){
+                        if (data.data[0].id){
                             console.log('Stream data added')
-                            console.log(data.streams);
-                            this.setState({twitchResults: data.streams});
+                            fetch('https://api.twitch.tv/helix/streams?game_id=' + data.data[0].id + '&first=5', {
+                            headers: {
+                                "Client-ID": '7mx4fyx7xv1pcxfe25fmguto1xao2b'
+                            }
+                            })
+                            .then((gameData) => {
+                                gameData.json()
+                                .then((data) => {
+                                    console.log(data)
+                                   this.setState({twitchResults: data.data})
+                                   console.log(data.data[0].thumbnail_url.slice(0, -21) + ".jpg")
+                                })
+                                .catch((err) => {
+                                    if (err) {
+                                        console.log(err);
+                                    }    
+                                })
+                            })
+                            .catch((err) => {
+                                if (err) {
+                                    console.log(err);
+                                }    
+                            })
                         }
                         else {
                             alert('Noone is streaming '+ this.state.searchResults.name +' on Twitch at this time!');
@@ -262,15 +285,12 @@ import Firebase from '../LoginScreen/firebase';
                                 }
                              <TouchableOpacity onPress={this.TWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top Twitch streams for {this.state.searchResults.name} </Text></TouchableOpacity>
                                 {
-                                    this.state.TWtoggle ? this.state.twitchResults.map( stream => (<TwitchCom streamedGame={stream.channel.game}
-                                    streamerName={stream.channel.display_name}
-                                    streamerFollowers={stream.channel.followers}
-                                    streamerBanner={stream.channel.profile_banner}
-                                    streamerBackgroundColor={stream.channel.profile_banner_background_color}
-                                    streamerStatus={stream.channel.status}
-                                    streamURL={stream.channel.url}
-                                    streamBanner={stream.channel.video_banner}
-                                    streamPreview={stream.preview.medium} /> )) : null
+                                    this.state.TWtoggle ? this.state.twitchResults.map( stream => (<TwitchCom streamedGame={this.state.searchResults.name}
+                                    streamerName={stream.user_name}
+                                    streamerFollowers={stream.viewer_count}
+                                    streamerStatus={stream.title}
+                                    streamURL={"https://www.twitch.tv/" + stream.user_name}
+                                    streamerPreview={stream.thumbnail_url.slice(0, -21) + ".jpg"} /> )) : null
                                 }
                             <TouchableOpacity onPress={this.MIXtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top Mixer streams for {this.state.searchResults.name} </Text></TouchableOpacity>
                                 { 
@@ -279,7 +299,7 @@ import Firebase from '../LoginScreen/firebase';
                                         streamedGame={this.state.searchResults.name}
                                         streamerName={stream.user.username}
                                         streamerFollowers={stream.numFollowers}
-                                        streamerBanner={stream.user.avatarUrl}
+                                        streamerPreview={stream.user.avatarUrl}
                                         streamerStatus={stream.name}
                                         streamURL={'https://mixer.com/' + stream.token}
                                         streamBanner={stream.bannerUrl}

@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     modalImage: {
-        bacgkroundColor: `darkslategray`,
+        backgroundColor: `darkslategray`,
         height: 500,
         width: 300
     },

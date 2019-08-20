@@ -1,16 +1,14 @@
 import React from "react";
-import { Image, Text, View, StyleSheet, TouchableHighlight, ImageBackground, Linking } from 'react-native';
+import { Image, Text, View, StyleSheet, TouchableHighlight, Linking } from 'react-native';
 
 export default class TwitchCom extends React.Component {
         render() {
             let pic = {
-                uri: this.props.streamerBanner
+                uri: this.props.streamerPreview
               };
             return(
                 <TouchableHighlight style={styles.card} onPress={ ()=>{ Linking.openURL(this.props.streamURL)}} underlayColor="rgb(1, 0, 96)">
                     <View style={styles.cardcontainer}>
-                        <ImageBackground source={{uri: this.props.streamPreview}} style={{width: '100%', height: '100%', opacity: 4, position: 'absolute'}}>
-                        </ImageBackground>
                         <View style={styles.subcontainer}>
                             <View style={styles.thumbcontainer}>
                                 <Image
@@ -21,7 +19,7 @@ export default class TwitchCom extends React.Component {
                             <View style={styles.cardtext}>
                                 <Text style={styles.title}>Watch {this.props.streamerName} streaming {this.props.streamedGame}</Text>
                                 <Text style={styles.description}>{this.props.streamerStatus}</Text>
-                                <Text style={styles.info}>Followers: {this.props.streamerFollowers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
+                                <Text style={styles.info}>Current Viewers: {this.props.streamerFollowers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
                             </View>
                         </View>
                     </View>
@@ -38,7 +36,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     }, 
     card: {
-        backgroundColor: 'rgb(1, 0, 64)' || this.props.streamerBackgroundColor,
+        backgroundColor: 'rgb(1, 0, 64)',
         height: `auto`,
         margin: 4,
         padding: 5,
