@@ -147,7 +147,7 @@ export default class HomeScreen extends React.Component {
                     snapToAlignment="center" 
                     indicatorStyle="white" 
                   >
-                    {this.state.streams.map(stream => ( 
+                    {this.state.streams.length > 0 ? this.state.streams.map(stream => ( 
                       <TwitchCom 
                       streamerName={stream.user_name}
                       streamerFollowers={stream.viewer_count}
@@ -155,7 +155,7 @@ export default class HomeScreen extends React.Component {
                       streamURL={"https://www.twitch.tv/" + stream.user_name}
                       streamerPreview={stream.thumbnail_url.slice(0, -21) + ".jpg"}
                       />
-                    ))}
+                    )): null}
                     </ScrollView>
                     <Text style={styles.scrollinst}>« Swipe left and right to browse streams »</Text>
                   </View>
@@ -177,7 +177,7 @@ export default class HomeScreen extends React.Component {
                     snapToAlignment="center" 
                     indicatorStyle="white" 
                   >
-                    {this.state.mixerResults.map(stream => ( 
+                    {this.state.mixerResults.length > 0 ? this.state.mixerResults.map(stream => ( 
                       <TwitchCom 
                         streamedGame={stream.type.name}
                         streamerName={stream.user.username}
@@ -187,14 +187,14 @@ export default class HomeScreen extends React.Component {
                         streamURL={'https://mixer.com/' + stream.token}
                         streamBanner={stream.type.backgroundUrl}
                       />
-                    ))}
+                    )) : null}
                     </ScrollView>
                     <Text style={styles.scrollinst}>« Swipe left and right to browse streams »</Text>
                   </View>
 
 
                   <Text style={styles.text}>Aggregated News</Text>
-                  {this.state.article.map(article => (
+                  {this.state.article.length > 0 ? this.state.article.map(article => (
                   <ArticleCard
                       cardhead={article.title}
                       cardauthor={article.author}
@@ -203,7 +203,7 @@ export default class HomeScreen extends React.Component {
                       source={article.source.name}
                       pic={article.urlToImage}
                   />
-                  ))} 
+                  )): null} 
               </View>  
               </ScrollView>
               <Footer 
