@@ -35,7 +35,7 @@ export default class AboutScreen extends Component {
                 Firebase.signupInfo.username = this.state.userName
                 Firebase.signupInfo.password = this.state.password
                 try {
-                    await firebase.auth().createUserWithEmailAndPassword(Firebase.signupInfo.email, Firebase.signupInfo.password)
+                    await Firebase.auth.createUserWithEmailAndPassword(Firebase.signupInfo.email, Firebase.signupInfo.password)
                     Firebase.auth.onAuthStateChanged( async (user) => {
                         if (user) {
                             await AsyncStorage.setItem('user', JSON.stringify(user));
