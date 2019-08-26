@@ -12,7 +12,7 @@ import LoginScreen from "../LoginScreen/LoginScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
 import SignupScreen from "../SignupScreen/SignupScreen";
 import Firebase from '../LoginScreen/firebase';
-
+import Divider from '../Divider/Divider';
 
 export default class HomeScreen extends React.Component {
 
@@ -118,81 +118,88 @@ export default class HomeScreen extends React.Component {
   
   render() {
     return (
-      <View style={{ backgroundColor: "#363534"}}>
+      <View style={{ flex: 1, backgroundColor: "#363534"}}>
               <ScrollView 
                 keyboardShouldPersistTaps='always'     
                 ref = 'mainScroll'
-                style={{marginBottom: 50}}
               >
                   <AutoCompleteBar
                     getSearchResults={this.getSearchResults}
                     getSuggestion={this.getSuggestion}
                   />
+                <View style={{marginTop: 100}}>
+                <Divider color='#545251'/>
 
-                <View style={{marginTop: 95}}>
-                  <Text style={styles.text}>Top Twitch Streams</Text>
-                  <View                       
-                    style={{
-                      backgroundColor: '#545251', 
-                      paddingTop: 2, 
-                      paddingBottom: 4,
-                      borderBottomColor: 'rgb(1, 0, 96)',
-                      borderBottomWidth: 2
-                    }}
-                  >
-                  <ScrollView 
-                    horizontal="true" 
-                    persistentScrollbar={true}
-                    snapToInterval={358} 
-                    snapToAlignment="center" 
-                    indicatorStyle="white" 
-                  >
-                    {this.state.streams.length > 0 ? this.state.streams.map(stream => ( 
-                      <TwitchCom 
-                      streamerName={stream.user_name}
-                      streamerFollowers={stream.viewer_count}
-                      streamerStatus={stream.title}
-                      streamURL={"https://www.twitch.tv/" + stream.user_name}
-                      streamerPreview={stream.thumbnail_url.slice(0, -21) + ".jpg"}
-                      />
-                    )): null}
-                    </ScrollView>
-                    <Text style={styles.scrollinst}>« Swipe left and right to browse streams »</Text>
+                  <View>
+                    <Text style={styles.text}>Top Twitch Streams</Text>
+                    <View                       
+                      style={{
+                        backgroundColor: '#545251', 
+                        paddingTop: 2, 
+                        paddingBottom: 4,
+                        borderBottomColor: 'rgb(1, 0, 96)',
+                        borderBottomWidth: 2
+                      }}
+                    >
+                    <ScrollView 
+                      horizontal="true" 
+                      persistentScrollbar={true}
+                      snapToInterval={358} 
+                      snapToAlignment="center" 
+                      indicatorStyle="white" 
+                    >
+                      {this.state.streams.length > 0 ? this.state.streams.map(stream => ( 
+                        <TwitchCom 
+                        streamerName={stream.user_name}
+                        streamerFollowers={stream.viewer_count}
+                        streamerStatus={stream.title}
+                        streamURL={"https://www.twitch.tv/" + stream.user_name}
+                        streamerPreview={stream.thumbnail_url.slice(0, -21) + "-640x320.jpg"}
+                        />
+                      )): null}
+                      </ScrollView>
+                      <Text style={styles.scrollinst}>« Swipe left and right to browse streams »</Text>
+                    </View>
                   </View>
 
-                  <Text style={styles.text}>Top Mixer Streams</Text>
-                  <View                       
-                    style={{
-                      backgroundColor: '#545251', 
-                      paddingTop: 2, 
-                      paddingBottom: 4,
-                      borderBottomColor: 'rgb(1, 0, 96)',
-                      borderBottomWidth: 2
-                    }}
-                  >
-                  <ScrollView 
-                    horizontal="true" 
-                    persistentScrollbar={true}
-                    snapToInterval={358} 
-                    snapToAlignment="center" 
-                    indicatorStyle="white" 
-                  >
-                    {this.state.mixerResults.length > 0 ? this.state.mixerResults.map(stream => ( 
-                      <TwitchCom 
-                        streamedGame={stream.type.name}
-                        streamerName={stream.user.username}
-                        streamerFollowers={stream.numFollowers}
-                        streamerPreview={stream.user.avatarUrl}
-                        streamerStatus={stream.name}
-                        streamURL={'https://mixer.com/' + stream.token}
-                        streamBanner={stream.type.backgroundUrl}
-                      />
-                    )) : null}
-                    </ScrollView>
-                    <Text style={styles.scrollinst}>« Swipe left and right to browse streams »</Text>
+                  <Divider color='#545251'/>
+
+                  <View>
+                    <Text style={styles.text}>Top Mixer Streams</Text>
+                    <View                       
+                      style={{
+                        backgroundColor: '#545251', 
+                        paddingTop: 2, 
+                        paddingBottom: 4,
+                        borderBottomColor: 'rgb(1, 0, 96)',
+                        borderBottomWidth: 2
+                      }}
+                    >
+                    <ScrollView 
+                      horizontal="true" 
+                      persistentScrollbar={true}
+                      snapToInterval={358} 
+                      snapToAlignment="center" 
+                      indicatorStyle="white" 
+                    >
+                      {this.state.mixerResults.length > 0 ? this.state.mixerResults.map(stream => ( 
+                        <TwitchCom 
+                          streamedGame={stream.type.name}
+                          streamerName={stream.user.username}
+                          streamerFollowers={stream.numFollowers}
+                          streamerPreview={stream.user.avatarUrl}
+                          streamerStatus={stream.name}
+                          streamURL={'https://mixer.com/' + stream.token}
+                          streamBanner={stream.type.backgroundUrl}
+                        />
+                      )) : null}
+                      </ScrollView>
+                      <Text style={styles.scrollinst}>« Swipe left and right to browse streams »</Text>
+                    </View>
                   </View>
 
-
+                  <Divider color='#545251'/>
+                  
                   <Text style={styles.text}>Aggregated News</Text>
                   {this.state.article.length > 0 ? this.state.article.map(article => (
                   <ArticleCard
@@ -240,15 +247,22 @@ export default class HomeScreen extends React.Component {
     text: {
       fontWeight: `bold`,
       color: `skyblue`,
-      marginLeft: 4,
-      fontSize: 18,
-      marginTop: 2
+      marginLeft: 6,
+      fontSize: 20,
+      marginBottom: 2,
+      textShadowColor: `#000`,
+      textShadowRadius: 2,
+      textShadowOffset: {
+          height: 2,
+          width: 1,
+      }
     },
     scrollinst: {
       fontStyle: `italic`,
       fontSize: 10,
       color: `lightgray`,
       paddingVertical: 1,
+      marginVertical: 1,
       marginLeft: 4
     }
   })

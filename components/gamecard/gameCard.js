@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, Text, View, Modal, TouchableOpacity } from 'react-native';
+import Divider from "../Divider/Divider";
 
 export default class GameCard extends React.Component {
     state = {
@@ -27,6 +28,9 @@ export default class GameCard extends React.Component {
                         <Text style={styles.title}>{this.props.title}</Text>
                         <Text style={styles.info}>Platforms: {this.props.platforms}</Text>
                         <Text style={styles.info}>Release Date: {this.props.releasedate}</Text>
+
+                        <Divider color='rgb(6, 5, 72)'/>
+
                         <Text style={styles.description}>{this.props.description}</Text>
                     </View>
                 </View> 
@@ -85,7 +89,7 @@ const styles = StyleSheet.create({
         fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
         color:`white`,
         fontWeight: `bold`,
-        fontSize: 16,
+        fontSize: 18,
     },
     info: {
         fontWeight: `100`,

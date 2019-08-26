@@ -1,7 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, TouchableHighlight, Text, View, Linking } from 'react-native';
-
-
+import Divider from "../Divider/Divider";
 
 export default class ArticleCard extends React.Component {
     everyOther = (index) => {
@@ -25,6 +24,7 @@ export default class ArticleCard extends React.Component {
                     <View style={styles.articletext}>
                         <Text style={styles.cardHead}>{this.props.cardhead}</Text>
                         <Text style={styles.cardSubhead}>By {this.props.cardauthor} for {this.props.source}</Text>
+                        <Divider color='rgb(6, 5, 72)'/>
                         <Text style={styles.cardBody}>{this.props.cardbody}</Text>
                     </View>
                 </View>
@@ -64,7 +64,8 @@ const styles = StyleSheet.create({
     cardSubhead: {
         fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
         color:`rgb(135, 206, 250)`,
-        fontSize: 12
+        fontSize: 12,
+        fontStyle: 'italic'
     },
     cardBody: {
         color:`rgb(135, 206, 250)`,

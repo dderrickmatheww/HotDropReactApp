@@ -92,7 +92,9 @@ export default class AutoCompleteBar extends Component {
                         </TouchableOpacity>
                     )}
                 />
-                <Button title='DEPLOY!' style={styles.searchbutton} color='rgb(1, 0, 96)' onPress={() => this.props.getSearchResults(this.state.query)}/>
+                <View style={styles.searchButton}>
+                    <Button title='DEPLOY!'  color='rgb(1, 0, 96)' onPress={() => this.props.getSearchResults(this.state.query)}/>
+                </View>
             </View>
         )
     }
@@ -121,7 +123,7 @@ const styles = StyleSheet.create({
     itemTouch:{
         padding: 2,
         backgroundColor: `darkslategray`,
-        flex: 1,
+        flex: 1
     },
     viewcontainer: {
         flexDirection: `row`
@@ -153,5 +155,8 @@ const styles = StyleSheet.create({
         textShadowOffset: {
             height: 1
         }
+    },
+    searchButton: {
+        marginTop: 1
     }
 });

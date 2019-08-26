@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
         color:`white`,
         fontWeight: `bold`,
         fontSize: 16,
+        marginBottom: 5,
         flexWrap: 'wrap',
         textShadowColor: `#000`,
         textShadowRadius: 2,

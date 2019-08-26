@@ -296,13 +296,13 @@ import Firebase from '../LoginScreen/firebase';
                                 { 
                                     this.state.MIXtoggle ? this.state.mixerResults.map(stream => ( 
                                         <TwitchCom 
-                                        streamedGame={this.state.searchResults.name}
-                                        streamerName={stream.user.username}
-                                        streamerFollowers={stream.numFollowers}
-                                        streamerPreview={stream.user.avatarUrl}
-                                        streamerStatus={stream.name}
-                                        streamURL={'https://mixer.com/' + stream.token}
-                                        streamBanner={stream.bannerUrl}
+                                            streamedGame={this.state.searchResults.name}
+                                            streamerName={stream.user.username}
+                                            streamerFollowers={stream.numFollowers}
+                                            streamerPreview={stream.user.avatarUrl}
+                                            streamerStatus={stream.name}
+                                            streamURL={'https://mixer.com/' + stream.token}
+                                            streamBanner={stream.bannerUrl}
                                         />
                                     )) : null
                                 }
