@@ -1,10 +1,20 @@
 import React from "react";
 import { Image, StyleSheet, TouchableHighlight, Text, View, Linking } from 'react-native';
 
+
+
 export default class ArticleCard extends React.Component {
+    everyOther = (index) => {
+        if (index % 2 === 0) {
+            return `rgb(1, 0, 24)`
+        } else {
+            return `rgb(1, 0, 42)`
+        }
+    }
+
     render() {
         return (
-            <TouchableHighlight style={styles.card} onPress={ ()=>{ Linking.openURL(this.props.link)}} underlayColor="rgb(0, 0, 128)">
+            <TouchableHighlight style={[styles.card, {backgroundColor: this.everyOther(this.props.index)}]} onPress={ ()=>{ Linking.openURL(this.props.link)}} underlayColor="rgb(1, 0, 96)">
                 <View style={styles.cardcontainer}>
                     <View style={styles.thumbcontainer}>
                         <Image
@@ -28,12 +38,12 @@ const styles = StyleSheet.create({
         flexDirection: `row`,
     },
     card: {
-        backgroundColor: `rgb(1, 0, 24)`,
         height: `auto`,
-        margin: 3,
+        margin: 2,
+        marginTop: 1,
+        marginBottom: 0,
         padding: 5,
         borderRadius: 3,
-        borderBottomRightRadius: 25,
         borderColor: `darkslategray`,
         borderWidth: 0.66,
         shadowColor: "#000",
@@ -47,7 +57,7 @@ const styles = StyleSheet.create({
     },
     cardHead: {
         fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
-        color:`rgb(135, 206, 250)`,
+        color:`white`,
         fontWeight: `bold`,
         fontSize: 16,
     },
@@ -57,12 +67,12 @@ const styles = StyleSheet.create({
         fontSize: 12
     },
     cardBody: {
-        color:`white`,
-        fontSize: 12
+        color:`rgb(135, 206, 250)`,
+        fontSize: 12,
     },
     articlethumb: {
         width: 100,
-        height: 100,
+        height: 150,
         borderColor: `rgb(2, 0, 144)`,
         borderWidth: 1,
         marginRight: 5,

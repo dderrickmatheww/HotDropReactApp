@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
         margin: 3,
         padding: 5,
         borderRadius: 3,
-        borderBottomRightRadius: 25,
         borderColor: `darkslategray`,
         borderWidth: 0.66,
         flexDirection: `row`,
@@ -84,7 +83,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
-        color:`rgb(135, 206, 250)`,
+        color:`white`,
         fontWeight: `bold`,
         fontSize: 16,
     },
@@ -94,7 +93,7 @@ const styles = StyleSheet.create({
         fontSize: 10,
     },
     description: {
-        color:`white`,
+        color:`rgb(135, 206, 250)`,
         fontSize: 12,
     },
     bottom: {

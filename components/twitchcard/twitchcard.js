@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
-        color:`rgb(135, 206, 250)`,
+        color:`white`,
         fontWeight: `bold`,
         fontSize: 16,
         flexWrap: 'wrap',
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     },
     info: {
         fontWeight: `100`,
-        color: `white`,
+        color:`rgb(135, 206, 250)`,
         fontSize: 10,
         textShadowColor: `#000`,
         textShadowRadius: 2,
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         }
     },
     description: {
-        color:`white`,
+        color:`rgb(135, 206, 250)`,
         fontSize: 12,
         textShadowColor: `#000`,
         textShadowRadius: 2,
@@ -126,7 +126,6 @@ const styles = StyleSheet.create({
         padding: 4,
         margin: 2,
         borderRadius: 3,
-        backgroundColor: `rgba(1, 0, 24, 0.7)`
     }
 
 })

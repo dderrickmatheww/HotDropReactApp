@@ -202,6 +202,7 @@ export default class HomeScreen extends React.Component {
                       link={article.url}
                       source={article.source.name}
                       pic={article.urlToImage}
+                      index={this.state.article.indexOf(article)}
                   />
                   )): null} 
               </View>  
