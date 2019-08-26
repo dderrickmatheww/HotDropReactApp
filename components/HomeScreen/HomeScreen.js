@@ -30,7 +30,7 @@ export default class HomeScreen extends React.Component {
   loadTwitchNewsAndMixer = async () => {
     let month = new Date().getMonth() + 1; 
     let year = new Date().getFullYear();
-    let url ="https://newsapi.org/v2/top-headlines?sources=ign,polygon&from=" + year + "-" + month +"&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15"
+    let url ="https://newsapi.org/v2/everything?sources=polygon&from=" + year + "-" + month +"&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15"
     fetch(url)
     .then( response => {
         response.json().then( data => {
@@ -198,7 +198,7 @@ export default class HomeScreen extends React.Component {
                   <ArticleCard
                       cardhead={article.title}
                       cardauthor={article.author}
-                      cardbody={article.content}
+                      cardbody={article.description}
                       link={article.url}
                       source={article.source.name}
                       pic={article.urlToImage}

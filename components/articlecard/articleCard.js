@@ -4,7 +4,7 @@ import { Image, StyleSheet, TouchableHighlight, Text, View, Linking } from 'reac
 export default class ArticleCard extends React.Component {
     render() {
         return (
-            <TouchableHighlight style={styles.card} onPress={ ()=>{ Linking.openURL(this.props.link)}} underlayColor="rgb(1, 0, 64)">
+            <TouchableHighlight style={styles.card} onPress={ ()=>{ Linking.openURL(this.props.link)}} underlayColor="rgb(0, 0, 128)">
                 <View style={styles.cardcontainer}>
                     <View style={styles.thumbcontainer}>
                         <Image
@@ -30,12 +30,12 @@ const styles = StyleSheet.create({
     card: {
         backgroundColor: `rgb(1, 0, 24)`,
         height: `auto`,
-        margin: 4,
+        margin: 3,
         padding: 5,
         borderRadius: 3,
         borderBottomRightRadius: 25,
         borderColor: `darkslategray`,
-        borderWidth: 1,
+        borderWidth: 0.66,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -49,12 +49,12 @@ const styles = StyleSheet.create({
         fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
         color:`rgb(135, 206, 250)`,
         fontWeight: `bold`,
-        fontSize: 18,
+        fontSize: 16,
     },
     cardSubhead: {
         fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
         color:`rgb(135, 206, 250)`,
-        fontSize: 14
+        fontSize: 12
     },
     cardBody: {
         color:`white`,

@@ -17,9 +17,11 @@ export default class TwitchCom extends React.Component {
                                 />
                             </View>
                             <View style={styles.cardtext}>
-                                <Text style={styles.title}>Watch {this.props.streamerName} streaming {this.props.streamedGame}</Text>
+                                {this.props.streamedGame ? 
+                                <Text style={styles.title}>{this.props.streamerName} is playing {this.props.streamedGame} </Text> 
+                                : <Text style={styles.title}>{this.props.streamerName}</Text>} 
                                 <Text style={styles.description}>{this.props.streamerStatus}</Text>
-                                <Text style={styles.info}>Current Viewers: {this.props.streamerFollowers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
+                                <Text style={styles.info}>{this.props.streamerFollowers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} currently watching</Text>
                             </View>
                         </View>
                     </View>
@@ -42,7 +44,7 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 3,
         borderColor: `rgb(1, 0, 128)`,
-        borderWidth: 1,
+        borderWidth: 0.6,
         width: 350,
         shadowColor: "#000",
         shadowOffset: {
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
     },
     info: {
         fontWeight: `100`,
-        color:`rgb(135, 206, 250)`,
+        color: `white`,
         fontSize: 10,
         textShadowColor: `#000`,
         textShadowRadius: 2,
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
         }
     },
     description: {
-        color:`rgb(135, 206, 250)`,
+        color:`white`,
         fontSize: 12,
         textShadowColor: `#000`,
         textShadowRadius: 2,
@@ -106,8 +108,8 @@ const styles = StyleSheet.create({
     gamelogo: {
         width: 100,
         height: 150,
-        borderColor: `rgb(1, 0, 218)`,
-        borderWidth: 2
+        borderColor: `rgb(1, 0, 128)`,
+        borderWidth: 1
     },
     thumbcontainer: {
         shadowColor: `#fff`,
@@ -124,7 +126,7 @@ const styles = StyleSheet.create({
         padding: 4,
         margin: 2,
         borderRadius: 3,
-        backgroundColor: `rgba(1, 0, 24, 0.4)`
+        backgroundColor: `rgba(1, 0, 24, 0.7)`
     }
 
 })

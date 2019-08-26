@@ -92,7 +92,7 @@ export default class AutoCompleteBar extends Component {
                         </TouchableOpacity>
                     )}
                 />
-                <Button title='DEPLOY!' style={styles.searchbutton} color='rgb(1, 0, 64)' onPress={() => this.props.getSearchResults(this.state.query)}/>
+                <Button title='DEPLOY!' style={styles.searchbutton} color='rgb(1, 0, 96)' onPress={() => this.props.getSearchResults(this.state.query)}/>
             </View>
         )
     }

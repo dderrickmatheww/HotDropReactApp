@@ -66,12 +66,12 @@ const styles = StyleSheet.create({
     card: {
         backgroundColor: `rgb(1, 0, 24)`,
         height: `auto`,
-        margin: 4,
+        margin: 3,
         padding: 5,
         borderRadius: 3,
         borderBottomRightRadius: 25,
         borderColor: `darkslategray`,
-        borderWidth: 1,
+        borderWidth: 0.66,
         flexDirection: `row`,
         shadowColor: "#000",
         shadowOffset: {
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
         color:`rgb(135, 206, 250)`,
         fontWeight: `bold`,
-        fontSize: 20,
+        fontSize: 16,
     },
     info: {
         fontWeight: `100`,
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         padding: 5,
         fontSize: 14,
         borderRadius: 2,
-        marginRight: 5,
+        marginRight: 4,
         bottom: 0
     },
     bottombuttontext: {
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     modalImage: {
-        backgroundColor: `darkslategray`,
+        backgroundColor: `transparent`,
         height: 500,
         width: 300
     },
