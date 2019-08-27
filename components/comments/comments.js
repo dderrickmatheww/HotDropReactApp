@@ -83,18 +83,18 @@ export default class commentsCom extends Component {
                 <Text style={styles.commentinst}>Have something to say? Post a comment below ↴ </Text>
                 <KeyboardAvoidingView enabled> 
                     <TextInput
-                        style={{marginBottom: 15, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
+                        style={{marginBottom: 15, backgroundColor: `rgb(76, 82, 88)`, borderColor: `rgb(206, 212, 218)`, borderBottomWidth: 1, color: 'white'}}
                         placeholder="Your name"
-                        placeholderTextColor="darkslategray"
+                        placeholderTextColor="gray"
                         onChangeText={(text) => this.setState({author: text})}
                         returnKeyType = { "next" }
                         onSubmitEditing={() => { this.secondTextInput.focus(); }}
                         ref={(input) => { this.firstTextInput = input; }}
                     />
                     <TextInput
-                        style={{marginBottom: 15, textAlignVertical: "top", backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
+                        style={{marginBottom: 15, textAlignVertical: "top", backgroundColor: `rgb(76, 82, 88)`, borderColor: `rgb(206, 212, 218)`, borderBottomWidth: 1, color: 'white'}}
                         placeholder="What do you have to say?"
-                        placeholderTextColor="darkslategray"
+                        placeholderTextColor="gray"
                         ref={(input) => { this.secondTextInput = input; }}
                         multiline = {true}
                         numberOfLines = {4}
@@ -105,7 +105,6 @@ export default class commentsCom extends Component {
                         title="Post"
                         color='rgb(1, 0, 64)'
                         onPress={this.postComment}
-                        style={{marginBottom: 15}}
                     />
                 </KeyboardAvoidingView>
                 <View style={styles.container}>
@@ -165,14 +164,25 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#363534',
         height: `100%`,
+        marginBottom: 15
     },
     commentheader: {
         marginTop: 10, 
-        marginBottom: 1, 
-        textDecorationLine: 'underline', 
         color: 'skyblue', 
-        fontSize: 14,
-        fontWeight: `bold`
+        fontWeight: `bold`,
+        fontSize: 20,
+        marginBottom: 2,
+        paddingHorizontal: 7,
+        paddingBottom: 2,
+        textShadowColor: `#000`,
+        textShadowRadius: 2,
+        textShadowOffset: {
+            height: 2,
+            width: 1,
+        },
+        backgroundColor: 'darkslategray',
+        borderRadius: 15,
+        alignSelf: 'flex-start'
     },
     commentcontainer: {
         borderWidth: 0.5,
@@ -182,8 +192,13 @@ const styles = StyleSheet.create({
     commentinst: {
         marginTop: 20,
         marginBottom: 20, 
+        fontFamily:`sans-serif-thin`,
+        fontStyle: `italic`,
         fontSize: 12,
-        color: 'skyblue'
+        color: `lightgray`,
+        paddingVertical: 1,
+        marginVertical: 1,
+        marginLeft: 4
     },
     container: {
          backgroundColor: 'gray',
