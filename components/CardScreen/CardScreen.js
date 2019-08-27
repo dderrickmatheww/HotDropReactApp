@@ -6,6 +6,7 @@ import YoutubeCom from '../youtubecard/youtubecard';
 import ArticleCard from '../articlecard/articleCard';
 import CommentsCom from '../comments/comments';
 import Firebase from '../LoginScreen/firebase';
+import Divider from '../Divider/Divider';
 
     export default class CardScreen extends React.Component {
 
@@ -274,6 +275,9 @@ import Firebase from '../LoginScreen/firebase';
                         picture={this.state.pic.medium_url}
                         modal={this.state.pic.original_url}
                     />
+                    
+                    <Divider color='#545251'/>
+
                     <View style={styles.bottom}>
                              <TouchableOpacity onPress={this.NWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top News for {this.state.searchResults.name} </Text></TouchableOpacity>
                                 {
@@ -306,6 +310,8 @@ import Firebase from '../LoginScreen/firebase';
                                         />
                                     )) : null
                                 }
+
+                            <Divider color='#545251'/>
 
                             <CommentsCom game={this.props.navigation.getParam('text', '')} navigate={this.props.navigation} />
                     </View>

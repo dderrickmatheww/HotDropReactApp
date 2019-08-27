@@ -127,7 +127,10 @@ export default class HomeScreen extends React.Component {
                     getSearchResults={this.getSearchResults}
                     getSuggestion={this.getSuggestion}
                   />
-                <View style={{marginTop: 100}}>
+
+
+                <View style={{marginTop: 95}}>
+
                 <Divider color='#545251'/>
 
                   <View>
@@ -247,17 +250,23 @@ export default class HomeScreen extends React.Component {
     text: {
       fontWeight: `bold`,
       color: `skyblue`,
-      marginLeft: 6,
+      marginLeft: 7,
       fontSize: 20,
       marginBottom: 2,
+      paddingHorizontal: 7,
+      paddingBottom: 2,
       textShadowColor: `#000`,
       textShadowRadius: 2,
       textShadowOffset: {
           height: 2,
           width: 1,
-      }
+      },
+      backgroundColor: 'darkslategray',
+      borderRadius: 15,
+      alignSelf: 'flex-start'
     },
     scrollinst: {
+      fontFamily:`sans-serif-thin`,
       fontStyle: `italic`,
       fontSize: 10,
       color: `lightgray`,

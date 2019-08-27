@@ -18,10 +18,17 @@ export default class TwitchCom extends React.Component {
                             </View>
                             <View style={styles.cardtext}>
                                 {this.props.streamedGame ? 
-                                <Text style={styles.title}>{this.props.streamerName} is playing {this.props.streamedGame} </Text> 
+                                <Text style={styles.title}>
+                                    {this.props.streamerName} 
+                                    <Text style={{fontSize: 15, color:'rgb(135, 206, 250)', fontWeight: '400'}}> is playing </Text> 
+                                    {this.props.streamedGame} 
+                                </Text> 
                                 : <Text style={styles.title}>{this.props.streamerName}</Text>} 
                                 <Text style={styles.description}>{this.props.streamerStatus}</Text>
-                                <Text style={styles.info}>{this.props.streamerFollowers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} currently watching</Text>
+                                <Text style={styles.info}> 
+                                    &#128065; {this.props.streamerFollowers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                    <Text style={{fontFamily: 'sans-serif-light'}}> currently watching </Text>
+                                </Text>
                             </View>
                         </View>
                     </View>
@@ -56,8 +63,8 @@ const styles = StyleSheet.create({
         elevation: 4,
     },
     title: {
-        fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
         color:`white`,
+        fontFamily: 'sans-serif-medium',
         fontWeight: `bold`,
         fontSize: 16,
         marginBottom: 5,
@@ -70,7 +77,6 @@ const styles = StyleSheet.create({
         }
     },
     info: {
-        fontWeight: `100`,
         color:`rgb(135, 206, 250)`,
         fontSize: 10,
         textShadowColor: `#000`,

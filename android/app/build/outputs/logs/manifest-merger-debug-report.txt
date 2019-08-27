@@ -5,6 +5,7 @@ INJECTED from C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\src\main\
 INJECTED from C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\src\main\AndroidManifest.xml:1:1-26:12
 INJECTED from C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\src\main\AndroidManifest.xml:1:1-26:12
 MERGED from C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\src\main\AndroidManifest.xml:1:1-26:12
+MERGED from [:react-native-svg] C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\node_modules\react-native-svg\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-webview] C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-23:12
 MERGED from [:react-native-gesture-handler] C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\RB\.gradle\caches\transforms-2\files-2.1\d6c656c76a4ff7e6ac49339aad8ee99a\react-native-0.59.8\AndroidManifest.xml:2:1-13:12
@@ -133,6 +134,8 @@ uses-sdk
 INJECTED from C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\src\main\AndroidManifest.xml
 INJECTED from C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\android\app\src\main\AndroidManifest.xml
+MERGED from [:react-native-svg] C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\node_modules\react-native-svg\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-svg] C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\node_modules\react-native-svg\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-webview] C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-webview] C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] C:\Users\RB\Desktop\Bootcamp\HotDropReactApp\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41

@@ -86,17 +86,19 @@ const styles = StyleSheet.create({
         elevation: 4,
     },
     title: {
-        fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
-        color:`white`,
+        fontFamily: "sans-serif-medium",
+        color:`lightskyblue`,
         fontWeight: `bold`,
         fontSize: 18,
     },
     info: {
+        fontStyle: 'italic',
         fontWeight: `100`,
         color:`rgb(135, 206, 250)`,
         fontSize: 10,
     },
     description: {
+        fontFamily:`sans-serif-light`,
         color:`rgb(135, 206, 250)`,
         fontSize: 12,
     },
@@ -119,7 +121,7 @@ const styles = StyleSheet.create({
     gamelogo: {
         width: 100,
         height: 150,
-        borderColor: `rgb(2, 0, 144)`,
+        borderColor: `darkslategray`,
         borderWidth: 1,
         marginRight: 5,
     },

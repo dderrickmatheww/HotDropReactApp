@@ -7,13 +7,13 @@ export default class ArticleCard extends React.Component {
         if (index % 2 === 0) {
             return `rgb(1, 0, 24)`
         } else {
-            return `rgb(1, 0, 42)`
+            return `rgb(1, 0, 48)`
         }
     }
 
     render() {
         return (
-            <TouchableHighlight style={[styles.card, {backgroundColor: this.everyOther(this.props.index)}]} onPress={ ()=>{ Linking.openURL(this.props.link)}} underlayColor="rgb(1, 0, 96)">
+            <TouchableHighlight style={[styles.card, {backgroundColor: this.everyOther(this.props.index)}]} onPress={ ()=>{ Linking.openURL(this.props.link)}} underlayColor="rgb(1, 15, 96)">
                 <View style={styles.cardcontainer}>
                     <View style={styles.thumbcontainer}>
                         <Image
@@ -23,7 +23,7 @@ export default class ArticleCard extends React.Component {
                     </View>
                     <View style={styles.articletext}>
                         <Text style={styles.cardHead}>{this.props.cardhead}</Text>
-                        <Text style={styles.cardSubhead}>By {this.props.cardauthor} for {this.props.source}</Text>
+                        <Text style={styles.cardSubhead}>By <Text style={{fontWeight: 'bold'}}>{this.props.cardauthor}</Text> for <Text style={{fontWeight: 'bold'}}>{this.props.source}</Text></Text>
                         <Divider color='rgb(6, 5, 72)'/>
                         <Text style={styles.cardBody}>{this.props.cardbody}</Text>
                     </View>
@@ -56,25 +56,26 @@ const styles = StyleSheet.create({
         elevation: 4,
     },
     cardHead: {
-        fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
-        color:`white`,
+        fontFamily: 'sans-serif-medium',
+        color:`lightskyblue`,
         fontWeight: `bold`,
         fontSize: 16,
     },
     cardSubhead: {
-        fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
+        fontFamily:`sans-serif-light`,
         color:`rgb(135, 206, 250)`,
         fontSize: 12,
         fontStyle: 'italic'
     },
     cardBody: {
+        fontFamily:`sans-serif-light`,
         color:`rgb(135, 206, 250)`,
         fontSize: 12,
     },
     articlethumb: {
         width: 100,
         height: 150,
-        borderColor: `rgb(2, 0, 144)`,
+        borderColor: `darkslategray`,
         borderWidth: 1,
         marginRight: 5,
     },
