@@ -12,7 +12,7 @@ import Divider from '../Divider/Divider';
 
         static navigationOptions = ({ navigation }) => {
             return {
-              title: navigation.getParam('text') ? navigation.getParam('text') : navigation.getParam('name'),
+              title: navigation.getParam('text') ? "\"" + navigation.getParam('text') + "\"": navigation.getParam('name'),
               headerStyle: {
                 backgroundColor: 'rgb(1, 0, 24)',
               },
@@ -281,7 +281,7 @@ import Divider from '../Divider/Divider';
                     <View style={styles.bottom}>
                              <TouchableOpacity onPress={this.NWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top News for {this.state.searchResults.name} </Text></TouchableOpacity>
                                 {
-                                    this.state.NWtoggle ?  this.state.gameArticles.map(article => (<ArticleCard  cardhead={article.title} cardauthor={article.author} cardbody={article.content} link={article.url} source={article.source.name} pic={article.urlToImage}/> )) : null
+                                    this.state.NWtoggle ?  this.state.gameArticles.map(article => (<ArticleCard  cardhead={article.title} cardauthor={article.author} cardbody={article.description} link={article.url} source={article.source.name} pic={article.urlToImage} index={this.state.gameArticles.indexOf(article)}/> )) : null
                                 }
                              <TouchableOpacity onPress={this.YTtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> YouTube Trailer for {this.state.searchResults.name} </Text></TouchableOpacity>
                                 {
@@ -294,7 +294,7 @@ import Divider from '../Divider/Divider';
                                     streamerFollowers={stream.viewer_count}
                                     streamerStatus={stream.title}
                                     streamURL={"https://www.twitch.tv/" + stream.user_name}
-                                    streamerPreview={stream.thumbnail_url.slice(0, -21) + ".jpg"} /> )) : null
+                                    streamerPreview={stream.thumbnail_url.slice(0, -21) + "-640x360.jpg"} /> )) : null
                                 }
                             <TouchableOpacity onPress={this.MIXtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top Mixer streams for {this.state.searchResults.name} </Text></TouchableOpacity>
                                 { 

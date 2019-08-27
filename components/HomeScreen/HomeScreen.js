@@ -157,7 +157,7 @@ export default class HomeScreen extends React.Component {
                         streamerFollowers={stream.viewer_count}
                         streamerStatus={stream.title}
                         streamURL={"https://www.twitch.tv/" + stream.user_name}
-                        streamerPreview={stream.thumbnail_url.slice(0, -21) + "-640x320.jpg"}
+                        streamerPreview={stream.thumbnail_url.slice(0, -21) + "-640x360.jpg"}
                         />
                       )): null}
                       </ScrollView>

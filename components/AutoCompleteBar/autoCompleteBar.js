@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: `white`,
         fontWeight: `bold`,
-        backgroundColor: `rgb(68, 74, 80)`,
+        backgroundColor: `rgb(76, 82, 88)`,
         borderColor: `rgb(206, 212, 218)`
     },
     itemTouch:{
