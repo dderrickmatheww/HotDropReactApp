@@ -15,22 +15,26 @@ export default class GameCard extends React.Component {
         return(
             <View>
                 <View style={styles.card}>
-                    <TouchableOpacity 
-                        style={styles.thumbcontainer}
-                        onPress={() => this.setState({isVisible: true})}
-                    >
-                        <Image
-                            style={styles.gamelogo}
-                            source={{ uri: this.props.picture }}
-                        />
-                    </TouchableOpacity>
-                    <View style={styles.cardtext}>
-                        <Text style={styles.title}>{this.props.title}</Text>
-                        <Text style={styles.info}>Platforms: {this.props.platforms}</Text>
-                        <Text style={styles.info}>Release Date: {this.props.releasedate}</Text>
+                    <View style={styles.cardupper}>
+                        <TouchableOpacity 
+                            style={styles.thumbcontainer}
+                            onPress={() => this.setState({isVisible: true})}
+                        >
+                            <Image
+                                style={styles.gamelogo}
+                                source={{ uri: this.props.picture }}
+                            />
+                        </TouchableOpacity>
+                        <View style={styles.cardtext}>
+                            <Text style={styles.title}>{this.props.title}</Text>
+                            <Text style={styles.info}><Text style={{fontWeight: 'bold'}}>Platforms: </Text> {this.props.platforms}</Text>
+                            <Text style={styles.info}><Text style={{fontWeight: 'bold'}}>Release Date: </Text> {this.props.releasedate}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.cardlower}>
+                    <Divider color='rgb(6, 5, 72)'/>
 
-                        <Divider color='rgb(6, 5, 72)'/>
-
+                    
                         <Text style={styles.description}>{this.props.description}</Text>
                     </View>
                 </View> 
@@ -70,12 +74,12 @@ const styles = StyleSheet.create({
     card: {
         backgroundColor: `rgb(1, 0, 24)`,
         height: `auto`,
-        margin: 3,
+        margin: 0,
         padding: 5,
-        borderRadius: 3,
         borderColor: `darkslategray`,
-        borderWidth: 0.66,
-        flexDirection: `row`,
+        borderTopWidth: 0.66,
+        borderBottomWidth: 0.66,
+        flexDirection: `column`,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -85,22 +89,28 @@ const styles = StyleSheet.create({
         shadowRadius: 2.62,
         elevation: 4,
     },
+    cardupper :{
+        flexDirection: 'row'
+    },
     title: {
         fontFamily: "sans-serif-medium",
         color:`lightskyblue`,
         fontWeight: `bold`,
-        fontSize: 18,
+        fontSize: 20,
+        marginBottom: 3
     },
     info: {
         fontStyle: 'italic',
-        fontWeight: `100`,
+        fontFamily: "sans-serif-thin",
         color:`rgb(135, 206, 250)`,
-        fontSize: 10,
+        fontSize: 14,
+        marginBottom: 2
     },
     description: {
+        paddingHorizontal: 2,
         fontFamily:`sans-serif-light`,
         color:`rgb(135, 206, 250)`,
-        fontSize: 12,
+        fontSize: 14,
     },
     bottom: {
         lineHeight: 5,
@@ -119,8 +129,8 @@ const styles = StyleSheet.create({
         fontWeight: `bold`,
     },
     gamelogo: {
-        width: 100,
-        height: 150,
+        width: 140,
+        height: 210,
         borderColor: `darkslategray`,
         borderWidth: 1,
         marginRight: 5,
@@ -140,17 +150,21 @@ const styles = StyleSheet.create({
     },
     modalImage: {
         backgroundColor: `transparent`,
-        height: 500,
-        width: 300
+        width: '95%',
+        height: '95%',
+        resizeMode: "contain"
     },
     modalView: {
         backgroundColor: `rgb(1, 0, 32)`,
-        margin: 40,
-        padding: 10,
+        height: `90%`,
+        width: `90%`,
+        margin: `5%`,
+        padding: 5,
         borderRadius: 1,
         borderWidth: 1,
         borderColor: 'rgb(206, 212, 218)',
-        elevation: 20
+        elevation: 20,
+        justifyContent: 'center'
     },
     closeText: {
         color: 'rgb(135, 206, 250)',
