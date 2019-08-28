@@ -75,7 +75,9 @@ export default class AutoCompleteBar extends Component {
                     style={styles.bar}
                     placeholder='Where we droppin&#39;?'
                     placeholderTextColor='gray'
+                    returnKeyLabel="search"
                     keyExtractor={(item, index) => item.key}
+                    keyboardShouldPersistTaps={true}
                     onSubmitEditing={() => this.props.getSearchResults(this.state.query)}
                     renderItem={ result => (         
                         <TouchableOpacity id={result.item.guid} style={styles.itemTouch} onPress={() => this.selectItem(result.item.name, result.item.guid)}>
