@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Text, View, StyleSheet, TouchableHighlight, Linking } from 'react-native';
+import { Image, Text, View, StyleSheet, TouchableHighlight, ImageBackground, Linking } from 'react-native';
 
 export default class TwitchCom extends React.Component {
         render() {
@@ -8,7 +8,10 @@ export default class TwitchCom extends React.Component {
               };
             return(
                 <TouchableHighlight style={styles.card} onPress={ ()=>{ Linking.openURL(this.props.streamURL)}} underlayColor="rgb(1, 0, 96)">
+
                     <View style={styles.cardcontainer}>
+                    <ImageBackground source={{uri: this.props.streamBanner}} style={{width: '100%', height: '100%', opacity: 4, position: 'absolute'}}/>
+
                         <View style={styles.subcontainer}>
                             <View style={styles.thumbcontainer}>
                                 <Image
@@ -16,8 +19,9 @@ export default class TwitchCom extends React.Component {
                                     source={pic}
                                 />
                             </View>
-                            <View style={styles.cardtext}>
-                                {this.props.streamedGame ? 
+                        
+                            <View style={styles.cardtext}> 
+                            {this.props.streamedGame ? 
                                 <Text style={styles.title}>
                                     {this.props.streamerName} 
                                     <Text style={{fontSize: 15, color:'rgb(135, 206, 250)', fontWeight: '400'}}> is playing </Text> 
@@ -30,6 +34,7 @@ export default class TwitchCom extends React.Component {
                                     <Text style={{fontFamily: 'sans-serif-light'}}> currently watching </Text>
                                 </Text>
                             </View>
+
                         </View>
                     </View>
                 </TouchableHighlight>
@@ -133,6 +138,7 @@ const styles = StyleSheet.create({
         padding: 4,
         margin: 2,
         borderRadius: 3,
+        backgroundColor: `rgba(1, 0, 48, 0.7)`
     }
 
 })

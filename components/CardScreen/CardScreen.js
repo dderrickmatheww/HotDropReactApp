@@ -302,12 +302,12 @@ import Divider from '../Divider/Divider';
                                         <TwitchCom 
                                             streamedGame={this.state.searchResults.name}
                                             streamerName={stream.user.username}
-                                            streamerFollowers={stream.currentViewers}
+                                            streamerFollowers={stream.viewersCurrent}
                                             streamerPreview={stream.user.avatarUrl}
                                             streamerStatus={stream.name}
                                             streamURL={'https://mixer.com/' + stream.token}
-                                            streamBanner={stream.bannerUrl}
-                                        />
+                                            streamBanner={stream.thumbnail ? stream.thumbnail.url : stream.type.backgroundUrl}
+                                            />
                                     )) : null
                                 }
 

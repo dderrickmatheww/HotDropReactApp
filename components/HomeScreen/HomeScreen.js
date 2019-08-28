@@ -195,7 +195,7 @@ export default class HomeScreen extends React.Component {
                           streamerPreview={stream.user.avatarUrl}
                           streamerStatus={stream.name}
                           streamURL={'https://mixer.com/' + stream.token}
-                          streamBanner={stream.type.backgroundUrl}
+                          streamBanner={stream.thumbnail ? stream.thumbnail.url : stream.type.backgroundUrl}
                         />
                       )) : null}
                       </ScrollView>
