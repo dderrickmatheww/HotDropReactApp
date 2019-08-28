@@ -80,7 +80,7 @@ import Divider from '../Divider/Divider';
             this.setState({NWtoggle: newState})
             let month = new Date().getMonth() + 1; 
             let year = new Date().getFullYear();
-            let url = 'https://newsapi.org/v2/everything?q="'+ this.state.searchResults.name +'"&from='+ year +'-'+ month +'&sources=polygon&language=en&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15';
+            let url = 'https://newsapi.org/v2/everything?q="'+ this.state.searchResults.name +'"&from='+ year +'-'+ month +'&sources=polygon,ign&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15&language=en';
                 fetch(url)
                 .then((response) => {
                     response.json()
