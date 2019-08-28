@@ -203,7 +203,7 @@ import Firebase from '../LoginScreen/firebase';
             if (text) {
                 searchQuery = text;
                 cacheName = text.toLowerCase();
-                searchQuery = searchQuery.toLowerCase().replace(' ', '%');
+                searchQuery = searchQuery.toLowerCase().replace(' ', '%20');
                 url = 'https://www.giantbomb.com/api/search/?format=json&api_key=99ec1d8980f419c59250e12a72f3b31d084e9bf9&query=' + searchQuery + '&resources=game&limit=1';
 
             } else if (id) {
