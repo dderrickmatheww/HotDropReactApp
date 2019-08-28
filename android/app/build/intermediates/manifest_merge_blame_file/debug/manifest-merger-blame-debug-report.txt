@@ -1,20 +1,14 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 3    package="com.hotdrop"
-<<<<<<< HEAD
-4    android:versionCode="2"
-5    android:versionName="1.1" >
-=======
 4    android:versionCode="4"
 5    android:versionName="1.3" >
->>>>>>> 6328d633a5a3d3bf4457d7871f1bfee45e4e7635
 6
 7    <uses-sdk
 8        android:minSdkVersion="16"
 9        android:targetSdkVersion="28" />
 10
 11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-<<<<<<< HEAD
 11-->C:\Users\dmontgomery\Documents\GitHub Repos\HotDropReactApp\android\app\src\debug\AndroidManifest.xml:5:5-77
 11-->C:\Users\dmontgomery\Documents\GitHub Repos\HotDropReactApp\android\app\src\debug\AndroidManifest.xml:5:22-75
 12    <uses-permission android:name="android.permission.INTERNET" />
@@ -85,76 +79,3 @@
 46    </application>
 47
 48</manifest>
-=======
-11-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\debug\AndroidManifest.xml:5:5-77
-11-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\debug\AndroidManifest.xml:5:22-75
-12    <uses-permission android:name="android.permission.INTERNET" />
-12-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:4:5-67
-12-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:4:22-64
-13
-14    <application
-14-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:6:5-24:19
-15        android:name="com.hotdrop.MainApplication"
-15-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:7:9-40
-16        android:allowBackup="false"
-16-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:11:9-36
-17        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
-17-->[com.android.support:support-compat:28.0.0] C:\Users\dderr\.gradle\caches\transforms-2\files-2.1\dd1cf78f22bdd94f550130b281f27c97\support-compat-28.0.0\AndroidManifest.xml:22:18-91
-18        android:debuggable="true"
-19        android:icon="@mipmap/ic_launcher"
-19-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:9:9-43
-20        android:label="@string/app_name"
-20-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:8:9-41
-21        android:roundIcon="@mipmap/ic_launcher_round"
-21-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:10:9-54
-22        android:testOnly="true"
-23        android:theme="@style/AppTheme.Launcher"
-23-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:12:9-49
-24        android:usesCleartextTraffic="true" >
-24-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\debug\AndroidManifest.xml:7:18-53
-25        <activity
-25-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:13:9-22:20
-26            android:name="com.hotdrop.MainActivity"
-26-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:14:13-41
-27            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-27-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:16:13-83
-28            android:label="@string/app_name"
-28-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:15:13-45
-29            android:windowSoftInputMode="adjustResize" >
-29-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:17:13-55
-30            <intent-filter>
-30-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:18:13-21:29
-31                <action android:name="android.intent.action.MAIN" />
-31-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:19:17-69
-31-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:19:25-66
-32
-33                <category android:name="android.intent.category.LAUNCHER" />
-33-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:20:17-77
-33-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:20:27-74
-34            </intent-filter>
-35        </activity>
-36        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-36-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:23:9-86
-36-->C:\Users\dderr\Documents\HotDropReactApp\android\app\src\main\AndroidManifest.xml:23:19-83
-37
-38        <provider
-38-->[:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-20:20
-39            android:name="com.reactnativecommunity.webview.RNCWebViewFileProvider"
-39-->[:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-83
-40            android:authorities="com.hotdrop.fileprovider"
-40-->[:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-64
-41            android:exported="false"
-41-->[:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-37
-42            android:grantUriPermissions="true" >
-42-->[:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:13-47
-43            <meta-data
-43-->[:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-19:63
-44                android:name="android.support.FILE_PROVIDER_PATHS"
-44-->[:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:17-67
-45                android:resource="@xml/file_provider_paths" />
-45-->[:react-native-webview] C:\Users\dderr\Documents\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:17-60
-46        </provider>
-47    </application>
-48
-49</manifest>
->>>>>>> 6328d633a5a3d3bf4457d7871f1bfee45e4e7635
