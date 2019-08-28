@@ -306,7 +306,7 @@ import Divider from '../Divider/Divider';
                                             streamerPreview={stream.user.avatarUrl}
                                             streamerStatus={stream.name}
                                             streamURL={'https://mixer.com/' + stream.token}
-                                            streamBanner={stream.thumbnail ? stream.thumbnail.url : stream.type.backgroundUrl}
+                                            streamBanner={(stream.thumbnail) ? stream.thumbnail.url : (stream.type) ? stream.type.backgroundUrl : stream.bannerUrl}
                                             />
                                     )) : null
                                 }
