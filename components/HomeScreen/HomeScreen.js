@@ -30,7 +30,9 @@ export default class HomeScreen extends React.Component {
   loadTwitchNewsAndMixer = async () => {
     let month = new Date().getMonth() + 1; 
     let year = new Date().getFullYear();
-    let url ="https://newsapi.org/v2/everything?sources=polygon&from=" + year + "-" + month +"&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15"
+    let url ="https://newsapi.org/v2/everything?sources=ign,polygon&from=" + year + "-" + month +"&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15&language=en"
+    //"language=en" should be swapped out eventually for some array passed from a settings option for language preferences. 
+    //i'm setting it to en for obvious testing purposes and being IGN tends to republish the same stories in multiple languages
     fetch(url)
     .then( response => {
         response.json().then( data => {
