@@ -5,38 +5,33 @@ import Divider from "../Divider/Divider";
 export default class ProfileCard extends Component {
     render() {
         return(
-        <View style={{backgroundColor: "#363534"}}>
             <View style={styles.card}>
-                <View style={styles.cardcontainer}>
-                    
-                    <Image style={styles.thumb} source={{uri: this.props.avatar}}/>
 
-                    <Text style={styles.cardHead}>
-                        {this.props.username}
-                    </Text>
+                <View style={styles.cardupper}>
+                    <Image style={styles.avatar} source={{ uri: this.props.avatar }}/>
+                    <View style={styles.cardtext}>
+                        <Text style={styles.title}>{this.props.username}</Text>
+                    </View>
+                </View>
+
+                <View style={styles.cardlower}>
                     <Divider color='rgb(6, 5, 72)'/>
-                    <Text style={styles.cardBody}>
-                        {this.props.description}
-                    </Text>
+                    <Text style={styles.description}>{this.props.description}</Text>
                 </View>
             </View>
-        </View>
         )
     }
 } 
-
 const styles = StyleSheet.create({
-    cardcontainer: {
-        flexDirection: `row`,
-    },
     card: {
         backgroundColor: `rgb(1, 0, 24)`,
         height: `auto`,
-        margin: 4,
+        margin: 0,
         padding: 5,
-        borderRadius: 3,
         borderColor: `darkslategray`,
-        borderWidth: 0.66,
+        borderTopWidth: 0.66,
+        borderBottomWidth: 0.66,
+        flexDirection: `column`,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -46,26 +41,50 @@ const styles = StyleSheet.create({
         shadowRadius: 2.62,
         elevation: 4,
     },
-    cardHead: {
-        fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
-        color:`white`,
+    cardupper :{
+        flexDirection: 'row'
+    },
+    title: {
+        fontFamily: "sans-serif-medium",
+        color:`lightskyblue`,
         fontWeight: `bold`,
-        fontSize: 16,
+        fontSize: 20,
+        marginBottom: 3
     },
-    cardSubhead: {
-        fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
+    info: {
+        fontStyle: 'italic',
+        fontFamily: "sans-serif-thin",
         color:`rgb(135, 206, 250)`,
-        fontSize: 12
+        fontSize: 14,
+        marginBottom: 2
     },
-    cardBody: {
+    description: {
+        paddingHorizontal: 2,
+        fontFamily:`sans-serif-light`,
         color:`rgb(135, 206, 250)`,
-        fontSize: 12
+        fontSize: 14,
     },
-    thumb: {
-        width: 150,
-        height: 150,
-        borderColor: `rgb(2, 0, 144)`,
-        borderWidth: 0.66,
+    bottom: {
+        lineHeight: 5,
+        flexDirection: `row`
+    },
+    bottombutton: {
+        backgroundColor: `darkslategray`,
+        padding: 5,
+        fontSize: 14,
+        borderRadius: 2,
+        marginRight: 4,
+        bottom: 0
+    },
+    bottombuttontext: {
+        color:`rgb(135, 206, 250)`,
+        fontWeight: `bold`,
+    },
+    avatar: {
+        width: 140,
+        height: 140,
+        borderColor: `darkslategray`,
+        borderWidth: 1,
         marginRight: 5,
     },
     thumbcontainer: {
@@ -77,5 +96,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.66,
         shadowRadius: 2.62,
         elevation: 4
+    },
+    cardtext: {
+        flex: 1
     }
 })
