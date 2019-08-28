@@ -191,7 +191,7 @@ export default class HomeScreen extends React.Component {
                         <TwitchCom 
                           streamedGame={stream.type.name}
                           streamerName={stream.user.username}
-                          streamerFollowers={stream.numFollowers}
+                          streamerFollowers={stream.viewersCurrent}
                           streamerPreview={stream.user.avatarUrl}
                           streamerStatus={stream.name}
                           streamURL={'https://mixer.com/' + stream.token}
