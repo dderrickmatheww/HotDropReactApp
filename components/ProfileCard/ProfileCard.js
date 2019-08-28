@@ -15,7 +15,7 @@ export default class ProfileCard extends Component {
 
                         {/* favorite games should be an array of ids, converted back into titles and then joined by commas; except the last one is preceded by "and"
                     
-                            ie, {user.favoritegames: ["id-0001", "id-0002", "id-0003"} becomes "My favorite games are Game1, Game2, and Game3."]
+                            ie, {user.favoritegames: ["id-0001", "id-0002", "id-0003"]} becomes "My favorite games are Game1, Game2, and Game3."]
                         */}
                     </View>
                 </View>
