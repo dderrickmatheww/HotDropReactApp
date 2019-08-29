@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, Text, View, Modal, TouchableOpacity } from 'react-native';
+import Divider from "../Divider/Divider";
 
 export default class GameCard extends React.Component {
     state = {
@@ -14,19 +15,26 @@ export default class GameCard extends React.Component {
         return(
             <View>
                 <View style={styles.card}>
-                    <TouchableOpacity 
-                        style={styles.thumbcontainer}
-                        onPress={() => this.setState({isVisible: true})}
-                    >
-                        <Image
-                            style={styles.gamelogo}
-                            source={{ uri: this.props.picture }}
-                        />
-                    </TouchableOpacity>
-                    <View style={styles.cardtext}>
-                        <Text style={styles.title}>{this.props.title}</Text>
-                        <Text style={styles.info}>Platforms: {this.props.platforms}</Text>
-                        <Text style={styles.info}>Release Date: {this.props.releasedate}</Text>
+                    <View style={styles.cardupper}>
+                        <TouchableOpacity 
+                            style={styles.thumbcontainer}
+                            onPress={() => this.setState({isVisible: true})}
+                        >
+                            <Image
+                                style={styles.gamelogo}
+                                source={{ uri: this.props.picture }}
+                            />
+                        </TouchableOpacity>
+                        <View style={styles.cardtext}>
+                            <Text style={styles.title}>{this.props.title}</Text>
+                            <Text style={styles.info}><Text style={{fontWeight: 'bold'}}>Platforms: </Text> {this.props.platforms}</Text>
+                            <Text style={styles.info}><Text style={{fontWeight: 'bold'}}>Release Date: </Text> {this.props.releasedate}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.cardlower}>
+                    <Divider color='rgb(6, 5, 72)'/>
+
+                    
                         <Text style={styles.description}>{this.props.description}</Text>
                     </View>
                 </View> 
@@ -34,7 +42,6 @@ export default class GameCard extends React.Component {
                 <View style={styles.container}>
                     <Modal
                         animationType='slide'
-                        onRequestClose={() => console.log('no warning')}
                         transparent={true}
                         visible={this.state.isVisible}
                     >
@@ -66,13 +73,12 @@ const styles = StyleSheet.create({
     card: {
         backgroundColor: `rgb(1, 0, 24)`,
         height: `auto`,
-        margin: 4,
+        margin: 0,
         padding: 5,
-        borderRadius: 3,
-        borderBottomRightRadius: 25,
         borderColor: `darkslategray`,
-        borderWidth: 1,
-        flexDirection: `row`,
+        borderTopWidth: 0.66,
+        borderBottomWidth: 0.66,
+        flexDirection: `column`,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -82,20 +88,28 @@ const styles = StyleSheet.create({
         shadowRadius: 2.62,
         elevation: 4,
     },
+    cardupper :{
+        flexDirection: 'row'
+    },
     title: {
-        fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
-        color:`rgb(135, 206, 250)`,
+        fontFamily: "sans-serif-medium",
+        color:`lightskyblue`,
         fontWeight: `bold`,
         fontSize: 20,
+        marginBottom: 3
     },
     info: {
-        fontWeight: `100`,
+        fontStyle: 'italic',
+        fontFamily: "sans-serif-thin",
         color:`rgb(135, 206, 250)`,
-        fontSize: 10,
+        fontSize: 14,
+        marginBottom: 2
     },
     description: {
-        color:`white`,
-        fontSize: 12,
+        paddingHorizontal: 2,
+        fontFamily:`sans-serif-light`,
+        color:`rgb(135, 206, 250)`,
+        fontSize: 14,
     },
     bottom: {
         lineHeight: 5,
@@ -106,7 +120,7 @@ const styles = StyleSheet.create({
         padding: 5,
         fontSize: 14,
         borderRadius: 2,
-        marginRight: 5,
+        marginRight: 4,
         bottom: 0
     },
     bottombuttontext: {
@@ -114,9 +128,9 @@ const styles = StyleSheet.create({
         fontWeight: `bold`,
     },
     gamelogo: {
-        width: 100,
-        height: 150,
-        borderColor: `rgb(2, 0, 144)`,
+        width: 140,
+        height: 210,
+        borderColor: `darkslategray`,
         borderWidth: 1,
         marginRight: 5,
     },
@@ -134,18 +148,22 @@ const styles = StyleSheet.create({
         flex: 1
     },
     modalImage: {
-        backgroundColor: `darkslategray`,
-        height: 500,
-        width: 300
+        backgroundColor: `transparent`,
+        width: '95%',
+        height: '95%',
+        resizeMode: "contain"
     },
     modalView: {
         backgroundColor: `rgb(1, 0, 32)`,
-        margin: 40,
-        padding: 10,
+        height: `90%`,
+        width: `90%`,
+        margin: `5%`,
+        padding: 5,
         borderRadius: 1,
         borderWidth: 1,
         borderColor: 'rgb(206, 212, 218)',
-        elevation: 20
+        elevation: 20,
+        justifyContent: 'center'
     },
     closeText: {
         color: 'rgb(135, 206, 250)',

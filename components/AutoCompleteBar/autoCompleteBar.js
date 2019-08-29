@@ -1,6 +1,8 @@
 import Autocomplete from 'react-native-autocomplete-input';
 import React, { Component } from 'react';
 import { StyleSheet, Text, Image, TouchableOpacity, View, Button } from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 
 export default class AutoCompleteBar extends Component {
@@ -62,6 +64,7 @@ export default class AutoCompleteBar extends Component {
         
         return (
             <View style={styles.container}>
+                <FontAwesomeIcon style={styles.searchicon}icon={ faSearch } color="gray"/>
                 <Autocomplete
                     autoCapitalize="none"
                     autoCorrect={false}
@@ -72,7 +75,9 @@ export default class AutoCompleteBar extends Component {
                     style={styles.bar}
                     placeholder='Where we droppin&#39;?'
                     placeholderTextColor='gray'
+                    returnKeyLabel="search"
                     keyExtractor={(item, index) => item.key}
+                    keyboardShouldPersistTaps={true}
                     onSubmitEditing={() => this.props.getSearchResults(this.state.query)}
                     renderItem={ result => (         
                         <TouchableOpacity id={result.item.guid} style={styles.itemTouch} onPress={() => this.selectItem(result.item.name, result.item.guid)}>
@@ -92,7 +97,9 @@ export default class AutoCompleteBar extends Component {
                         </TouchableOpacity>
                     )}
                 />
-                <Button title='DEPLOY!' style={styles.searchbutton} color='rgb(1, 0, 64)' onPress={() => this.props.getSearchResults(this.state.query)}/>
+                <View style={styles.searchButton}>
+                    <Button title='DEPLOY!'  color='rgb(1, 0, 96)' onPress={() => this.props.getSearchResults(this.state.query)}/>
+                </View>
             </View>
         )
     }
@@ -102,7 +109,7 @@ const styles = StyleSheet.create({
     container: {
         position: `absolute`,
         flex: 1,
-        margin: 4,
+        marginHorizontal: 4,
         left: 0,
         right: 0,
         top: 5,
@@ -115,13 +122,13 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: `white`,
         fontWeight: `bold`,
-        backgroundColor: `rgb(52, 58, 64)`,
+        backgroundColor: `rgb(76, 82, 88)`,
         borderColor: `rgb(206, 212, 218)`
     },
     itemTouch:{
         padding: 2,
         backgroundColor: `darkslategray`,
-        flex: 1,
+        flex: 1
     },
     viewcontainer: {
         flexDirection: `row`
@@ -153,5 +160,15 @@ const styles = StyleSheet.create({
         textShadowOffset: {
             height: 1
         }
+    },
+    searchButton: {
+        marginTop: 3
+    },
+    searchicon: {
+        position: "absolute",
+        margin: 4,
+        right: 15,
+        top: 12,
+        zIndex: 999,
     }
 });

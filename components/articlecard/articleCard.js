@@ -1,23 +1,39 @@
 import React from "react";
-import { Image, StyleSheet, TouchableHighlight, Text, View, Linking } from 'react-native';
+import { Image, StyleSheet, TouchableHighlight, Text, View, Linking, TouchableNativeFeedback } from 'react-native';
+import Divider from "../Divider/Divider";
 
 export default class ArticleCard extends React.Component {
+    everyOther = (index) => {
+        if (index % 2 === 0) {
+            return `rgb(1, 0, 24)`
+        } else {
+            return `rgb(1, 0, 48)`
+        }
+    }
+
     render() {
         return (
-            <TouchableHighlight style={styles.card} onPress={ ()=>{ Linking.openURL(this.props.link)}} underlayColor="rgb(1, 0, 64)">
-                <View style={styles.cardcontainer}>
-                    <View style={styles.thumbcontainer}>
-                        <Image
-                            style={styles.articlethumb}
-                            source={{uri: this.props.pic }}
-                        />
-                    </View>
-                    <View style={styles.articletext}>
-                        <Text style={styles.cardHead}>{this.props.cardhead}</Text>
-                        <Text style={styles.cardSubhead}>By {this.props.cardauthor} for {this.props.source}</Text>
-                        <Text style={styles.cardBody}>{this.props.cardbody}</Text>
-                    </View>
+            <TouchableHighlight style={[styles.card, {backgroundColor: this.everyOther(this.props.index)}]} onPress={ ()=>{ Linking.openURL(this.props.link)}}>
+                    <TouchableNativeFeedback
+                        onPress={this._onPressButton}
+                        background={TouchableNativeFeedback.Ripple("deepskyblue")}
+                        onPress={ ()=>{ Linking.openURL(this.props.link)}}
+                    >
+                        <View style={styles.cardcontainer}>
+                        <View style={styles.thumbcontainer}>
+                            <Image
+                                style={styles.articlethumb}
+                                source={{uri: this.props.pic }}
+                            />
+                        </View>
+                        <View style={styles.articletext}>
+                            <Text style={styles.cardHead}>{this.props.cardhead}</Text>
+                            <Text style={styles.cardSubhead}>By <Text style={{fontWeight: 'bold'}}>{this.props.cardauthor}</Text> for <Text style={{fontWeight: 'bold'}}>{this.props.source}</Text></Text>
+                            <Divider color='rgb(6, 5, 72)'/>
+                            <Text style={styles.cardBody}>{this.props.cardbody}</Text>
+                        </View>
                 </View>
+                </TouchableNativeFeedback>
             </TouchableHighlight>
         )
     }
@@ -28,14 +44,14 @@ const styles = StyleSheet.create({
         flexDirection: `row`,
     },
     card: {
-        backgroundColor: `rgb(1, 0, 24)`,
         height: `auto`,
-        margin: 4,
+        margin: 2,
+        marginTop: 1,
+        marginBottom: 0,
         padding: 5,
         borderRadius: 3,
-        borderBottomRightRadius: 25,
         borderColor: `darkslategray`,
-        borderWidth: 1,
+        borderWidth: 0.66,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -46,24 +62,26 @@ const styles = StyleSheet.create({
         elevation: 4,
     },
     cardHead: {
-        fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
-        color:`rgb(135, 206, 250)`,
+        fontFamily: 'sans-serif-medium',
+        color:`lightskyblue`,
         fontWeight: `bold`,
-        fontSize: 18,
+        fontSize: 16,
     },
     cardSubhead: {
-        fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
+        fontFamily:`sans-serif-light`,
         color:`rgb(135, 206, 250)`,
-        fontSize: 14
+        fontSize: 12,
+        fontStyle: 'italic'
     },
     cardBody: {
-        color:`white`,
-        fontSize: 12
+        fontFamily:`sans-serif-light`,
+        color:`rgb(135, 206, 250)`,
+        fontSize: 12,
     },
     articlethumb: {
         width: 100,
-        height: 100,
-        borderColor: `rgb(2, 0, 144)`,
+        height: 150,
+        borderColor: `darkslategray`,
         borderWidth: 1,
         marginRight: 5,
     },

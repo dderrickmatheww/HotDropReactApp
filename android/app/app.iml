@@ -135,6 +135,7 @@
     <orderEntry type="library" name="Gradle: com.facebook.soloader:soloader:0.6.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.facebook.fresco:imagepipeline-okhttp3:1.10.0@aar" level="project" />
     <orderEntry type="module" module-name="react-native-webview" />
+    <orderEntry type="module" module-name="react-native-svg" />
     <orderEntry type="module" module-name="react-native-gesture-handler" />
   </component>
 </module>

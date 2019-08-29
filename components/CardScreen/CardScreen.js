@@ -6,12 +6,13 @@ import YoutubeCom from '../youtubecard/youtubecard';
 import ArticleCard from '../articlecard/articleCard';
 import CommentsCom from '../comments/comments';
 import Firebase from '../LoginScreen/firebase';
+import Divider from '../Divider/Divider';
 
     export default class CardScreen extends React.Component {
 
         static navigationOptions = ({ navigation }) => {
             return {
-              title: navigation.getParam('text') ? navigation.getParam('text') : navigation.getParam('name'),
+              title: navigation.getParam('text') ? "\"" + navigation.getParam('text') + "\"": navigation.getParam('name'),
               headerStyle: {
                 backgroundColor: 'rgb(1, 0, 24)',
               },
@@ -51,7 +52,6 @@ import Firebase from '../LoginScreen/firebase';
             let value =  await AsyncStorage.getItem(cacheName);
             value = JSON.parse(value);
             if ( value.videoId ) {
-                console.log("Grabbed video id from cache");
                 this.setState({YTVidID: value.videoId});
             }
             else {
@@ -60,7 +60,6 @@ import Firebase from '../LoginScreen/firebase';
                     response.json().then( async data => {
                         let videoId = data.items[0].id.videoId
                         await  AsyncStorage.mergeItem(cacheName, JSON.stringify(data.items[0].id)).catch((err) => {if(err) console.log(err)});
-                        console.log('added video id to cache');
                         this.setState({YTVidID: videoId});
                     })
                     .catch((err) => {
@@ -79,7 +78,7 @@ import Firebase from '../LoginScreen/firebase';
             this.setState({NWtoggle: newState})
             let month = new Date().getMonth() + 1; 
             let year = new Date().getFullYear();
-            let url = 'https://newsapi.org/v2/everything?q="'+ this.state.searchResults.name +'"&from='+ year +'-'+ month +'&sources=polygon&language=en&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15';
+            let url = 'https://newsapi.org/v2/everything?q="'+ this.state.searchResults.name +'"&from='+ year +'-'+ month +'&sources=polygon,ign&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15&language=en';
                 fetch(url)
                 .then((response) => {
                     response.json()
@@ -88,7 +87,6 @@ import Firebase from '../LoginScreen/firebase';
                             alert("There are no new articles for " + this.state.searchResults.name + " at this time");
                         } 
                         else {
-                            console.log('added article data');
                             this.setState({gameArticles: data.articles.slice(1, 4)}); 
                         }
                     })
@@ -115,7 +113,6 @@ import Firebase from '../LoginScreen/firebase';
                     response.json()
                     .then(async (data) => {
                         if (data.data[0].id){
-                            console.log('Stream data added')
                             fetch('https://api.twitch.tv/helix/streams?game_id=' + data.data[0].id + '&first=5', {
                             headers: {
                                 "Client-ID": '7mx4fyx7xv1pcxfe25fmguto1xao2b'
@@ -124,9 +121,7 @@ import Firebase from '../LoginScreen/firebase';
                             .then((gameData) => {
                                 gameData.json()
                                 .then((data) => {
-                                    console.log(data)
                                    this.setState({twitchResults: data.data})
-                                   console.log(data.data[0].thumbnail_url.slice(0, -21) + ".jpg")
                                 })
                                 .catch((err) => {
                                     if (err) {
@@ -216,7 +211,6 @@ import Firebase from '../LoginScreen/firebase';
                 let value = await AsyncStorage.getItem(cacheName);
                 if ( value ) {
                     value = JSON.parse(value);
-                    console.log('Grabbed game data from cache')
                     this.setState({searchResults: value});  
                     this.setState({date: [value.expected_release_month, '/', value.expected_release_day, '/', value.expected_release_year]});
                     this.setState({platforms: value.platforms.map(platforms => platforms.abbreviation).join(', ')});
@@ -238,7 +232,6 @@ import Firebase from '../LoginScreen/firebase';
                             }
                             else{
                                 await AsyncStorage.setItem(cacheName, JSON.stringify(value));
-                                console.log('Added game data to cache')
                                 this.setState({searchResults: value});
                                 this.setState({date: [value.expected_release_month, '/', value.expected_release_day, '/', value.expected_release_year]});
                                 this.setState({platforms: value.platforms.map(platforms => platforms.abbreviation).join(', ')});
@@ -274,10 +267,13 @@ import Firebase from '../LoginScreen/firebase';
                         picture={this.state.pic.medium_url}
                         modal={this.state.pic.original_url}
                     />
+                    
+                    <Divider color='#545251'/>
+
                     <View style={styles.bottom}>
                              <TouchableOpacity onPress={this.NWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top News for {this.state.searchResults.name} </Text></TouchableOpacity>
                                 {
-                                    this.state.NWtoggle ?  this.state.gameArticles.map(article => (<ArticleCard  cardhead={article.title} cardauthor={article.author} cardbody={article.content} link={article.url} source={article.source.name} pic={article.urlToImage}/> )) : null
+                                    this.state.NWtoggle ?  this.state.gameArticles.map(article => (<ArticleCard  cardhead={article.title} cardauthor={article.author} cardbody={article.description} link={article.url} source={article.source.name} pic={article.urlToImage} index={this.state.gameArticles.indexOf(article)}/> )) : null
                                 }
                              <TouchableOpacity onPress={this.YTtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> YouTube Trailer for {this.state.searchResults.name} </Text></TouchableOpacity>
                                 {
@@ -290,22 +286,24 @@ import Firebase from '../LoginScreen/firebase';
                                     streamerFollowers={stream.viewer_count}
                                     streamerStatus={stream.title}
                                     streamURL={"https://www.twitch.tv/" + stream.user_name}
-                                    streamerPreview={stream.thumbnail_url.slice(0, -21) + ".jpg"} /> )) : null
+                                    streamerPreview={stream.thumbnail_url.slice(0, -21) + "-640x360.jpg"} /> )) : null
                                 }
                             <TouchableOpacity onPress={this.MIXtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top Mixer streams for {this.state.searchResults.name} </Text></TouchableOpacity>
                                 { 
                                     this.state.MIXtoggle ? this.state.mixerResults.map(stream => ( 
                                         <TwitchCom 
-                                        streamedGame={this.state.searchResults.name}
-                                        streamerName={stream.user.username}
-                                        streamerFollowers={stream.numFollowers}
-                                        streamerPreview={stream.user.avatarUrl}
-                                        streamerStatus={stream.name}
-                                        streamURL={'https://mixer.com/' + stream.token}
-                                        streamBanner={stream.bannerUrl}
-                                        />
+                                            streamedGame={this.state.searchResults.name}
+                                            streamerName={stream.user.username}
+                                            streamerFollowers={stream.viewersCurrent}
+                                            streamerPreview={stream.user.avatarUrl}
+                                            streamerStatus={stream.name}
+                                            streamURL={'https://mixer.com/' + stream.token}
+                                            streamBanner={(stream.thumbnail) ? stream.thumbnail.url : (stream.type) ? stream.type.backgroundUrl : stream.bannerUrl}
+                                            />
                                     )) : null
                                 }
+
+                            <Divider color='#545251'/>
 
                             <CommentsCom game={this.props.navigation.getParam('text', '')} navigate={this.props.navigation} />
                     </View>
