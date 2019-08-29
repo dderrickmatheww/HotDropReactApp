@@ -42,7 +42,6 @@ export default class GameCard extends React.Component {
                 <View style={styles.container}>
                     <Modal
                         animationType='slide'
-                        onRequestClose={() => console.log('no warning')}
                         transparent={true}
                         visible={this.state.isVisible}
                     >

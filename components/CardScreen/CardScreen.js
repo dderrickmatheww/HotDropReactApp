@@ -52,7 +52,6 @@ import Divider from '../Divider/Divider';
             let value =  await AsyncStorage.getItem(cacheName);
             value = JSON.parse(value);
             if ( value.videoId ) {
-                console.log("Grabbed video id from cache");
                 this.setState({YTVidID: value.videoId});
             }
             else {
@@ -61,7 +60,6 @@ import Divider from '../Divider/Divider';
                     response.json().then( async data => {
                         let videoId = data.items[0].id.videoId
                         await  AsyncStorage.mergeItem(cacheName, JSON.stringify(data.items[0].id)).catch((err) => {if(err) console.log(err)});
-                        console.log('added video id to cache');
                         this.setState({YTVidID: videoId});
                     })
                     .catch((err) => {
@@ -89,7 +87,6 @@ import Divider from '../Divider/Divider';
                             alert("There are no new articles for " + this.state.searchResults.name + " at this time");
                         } 
                         else {
-                            console.log('added article data');
                             this.setState({gameArticles: data.articles.slice(1, 4)}); 
                         }
                     })
@@ -116,7 +113,6 @@ import Divider from '../Divider/Divider';
                     response.json()
                     .then(async (data) => {
                         if (data.data[0].id){
-                            console.log('Stream data added')
                             fetch('https://api.twitch.tv/helix/streams?game_id=' + data.data[0].id + '&first=5', {
                             headers: {
                                 "Client-ID": '7mx4fyx7xv1pcxfe25fmguto1xao2b'
@@ -125,9 +121,7 @@ import Divider from '../Divider/Divider';
                             .then((gameData) => {
                                 gameData.json()
                                 .then((data) => {
-                                    console.log(data)
                                    this.setState({twitchResults: data.data})
-                                   console.log(data.data[0].thumbnail_url.slice(0, -21) + ".jpg")
                                 })
                                 .catch((err) => {
                                     if (err) {
@@ -217,7 +211,6 @@ import Divider from '../Divider/Divider';
                 let value = await AsyncStorage.getItem(cacheName);
                 if ( value ) {
                     value = JSON.parse(value);
-                    console.log('Grabbed game data from cache')
                     this.setState({searchResults: value});  
                     this.setState({date: [value.expected_release_month, '/', value.expected_release_day, '/', value.expected_release_year]});
                     this.setState({platforms: value.platforms.map(platforms => platforms.abbreviation).join(', ')});
@@ -239,7 +232,6 @@ import Divider from '../Divider/Divider';
                             }
                             else{
                                 await AsyncStorage.setItem(cacheName, JSON.stringify(value));
-                                console.log('Added game data to cache')
                                 this.setState({searchResults: value});
                                 this.setState({date: [value.expected_release_month, '/', value.expected_release_day, '/', value.expected_release_year]});
                                 this.setState({platforms: value.platforms.map(platforms => platforms.abbreviation).join(', ')});

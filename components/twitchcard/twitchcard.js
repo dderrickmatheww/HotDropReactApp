@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Text, View, StyleSheet, TouchableHighlight, ImageBackground, Linking } from 'react-native';
+import { Image, Text, View, StyleSheet, TouchableHighlight, TouchableNativeFeedback, ImageBackground, Linking } from 'react-native';
 
 export default class TwitchCom extends React.Component {
         render() {
@@ -7,8 +7,13 @@ export default class TwitchCom extends React.Component {
                 uri: this.props.streamerPreview
               };
             return(
-                <TouchableHighlight style={styles.card} onPress={ ()=>{ Linking.openURL(this.props.streamURL)}} underlayColor="rgb(1, 0, 96)">
-
+                <TouchableHighlight style={styles.card} onPress={ ()=>{ Linking.openURL(this.props.streamURL)}}>
+                    <TouchableNativeFeedback
+                        onPress={this._onPressButton}
+                        background={TouchableNativeFeedback.Ripple("deepskyblue")}
+                        onPress={ ()=>{ Linking.openURL(this.props.streamURL)}}
+                        useForeground={true}
+                    >
                     <View style={styles.cardcontainer}>
                     <ImageBackground source={{uri: this.props.streamBanner}} style={{width: '100%', height: '100%', opacity: 4, position: 'absolute'}}/>
 
@@ -37,6 +42,7 @@ export default class TwitchCom extends React.Component {
 
                         </View>
                     </View>
+                    </TouchableNativeFeedback>
                 </TouchableHighlight>
             )
         }

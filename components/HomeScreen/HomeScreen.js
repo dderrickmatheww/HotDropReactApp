@@ -71,8 +71,6 @@ export default class HomeScreen extends React.Component {
     .then((response) => {
         response.json()
         .then((data) => {
-            console.log('Mixer data added')
-            console.log(data);
             this.setState({mixerResults: data});
         })
         .catch((err) => {

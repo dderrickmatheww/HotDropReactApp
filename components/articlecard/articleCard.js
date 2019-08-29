@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, StyleSheet, TouchableHighlight, Text, View, Linking } from 'react-native';
+import { Image, StyleSheet, TouchableHighlight, Text, View, Linking, TouchableNativeFeedback } from 'react-native';
 import Divider from "../Divider/Divider";
 
 export default class ArticleCard extends React.Component {
@@ -13,21 +13,27 @@ export default class ArticleCard extends React.Component {
 
     render() {
         return (
-            <TouchableHighlight style={[styles.card, {backgroundColor: this.everyOther(this.props.index)}]} onPress={ ()=>{ Linking.openURL(this.props.link)}} underlayColor="rgb(1, 15, 96)">
-                <View style={styles.cardcontainer}>
-                    <View style={styles.thumbcontainer}>
-                        <Image
-                            style={styles.articlethumb}
-                            source={{uri: this.props.pic }}
-                        />
-                    </View>
-                    <View style={styles.articletext}>
-                        <Text style={styles.cardHead}>{this.props.cardhead}</Text>
-                        <Text style={styles.cardSubhead}>By <Text style={{fontWeight: 'bold'}}>{this.props.cardauthor}</Text> for <Text style={{fontWeight: 'bold'}}>{this.props.source}</Text></Text>
-                        <Divider color='rgb(6, 5, 72)'/>
-                        <Text style={styles.cardBody}>{this.props.cardbody}</Text>
-                    </View>
+            <TouchableHighlight style={[styles.card, {backgroundColor: this.everyOther(this.props.index)}]} onPress={ ()=>{ Linking.openURL(this.props.link)}}>
+                    <TouchableNativeFeedback
+                        onPress={this._onPressButton}
+                        background={TouchableNativeFeedback.Ripple("deepskyblue")}
+                        onPress={ ()=>{ Linking.openURL(this.props.link)}}
+                    >
+                        <View style={styles.cardcontainer}>
+                        <View style={styles.thumbcontainer}>
+                            <Image
+                                style={styles.articlethumb}
+                                source={{uri: this.props.pic }}
+                            />
+                        </View>
+                        <View style={styles.articletext}>
+                            <Text style={styles.cardHead}>{this.props.cardhead}</Text>
+                            <Text style={styles.cardSubhead}>By <Text style={{fontWeight: 'bold'}}>{this.props.cardauthor}</Text> for <Text style={{fontWeight: 'bold'}}>{this.props.source}</Text></Text>
+                            <Divider color='rgb(6, 5, 72)'/>
+                            <Text style={styles.cardBody}>{this.props.cardbody}</Text>
+                        </View>
                 </View>
+                </TouchableNativeFeedback>
             </TouchableHighlight>
         )
     }
