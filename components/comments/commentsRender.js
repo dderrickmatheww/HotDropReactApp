@@ -5,6 +5,15 @@ export default class CommentsRender extends Component {
     static propTypes = {
         commentData: PropTypes.array.isRequired
     }
+
+    everyOther = (index) => {
+        if (index % 2 === 0) {
+            return `rgb(1, 0, 24)`
+        } else {
+            return `rgb(1, 0, 48)`
+        }
+    }
+    
     render () {
         return(
             <View>
@@ -12,7 +21,7 @@ export default class CommentsRender extends Component {
                     this.props.commentData.length > 0 ?
                     this.props.commentData.map((comment) => {
                         return (
-                            <View style={styles.card}>
+                            <View style={[styles.card, {backgroundColor: this.everyOther(this.props.commentData.indexOf(comment))}]}>
                                     <Text style={styles.author}>{comment.authorName}</Text>
                                     <Text style={styles.comment}>{comment.comment}</Text>
                             </View>
@@ -32,7 +41,7 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 3,
         borderColor: `darkslategray`,
-        borderWidth: 1,
+        borderWidth: 0.66,
         shadowColor: "#000",
         flexDirection: `column`,
         shadowOffset: {

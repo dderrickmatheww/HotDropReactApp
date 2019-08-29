@@ -1,10 +1,21 @@
 {
     "logs": [
         {
+<<<<<<< HEAD
             "outputFile": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
             "map": [
                 {
                     "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\bbf07aa1da9ab954374e693dfcc335b9\\appcompat-v7-28.0.0\\res\\values-port\\values-port.xml",
+=======
+            "outputFile": "C:\\Users\\RB\\Desktop\\Bootcamp\\HotDropReactApp\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
+            "map": [
+                {
+<<<<<<< HEAD
+                    "source": "C:\\Users\\RB\\.gradle\\caches\\transforms-2\\files-2.1\\bbf07aa1da9ab954374e693dfcc335b9\\appcompat-v7-28.0.0\\res\\values-port\\values-port.xml",
+=======
+                    "source": "C:\\Users\\dderr\\.gradle\\caches\\transforms-2\\files-2.1\\bbf07aa1da9ab954374e693dfcc335b9\\appcompat-v7-28.0.0\\res\\values-port\\values-port.xml",
+>>>>>>> origin
+>>>>>>> master
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
