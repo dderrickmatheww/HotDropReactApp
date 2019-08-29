@@ -12,10 +12,12 @@
             <option value="$PROJECT_DIR$/../node_modules/react-native-fbsdk/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-firebase/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-gesture-handler/android" />
+            <option value="$PROJECT_DIR$/../node_modules/react-native-svg/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-webview/android" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="testRunner" value="PLATFORM" />
       </GradleProjectSettings>
     </option>
   </component>

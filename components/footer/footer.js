@@ -62,7 +62,7 @@ export default class Footer extends Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.footcontainer}>
                 {this.state.loggedIn ? 
                     <View style={styles.footer}>
                         <FooterTab tablabel='Home' tabaction={this.props.scrollfunc}/>
@@ -83,14 +83,18 @@ export default class Footer extends Component {
 }
 
 const styles = StyleSheet.create({
+    footcontainer: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        paddingTop: 40,
+        backgroundColor: `transparent`
+    },
     footer: {
         position: 'absolute',
         bottom: 0,
-        flex: 1,
         width: `100%`,
         backgroundColor: `#000`,
         flexDirection: 'row',
-        justifyContent: 'center',
         height: `auto`,
         borderTopWidth: 1,
         borderBottomWidth: 1,

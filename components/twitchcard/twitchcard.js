@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Text, View, StyleSheet, TouchableHighlight, Linking } from 'react-native';
+import { Image, Text, View, StyleSheet, TouchableHighlight, TouchableNativeFeedback, ImageBackground, Linking } from 'react-native';
 
 export default class TwitchCom extends React.Component {
         render() {
@@ -7,8 +7,16 @@ export default class TwitchCom extends React.Component {
                 uri: this.props.streamerPreview
               };
             return(
-                <TouchableHighlight style={styles.card} onPress={ ()=>{ Linking.openURL(this.props.streamURL)}} underlayColor="rgb(1, 0, 96)">
+                <TouchableHighlight style={styles.card} onPress={ ()=>{ Linking.openURL(this.props.streamURL)}}>
+                    <TouchableNativeFeedback
+                        onPress={this._onPressButton}
+                        background={TouchableNativeFeedback.Ripple("deepskyblue")}
+                        onPress={ ()=>{ Linking.openURL(this.props.streamURL)}}
+                        useForeground={true}
+                    >
                     <View style={styles.cardcontainer}>
+                    <ImageBackground source={{uri: this.props.streamBanner}} style={{width: '100%', height: '100%', opacity: 4, position: 'absolute'}}/>
+
                         <View style={styles.subcontainer}>
                             <View style={styles.thumbcontainer}>
                                 <Image
@@ -16,13 +24,25 @@ export default class TwitchCom extends React.Component {
                                     source={pic}
                                 />
                             </View>
-                            <View style={styles.cardtext}>
-                                <Text style={styles.title}>Watch {this.props.streamerName} streaming {this.props.streamedGame}</Text>
+                        
+                            <View style={styles.cardtext}> 
+                            {this.props.streamedGame ? 
+                                <Text style={styles.title}>
+                                    {this.props.streamerName} 
+                                    <Text style={{fontSize: 15, color:'rgb(135, 206, 250)', fontWeight: '400'}}> is playing </Text> 
+                                    {this.props.streamedGame} 
+                                </Text> 
+                                : <Text style={styles.title}>{this.props.streamerName}</Text>} 
                                 <Text style={styles.description}>{this.props.streamerStatus}</Text>
-                                <Text style={styles.info}>Current Viewers: {this.props.streamerFollowers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
+                                <Text style={styles.info}> 
+                                    &#128065; {this.props.streamerFollowers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                    <Text style={{fontFamily: 'sans-serif-light'}}> currently watching </Text>
+                                </Text>
                             </View>
+
                         </View>
                     </View>
+                    </TouchableNativeFeedback>
                 </TouchableHighlight>
             )
         }
@@ -42,7 +62,7 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 3,
         borderColor: `rgb(1, 0, 128)`,
-        borderWidth: 1,
+        borderWidth: 0.6,
         width: 350,
         shadowColor: "#000",
         shadowOffset: {
@@ -54,10 +74,11 @@ const styles = StyleSheet.create({
         elevation: 4,
     },
     title: {
-        fontFamily:`'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
-        color:`rgb(135, 206, 250)`,
+        color:`white`,
+        fontFamily: 'sans-serif-medium',
         fontWeight: `bold`,
         fontSize: 16,
+        marginBottom: 5,
         flexWrap: 'wrap',
         textShadowColor: `#000`,
         textShadowRadius: 2,
@@ -67,7 +88,6 @@ const styles = StyleSheet.create({
         }
     },
     info: {
-        fontWeight: `100`,
         color:`rgb(135, 206, 250)`,
         fontSize: 10,
         textShadowColor: `#000`,
@@ -106,8 +126,8 @@ const styles = StyleSheet.create({
     gamelogo: {
         width: 100,
         height: 150,
-        borderColor: `rgb(1, 0, 218)`,
-        borderWidth: 2
+        borderColor: `rgb(1, 0, 128)`,
+        borderWidth: 1
     },
     thumbcontainer: {
         shadowColor: `#fff`,
@@ -124,7 +144,7 @@ const styles = StyleSheet.create({
         padding: 4,
         margin: 2,
         borderRadius: 3,
-        backgroundColor: `rgba(1, 0, 24, 0.4)`
+        backgroundColor: `rgba(1, 0, 48, 0.7)`
     }
 
 })
