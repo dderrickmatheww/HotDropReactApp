@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import { View, StyleSheet, Button, TextInput, AsyncStorage } from 'react-native';
+import { View, StyleSheet, Button, TextInput, AsyncStorage, Picker } from 'react-native';
 import Firebase from '../LoginScreen/firebase';
 import { ScrollView } from 'react-native-gesture-handler';
-
 
 export default class AboutScreen extends Component {
 
@@ -21,8 +20,44 @@ export default class AboutScreen extends Component {
         lastName: '',
         email: '',
         password: '',
-        passwordComfirm: ''
+        passwordComfirm: '',
+        userExist: false,
+        platformSelectors: []
     }
+    items = [
+        {
+            id: 0,
+            name: 'PS4'
+        },
+        {
+            id: 1,
+            name: 'Xbox One'
+        },
+        {
+            id: 2,
+            name: 'Nitendo Switch'
+        },
+        {
+            id: 3,
+            name: 'PC (master race)'
+        },
+        {
+            id: 4,
+            name: 'Xbox 360'
+        },
+        {
+            id: 5,
+            name: 'PS3'
+        },
+        {
+            id: 6,
+            name: 'Other'
+        }
+    ]
+    onSelectedItemsChange = selectedItems => {
+        this.setState({ platformSelectors: selectedItems });
+      };
+    
       signup = async () => {
         if(this.state.password === this.state.passwordComfirm) {
             if(!this.state.email || !this.state.password) {
@@ -35,10 +70,22 @@ export default class AboutScreen extends Component {
                 Firebase.signupInfo.username = this.state.userName
                 Firebase.signupInfo.password = this.state.password
                 try {
-                    await Firebase.auth.createUserWithEmailAndPassword(Firebase.signupInfo.email, Firebase.signupInfo.password)
+
+                    await Firebase.auth.createUserWithEmailAndPassword(Firebase.signupInfo.email, Firebase.signupInfo.password )
+                    
                     Firebase.auth.onAuthStateChanged( async (user) => {
                         if (user) {
-                            await AsyncStorage.setItem('user', JSON.stringify(user));
+                            await Firebase.database.ref('users').once('value').then((snap) => {this.setState({userExist: snap.child(Firebase.signupInfo.username).exists()})})
+                            if(!this.state.userExist){
+                                Firebase.database.ref('users').child(Firebase.signupInfo.username).child('userData').push({
+                
+                                    firstName: Firebase.signupInfo.firstName,
+                                    lastName: Firebase.signupInfo.lastName,
+                                    userName: Firebase.signupInfo.username
+        
+                                })
+                                await AsyncStorage.setItem('user', JSON.stringify(user));
+                            }
                             this.props.navigation.goBack();
                         } 
                         else {
@@ -116,6 +163,14 @@ export default class AboutScreen extends Component {
                         ref={(input) => { this.sixthTextInput = input; }}
                         onSubmitEditing={this.signup}
                     />
+                    <Picker
+                        selectedValue={this.state.platformSelectors}
+                        onValueChange={(itemValue, itemIndex) => {
+                            this.setState({platformSelectors: itemValue})
+                        }}
+                    >
+
+                    </Picker>
                     <Button
                         title="Sign-Up"
                         onPress={this.signup}

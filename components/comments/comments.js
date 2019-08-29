@@ -19,7 +19,7 @@ export default class commentsCom extends Component {
    
     postComment = async () => {
         let searchedGame = this.state.searchedGame.toLowerCase();
-        await Firebase.database.ref('game').once("value").then((snapshot) => {this.setState({gameExists: snapshot.child(searchedGame).exists()}); console.log(snapshot.child(this.state.searchedGame).exists())});
+        await Firebase.database.ref('game').once("value").then((snapshot) => {this.setState({gameExists: snapshot.child(searchedGame).exists()})});
         let user = await AsyncStorage.getItem('user');
             if (user) {
                 Firebase.comments.authorName = this.state.author
@@ -32,7 +32,6 @@ export default class commentsCom extends Component {
                 }
                 else {
                     if (this.state.gameExists) {
-                        console.log('here/if')
                         await Firebase.gameRef.child(searchedGame).push({
                             comment: Firebase.comments.comment,
                             authorName: Firebase.comments.authorName
@@ -40,8 +39,6 @@ export default class commentsCom extends Component {
                         this.grabbingComments(searchedGame)
                     }
                     else {
-                        console.log('here/else');
-                        console.log(searchedGame)
                         await Firebase.gameRef.child(searchedGame).push({
                             comment: Firebase.comments.comment,
                             authorName: Firebase.comments.authorName
