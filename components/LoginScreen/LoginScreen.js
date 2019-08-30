@@ -17,24 +17,29 @@ export default class LoginScreen extends Component {
     state = {
         email: '',
         password: '',
+        userName: '',
+        userExist: false
     }
       login = async () => {
-        if(!this.state.email || !this.state.password) {
+        await Firebase.database.ref('users').once('value').then((snap) => { this.setState({userExist: snap.child(this.state.userName).exists()})})
+        if(!this.state.email || !this.state.password || !this.state.userName) {
             alert('Please enter correct login information')
+        }
+        else if (!this.state.userExist){
+            alert('Username does not exist, please enter valid username')
         }
         else {
             Firebase.loginInfo.email = this.state.email
             Firebase.loginInfo.password = this.state.password
+            Firebase.loginInfo.userName = this.state.userName
             try {
                 await Firebase.auth.signInWithEmailAndPassword(Firebase.loginInfo.email, Firebase.loginInfo.password);
                 Firebase.auth.onAuthStateChanged( async (user) => {
                     if (user) {
+                        await AsyncStorage.setItem('userUserName', Firebase.loginInfo.userName);
                         await AsyncStorage.setItem('user', JSON.stringify(user));
                         this.props.navigation.goBack();
                     } 
-                    else {
-                        
-                    }
                 });
             }
             catch (err) {
@@ -58,11 +63,20 @@ export default class LoginScreen extends Component {
                 />
                 <TextInput
                     style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
+                    placeholder="Username"
+                    placeholderTextColor="darkslategray"
+                    returnKeyType = { "next" }
+                    onChangeText={(text) => this.setState({userName: text})}
+                    ref={(input) => { this.secondTextInput = input; }}
+                    onSubmitEditing={() => { this.thirdTextInput.focus(); }}
+                />
+                <TextInput
+                    style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
                     placeholder="Password"
                     placeholderTextColor="darkslategray"
                     secureTextEntry={true}
                     onChangeText={(text) => this.setState({password: text})}
-                    ref={(input) => { this.secondTextInput = input; }}
+                    ref={(input) => { this.thirdTextInput = input; }}
                     onSubmitEditing={this.login}
                 />
                 <Button

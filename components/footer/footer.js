@@ -54,6 +54,7 @@ export default class Footer extends Component {
         Firebase.auth.signOut()
         .then(() => {
             AsyncStorage.removeItem('user');
+            AsyncStorage.removeItem('userUserName');
             this.setState({loggedIn: false})
             this.setState({userAuth: []});
         })
@@ -67,7 +68,9 @@ export default class Footer extends Component {
                     <View style={styles.footer}>
                         <FooterTab tablabel='Home' tabaction={this.props.scrollfunc}/>
                         <FooterTab tablabel='Log Out' tabaction={this.signout}/>
+                        <FooterTab tablabel='Profile' tabaction={this.props.profile} />
                         <FooterTab tablabel='About' tabaction={this.props.about} />
+                        
                     </View>
                 :
                     <View style={styles.footer}>

@@ -22,10 +22,14 @@ export default class Firebase {
           email: "",
           username: "",
           password: "",
+          platform: "",
+          gender: "",
+          imageURL: ""
       }
       static comments = {
         authorName: '',
-        comment: ''
+        comment: '',
+        userName: ''
     }
     static init() {
      

@@ -1,17 +1,29 @@
 import React, {Component} from "react";
 import { View, StyleSheet, Text, Image } from "react-native"
 import Divider from "../Divider/Divider";
+import PropTypes from 'prop-types';
 
 export default class ProfileCard extends Component {
+    static propTypes = {
+        data: PropTypes.array.isRequired
+    }
+    shouldComponentUpdate = () => {
+        if (!this.props.data === []){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
     render() {
         return(
             <View style={styles.card}>
 
                 <View style={styles.cardupper}>
-                    <Image style={styles.avatar} source={{ uri: this.props.avatar }}/>
+                    <Image style={styles.avatar} source={{ uri: this.props.data.imageURL }}/>
                     <View style={styles.cardtext}>
-                        <Text style={styles.title}>{this.props.username}</Text>
-                        <Text style={styles.info}>My favorite games are <Text style={{fontWeight: 'bold'}}>{this.props.favoritegames}</Text>.</Text>
+                        <Text style={styles.title}>{this.props.data.userName}</Text>
+                        <Text style={styles.info}>I play on <Text style={{fontWeight: 'bold'}}>{this.props.data.platform}</Text>.</Text>
 
                         {/* favorite games should be an array of ids, converted back into titles and then joined by commas; except the last one is preceded by "and"
                     
@@ -22,7 +34,7 @@ export default class ProfileCard extends Component {
 
                 <View style={styles.cardlower}>
                     <Divider color='rgb(6, 5, 72)'/>
-                    <Text style={styles.description}>{this.props.description}</Text>
+                    <Text style={styles.description}>{null}</Text>
                 </View>
             </View>
         )

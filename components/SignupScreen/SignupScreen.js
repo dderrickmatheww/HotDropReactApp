@@ -22,46 +22,19 @@ export default class AboutScreen extends Component {
         password: '',
         passwordComfirm: '',
         userExist: false,
-        platformSelectors: []
+        favoritePlatform: '',
+        gender: '',
+        imageURL: ''
     }
-    items = [
-        {
-            id: 0,
-            name: 'PS4'
-        },
-        {
-            id: 1,
-            name: 'Xbox One'
-        },
-        {
-            id: 2,
-            name: 'Nitendo Switch'
-        },
-        {
-            id: 3,
-            name: 'PC (master race)'
-        },
-        {
-            id: 4,
-            name: 'Xbox 360'
-        },
-        {
-            id: 5,
-            name: 'PS3'
-        },
-        {
-            id: 6,
-            name: 'Other'
-        }
-    ]
-    onSelectedItemsChange = selectedItems => {
-        this.setState({ platformSelectors: selectedItems });
-      };
     
       signup = async () => {
+        await Firebase.database.ref('users').once('value').then((snap) => { this.setState({userExist: snap.child(this.state.userName).exists()})})
         if(this.state.password === this.state.passwordComfirm) {
-            if(!this.state.email || !this.state.password) {
+            if(!this.state.email || !this.state.password || !this.state.userName) {
                 alert('Please enter correct sign-up information')
+            }
+            else if (this.state.userExist){
+                alert('Username is already taken, please choose another one!');
             }
             else {
                 Firebase.signupInfo.email = this.state.email
@@ -69,23 +42,30 @@ export default class AboutScreen extends Component {
                 Firebase.signupInfo.lastName = this.state.lastName
                 Firebase.signupInfo.username = this.state.userName
                 Firebase.signupInfo.password = this.state.password
+                Firebase.signupInfo.platform = this.state.favoritePlatform
+                Firebase.signupInfo.gender = this.state.gender
+                Firebase.signupInfo.imageURL = this.state.imageURL
                 try {
 
-                    await Firebase.auth.createUserWithEmailAndPassword(Firebase.signupInfo.email, Firebase.signupInfo.password )
+                    await Firebase.auth.createUserWithEmailAndPassword(Firebase.signupInfo.email, Firebase.signupInfo.password)
                     
                     Firebase.auth.onAuthStateChanged( async (user) => {
                         if (user) {
-                            await Firebase.database.ref('users').once('value').then((snap) => {this.setState({userExist: snap.child(Firebase.signupInfo.username).exists()})})
-                            if(!this.state.userExist){
-                                Firebase.database.ref('users').child(Firebase.signupInfo.username).child('userData').push({
-                
-                                    firstName: Firebase.signupInfo.firstName,
-                                    lastName: Firebase.signupInfo.lastName,
-                                    userName: Firebase.signupInfo.username
-        
-                                })
-                                await AsyncStorage.setItem('user', JSON.stringify(user));
-                            }
+                            
+                            Firebase.database.ref('users').child(Firebase.signupInfo.username).child('userData').push({
+            
+                                firstName: Firebase.signupInfo.firstName,
+                                lastName: Firebase.signupInfo.lastName,
+                                userName: Firebase.signupInfo.username,
+                                platform: Firebase.signupInfo.platform,
+                                gender: Firebase.signupInfo.gender,
+                                email: Firebase.signupInfo.email,
+                                imageURL: Firebase.signupInfo.imageURL
+    
+                            })
+                            await AsyncStorage.setItem('user', JSON.stringify(user));
+                            await AsyncStorage.setItem('userUserName', Firebase.signupInfo.username);
+                            
                             this.props.navigation.goBack();
                         } 
                         else {
@@ -146,11 +126,44 @@ export default class AboutScreen extends Component {
                     />
                     <TextInput
                         style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
+                        placeholder="Profile Pic URL"
+                        placeholderTextColor="darkslategray"
+                        onChangeText={(text) => this.setState({imageURL: text})}
+                        ref={(input) => { this.fifthTextInput = input; }}
+                        returnKeyType = { "next" }
+                    />
+                    <Picker
+                        selectedValue={this.state.favoritePlatform}
+                        onValueChange={(itemValue, itemIndex) => {
+                            this.setState({favoritePlatform: itemValue})
+                        }}
+                    >
+                        <Picker.Item label="Favorite gaming rig?" />
+                        <Picker.Item label="PS4" value="PS4" />
+                        <Picker.Item label="Xbox One" value="Xbox One" />
+                        <Picker.Item label="PC (master race)" value="Master Race" />
+                        <Picker.Item label="Switch" value="Switch" />
+                        <Picker.Item label="PS3" value="PS3" />
+                        <Picker.Item label="Xbox 360" value="Xbox 360" />
+                    </Picker>
+                    <Picker
+                        selectedValue={this.state.gender}
+                        onValueChange={(itemValue, itemIndex) => {
+                            this.setState({gender: itemValue})
+                        }}
+                        
+                    >
+                        <Picker.Item label="Gender?" />
+                        <Picker.Item label="Male" value="Male" />
+                        <Picker.Item label="Female" value="Female"/>
+                    </Picker>
+
+                    <TextInput
+                        style={{marginBottom: 2, backgroundColor: 'rgb(52, 58, 64)', borderColor: 'skyblue', borderWidth: 1, color: 'white'}}
                         placeholder="Password"
                         placeholderTextColor="darkslategray"
                         secureTextEntry={true}
                         onChangeText={(text) => this.setState({password: text})}
-                        ref={(input) => { this.fifthTextInput = input; }}
                         returnKeyType = { "next" }
                         onSubmitEditing={() => { this.sixthTextInput.focus(); }}
                     />
@@ -163,14 +176,7 @@ export default class AboutScreen extends Component {
                         ref={(input) => { this.sixthTextInput = input; }}
                         onSubmitEditing={this.signup}
                     />
-                    <Picker
-                        selectedValue={this.state.platformSelectors}
-                        onValueChange={(itemValue, itemIndex) => {
-                            this.setState({platformSelectors: itemValue})
-                        }}
-                    >
-
-                    </Picker>
+           
                     <Button
                         title="Sign-Up"
                         onPress={this.signup}
