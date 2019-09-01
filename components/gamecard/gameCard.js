@@ -1,14 +1,46 @@
 import React from "react";
-import { Image, StyleSheet, Text, View, Modal, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, Modal, TouchableOpacity, AsyncStorage } from 'react-native';
 import Divider from "../Divider/Divider";
-
+import { Rating } from 'react-native-ratings';
+import Firebase from "../LoginScreen/firebase";
+const HD_IMAGE = require('../../assets/heart.png')
 export default class GameCard extends React.Component {
     state = {
-        isVisible: false
+        isVisible: false,
+        isFavorite: false,
+        gameExist: false
     }
 
     closeModalFunc = () => {
         this.setState({isVisible: false});
+    }
+    componentWillMount = () => {
+       this.isFavorite();
+    }
+    componentDidMount = () => {
+        this.isFavorite();
+    }
+    isFavorite = async () => {
+        let userName = await AsyncStorage.getItem('userUserName');
+        if(userName){
+            await Firebase.database.ref('users').child(userName).child('favGames').once("value").then((snap) => { this.setState({gameExist: snap.child(this.props.title).exists()})})
+        }
+    }
+    setFavorite = async () => {
+       let userName = await AsyncStorage.getItem('userUserName');
+        if(userName){
+            if (this.state.isFavorite){
+                Firebase.database.ref('users').child(userName).child('favGames').child(this.props.title).push({
+                    isFavorite: this.state.isFavorite,
+                    gameName: this.props.title,
+                    dateAdded: new Date().getMonth() + 1 + '/' + new Date().getDay() + 1 + '/' + new Date().getFullYear(),
+                    image: this.props.picture
+                })
+            }
+            else {
+                Firebase.database.ref('users').child(userName).child('favGames').child(this.props.title).remove();
+            }
+        }
     }
 
     render() {
@@ -30,7 +62,26 @@ export default class GameCard extends React.Component {
                             <Text style={styles.info}><Text style={{fontWeight: 'bold'}}>Platforms: </Text> {this.props.platforms}</Text>
                             <Text style={styles.info}><Text style={{fontWeight: 'bold'}}>Release Date: </Text> {this.props.releasedate}</Text>
                         </View>
+                        <View style={styles.cardtext}>
+                            
+                                <Rating
+                                    type='custom'
+                                    ratingImage={HD_IMAGE}
+                                    ratingBackgroundColor={'darkslategray'}
+                                    ratingColor={"lightskyblue"}
+                                    startingValue={this.state.gameExist ? 1 : 0}
+                                    minValue={0}
+                                    ratingCount={1}
+                                    imageSize={50}
+                                    fractions={0}
+                                    onFinishRating={(rate)=>{ this.setState({isFavorite: rate}); this.setFavorite()}}
+                                />
+                            
+                             <Text style={styles.favInfo}>Slide right to favorite ⬏</Text>
+                             <Text style={styles.favInfo}>Left to remove ⬏</Text>
+                        </View>
                     </View>
+                   
                     <View style={styles.cardlower}>
                     <Divider color='rgb(6, 5, 72)'/>
 
@@ -179,5 +230,13 @@ const styles = StyleSheet.create({
     modalContent: {
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    favInfo: {
+        fontStyle: 'italic',
+        fontFamily: "sans-serif-thin",
+        color:`rgb(135, 206, 250)`,
+        fontSize: 12,
+        marginBottom: 5,
+        marginTop: 5
     }
 })

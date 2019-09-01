@@ -51,7 +51,6 @@ export default class AboutScreen extends Component {
                     
                     Firebase.auth.onAuthStateChanged( async (user) => {
                         if (user) {
-                            
                             Firebase.database.ref('users').child(Firebase.signupInfo.username).child('userData').push({
             
                                 firstName: Firebase.signupInfo.firstName,
@@ -141,7 +140,7 @@ export default class AboutScreen extends Component {
                         <Picker.Item label="Favorite gaming rig?" />
                         <Picker.Item label="PS4" value="PS4" />
                         <Picker.Item label="Xbox One" value="Xbox One" />
-                        <Picker.Item label="PC (master race)" value="Master Race" />
+                        <Picker.Item label="PC (master race)" value="PC (Master Race)" />
                         <Picker.Item label="Switch" value="Switch" />
                         <Picker.Item label="PS3" value="PS3" />
                         <Picker.Item label="Xbox 360" value="Xbox 360" />

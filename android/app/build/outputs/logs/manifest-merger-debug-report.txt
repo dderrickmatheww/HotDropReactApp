@@ -8,7 +8,7 @@ MERGED from C:\Users\dmontgomery\Documents\GitHub Repos\HotDropReactApp\android\
 MERGED from [:react-native-svg] C:\Users\dmontgomery\Documents\GitHub Repos\HotDropReactApp\node_modules\react-native-svg\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-webview] C:\Users\dmontgomery\Documents\GitHub Repos\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-23:12
 MERGED from [:react-native-gesture-handler] C:\Users\dmontgomery\Documents\GitHub Repos\HotDropReactApp\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\d6c656c76a4ff7e6ac49339aad8ee99a\react-native-0.59.8\AndroidManifest.xml:2:1-13:12
+MERGED from [com.facebook.react:react-native:0.59.10] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\d22595eb593876ba788b519701fe9e7c\react-native-0.59.10\AndroidManifest.xml:2:1-13:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\bbf07aa1da9ab954374e693dfcc335b9\appcompat-v7-28.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\59df75d251431efe4d450d41cc6b083b\support-fragment-28.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\45d50504f4c11c4f549bb8efafb39de8\animated-vector-drawable-28.0.0\AndroidManifest.xml:17:1-22:12
@@ -72,8 +72,8 @@ MERGED from C:\Users\dmontgomery\Documents\GitHub Repos\HotDropReactApp\android\
 MERGED from C:\Users\dmontgomery\Documents\GitHub Repos\HotDropReactApp\android\app\src\main\AndroidManifest.xml:6:5-24:19
 MERGED from [:react-native-webview] C:\Users\dmontgomery\Documents\GitHub Repos\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-21:19
 MERGED from [:react-native-webview] C:\Users\dmontgomery\Documents\GitHub Repos\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-21:19
-MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\d6c656c76a4ff7e6ac49339aad8ee99a\react-native-0.59.8\AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\d6c656c76a4ff7e6ac49339aad8ee99a\react-native-0.59.8\AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.react:react-native:0.59.10] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\d22595eb593876ba788b519701fe9e7c\react-native-0.59.10\AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.react:react-native:0.59.10] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\d22595eb593876ba788b519701fe9e7c\react-native-0.59.10\AndroidManifest.xml:11:5-20
 MERGED from [com.android.support:support-compat:28.0.0] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\dd1cf78f22bdd94f550130b281f27c97\support-compat-28.0.0\AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:support-compat:28.0.0] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\dd1cf78f22bdd94f550130b281f27c97\support-compat-28.0.0\AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\8bb2478d12c0baf5b421024800cd7dbb\versionedparcelable-28.0.0\AndroidManifest.xml:22:5-23:19
@@ -140,8 +140,8 @@ MERGED from [:react-native-webview] C:\Users\dmontgomery\Documents\GitHub Repos\
 MERGED from [:react-native-webview] C:\Users\dmontgomery\Documents\GitHub Repos\HotDropReactApp\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] C:\Users\dmontgomery\Documents\GitHub Repos\HotDropReactApp\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] C:\Users\dmontgomery\Documents\GitHub Repos\HotDropReactApp\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\d6c656c76a4ff7e6ac49339aad8ee99a\react-native-0.59.8\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\d6c656c76a4ff7e6ac49339aad8ee99a\react-native-0.59.8\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.59.10] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\d22595eb593876ba788b519701fe9e7c\react-native-0.59.10\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.59.10] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\d22595eb593876ba788b519701fe9e7c\react-native-0.59.10\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\bbf07aa1da9ab954374e693dfcc335b9\appcompat-v7-28.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\bbf07aa1da9ab954374e693dfcc335b9\appcompat-v7-28.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\dmontgomery\.gradle\caches\transforms-2\files-2.1\59df75d251431efe4d450d41cc6b083b\support-fragment-28.0.0\AndroidManifest.xml:20:5-44

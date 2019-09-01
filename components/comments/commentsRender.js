@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import PropTypes from 'prop-types';
+import { AirbnbRating } from 'react-native-ratings';
+
 export default class CommentsRender extends Component {
     static propTypes = {
         commentData: PropTypes.array.isRequired
@@ -24,6 +26,14 @@ export default class CommentsRender extends Component {
                             <View style={[styles.card, {backgroundColor: this.everyOther(this.props.commentData.indexOf(comment))}]}>
                                     <Text style={styles.author}>{comment.authorName}</Text>
                                     <Text style={styles.comment}>{comment.comment}</Text>
+                                    <AirbnbRating
+                                        count={5}
+                                        reviews={["Terrible", "Bad", "Meh", "Very Good", "Unbelievable"]}
+                                        defaultRating={comment.rating}
+                                        showRating={true}
+                                        isDisabled={true}
+                                        size={20}
+                                    />
                             </View>
                         )
                     }) : <Text style={styles.nocomments}>No comments here yet -- try leaving one!</Text>

@@ -201,7 +201,7 @@
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_fps_view.xml.flat",
-        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d6c656c76a4ff7e6ac49339aad8ee99a\\react-native-0.59.8\\res\\layout\\fps_view.xml"
+        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d22595eb593876ba788b519701fe9e7c\\react-native-0.59.10\\res\\layout\\fps_view.xml"
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
@@ -297,7 +297,7 @@
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim_catalyst_push_up_in.xml.flat",
-        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d6c656c76a4ff7e6ac49339aad8ee99a\\react-native-0.59.8\\res\\anim\\catalyst_push_up_in.xml"
+        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d22595eb593876ba788b519701fe9e7c\\react-native-0.59.10\\res\\anim\\catalyst_push_up_in.xml"
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\xml_file_provider_paths.xml.flat",
@@ -565,7 +565,7 @@
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim_catalyst_fade_out.xml.flat",
-        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d6c656c76a4ff7e6ac49339aad8ee99a\\react-native-0.59.8\\res\\anim\\catalyst_fade_out.xml"
+        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d22595eb593876ba788b519701fe9e7c\\react-native-0.59.10\\res\\anim\\catalyst_fade_out.xml"
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_list_selector_disabled_holo_dark.9.png.flat",
@@ -573,11 +573,11 @@
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim_catalyst_slide_down.xml.flat",
-        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d6c656c76a4ff7e6ac49339aad8ee99a\\react-native-0.59.8\\res\\anim\\catalyst_slide_down.xml"
+        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d22595eb593876ba788b519701fe9e7c\\react-native-0.59.10\\res\\anim\\catalyst_slide_down.xml"
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_dev_loading_view.xml.flat",
-        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d6c656c76a4ff7e6ac49339aad8ee99a\\react-native-0.59.8\\res\\layout\\dev_loading_view.xml"
+        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d22595eb593876ba788b519701fe9e7c\\react-native-0.59.10\\res\\layout\\dev_loading_view.xml"
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_textfield_activated_mtrl_alpha.9.png.flat",
@@ -661,7 +661,7 @@
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim_catalyst_push_up_out.xml.flat",
-        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d6c656c76a4ff7e6ac49339aad8ee99a\\react-native-0.59.8\\res\\anim\\catalyst_push_up_out.xml"
+        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d22595eb593876ba788b519701fe9e7c\\react-native-0.59.10\\res\\anim\\catalyst_push_up_out.xml"
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_list_focused_holo.9.png.flat",
@@ -773,7 +773,7 @@
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim_catalyst_slide_up.xml.flat",
-        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d6c656c76a4ff7e6ac49339aad8ee99a\\react-native-0.59.8\\res\\anim\\catalyst_slide_up.xml"
+        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d22595eb593876ba788b519701fe9e7c\\react-native-0.59.10\\res\\anim\\catalyst_slide_up.xml"
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_list_selector_disabled_holo_dark.9.png.flat",
@@ -1229,7 +1229,7 @@
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_redbox_item_frame.xml.flat",
-        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d6c656c76a4ff7e6ac49339aad8ee99a\\react-native-0.59.8\\res\\layout\\redbox_item_frame.xml"
+        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d22595eb593876ba788b519701fe9e7c\\react-native-0.59.10\\res\\layout\\redbox_item_frame.xml"
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_list_longpressed_holo.9.png.flat",
@@ -1313,11 +1313,11 @@
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\xml_rn_dev_preferences.xml.flat",
-        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d6c656c76a4ff7e6ac49339aad8ee99a\\react-native-0.59.8\\res\\xml\\rn_dev_preferences.xml"
+        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d22595eb593876ba788b519701fe9e7c\\react-native-0.59.10\\res\\xml\\rn_dev_preferences.xml"
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_redbox_view.xml.flat",
-        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d6c656c76a4ff7e6ac49339aad8ee99a\\react-native-0.59.8\\res\\layout\\redbox_view.xml"
+        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d22595eb593876ba788b519701fe9e7c\\react-native-0.59.10\\res\\layout\\redbox_view.xml"
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_text_select_handle_middle_mtrl_dark.png.flat",
@@ -1449,7 +1449,7 @@
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_redbox_item_title.xml.flat",
-        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d6c656c76a4ff7e6ac49339aad8ee99a\\react-native-0.59.8\\res\\layout\\redbox_item_title.xml"
+        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d22595eb593876ba788b519701fe9e7c\\react-native-0.59.10\\res\\layout\\redbox_item_title.xml"
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\color_abc_btn_colored_borderless_text_material.xml.flat",
@@ -1461,7 +1461,7 @@
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_redbox_top_border_background.xml.flat",
-        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d6c656c76a4ff7e6ac49339aad8ee99a\\react-native-0.59.8\\res\\drawable\\redbox_top_border_background.xml"
+        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d22595eb593876ba788b519701fe9e7c\\react-native-0.59.10\\res\\drawable\\redbox_top_border_background.xml"
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_notify_panel_notification_icon_bg.png.flat",
@@ -1505,7 +1505,7 @@
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim_catalyst_fade_in.xml.flat",
-        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d6c656c76a4ff7e6ac49339aad8ee99a\\react-native-0.59.8\\res\\anim\\catalyst_fade_in.xml"
+        "source": "C:\\Users\\dmontgomery\\.gradle\\caches\\transforms-2\\files-2.1\\d22595eb593876ba788b519701fe9e7c\\react-native-0.59.10\\res\\anim\\catalyst_fade_in.xml"
     },
     {
         "merged": "C:\\Users\\dmontgomery\\Documents\\GitHub Repos\\HotDropReactApp\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",

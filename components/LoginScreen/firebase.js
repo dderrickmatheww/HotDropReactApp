@@ -14,6 +14,7 @@ export default class Firebase {
     static loginInfo = {
       email: "",
       password: "",
+      userName: ""
     }
 
     static signupInfo = {
@@ -29,7 +30,7 @@ export default class Firebase {
       static comments = {
         authorName: '',
         comment: '',
-        userName: ''
+        rating: 0
     }
     static init() {
      

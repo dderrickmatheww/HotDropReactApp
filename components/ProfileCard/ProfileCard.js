@@ -1,29 +1,24 @@
 import React, {Component} from "react";
-import { View, StyleSheet, Text, Image } from "react-native"
+import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native"
 import Divider from "../Divider/Divider";
 import PropTypes from 'prop-types';
 
+
 export default class ProfileCard extends Component {
     static propTypes = {
-        data: PropTypes.array.isRequired
-    }
-    shouldComponentUpdate = () => {
-        if (!this.props.data === []){
-            return false;
-        }
-        else {
-            return true;
-        }
+        favGameData: PropTypes.array.isRequired
     }
     render() {
+        console.log(this.props.favGameData)
         return(
             <View style={styles.card}>
-
                 <View style={styles.cardupper}>
                     <Image style={styles.avatar} source={{ uri: this.props.data.imageURL }}/>
                     <View style={styles.cardtext}>
                         <Text style={styles.title}>{this.props.data.userName}</Text>
+                        <Text style={styles.info}>My name is <Text style={{fontWeight: 'bold'}}>{this.props.data.firstName} {this.props.data.lastName}</Text>.</Text>
                         <Text style={styles.info}>I play on <Text style={{fontWeight: 'bold'}}>{this.props.data.platform}</Text>.</Text>
+
 
                         {/* favorite games should be an array of ids, converted back into titles and then joined by commas; except the last one is preceded by "and"
                     
@@ -31,11 +26,32 @@ export default class ProfileCard extends Component {
                         */}
                     </View>
                 </View>
-
                 <View style={styles.cardlower}>
                     <Divider color='rgb(6, 5, 72)'/>
                     <Text style={styles.description}>{null}</Text>
                 </View>
+                
+                {   
+                    this.props.favGameData.length > 0 ?
+                        this.props.favGameData.map((game) => {
+                            return(
+                                <View>
+                                    <Text><Text style={styles.favInfo}>These are your favorited games ⬎</Text></Text>
+                                    <View >
+                                        <TouchableOpacity 
+                                            style={styles.bottombutton}
+                                            onPress={() => {this.props.cardScreen.navigate('CardScreen', { text: game.gameName })}}
+                                        >
+                                            <Text style={styles.bottombuttontext}>{game.gameName}</Text>
+                                            <Text style={styles.bottombuttontext}>Date added: {game.dateAdded}</Text>
+                                            <Text style={styles.bottombuttontext}>Touch here to view more!</Text>
+                                            <Image style={styles.gamePic} source={{uri: game.image}}/>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                            )
+                        }) : <Text><Text style={styles.favInfo}>You have no favorited games, swipe right on the heart to favorite and they will appear down here ⬎</Text></Text>
+                }
             </View>
         )
     }
@@ -117,5 +133,33 @@ const styles = StyleSheet.create({
     },
     cardtext: {
         flex: 1
+    },
+    bottombutton: {
+        backgroundColor: `darkslategray`,
+        padding: 5,
+        fontSize: 14,
+        borderRadius: 2,
+        marginRight: 5,
+        bottom: 0,
+        marginTop: 10,
+
+    },
+    favInfo: {
+        fontStyle: 'italic',
+        fontFamily: "sans-serif-thin",
+        color:`rgb(135, 206, 250)`,
+        fontSize: 16,
+        marginBottom: 5,
+        marginTop: 5
+    },
+    bottombuttontext: {
+        color:`rgb(135, 206, 250)`,
+        fontWeight: `bold`,
+    },
+    gamePic: {
+        width: 140,
+        height: 140,
+        borderColor: `darkslategray`,
+        borderWidth: 1
     }
 })

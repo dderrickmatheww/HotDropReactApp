@@ -5,7 +5,6 @@ import TwitchCom from '../twitchcard/twitchcard';
 import YoutubeCom from '../youtubecard/youtubecard';
 import ArticleCard from '../articlecard/articleCard';
 import CommentsCom from '../comments/comments';
-import Firebase from '../LoginScreen/firebase';
 import Divider from '../Divider/Divider';
 
     export default class CardScreen extends React.Component {
@@ -254,7 +253,74 @@ import Divider from '../Divider/Divider';
             }
             cacheResults(cacheName, url);
         }
+        componentWillMount(){
+            let { navigation } = this.props;
+            let text = navigation.getParam('text', '');
+            let id = navigation.getParam('id', '');
+            let name = navigation.getParam('name', '')
+            let searchQuery = ''
+            let cacheName = ''
+            let url = ''
 
+            if (text) {
+                searchQuery = text;
+                cacheName = text.toLowerCase();
+                searchQuery = searchQuery.toLowerCase().replace(' ', '%20');
+                url = 'https://www.giantbomb.com/api/search/?format=json&api_key=99ec1d8980f419c59250e12a72f3b31d084e9bf9&query=' + searchQuery + '&resources=game&limit=1';
+
+            } else if (id) {
+                searchQuery = id;
+                cacheName = name.toLowerCase();
+                url = `https://www.giantbomb.com/api/game/` + searchQuery + `/?format=json&api_key=99ec1d8980f419c59250e12a72f3b31d084e9bf9`
+            }
+
+            cacheResults = async (cacheName, url) => {
+                let value = await AsyncStorage.getItem(cacheName);
+                if ( value ) {
+                    value = JSON.parse(value);
+                    this.setState({searchResults: value});  
+                    this.setState({date: [value.expected_release_month, '/', value.expected_release_day, '/', value.expected_release_year]});
+                    this.setState({platforms: value.platforms.map(platforms => platforms.abbreviation).join(', ')});
+                    this.setState({pic: value.image});
+                } 
+                else {
+                    fetch(url)
+                    .then( response => {
+                        response.json().then(async data => {
+                            if (text) {
+                                value = data.results[0];
+                            }
+                            if (id) {
+                                value = data.results;
+                            }
+                            if (data.results.length === 0){
+                                alert("We have no clue what you're trying to search for... No results")
+                                this.props.navigation.goBack();
+                            }
+                            else{
+                                await AsyncStorage.setItem(cacheName, JSON.stringify(value));
+                                this.setState({searchResults: value});
+                                this.setState({date: [value.expected_release_month, '/', value.expected_release_day, '/', value.expected_release_year]});
+                                this.setState({platforms: value.platforms.map(platforms => platforms.abbreviation).join(', ')});
+                                this.setState({pic: value.image});
+                            }
+                        })
+                        .catch(function(err) {
+                            if(err) {
+                                console.log(err);
+                            }
+                        })
+                    })
+                    .catch(function(err) {
+                        if (err) {
+                            console.log(err);
+                        }
+                    });
+                }
+                
+            }
+            cacheResults(cacheName, url);
+        }
         render() {
             return (
             <View style={{flex: 1, backgroundColor: "#363534"}}>

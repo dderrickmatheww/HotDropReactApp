@@ -2,15 +2,28 @@ import React, {Component} from 'react';
 import { View, StyleSheet, Button, TextInput, AsyncStorage, Text, KeyboardAvoidingView, Modal, TouchableOpacity } from 'react-native';
 import Firebase from '../LoginScreen/firebase';
 import CommentsRender from './commentsRender';
+import { AirbnbRating } from 'react-native-ratings';
+
 export default class commentsCom extends Component {
     state = {
         author: '',
         comment: '',
+        starCount: 0,
         gameExists: false,
         searchedGame: this.props.game,
         commentData: [],
-        isVisible: false
+        isVisible: false,
     };
+    async shouldComponentUpdate() {
+        let userName = await AsyncStorage.getItem('userUserName');
+        if (userName){
+            this.setState({author: userName});
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
     async componentDidMount() {
         let searchedGame = this.state.searchedGame.toLowerCase();
         await this.grabbingComments(searchedGame);
@@ -23,6 +36,7 @@ export default class commentsCom extends Component {
             if (user) {
                 Firebase.comments.authorName = this.state.author
                 Firebase.comments.comment = this.state.comment
+                Firebase.comments.rating = this.state.starCount
                 if(this.state.comment === '') {
                     alert('Please enter a comment')
                 } 
@@ -33,23 +47,23 @@ export default class commentsCom extends Component {
                     if (this.state.gameExists) {
                         await Firebase.gameRef.child(searchedGame).push({
                             comment: Firebase.comments.comment,
-                            authorName: Firebase.comments.authorName
+                            authorName: Firebase.comments.authorName,
+                            rating: Firebase.comments.rating
                         });
                         this.grabbingComments(searchedGame)
                     }
                     else {
                         await Firebase.gameRef.child(searchedGame).push({
                             comment: Firebase.comments.comment,
-                            authorName: Firebase.comments.authorName
+                            authorName: Firebase.comments.authorName,
+                            rating: Firebase.comments.rating
                         });
                         this.grabbingComments(searchedGame)
                     }
                 }
             }
             else {
-                this.firstTextInput.clear();
                 this.secondTextInput.clear();
-                this.setState({author: ''});
                 this.setState({comment: ''});
                 this.setState({isVisible: true});
             }
@@ -60,11 +74,17 @@ export default class commentsCom extends Component {
                 if(child) {
                     let items = Object.values(child);
                     this.setState({commentData: items}); 
+                    console.log(items);
                 }
         }, 
         function(errorObject) {
         })
     }
+    onStarRatingPress(rating) {
+        this.setState({
+          starCount: rating
+        });
+      }
     closeModalFunc = () => {
         this.setState({isVisible: false});
     }
@@ -75,19 +95,30 @@ export default class commentsCom extends Component {
                 <View style={styles.commentcontainer}>
                     <CommentsRender commentData={this.state.commentData} />
                 </View>
+                <Text style={styles.commentinst}>What rating would you give this game out of 5 stars? ↴ </Text>
+                <AirbnbRating
+                    count={5}
+                    reviews={["Terrible", "Bad", "Meh", "Very Good", "Unbelievable"]}
+                    defaultRating={3}
+                    showRating={true}
+                    size={20}
+                    onFinishRating={(rating) => {this.onStarRatingPress(rating)}}
+                />
                 <Text style={styles.commentinst}>Have something to say? Post a comment below ↴ </Text>
                 <KeyboardAvoidingView enabled> 
                     <TextInput
                         style={{marginBottom: 15, backgroundColor: `rgb(76, 82, 88)`, borderColor: `rgb(206, 212, 218)`, borderBottomWidth: 1, color: 'white'}}
-                        placeholder="Your name"
+                        placeholder={this.state.author}
+                        editable={false}
                         placeholderTextColor="gray"
-                        onChangeText={(text) => this.setState({author: text})}
+                        value={this.state.author}
                         returnKeyType = { "next" }
                         onSubmitEditing={() => { this.secondTextInput.focus(); }}
                         ref={(input) => { this.firstTextInput = input; }}
                     />
+                    
                     <TextInput
-                        style={{marginBottom: 15, textAlignVertical: "top", backgroundColor: `rgb(76, 82, 88)`, borderColor: `rgb(206, 212, 218)`, borderBottomWidth: 1, color: 'white'}}
+                        style={{marginTop: 15, marginBottom: 15, textAlignVertical: "top", backgroundColor: `rgb(76, 82, 88)`, borderColor: `rgb(206, 212, 218)`, borderBottomWidth: 1, color: 'white'}}
                         placeholder="What do you have to say?"
                         placeholderTextColor="gray"
                         ref={(input) => { this.secondTextInput = input; }}
@@ -256,6 +287,9 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor: `darkslategray`,
         backgroundColor: 'darkslategray'
+    },
+    myStarStyle: {
+        color: 'yellow'
     }
         
 })
