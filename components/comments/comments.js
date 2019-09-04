@@ -45,7 +45,8 @@ export default class commentsCom extends Component {
                 }
                 else {
                     if (this.state.gameExists) {
-                        await Firebase.gameRef.child(searchedGame).push({
+                        let commentName = searchedGame.replace(/[^a-zA-Z0-9]/g,' ')
+                        await Firebase.database.ref('HDGameInfo').child(commentName).push({
                             comment: Firebase.comments.comment,
                             authorName: Firebase.comments.authorName,
                             rating: Firebase.comments.rating
@@ -53,7 +54,7 @@ export default class commentsCom extends Component {
                         this.grabbingComments(searchedGame)
                     }
                     else {
-                        await Firebase.gameRef.child(searchedGame).push({
+                        await Firebase.gameRef.child(commentName).push({
                             comment: Firebase.comments.comment,
                             authorName: Firebase.comments.authorName,
                             rating: Firebase.comments.rating
@@ -69,7 +70,8 @@ export default class commentsCom extends Component {
             }
     }
     grabbingComments = (searchedGame) => {
-        Firebase.gameRef.child(searchedGame).on('value', (snap) => {
+        let commentName = searchedGame.replace(/[^a-zA-Z0-9]/g,' ')
+        Firebase.gameRef.child(commentName).on('value', (snap) => {
                 let child = snap.val();
                 if(child) {
                     let items = Object.values(child);
@@ -93,7 +95,10 @@ export default class commentsCom extends Component {
             <View style={styles.commentsection}>
                 <Text style={styles.commentheader}>Comments</Text>
                 <View style={styles.commentcontainer}>
-                    <CommentsRender commentData={this.state.commentData} />
+                    {
+                        this.state.commentData.length > 0 ? <CommentsRender commentData={this.state.commentData} />
+                        : null
+                    }
                 </View>
                 <Text style={styles.commentinst}>What rating would you give this game out of 5 stars? ↴ </Text>
                 <AirbnbRating

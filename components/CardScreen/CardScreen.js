@@ -6,6 +6,8 @@ import YoutubeCom from '../youtubecard/youtubecard';
 import ArticleCard from '../articlecard/articleCard';
 import CommentsCom from '../comments/comments';
 import Divider from '../Divider/Divider';
+import Firebase from '../LoginScreen/firebase';
+import axios from 'axios';
 
     export default class CardScreen extends React.Component {
 
@@ -31,7 +33,10 @@ import Divider from '../Divider/Divider';
             YTtoggle: false,
             NWtoggle: false,
             TWtoggle: false,
-            MIXtoggle: false
+            MIXtoggle: false,
+            gameExist: false,
+            gameName: '',
+            firebaseData: false
         }
 
         YTtoggle = async () => {
@@ -47,29 +52,57 @@ import Divider from '../Divider/Divider';
             if (name) {
                 cacheName = name.toLowerCase();
             }
-            let url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q="' + this.state.searchResults.name + '" game trailer&type=video&key=AIzaSyAhsb0OUjYC9-im6U3pNoks26zkjBWUtHo'
-            let value =  await AsyncStorage.getItem(cacheName);
-            value = JSON.parse(value);
-            if ( value.videoId ) {
-                this.setState({YTVidID: value.videoId});
-            }
-            else {
-                fetch(url)
-                .then((response) => {
-                    response.json().then( async data => {
-                        let videoId = data.items[0].id.videoId
-                        await  AsyncStorage.mergeItem(cacheName, JSON.stringify(data.items[0].id)).catch((err) => {if(err) console.log(err)});
-                        this.setState({YTVidID: videoId});
+            if(this.state.firebaseData) {
+                let url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q="' + this.state.searchResults.gameName + '" game trailer&type=video&key=AIzaSyAhsb0OUjYC9-im6U3pNoks26zkjBWUtHo'
+                let value =  await AsyncStorage.getItem(cacheName);
+                value = JSON.parse(value);
+                if ( value.videoId ) {
+                    this.setState({YTVidID: value.videoId});
+                }
+                else {
+                    fetch(url)
+                    .then((response) => {
+                        response.json().then( async data => {
+                            let videoId = data.items[0].id.videoId
+                            await  AsyncStorage.mergeItem(cacheName, JSON.stringify(data.items[0].id)).catch((err) => {if(err) console.log(err)});
+                            this.setState({YTVidID: videoId});
+                        })
+                        .catch((err) => {
+                                console.log(err)
+                        });
                     })
                     .catch((err) => {
-                            console.log(err)
+                            if(err) {
+                            console.log(err);
+                            }
                     });
-                })
-                .catch((err) => {
-                        if(err) {
-                        console.log(err);
-                        }
-                });
+                }
+            }
+            else {
+                let url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q="' + this.state.searchResults.name + '" game trailer&type=video&key=AIzaSyAhsb0OUjYC9-im6U3pNoks26zkjBWUtHo'
+                let value =  await AsyncStorage.getItem(cacheName);
+                value = JSON.parse(value);
+                if ( value.videoId ) {
+                    this.setState({YTVidID: value.videoId});
+                }
+                else {
+                    fetch(url)
+                    .then((response) => {
+                        response.json().then( async data => {
+                            let videoId = data.items[0].id.videoId
+                            await  AsyncStorage.mergeItem(cacheName, JSON.stringify(data.items[0].id)).catch((err) => {if(err) console.log(err)});
+                            this.setState({YTVidID: videoId});
+                        })
+                        .catch((err) => {
+                                console.log(err)
+                        });
+                    })
+                    .catch((err) => {
+                            if(err) {
+                            console.log(err);
+                            }
+                    });
+                }
             }
         }
         NWtoggle = () => {
@@ -77,7 +110,31 @@ import Divider from '../Divider/Divider';
             this.setState({NWtoggle: newState})
             let month = new Date().getMonth() + 1; 
             let year = new Date().getFullYear();
-            let url = 'https://newsapi.org/v2/everything?q="'+ this.state.searchResults.name +'"&from='+ year +'-'+ month +'&sources=polygon,ign&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15&language=en';
+            if(this.state.firebaseData){
+                let url = 'https://newsapi.org/v2/everything?q="'+ this.state.searchResults.gameName +'"&from='+ year +'-'+ month +'&sources=polygon,ign&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15&language=en';
+                fetch(url)
+                .then((response) => {
+                    response.json()
+                    .then( data => {
+                        if(data.articles.length === 0){
+                            alert("There are no new articles for " + this.state.searchResults.gameName + " at this time");
+                        } 
+                        else {
+                            this.setState({gameArticles: data.articles.slice(1, 4)}); 
+                        }
+                    })
+                    .catch((err)=>{
+                        if (err) {
+                            console.log(err)
+                        }
+                    });
+                })
+                .catch((err) => {
+                        console.log(err)
+                });  
+            }
+            else {
+                let url = 'https://newsapi.org/v2/everything?q="'+ this.state.searchResults.name +'"&from='+ year +'-'+ month +'&sources=polygon,ign&sortBy=publishedAt&apiKey=f38cc49da4df4fd0b9ceea723e83cb15&language=en';
                 fetch(url)
                 .then((response) => {
                     response.json()
@@ -98,11 +155,13 @@ import Divider from '../Divider/Divider';
                 .catch((err) => {
                         console.log(err)
                 });  
+            }
         }
         TWtoggle = () => {
             const newState = !this.state.TWtoggle
             this.setState({TWtoggle: newState});
-            let gameStreams ='https://api.twitch.tv/helix/games?name=' + this.state.searchResults.name;
+            if (this.state.firebaseData){
+                let gameStreams ='https://api.twitch.tv/helix/games?name=' + this.state.searchResults.gameName;
                 fetch(gameStreams, {
                     headers: {
                         "Client-ID": '7mx4fyx7xv1pcxfe25fmguto1xao2b'
@@ -135,7 +194,13 @@ import Divider from '../Divider/Divider';
                             })
                         }
                         else {
-                            alert('Noone is streaming '+ this.state.searchResults.name +' on Twitch at this time!');
+                            if(this.state.searchResults.name) {
+                                alert('Noone is streaming '+ this.state.searchResults.name +' on Twitch at this time!');
+                            }
+                            else{
+                                alert('Noone is streaming '+ this.state.searchResults.gameName +' on Twitch at this time!');
+                            }
+                            
                         }
                     })
                     .catch((err) => {
@@ -149,6 +214,62 @@ import Divider from '../Divider/Divider';
                         console.log(err);
                     }
                 });
+            }
+            else {
+                let gameStreams ='https://api.twitch.tv/helix/games?name=' + this.state.searchResults.name;
+                fetch(gameStreams, {
+                    headers: {
+                        "Client-ID": '7mx4fyx7xv1pcxfe25fmguto1xao2b'
+                    }
+                })
+                .then((response) => {
+                    response.json()
+                    .then(async (data) => {
+                        if (data.data[0].id){
+                            fetch('https://api.twitch.tv/helix/streams?game_id=' + data.data[0].id + '&first=5', {
+                            headers: {
+                                "Client-ID": '7mx4fyx7xv1pcxfe25fmguto1xao2b'
+                            }
+                            })
+                            .then((gameData) => {
+                                gameData.json()
+                                .then((data) => {
+                                   this.setState({twitchResults: data.data})
+                                })
+                                .catch((err) => {
+                                    if (err) {
+                                        console.log(err);
+                                    }    
+                                })
+                            })
+                            .catch((err) => {
+                                if (err) {
+                                    console.log(err);
+                                }    
+                            })
+                        }
+                        else {
+                            if(this.state.searchResults.name) {
+                                alert('Noone is streaming '+ this.state.searchResults.name +' on Twitch at this time!');
+                            }
+                            else{
+                                alert('Noone is streaming '+ this.state.searchResults.gameName +' on Twitch at this time!');
+                            }
+                            
+                        }
+                    })
+                    .catch((err) => {
+                        if (err) {
+                            console.log(err);
+                        }    
+                    })
+                })
+                .catch((err) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+            }
         }
         MIXtoggle = async () => {
             const newState = !this.state.MIXtoggle
@@ -158,7 +279,12 @@ import Divider from '../Divider/Divider';
                 res1.json()
                 .then((res2) => {
                     if (res2.length === 0) {
-                        alert('No one is streaming '+ this.state.searchResults.name +' on Mixer at this time!');
+                        if (this.state.searchResults.name) {
+                            alert('No one is streaming '+ this.state.searchResults.name +' on Mixer at this time!');
+                        }
+                        else{
+                            alert('No one is streaming '+ this.state.searchResults.gameName +' on Mixer at this time!');
+                        }
                     }
                     fetch('https://mixer.com/api/v1/types/'+res2[0].id+'/channels?order=viewersCurrent:DESC&limit=5')
                     .then( async (res3) => {
@@ -185,7 +311,6 @@ import Divider from '../Divider/Divider';
             
         }
         componentDidMount() {
-
             let { navigation } = this.props;
             let text = navigation.getParam('text', '');
             let id = navigation.getParam('id', '');
@@ -197,28 +322,50 @@ import Divider from '../Divider/Divider';
             if (text) {
                 searchQuery = text;
                 cacheName = text.toLowerCase();
+                this.setState({gameName: cacheName});
                 searchQuery = searchQuery.toLowerCase().replace(' ', '%20');
                 url = 'https://www.giantbomb.com/api/search/?format=json&api_key=99ec1d8980f419c59250e12a72f3b31d084e9bf9&query=' + searchQuery + '&resources=game&limit=1';
 
             } else if (id) {
                 searchQuery = id;
                 cacheName = name.toLowerCase();
+                this.setState({gameName: cacheName});
                 url = `https://www.giantbomb.com/api/game/` + searchQuery + `/?format=json&api_key=99ec1d8980f419c59250e12a72f3b31d084e9bf9`
             }
 
             cacheResults = async (cacheName, url) => {
                 let value = await AsyncStorage.getItem(cacheName);
+                let firebaseCheck = await cacheName.replace(/[^a-zA-Z0-9]/g,' ');
+                let firebaseDataCheck = await axios.get('https://hotdropauth.firebaseio.com/GameDatabase/HDGameInfo/'+ firebaseCheck +'.json?print=pretty');
+                
                 if ( value ) {
                     value = JSON.parse(value);
-                    this.setState({searchResults: value});  
-                    this.setState({date: [value.expected_release_month, '/', value.expected_release_day, '/', value.expected_release_year]});
-                    this.setState({platforms: value.platforms.map(platforms => platforms.abbreviation).join(', ')});
-                    this.setState({pic: value.image});
+                    if(value.gameName) {
+                        this.setState({firebaseData: true});
+                        this.setState({searchResults: value});  
+                    }
+                    else{
+                        console.log('Grabbed value from cache')
+                        value = JSON.parse(value);
+                        this.setState({searchResults: value});  
+                        this.setState({date: [value.expected_release_month, '/', value.expected_release_day, '/', value.expected_release_year]});
+                        this.setState({platforms: value.platforms.map(platforms => platforms.abbreviation).join(', ')});
+                        this.setState({pic: value.image});
+                    }
                 } 
-                else {
+                if (firebaseDataCheck.data) {
+                    if(!value){
+                        this.setState({firebaseData: true});
+                        let items = Object.values(firebaseDataCheck.data);
+                        await AsyncStorage.setItem(cacheName, JSON.stringify(items[0]));
+                        this.setState({searchResults: items[0]});
+                    }
+                }
+                if(!this.state.firebaseData) {
                     fetch(url)
                     .then( response => {
                         response.json().then(async data => {
+                            console.log('API call')
                             if (text) {
                                 value = data.results[0];
                             }
@@ -265,28 +412,50 @@ import Divider from '../Divider/Divider';
             if (text) {
                 searchQuery = text;
                 cacheName = text.toLowerCase();
+                this.setState({gameName: cacheName});
                 searchQuery = searchQuery.toLowerCase().replace(' ', '%20');
                 url = 'https://www.giantbomb.com/api/search/?format=json&api_key=99ec1d8980f419c59250e12a72f3b31d084e9bf9&query=' + searchQuery + '&resources=game&limit=1';
 
             } else if (id) {
                 searchQuery = id;
                 cacheName = name.toLowerCase();
+                this.setState({gameName: cacheName});
                 url = `https://www.giantbomb.com/api/game/` + searchQuery + `/?format=json&api_key=99ec1d8980f419c59250e12a72f3b31d084e9bf9`
             }
 
             cacheResults = async (cacheName, url) => {
                 let value = await AsyncStorage.getItem(cacheName);
+                let firebaseCheck = await cacheName.replace(/[^a-zA-Z0-9]/g,' ');
+                let firebaseDataCheck = await axios.get('https://hotdropauth.firebaseio.com/GameDatabase/HDGameInfo/'+ firebaseCheck +'.json?print=pretty');
+                
                 if ( value ) {
                     value = JSON.parse(value);
-                    this.setState({searchResults: value});  
-                    this.setState({date: [value.expected_release_month, '/', value.expected_release_day, '/', value.expected_release_year]});
-                    this.setState({platforms: value.platforms.map(platforms => platforms.abbreviation).join(', ')});
-                    this.setState({pic: value.image});
+                    if(value.gameName) {
+                        this.setState({firebaseData: true});
+                        this.setState({searchResults: value});  
+                    }
+                    else{
+                        console.log('Grabbed value from cache')
+                        value = JSON.parse(value);
+                        this.setState({searchResults: value});  
+                        this.setState({date: [value.expected_release_month, '/', value.expected_release_day, '/', value.expected_release_year]});
+                        this.setState({platforms: value.platforms.map(platforms => platforms.abbreviation).join(', ')});
+                        this.setState({pic: value.image});
+                    }
                 } 
-                else {
+                if (firebaseDataCheck.data) {
+                    if(!value){
+                        this.setState({firebaseData: true});
+                        let items = Object.values(firebaseDataCheck.data);
+                        await AsyncStorage.setItem(cacheName, JSON.stringify(items[0]));
+                        this.setState({searchResults: items[0]});
+                    }
+                }
+                if(!this.state.firebaseData) {
                     fetch(url)
                     .then( response => {
                         response.json().then(async data => {
+                            console.log('API call')
                             if (text) {
                                 value = data.results[0];
                             }
@@ -326,26 +495,26 @@ import Divider from '../Divider/Divider';
             <View style={{flex: 1, backgroundColor: "#363534"}}>
                     <ScrollView>
                     <GameCard
-                        title={this.state.searchResults.name}
-                        platforms={this.state.platforms}
-                        releasedate={this.state.date}
-                        description={this.state.searchResults.deck}
-                        picture={this.state.pic.medium_url}
-                        modal={this.state.pic.original_url}
+                        title={this.state.firebase ? this.state.searchResults.gameName : this.state.searchResults.name}
+                        platforms={this.state.firebase ? this.state.searchResults.platforms : this.state.platforms}
+                        releasedate={this.state.firebase ? this.state.searchResults.releasedate : this.state.date}
+                        description={this.state.firebase ? this.state.searchResults.description : this.state.searchResults.deck}
+                        picture={this.state.firebase ? this.state.searchResults.imageURL : this.state.pic.medium_url}
+                        modal={this.state.firebase ? this.state.searchResults.modalURL : this.state.pic.original_url}
                     />
                     
                     <Divider color='#545251'/>
 
                     <View style={styles.bottom}>
-                             <TouchableOpacity onPress={this.NWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top News for {this.state.searchResults.name} </Text></TouchableOpacity>
+                             <TouchableOpacity onPress={this.NWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top News for {this.state.firebaseData ? this.state.searchResults.gameName : this.state.searchResults.name} </Text></TouchableOpacity>
                                 {
                                     this.state.NWtoggle ?  this.state.gameArticles.map(article => (<ArticleCard  cardhead={article.title} cardauthor={article.author} cardbody={article.description} link={article.url} source={article.source.name} pic={article.urlToImage} index={this.state.gameArticles.indexOf(article)}/> )) : null
                                 }
-                             <TouchableOpacity onPress={this.YTtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> YouTube Trailer for {this.state.searchResults.name} </Text></TouchableOpacity>
+                             <TouchableOpacity onPress={this.YTtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> YouTube Trailer for {this.state.firebaseData ? this.state.searchResults.gameName : this.state.searchResults.name} </Text></TouchableOpacity>
                                 {
                                     this.state.YTtoggle ? <YoutubeCom videoId={this.state.YTVidID}/> : null
                                 }
-                             <TouchableOpacity onPress={this.TWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top Twitch streams for {this.state.searchResults.name} </Text></TouchableOpacity>
+                             <TouchableOpacity onPress={this.TWtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top Twitch streams for {this.state.firebaseData ? this.state.searchResults.gameName : this.state.searchResults.name} </Text></TouchableOpacity>
                                 {
                                     this.state.TWtoggle ? this.state.twitchResults.map( stream => (<TwitchCom streamedGame={this.state.searchResults.name}
                                     streamerName={stream.user_name}
@@ -354,11 +523,11 @@ import Divider from '../Divider/Divider';
                                     streamURL={"https://www.twitch.tv/" + stream.user_name}
                                     streamerPreview={stream.thumbnail_url.slice(0, -21) + "-640x360.jpg"} /> )) : null
                                 }
-                            <TouchableOpacity onPress={this.MIXtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top Mixer streams for {this.state.searchResults.name} </Text></TouchableOpacity>
+                            <TouchableOpacity onPress={this.MIXtoggle} style={styles.bottombutton}><Text style={styles.bottombuttontext}> Top Mixer streams for {this.state.firebaseData ? this.state.searchResults.gameName : this.state.searchResults.name} </Text></TouchableOpacity>
                                 { 
                                     this.state.MIXtoggle ? this.state.mixerResults.map(stream => ( 
                                         <TwitchCom 
-                                            streamedGame={this.state.searchResults.name}
+                                            streamedGame={this.state.firebaseData ? this.state.searchResults.gameName : this.state.searchResults.name}
                                             streamerName={stream.user.username}
                                             streamerFollowers={stream.viewersCurrent}
                                             streamerPreview={stream.user.avatarUrl}
@@ -371,7 +540,7 @@ import Divider from '../Divider/Divider';
 
                             <Divider color='#545251'/>
 
-                            <CommentsCom game={this.props.navigation.getParam('text', '')} navigate={this.props.navigation} />
+                            <CommentsCom game={this.state.gameName} navigate={this.props.navigation} />
                     </View>
                 </ScrollView>
             </View>
